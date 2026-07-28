@@ -1,0 +1,8 @@
+District,Block,Habitation,geocode_query_used,latitude,longitude,geocode_status,bhuvan_vid,bhuvan_population
+Kinnaur,Unknown,Chhitkul,"Chhitkul, Kinnaur, Himachal Pradesh, India",31.3881,78.46219,"matched (fallback query, no block)",,
+Kinnaur,Unknown,Pooh,"Pooh, Kinnaur, Himachal Pradesh, India",31.76159,78.5839324,"matched (fallback query, no block)",,
+Kinnaur,Unknown,Nako,"Nako, Kinnaur, Himachal Pradesh, India",31.8813748,78.6270483,"matched (fallback query, no block)",,
+Kinnaur,Unknown,Leo,"Leo, Kinnaur, Himachal Pradesh, India",31.8839167,78.5935199,"matched (fallback query, no block)",,
+Kinnaur,Unknown,Chango,"Chango, Kinnaur, Himachal Pradesh, India",31.9777573,78.5944015,"matched (fallback query, no block)",,
+Lahaul and Spiti,Unknown,Gue,"Gue, Lahaul and Spiti, Himachal Pradesh, India",32.1310531,78.5697113,"matched (fallback query, no block)",,
+Lahaul and Spiti,Unknown,Lalung,"Lalung, Lahaul and Spiti, Himachal Pradesh, India",32.14927,78.27071,"matched (fallback query, no block)",,

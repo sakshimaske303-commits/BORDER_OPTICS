@@ -1,0 +1,155 @@
+import streamlit as st
+from utils.theme import inject_theme, PALETTE
+from utils.data import load_data
+
+st.set_page_config(page_title="BORDER OPTICS", page_icon="🛰️", layout="wide", initial_sidebar_state="expanded")
+inject_theme()
+
+villages, full_year, summer = load_data()
+
+from scipy import stats
+
+st.markdown("<h1>🛰️ BORDER OPTICS</h1>", unsafe_allow_html=True)
+st.markdown(
+    "<h3 style='text-align: center; font-weight: 700; margin-top: -10px;'>"
+    "A Satellite-Based Verification Framework for India's Vibrant Villages Programme (VVP-I)</h3>",
+    unsafe_allow_html=True,
+)
+
+st.markdown("---")
+
+valid_ndbi = summer.dropna(subset=["ndbi_change"])
+peak_row = valid_ndbi.loc[valid_ndbi["ndbi_change"].idxmax()] if len(valid_ndbi) else None
+paired = summer.dropna(subset=["ndbi_before", "ndbi_after"])
+if len(paired) >= 2:
+    _, p_val = stats.wilcoxon(paired["ndbi_before"], paired["ndbi_after"])
+else:
+    p_val = float("nan")
+
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    st.metric("STUDY REGION", f"{villages['state'].nunique()} States", "Himalayan Border Belt")
+with col2:
+    st.metric("PEAK NDBI CHANGE", f"{peak_row['ndbi_change']:.3f}" if peak_row is not None else "—",
+               peak_row["village"] if peak_row is not None else None)
+with col3:
+    st.metric("STATISTICAL SIGNIFICANCE", f"p = {p_val:.4f}" if p_val == p_val else "—")
+with col4:
+    st.metric("VILLAGES VERIFIED", f"{len(villages)}", "Multi-Source Geocoded")
+
+st.markdown("---")
+
+col_left, col_right = st.columns([1.1, 1])
+
+with col_left:
+    st.markdown("""
+    ### What Is BORDER OPTICS?
+
+    Under the **Vibrant Villages Programme (VVP-I)**, the Government of India sanctioned
+    infrastructure and development spending across border villages in Arunachal Pradesh,
+    Sikkim, Uttarakhand, Himachal Pradesh, and Ladakh. Official progress reports describe
+    spending and sanctioned works, but do not independently verify physical, observable
+    change on the ground.
+
+    This project fills that gap: applying **Sentinel-2 built-up-area indices (NDBI)** and
+    **VIIRS night-lights** data to 258 individually geocoded villages, testing whether
+    measurable change occurred between 2021 and 2025, whether it correlates with state-wise
+    budget allocation, and whether proximity to the border/LAC itself predicts the pace
+    of development — with every data gap and methodological trade-off disclosed transparently.
+    """)
+
+with col_right:
+    st.markdown(f"""
+    <div class="recon-card">
+        <p style="color:{PALETTE['accent']}; text-transform:uppercase; font-size:0.78rem;
+                  letter-spacing:1.5px; font-weight:800; margin-bottom:12px;">Core Finding</p>
+        <p style="color:{PALETTE['text_primary']}; font-size:0.95rem; line-height:1.7; margin:0; font-weight:500;">
+            Built-up area change across the sample was tested under two independent
+            compositing windows — full-year and summer-matched — to guard against
+            seasonal artifacts. Where the two windows agree, the result is reported with
+            confidence; where they diverge, that instability is disclosed as a genuine
+            finding rather than resolved by discarding one window. See Statistical
+            Validation for the full breakdown.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("---")
+
+st.markdown("### Methodology at a Glance")
+
+m1, m2, m3 = st.columns(3)
+
+with m1:
+    st.markdown(f"""
+    <div class="recon-card" style="min-height: 190px;">
+        <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">🛰️ Satellite Verification</p>
+        <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
+            Sentinel-2 NDBI and VIIRS night-lights extracted at 258 village points (500m
+            buffer), across paired 2021/2025 composites, under both full-year and
+            season-matched windows.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with m2:
+    st.markdown(f"""
+    <div class="recon-card" style="min-height: 190px;">
+        <p style="color: {PALETTE['lights']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">📊 Statistical Testing</p>
+        <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
+            Wilcoxon signed-rank tests for before/after change, and Spearman correlations
+            for budget (RQ2) and border-proximity (H3), with sample-size caveats disclosed
+            wherever a test is exploratory.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with m3:
+    st.markdown(f"""
+    <div class="recon-card" style="min-height: 190px;">
+        <p style="color: {PALETTE['border_down']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">🔥 Honest Validation</p>
+        <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
+            Every data gap — Ladakh's unresolved villages, Himachal Pradesh's partial
+            sample, Uttarakhand's block ambiguity — is disclosed transparently, not
+            papered over.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("---")
+
+st.markdown("### Explore the Evidence")
+
+nav_items = [
+    ("🏛️", "Study Design", "Research questions, hypotheses, sample overview"),
+    ("🏗️", "Built-Up Change", "NDBI findings across all villages"),
+    ("💡", "Night-Lights", "VIIRS radiance change findings"),
+    ("📊", "Statistical Validation", "Wilcoxon tests, Spearman correlations, robustness"),
+    ("📈", "Explore Trends", "Cross-state comparison, budget correlation"),
+    ("🗺️", "Interactive Maps", "Live village-level geospatial exploration"),
+    ("📖", "Methodology & Limitations", "Full transparency on data and methods"),
+]
+
+cols = st.columns(3)
+for i, (icon, title, desc) in enumerate(nav_items):
+    with cols[i % 3]:
+        st.markdown(f"""
+        <div class="recon-card" style="margin-bottom: 14px; min-height: 110px;">
+            <p style="font-size: 1.6rem; margin: 0 0 6px 0;">{icon}</p>
+            <p style="color: {PALETTE['text_primary']}; font-weight: 800; font-size: 0.95rem; margin: 0 0 4px 0;">{title}</p>
+            <p style="color: {PALETTE['text_secondary']}; font-size: 0.8rem; margin: 0; font-weight: 600;">{desc}</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+st.markdown("---")
+
+st.markdown(
+    f"""
+    <div style="text-align: center; padding: 25px;" class="recon-card">
+        <p style="color: {PALETTE['text_secondary']}; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700;">Developed by</p>
+        <h2 style="color: {PALETTE['text_primary']}; margin: 5px 0; border: none; padding: 0;">SAKSHI D. MASKE</h2>
+        <p style="color: {PALETTE['accent']}; font-weight: 700;">Independent Geospatial Researcher</p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)

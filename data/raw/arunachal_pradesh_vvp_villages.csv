@@ -1,0 +1,456 @@
+District,Block,Habitation,LGD_Code,Households,Population
+Anjaw,Chaglagam,Metengliang,266838,52,197
+Anjaw,Chaglagam,Aphumna,266826,22,85
+Anjaw,Chaglagam,Chaglagam H.Q.,266837,29,192
+Anjaw,Chaglagam,Chakka,266834,30,137
+Anjaw,Chaglagam,Chipra,266831,5,35
+Anjaw,Chaglagam,Chipuiliang,266841,10,57
+Anjaw,Chaglagam,Gomin,266850,14,60
+Anjaw,Chaglagam,Kaey Maro,266824,3,16
+Anjaw,Chaglagam,Kalabro (Kaangbro),266857,0,N/A
+Anjaw,Chaglagam,Kalamna,266822,5,21
+Anjaw,Chaglagam,"Khalega, Metengliang",266821,13,53
+Anjaw,Chaglagam,Khowegko,266843,5,31
+Anjaw,Chaglagam,Kromna,266840,31,139
+Anjaw,Chaglagam,Mailiang,266830,20,81
+Anjaw,Chaglagam,Mithumna,266866,24,102
+Anjaw,Chaglagam,Pailiang,266844,13,72
+Anjaw,Chaglagam,Payaparap,266847,4,30
+Anjaw,Chaglagam,Roiliang,266849,26,133
+Anjaw,Chaglagam,Tabretong,266845,10,58
+Anjaw,Chaglagam,Tadumna,266846,5,31
+Anjaw,Chaglagam,Taflagam,266828,39,148
+Anjaw,Chaglagam,Taimna,266842,9,56
+Anjaw,Chaglagam,Tamkadu,266832,7,32
+Anjaw,Chaglagam,Upper Taflagaon,266829,17,53
+Anjaw,Hayuliang,Glotong,266788,11,69
+Anjaw,Hayuliang,Hayuliang,266712,374,1834
+Anjaw,Hayuliang,Keletong,266800,3,9
+Anjaw,Hayuliang,Kongra(Metung),266690,8,28
+Anjaw,Hayuliang,Zapaliang,266716,4,15
+Anjaw,Walong,Bhaw,266945,15,77
+Anjaw,Walong,Chenguinty,266965,7,16
+Anjaw,Walong,Dhanbari,266878,6,25
+Anjaw,Walong,Dong,266880,4,15
+Anjaw,Walong,Gong,266893,0,0
+Anjaw,Walong,Hot Spring,266879,1,4
+Anjaw,Walong,Hunung,266946,0,0
+Anjaw,Walong,Kaho,266868,10,65
+Anjaw,Walong,Kheyong,266942,5,22
+Anjaw,Walong,Khrawit,266892,3,22
+Anjaw,Walong,Kibithoo H.Q.,266876,129,723
+Anjaw,Walong,Krowti,266873,6,27
+Anjaw,Walong,Krowti Labour Camp,266874,13,29
+Anjaw,Walong,Kundan,266871,4,24
+Anjaw,Walong,Lamkung,266938,3,15
+Anjaw,Walong,Misai labour Camp,266870,69,232
+Anjaw,Walong,Musai,266869,65,262
+Anjaw,Walong,Pranju,266940,1,6
+Anjaw,Walong,Samdul,266952,12,51
+Anjaw,Walong,Sanglang,266943,17,82
+Anjaw,Walong,Staging Hut Krosam,266962,0,0
+Anjaw,Walong,Supkung,266881,4,23
+Anjaw,Walong,Walong,266883,21,79
+Anjaw,Walong,Walong BRTF Camp,266902,25,109
+Anjaw,Walong,Walong H.Q.,266901,101,392
+Anjaw,Walong,Yakung,266875,13,64
+Dibang Valley,Anelih-Arzu,Adane,266010,4,6
+Dibang Valley,Anini-Mipi,Achali,265928,2,11
+Dibang Valley,Anini-Mipi,Achengo,265937,2,5
+Dibang Valley,Anini-Mipi,Acheso,265936,10,31
+Dibang Valley,Anini-Mipi,Ahungo,265913,7,49
+Dibang Valley,Anini-Mipi,Alinye,265926,48,201
+Dibang Valley,Anini-Mipi,Angrim Valley,265921,31,116
+Dibang Valley,Anini-Mipi,Aropo,265932,21,95
+Dibang Valley,Anini-Mipi,Atoto,265922,4,13
+Dibang Valley,Anini-Mipi,Ebamee,265939,10,20
+Dibang Valley,Anini-Mipi,Echito,265940,7,22
+Dibang Valley,Anini-Mipi,Ediya,265915,3,11
+Dibang Valley,Anini-Mipi,Emuli,265907,15,58
+Dibang Valley,Anini-Mipi,Gipulin,265923,27,131
+Dibang Valley,Anini-Mipi,Kamuyi,265918,4,29
+Dibang Valley,Anini-Mipi,Mipi H.Q.,265920,8,19
+Dibang Valley,Anini-Mipi,Mipido,265914,4,25
+Dibang Valley,Anini-Mipi,New Achuli,265927,4,13
+Dibang Valley,Etalin-Malinye,Etalin Bridge Point,265975,41,170
+Dibang Valley,Etalin-Malinye,Etalin H.Q.,266002,64,247
+Dibang Valley,Etalin-Malinye,Maliney,265996,27,127
+Dibang Valley,Etalin-Malinye,Mawali,265991,1,2
+Dibang Valley,Etalin-Malinye,New Echanli,266000,8,58
+Dibang Valley,Etalin-Malinye,New Emali(Old Etalin),266001,0,0
+Dibang Valley,Etalin-Malinye,Punli,265983,4,32
+East Kameng,Bameng,Babey Camp,262126,6,30
+East Kameng,Bameng,Bameng H.Q.,262132,204,934
+East Kameng,Bameng,Beyong,262098,60,242
+East Kameng,Bameng,Lengdi/Liang,262116,18,89
+East Kameng,Bameng,Rasong,262129,15,70
+East Kameng,Bameng,Taffo,262123,17,68
+East Kameng,Bameng,Tayung,262131,24,99
+East Kameng,Bameng,Upper Liyak,262128,30,173
+East Kameng,Bameng,Upper Liyak Doncha,262125,22,130
+East Kameng,Chayangtajo,Chayangtajo H.Q.,262245,281,1329
+East Kameng,Chayangtajo,Dache Sullung,262244,6,32
+East Kameng,Chayangtajo,Dao,262251,12,64
+East Kameng,Chayangtajo,Dara Yangfo,262258,12,66
+East Kameng,Chayangtajo,Lamrah,262256,13,100
+East Kameng,Chayangtajo,Loto Yangfo,262255,26,112
+East Kameng,Chayangtajo,Diya Sullung,262266,4,18
+East Kameng,Chayangtajo,Hara Yangfo,262221,15,103
+East Kameng,Chayangtajo,Jayang Bagang,262218,105,659
+East Kameng,Chayangtajo,Kesse Bagang,262219,34,255
+East Kameng,Chayangtajo,Langchu Sullung,262252,19,77
+East Kameng,Chayangtajo,Langruk Tajo,262233,3,15
+East Kameng,Chayangtajo,Nampe Bagang,262273,22,170
+East Kameng,Chayangtajo,Raro Sullung,262268,12,55
+East Kameng,Chayangtajo,Saria Takhang,262271,36,148
+East Kameng,Chayangtajo,Sawa H.Q.,262272,6,34
+East Kameng,Chayangtajo,Tamsang Yangfo,262227,13,88
+East Kameng,Chayangtajo,Warriam Sullung,262270,7,39
+East Kameng,Khenewa,Bisai,262069,21,145
+East Kameng,Khenewa,Sachung,262072,21,165
+East Kameng,Khenewa,Dongkha,262075,8,45
+East Kameng,Khenewa,Welling Tawe,262074,3,22
+East Kameng,Khenewa,Drakshi,262088,30,198
+East Kameng,Khenewa,Kojo,262089,20,147
+East Kameng,Khenewa,Lada H.Q.,262082,48,251
+East Kameng,Khenewa,Rawa,262200,56,323
+East Kameng,Khenewa,Rojo,262090,15,110
+East Kameng,Khenewa,Wabalang,262084,9,82
+East Kameng,Khenewa,Wagyung,262187,6,25
+East Kameng,Khenewa,Wallong,262209,28,113
+Kurung Kumey,Damin,Boruk,265781,12,61
+Kurung Kumey,Damin,Chate,265796,12,84
+Kurung Kumey,Damin,Chulla,265826,18,106
+Kurung Kumey,Damin,Damin H.Q.,265777,99,660
+Kurung Kumey,Damin,Damin Village,265780,11,50
+Kurung Kumey,Damin,Digok,265811,7,29
+Kurung Kumey,Damin,Fuba,265808,58,304
+Kurung Kumey,Damin,Hume,265828,10,66
+Kurung Kumey,Damin,Huri,265794,8,49
+Kurung Kumey,Damin,Katuk,265805,8,46
+Kurung Kumey,Damin,Kopila,265793,17,118
+Kurung Kumey,Damin,Machang,265792,22,137
+Kurung Kumey,Damin,Nisuk,265820,6,35
+Kurung Kumey,Damin,Pipa,265801,10,40
+Kurung Kumey,Damin,Ramu,265818,24,130
+Kurung Kumey,Damin,Rane,265802,4,30
+Kurung Kumey,Damin,Rawiok,265806,12,47
+Kurung Kumey,Damin,Ruba,265807,45,204
+Kurung Kumey,Damin,Senamriang,265800,13,60
+Kurung Kumey,Damin,Sibia,265795,10,61
+Kurung Kumey,Damin,Tarba,265798,16,74
+Kurung Kumey,Damin,Tokriang,265778,20,150
+Kurung Kumey,Damin,Yaso,265784,8,43
+Kurung Kumey,Koloriang,Buhan,265467,3,12
+Kurung Kumey,Koloriang,Buyang,265476,0,0
+Kurung Kumey,Koloriang,Buyang-II,265477,27,149
+Kurung Kumey,Koloriang,Chello,265464,14,93
+Kurung Kumey,Koloriang,Chimpu,265478,4,19
+Kurung Kumey,Koloriang,Chomi,265486,11,57
+Kurung Kumey,Koloriang,Chote,265485,3,13
+Kurung Kumey,Koloriang,Degging I,265482,11,48
+Kurung Kumey,Koloriang,Kachanjane,265452,5,28
+Kurung Kumey,Koloriang,Kiodhriang,265473,7,27
+Kurung Kumey,Koloriang,Naji Bibok,265472,14,86
+Kurung Kumey,Koloriang,Nangram,265438,83,350
+Kurung Kumey,Koloriang,Nyolo,265469,21,75
+Kurung Kumey,Koloriang,Pakba,265433,28,175
+Kurung Kumey,Koloriang,Papu,265453,16,87
+Kurung Kumey,Koloriang,Rengchi,265431,12,69
+Kurung Kumey,Koloriang,Sollung Tapin,265463,3,22
+Kurung Kumey,Koloriang,Tate,265488,15,99
+Kurung Kumey,Koloriang,Yumlam,265426,35,241
+Kurung Kumey,Parsi-Parlo,Cheba,265748,16,109
+Kurung Kumey,Parsi-Parlo,Dalang,265761,25,136
+Kurung Kumey,Parsi-Parlo,Dape,265773,18,112
+Kurung Kumey,Parsi-Parlo,Dare,265768,8,42
+Kurung Kumey,Parsi-Parlo,Geyang,265774,31,167
+Kurung Kumey,Parsi-Parlo,Gonang,265716,48,365
+Kurung Kumey,Parsi-Parlo,Hissang,265745,12,48
+Kurung Kumey,Parsi-Parlo,Leneriang,265746,12,55
+Kurung Kumey,Parsi-Parlo,Nyokuriang,265740,12,63
+Kurung Kumey,Parsi-Parlo,Pachang,265762,31,161
+Kurung Kumey,Parsi-Parlo,Pado I,265733,24,133
+Kurung Kumey,Parsi-Parlo,Pagam,265766,10,55
+Kurung Kumey,Parsi-Parlo,Pape,265765,24,129
+Kurung Kumey,Parsi-Parlo,Pariang,265747,20,122
+Kurung Kumey,Parsi-Parlo,Parsi-Parlo H.Q.,265712,39,234
+Kurung Kumey,Parsi-Parlo,Passik,265753,14,83
+Kurung Kumey,Parsi-Parlo,Pilop,265751,24,114
+Kurung Kumey,Parsi-Parlo,Rashik,265741,14,88
+Kurung Kumey,Parsi-Parlo,Renchiporiang -I,265720,24,165
+Kurung Kumey,Parsi-Parlo,Yarba-I,265731,24,142
+Kurung Kumey,Sarli,Bala,265704,3,15
+Kurung Kumey,Sarli,Chaching,265693,6,43
+Kurung Kumey,Sarli,Chulu,265711,15,65
+Kurung Kumey,Sarli,Gane,265702,5,30
+Kurung Kumey,Sarli,Haraiho,265678,5,29
+Kurung Kumey,Sarli,Kapu,265708,16,91
+Kurung Kumey,Sarli,Koropu,265685,10,49
+Kurung Kumey,Sarli,Machane,265701,16,99
+Kurung Kumey,Sarli,Malo,265677,7,44
+Kurung Kumey,Sarli,Milli,265703,21,121
+Kurung Kumey,Sarli,Namjo,265698,6,51
+Kurung Kumey,Sarli,New Sarli,265681,7,26
+Kurung Kumey,Sarli,Pale,265700,8,62
+Kurung Kumey,Sarli,Riya,265710,4,15
+Kurung Kumey,Sarli,Sahrma,265706,10,64
+Kurung Kumey,Sarli,Sape,265676,19,226
+Kurung Kumey,Sarli,Sarli,265673,39,340
+Kurung Kumey,Sarli,Sate,265674,56,248
+Kurung Kumey,Sarli,Vatalin,265707,10,52
+Kurung Kumey,Sarli,Wabia,265696,11,95
+Kurung Kumey,Sarli,Walu,265699,5,47
+Kurung Kumey,Sarli,Waru,265709,24,122
+Lower Dibang,Hunli-Desali,Chanli,266090,8,45
+Lower Dibang,Hunli-Desali,Yuma (7 KM),266052,8,21
+Tawang,Jang-Thingbu,Broxer,261609,0,0
+Tawang,Jang-Thingbu,Dungse,261557,375,1770
+Tawang,Jang-Thingbu,Kharsa(New),261555,102,559
+Tawang,Jang-Thingbu,Kharsa(Old),261554,24,132
+Tawang,Jang-Thingbu,Luguthang,261611,11,58
+Tawang,Jang-Thingbu,Mago,261607,75,486
+Tawang,Jang-Thingbu,Marmang,261553,74,497
+Tawang,Jang-Thingbu,Namazing,261556,121,664
+Tawang,Jang-Thingbu,Rho,261608,132,652
+Tawang,Jang-Thingbu,Sarong,261606,10,33
+Tawang,Jang-Thingbu,Thingbu H.Q.,261610,69,363
+Tawang,Jang-Thingbu,Yuthumbu,261558,204,1363
+Tawang,Kitpi,Audung,261537,41,145
+Tawang,Kitpi,Bathung,261536,9,39
+Tawang,Kitpi,Boimkang,261550,12,41
+Tawang,Kitpi,Boksar,261543,16,64
+Tawang,Kitpi,Bomdir Basti,261528,59,235
+Tawang,Kitpi,Bongbong/Chaksam,261545,9,40
+Tawang,Kitpi,Bragyap,261548,19,81
+Tawang,Kitpi,Grenghar,261521,21,112
+Tawang,Kitpi,Jamkhar (Shemghar),261538,17,90
+Tawang,Kitpi,Jyarmang Ani Gonpa,261526,5,5
+Tawang,Kitpi,Khardung,261551,35,127
+Tawang,Kitpi,Khrimu,261547,148,596
+Tawang,Kitpi,Khromten Gonpa,261525,1,2
+Tawang,Kitpi,Kitpi,261533,15,53
+Tawang,Kitpi,Kitpi II,261534,60,210
+Tawang,Kitpi,Kralling,261544,23,124
+Tawang,Kitpi,Langbutse,261530,30,134
+Tawang,Kitpi,Lhargong,261523,16,58
+Tawang,Kitpi,Namet,261524,36,150
+Tawang,Kitpi,Namtungtse,261527,18,89
+Tawang,Kitpi,Ruighar,261539,10,28
+Tawang,Kitpi,Shernup,261542,21,94
+Tawang,Kitpi,Soma,261546,15,37
+Tawang,Kitpi,Tarmang Gonpa,261531,5,21
+Tawang,Kitpi,Tengteng (Thengthin),261522,14,47
+Tawang,Kitpi,Themkhar,261535,8,38
+Tawang,Kitpi,Thongmin Gonpa,261549,6,13
+Tawang,Kitpi,Waikher,261532,19,79
+Tawang,Kitpi,Zyemteng,261529,30,109
+Tawang,Tawang,8 K.M. Labour Camp,261446,84,348
+Tawang,Tawang,Bigha,261460,13,48
+Tawang,Tawang,Blemleng,261468,3,13
+Tawang,Tawang,Bomba,261464,19,85
+Tawang,Tawang,Bomdir Supply,261505,0,0
+Tawang,Tawang,Brakhar Gompa,261572,12,104
+Tawang,Tawang,Brukpaleng,261568,4,45
+Tawang,Tawang,Bumteng,261463,32,114
+Tawang,Tawang,Chala Gonpa,261475,1,3
+Tawang,Tawang,Changprong,261457,42,201
+Tawang,Tawang,Changteng,261511,13,68
+Tawang,Tawang,Damgyen,261455,25,115
+Tawang,Tawang,Darmong G,261516,0,0
+Tawang,Tawang,Dharmakang,261514,16,83
+Tawang,Tawang,Dungkhar,261581,6,19
+Tawang,Tawang,Famla,261499,13,88
+Tawang,Tawang,Gemreteng,261576,8,24
+Tawang,Tawang,Gompa Village(Basti),261448,0,0
+Tawang,Tawang,Gorman Gompa,261520,0,0
+Tawang,Tawang,Gormang,261478,13,48
+Tawang,Tawang,Gorze Gonpa,261492,0,0
+Tawang,Tawang,Grakhang,261566,12,66
+Tawang,Tawang,Grelleng,261565,31,258
+Tawang,Tawang,Gridar Gonpa,261483,3,3
+Tawang,Tawang,Gyada,261484,13,44
+Tawang,Tawang,Gyanggit,261465,16,54
+Tawang,Tawang,Gyangkhar,261498,47,239
+Tawang,Tawang,Gyangong Ani Gompa,261445,25,45
+Tawang,Tawang,Jamyang Choikorling Gonpa,261459,22,166
+Tawang,Tawang,Jangda,261584,137,682
+Tawang,Tawang,Jobrang,261573,11,47
+Tawang,Tawang,Kangteng,261472,5,22
+Tawang,Tawang,Kegorbteng,261473,30,125
+Tawang,Tawang,Khalengche,261582,1,4
+Tawang,Tawang,Khamba,261575,63,352
+Tawang,Tawang,Khartoth,261503,24,103
+Tawang,Tawang,Khinmey Gonpa,261507,4,103
+Tawang,Tawang,Kitkhar,261461,7,37
+Tawang,Tawang,Kyableng,261504,98,370
+Tawang,Tawang,Labour Camp,261467,1,7
+Tawang,Tawang,Lamrong,261476,6,28
+Tawang,Tawang,Lebrang,261453,24,107
+Tawang,Tawang,Lemberdung,261497,74,328
+Tawang,Tawang,Lhoukhar,261563,25,123
+Tawang,Tawang,Lugudung,261579,3,10
+Tawang,Tawang,Lumkang,261564,9,26
+Tawang,Tawang,Mandrelling,261449,72,279
+Tawang,Tawang,New Lebrang,261454,0,0
+Tawang,Tawang,Nodo,261479,3,12
+Tawang,Tawang,Paidhar,261509,6,33
+Tawang,Tawang,Paigong,261567,95,462
+Tawang,Tawang,Paikhar,261513,29,120
+Tawang,Tawang,Pamaghar,261488,60,248
+Tawang,Tawang,Ponkang,261518,0,0
+Tawang,Tawang,Prangteng,261517,0,0
+Tawang,Tawang,Rengyang,261570,24,180
+Tawang,Tawang,Saikharteng,261502,0,0
+Tawang,Tawang,Sakpret,261490,54,184
+Tawang,Tawang,Sangeeling,261458,3,4
+Tawang,Tawang,Seru,261471,145,671
+Tawang,Tawang,Shabur,261485,29,132
+Tawang,Tawang,Shakpaleng,261578,4,14
+Tawang,Tawang,Shepeadung,261515,4,20
+Tawang,Tawang,Shyro,261583,97,636
+Tawang,Tawang,Singsore Ani Gompa,261571,27,46
+Tawang,Tawang,Surbi,261469,44,209
+Tawang,Tawang,Surbu/Tseretse,261580,20,193
+Tawang,Tawang,Tawang Gompa,261447,40,422
+Tawang,Tawang,Tengpuche Gonpa,261494,4,15
+Tawang,Tawang,Tepsha,261510,11,80
+Tawang,Tawang,Tepsotmey,261560,16,73
+Tawang,Tawang,Thangphe Gonpa,261496,0,0
+Tawang,Tawang,Thespa Gonpa,261508,0,0
+Tawang,Tawang,Thongleng,261493,110,377
+Tawang,Tawang,Timelo,261451,12,52
+Tawang,Tawang,Tohsur Gonpa,261489,0,0
+Tawang,Tawang,Tsewkhar/DHPD colony,261562,30,279
+Tawang,Tawang,Unghar,261500,17,66
+Tawang,Tawang,Yanla Gompa,261577,24,124
+Tawang,Tawang,Yubu,261512,8,47
+Tawang,Tawang,Yuesa Gonpa,261491,2,2
+Tawang,Tawang,Yusum,261486,27,96
+Tawang,Zemithang-Dudunghar,B.T.K (Chumrong),261388,32,125
+Tawang,Zemithang-Dudunghar,Brokenthang,261378,14,42
+Tawang,Zemithang-Dudunghar,Chellengdung,261428,26,113
+Tawang,Zemithang-Dudunghar,Dorkarong,261437,19,71
+Tawang,Zemithang-Dudunghar,Dudunghar H.Q.,261430,35,164
+Tawang,Zemithang-Dudunghar,Dung,261386,10,54
+Tawang,Zemithang-Dudunghar,Gorsam,261382,27,103
+Tawang,Zemithang-Dudunghar,Gyamo,261431,0,0
+Tawang,Zemithang-Dudunghar,Hanggang,261390,2,4
+Tawang,Zemithang-Dudunghar,Kelengteng,261385,38,131
+Tawang,Zemithang-Dudunghar,Kharman,261384,44,200
+Tawang,Zemithang-Dudunghar,Khebleteng,261393,4,18
+Tawang,Zemithang-Dudunghar,Kheleteng,261436,2,8
+Tawang,Zemithang-Dudunghar,Khobleteng,261387,66,273
+Tawang,Zemithang-Dudunghar,Khokem,261441,44,171
+Tawang,Zemithang-Dudunghar,Lumchang,261420,19,98
+Tawang,Zemithang-Dudunghar,Lumpo,261379,52,254
+Tawang,Zemithang-Dudunghar,Maling,261433,11,37
+Tawang,Zemithang-Dudunghar,Muchut (Kharakpu),261381,39,177
+Tawang,Zemithang-Dudunghar,Muktur,261443,41,191
+Tawang,Zemithang-Dudunghar,Narmaleng,261438,3,17
+Tawang,Zemithang-Dudunghar,Pamdung,261432,6,25
+Tawang,Zemithang-Dudunghar,Phomghar,261440,15,49
+Tawang,Zemithang-Dudunghar,Ramyang,261429,19,97
+Tawang,Zemithang-Dudunghar,Shakti,261394,102,370
+Tawang,Zemithang-Dudunghar,Shoktsen,261377,118,475
+Tawang,Zemithang-Dudunghar,Sirdi,261392,15,73
+Tawang,Zemithang-Dudunghar,T.Gonpa,261380,57,204
+Tawang,Zemithang-Dudunghar,Tebo,261389,4,8
+Tawang,Zemithang-Dudunghar,Thikshi,261391,18,79
+Tawang,Zemithang-Dudunghar,Yuser,261423,24,115
+Tawang,Zemithang-Dudunghar,Zemithang H.Q.,261383,99,336
+Upper Siang,Jengging,Jengging Vill.,263996,0,0
+Upper Siang,Jengging,Pittung,263989,16,50
+Upper Siang,Jengging,Tageng,263995,15,33
+Upper Siang,Jengging,Tayeng,263988,0,0
+Upper Siang,Jengging,Tenemoka,263991,6,32
+Upper Siang,Singa-Gelling,Bishing,263959,26,121
+Upper Siang,Singa-Gelling,Bona,263960,24,98
+Upper Siang,Singa-Gelling,Gelling H.Q.,263962,31,123
+Upper Siang,Singa-Gelling,Kopu,263961,47,186
+Upper Siang,Singa-Gelling,Mankota,263967,18,177
+Upper Siang,Singa-Gelling,Mayum,263958,17,99
+Upper Siang,Singa-Gelling,Norbudling,263963,31,153
+Upper Siang,Singa-Gelling,Singa H.Q.,263977,33,176
+Upper Siang,Singa-Gelling,Tashi Gaon,263969,16,117
+Upper Siang,Tuting,Dompo,263936,0,0
+Upper Siang,Tuting,Jido,263928,22,124
+Upper Siang,Tuting,Kuging,263931,32,156
+Upper Siang,Tuting,Lali,263945,35,201
+Upper Siang,Tuting,Ngaming,263934,74,472
+Upper Siang,Tuting,Ningging,263937,58,330
+Upper Siang,Tuting,Nyering,263938,18,87
+Upper Siang,Tuting,Pango,263950,56,283
+Upper Siang,Tuting,Pekong,263939,0,0
+Upper Siang,Tuting,Pekong,263947,91,616
+Upper Siang,Tuting,Pokbir,263929,33,219
+Upper Siang,Tuting,Rishing,263946,36,165
+Upper Siang,Tuting,Tenggo,263935,9,50
+Upper Siang,Tuting,Tuting H.Q.,263944,482,2733
+Upper Siang,Tuting,Tuting Panikheti(Ongkong),263943,0,0
+Upper Siang,Tuting,Tuting Village,263940,1,2
+Upper Subansiri,Limeking,Dadu,262764,5,32
+Upper Subansiri,Limeking,Dojubung,262763,2,11
+Upper Subansiri,Limeking,Gelomo Camp(Golomoring),262791,11,40
+Upper Subansiri,Limeking,Gumsing,262772,21,117
+Upper Subansiri,Limeking,Ishneya(Isnia) I,262773,20,121
+Upper Subansiri,Limeking,Kacha,262768,20,119
+Upper Subansiri,Limeking,Limeking H.Q.,262798,62,376
+Upper Subansiri,Limeking,Lingbing,262770,19,116
+Upper Subansiri,Limeking,Ojugu,262775,21,105
+Upper Subansiri,Limeking,Redding,262766,12,74
+Upper Subansiri,Limeking,Redding Camp,262792,7,39
+Upper Subansiri,Limeking,Reddy,262765,13,67
+Upper Subansiri,Limeking,Taksing H.Q.,262776,52,324
+Upper Subansiri,Limeking,Taying,262771,7,51
+Upper Subansiri,Limeking,Thungba(Tungba),262769,6,35
+Upper Subansiri,Limeking,Yaja,262767,7,34
+Upper Subansiri,Nacho,Chokar,262817,15,86
+Upper Subansiri,Siyum,Byachng(Siyum H.Q.),262864,25,131
+West Kameng,Nafra,Dibbin,261732,54,390
+West Kameng,Nafra,Dibirick,261728,36,200
+West Kameng,Nafra,Dillung,261730,12,65
+West Kameng,Nafra,Dingchang,261742,27,91
+West Kameng,Nafra,Dishing,261731,8,34
+West Kameng,Nafra,Jerigaon,261743,115,534
+West Kameng,Nafra,Khellong,261722,66,357
+West Kameng,Nafra,Mathow,261734,44,237
+West Kameng,Nafra,Nafra H.Q.,261745,274,1169
+West Kameng,Nafra,Nakhu,261724,55,303
+West Kameng,Nafra,Pedung (New Bomdila),261746,193,839
+Shiyomi,Mechuka,Charu,263433,0,0
+Shiyomi,Mechuka,Dechengtung East,263321,23,160
+Shiyomi,Mechuka,Gai,263437,2,16
+Shiyomi,Mechuka,Galling,263324,10,73
+Shiyomi,Mechuka,Hone,263445,14,140
+Shiyomi,Mechuka,Lamak,263402,15,71
+Shiyomi,Mechuka,Lhalung,263319,43,310
+Shiyomi,Mechuka,Mechuka H.Q.,263348,282,1998
+Shiyomi,Mechuka,Pene,263446,4,45
+Shiyomi,Mechuka,Segong,263320,14,97
+Shiyomi,Mechuka,Singbir,263323,23,160
+Shiyomi,Mechuka,Thargelling,263317,15,110
+Shiyomi,Mechuka,Yapu,263432,4,38
+Shiyomi,Mechuka,Yorko,263318,17,77
+Shiyomi,Monigong,Chingo,263359,15,81
+Shiyomi,Monigong,Korle,263358,12,69
+Shiyomi,Monigong,Labukar,263367,16,82
+Shiyomi,Monigong,Nema Sibo,263360,21,125
+Shiyomi,Monigong,Paning,263380,19,74
+Shiyomi,Monigong,Pape Krong,263361,21,138
+Shiyomi,Monigong,Pullom,263370,13,70
+Shiyomi,Monigong,Remang Village,263353,15,67
+Shiyomi,Monigong,Sheet,263383,22,118
+Shiyomi,Monigong,Soyorgong,263364,12,74
+Shiyomi,Monigong,Sukudom,263369,12,67
+Shiyomi,Monigong,Tabha,263351,7,36
+Shiyomi,Monigong,Tasum,263365,2,15
+Shiyomi,Monigong,Yadang,263352,10,45
+Shiyomi,Monigong,Yangrang,263388,13,95
+Shiyomi,Monigong,Yorkodom,263363,16,89
+Kra daadi,Pipsorang,Gatam,265857,5,34
+Kra daadi,Pipsorang,Habak,265858,7,49
+Kra daadi,Pipsorang,Hapuk (I),265841,0,0
+Kra daadi,Pipsorang,Kokso,265862,7,50
+Kra daadi,Pipsorang,Neopum,265838,0,0
+Kra daadi,Pipsorang,Richik,265851,6,33

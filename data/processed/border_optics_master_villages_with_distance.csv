@@ -1,0 +1,259 @@
+village_id,village,district,block,state,is_core_sample,latitude,longitude,distance_to_border_km
+1,Metengliang,Anjaw,Chaglagam,Arunachal Pradesh,True,28.2053139,96.5325529,23.55147754732031
+2,Chipra,Anjaw,Chaglagam,Arunachal Pradesh,True,28.2687337,96.564114,18.61597302269579
+3,Mithumna,Anjaw,Chaglagam,Arunachal Pradesh,True,28.2346775,96.535261,20.637282103971327
+4,Pailiang,Anjaw,Chaglagam,Arunachal Pradesh,True,28.1966606,96.5083691,23.64936417912975
+5,Glotong,Anjaw,Hayuliang,Arunachal Pradesh,True,28.2051645,96.6850333,24.978123931864474
+6,Hayuliang,Anjaw,Hayuliang,Arunachal Pradesh,True,28.081317,96.5236674,36.734568945910176
+7,Keletong,Anjaw,Hayuliang,Arunachal Pradesh,True,28.123006,96.6192583,35.875909327273206
+8,Kongra(Metung),Anjaw,Hayuliang,Arunachal Pradesh,True,28.0695862,96.5735857,39.47988017013702
+9,Zapaliang,Anjaw,Hayuliang,Arunachal Pradesh,True,28.009235,96.4411122,42.65322226035644
+10,Chenguinty,Anjaw,Walong,Arunachal Pradesh,True,27.8858991,96.8520327,23.015596041705322
+11,Dhanbari,Anjaw,Walong,Arunachal Pradesh,True,28.0078075,96.6214266,47.7984107193678
+12,Dong,Anjaw,Walong,Arunachal Pradesh,True,28.1679203,97.0389469,19.770185418463136
+13,Gong,Anjaw,Walong,Arunachal Pradesh,True,28.1700892,97.0008029,18.655530157759433
+14,Hot Spring,Anjaw,Walong,Arunachal Pradesh,True,28.2928975,97.1638576,3.1653670214744634
+15,Hunung,Anjaw,Walong,Arunachal Pradesh,True,27.8741289,96.9451026,16.731495711381037
+16,Kaho,Anjaw,Walong,Arunachal Pradesh,True,28.3034238,97.0250574,4.742758087131749
+17,Khrawit,Anjaw,Walong,Arunachal Pradesh,True,27.9044705,96.9437389,19.354876095919487
+18,Krowti,Anjaw,Walong,Arunachal Pradesh,True,28.2354088,97.0273216,12.000143808997192
+19,Krowti Labour Camp,Anjaw,Walong,Arunachal Pradesh,True,28.2318311,97.0285584,12.427171082623461
+20,Kundan,Anjaw,Walong,Arunachal Pradesh,True,28.2425043,97.0254063,11.166994063659924
+21,Musai,Anjaw,Walong,Arunachal Pradesh,True,28.2588294,97.0287424,9.482353162624644
+22,Samdul,Anjaw,Walong,Arunachal Pradesh,True,27.8858936,96.9223997,19.199961457968946
+23,Supkung,Anjaw,Walong,Arunachal Pradesh,True,28.1588813,97.0363709,20.714953414239698
+24,Walong,Anjaw,Walong,Arunachal Pradesh,True,28.1294938,97.0166444,23.522962781272955
+25,Yakung,Anjaw,Walong,Arunachal Pradesh,True,28.1997526,97.0263468,15.937971478438264
+26,Achali,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.8429461,95.9704783,25.136122972754706
+27,Achengo,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.8238506,95.9428387,28.591261465836226
+28,Acheso,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.9263772,95.97448,21.938012953968236
+29,Alinye,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.8346828,95.9628967,26.239570559223203
+30,Angrim Valley,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.8842816,95.9786208,22.641143662473482
+31,Aropo,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.8230901,95.9397069,28.909067186142877
+32,Atoto,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.8355826,95.9647411,26.028436586542608
+33,Echito,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.9291593,95.9752771,21.790565296758967
+34,Ediya,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.9638191,95.8076515,30.30058503121086
+35,Emuli,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.8871158,95.8356573,36.47291914494567
+36,Gipulin,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.8479222,95.9666253,25.238580982638027
+37,Kamuyi,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.9926912,95.8050502,27.09994674507738
+38,Mipi H.Q.,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.9641685,95.8081308,30.2770168490466
+39,Mipido,Dibang Valley,Anini-Mipi,Arunachal Pradesh,True,28.950424,95.8144355,31.95699197785582
+40,Etalin Bridge Point,Dibang Valley,Etalin-Malinye,Arunachal Pradesh,True,28.6094048,95.8703668,48.40229922526041
+41,Maliney,Dibang Valley,Etalin-Malinye,Arunachal Pradesh,True,28.6750197,96.1532235,28.30539834121112
+42,Mawali,Dibang Valley,Etalin-Malinye,Arunachal Pradesh,True,28.6599698,96.0170217,36.65054678878319
+43,Punli,Dibang Valley,Etalin-Malinye,Arunachal Pradesh,True,28.6565904,95.8520788,47.236513507799465
+44,Lengdi/Liang,East Kameng,Bameng,Arunachal Pradesh,True,27.5376292,92.923885,48.40847649732043
+45,Upper Liyak,East Kameng,Bameng,Arunachal Pradesh,True,27.5337804,92.8465101,44.62584993063105
+46,Dao,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.7832832,92.9383609,29.2258201597848
+47,Dara Yangfo,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.732817,93.0487159,41.62935330368037
+48,Lamrah,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.6967225,93.0373888,42.84133586938716
+49,Loto Yangfo,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.7296573,93.059293,42.71937793657178
+50,Diya Sullung,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.7760452,93.0124888,35.98060261054533
+51,Hara Yangfo,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.751648,93.1327809,47.65524470124099
+52,Jayang Bagang,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.7547367,93.1791026,51.421580088089655
+53,Kesse Bagang,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.7809294,93.2034502,52.16217367977562
+54,Langchu Sullung,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.7569534,92.9355132,30.5761082507588
+55,Nampe Bagang,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.7140627,93.0313033,41.25599578439832
+56,Raro Sullung,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.6890058,93.0717372,46.195477079091
+57,Tamsang Yangfo,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.6760974,93.0917894,48.675422550444736
+58,Warriam Sullung,East Kameng,Chayangtajo,Arunachal Pradesh,True,27.7279436,92.9802579,36.12536591014656
+59,Wallong,East Kameng,Khenewa,Arunachal Pradesh,True,27.6530641,92.9685879,40.68780849847036
+60,Chate,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1191826,93.3236259,27.514653092640128
+61,Chulla,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1242982,93.411274,31.749148583931046
+62,Damin H.Q.,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1041982,93.3343841,29.501881017859247
+63,Damin Village,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1050092,93.3443566,29.861346731499662
+64,Digok,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1272533,93.3496878,27.919181951318258
+65,Fuba,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1198537,93.3376816,28.067158393895337
+66,Huri,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1095105,93.3045975,27.790657647890605
+67,Katuk,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1189094,93.2501395,25.327299110226797
+68,Kopila,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1092251,93.3088818,27.97259405716954
+69,Machang,Kurung Kumey,Damin,Arunachal Pradesh,True,28.0962492,93.3005705,29.06685602606695
+70,Nisuk,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1081822,93.414929,33.39233200993765
+71,Pipa,Kurung Kumey,Damin,Arunachal Pradesh,True,28.0735847,93.283149,31.032365604435046
+72,Ramu,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1084035,93.4191096,33.63348546910175
+73,Rane,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1440384,93.3476122,26.193750940148828
+74,Rawiok,Kurung Kumey,Damin,Arunachal Pradesh,True,28.137739,93.3249207,25.68900497047034
+75,Ruba,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1221707,93.2334312,24.62205079247333
+76,Senamriang,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1320477,93.3191302,26.0096499397752
+77,Sibia,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1070207,93.3012679,27.941142532628323
+78,Tarba,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1607522,93.4195471,29.299565553124097
+79,Tokriang,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1110736,93.3311986,28.664594358182786
+80,Yaso,Kurung Kumey,Damin,Arunachal Pradesh,True,28.1002726,93.3473375,30.47289915044691
+81,Buhan,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.8895447,93.283152,51.320768493337084
+82,Buyang,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.9419935,93.286116,45.59446808250265
+83,Buyang-II,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.9419935,93.286116,45.59446808250265
+84,Chello,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.8849215,93.291646,52.00727028968623
+85,Chimpu,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.9522411,93.2566277,43.85210058598218
+86,Chomi,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.955673,93.2595487,43.53402714728976
+87,Chote,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.9524396,93.2616596,43.934592941357735
+88,Kiodhriang,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.8581693,93.2541827,53.7954054191722
+89,Nangram,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.9071735,93.4387839,54.067301708834364
+90,Nyolo,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.9012651,93.3076219,50.535068858026115
+91,Pakba,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.8903622,93.3997806,54.28660902922932
+92,Papu,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.9111524,93.3917445,51.807539374838065
+93,Rengchi,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.8914093,93.4267781,55.19282192909671
+94,Tate,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.9539309,93.2699171,43.94130685957721
+95,Yumlam,Kurung Kumey,Koloriang,Arunachal Pradesh,True,27.8897958,93.4560068,56.582519874523385
+96,Cheba,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.0204954,93.4801015,45.213122071085685
+97,Dape,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.0305059,93.4762607,44.08076822849323
+98,Dare,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.040746,93.4566336,41.976840639837974
+99,Geyang,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.032302,93.4718342,43.6508702157303
+100,Gonang,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,27.9884834,93.5169908,50.32814963641506
+101,Nyokuriang,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.0062351,93.5622034,51.748144421554905
+102,Pachang,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.0250521,93.4720132,44.31635553943163
+103,Pado I,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,27.9756026,93.5757879,55.21899864800898
+104,Pagam,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.049312,93.4584998,41.31463372768988
+105,Pape,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.0129617,93.4902587,46.50524109896463
+106,Pariang,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.0328165,93.4803814,44.12740336901169
+107,Passik,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.0360017,93.4705453,43.240412808327626
+108,Pilop,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.004125,93.5674707,52.283346040104945
+109,Rashik,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,28.0080613,93.5508476,50.8242312756417
+110,Yarba-I,Kurung Kumey,Parsi-Parlo,Arunachal Pradesh,True,27.96349,93.5654022,55.57211119674372
+111,Bala,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9431025,93.1252507,39.20147233365385
+112,Chaching,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9375989,93.2339474,44.86967213138936
+113,Chulu,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.8792111,93.0545229,34.02826561063942
+114,Gane,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9643147,93.0391329,30.378678116592763
+115,Haraiho,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9804475,93.1383943,37.19190792339146
+116,Kapu,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.8879985,93.075251,35.65724887594759
+117,Koropu,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9899045,93.2023371,38.28343575616581
+118,Machane,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9220981,93.0770012,34.827688163888126
+119,Malo,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9563848,93.1153543,37.50618853567789
+120,Milli,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9506354,93.0574678,32.36289589181545
+121,Namjo,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.942996,93.1849686,42.781038789057654
+122,New Sarli,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9582217,93.1705235,40.702430102915834
+123,Riya,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.8776779,93.0467319,33.36265119245259
+124,Sape,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9549291,93.1321419,38.804436983164464
+125,Sarli,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9525582,93.163373,41.09740726219337
+126,Sate,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9537376,93.1572444,40.6744386435624
+127,Wabia,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9413919,93.1360402,40.16427216500065
+128,Walu,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.9413919,93.1360402,40.16427216500065
+129,Waru,Kurung Kumey,Sarli,Arunachal Pradesh,True,27.8852647,93.0448126,32.87832593598136
+130,Chanli,Lower Dibang,Hunli-Desali,Arunachal Pradesh,True,28.2923493,96.0296242,31.069644375527663
+131,Broxer,Tawang,Jang-Thingbu,Arunachal Pradesh,True,27.622647,91.9631993,11.534632926202617
+132,Luguthang,Tawang,Jang-Thingbu,Arunachal Pradesh,True,27.5948234,92.1857466,22.326597201305386
+133,Mago,Tawang,Jang-Thingbu,Arunachal Pradesh,True,27.6883395,92.2081099,14.280087089647713
+134,Namazing,Tawang,Jang-Thingbu,Arunachal Pradesh,True,27.5506261,91.9768197,8.789847397916873
+135,Rho,Tawang,Jang-Thingbu,Arunachal Pradesh,True,27.6141065,91.987227,12.925569246703043
+136,Kitpi,Tawang,Kitpi,Arunachal Pradesh,True,27.5731189,91.90284,12.536040065406388
+137,Kitpi II,Tawang,Kitpi,Arunachal Pradesh,True,27.5731189,91.90284,12.536040065406388
+138,Famla,Tawang,Tawang,Arunachal Pradesh,True,27.5612427,91.8523298,10.682528185155059
+139,Gyangong Ani Gompa,Tawang,Tawang,Arunachal Pradesh,True,27.6003059,91.8525209,14.622825620474936
+140,Jangda,Tawang,Tawang,Arunachal Pradesh,True,27.5942319,91.9742379,13.689163331752756
+141,Mandrelling,Tawang,Tawang,Arunachal Pradesh,True,27.5952914,91.8697249,14.559523015455596
+142,Sakpret,Tawang,Tawang,Arunachal Pradesh,True,27.57568,91.79901,12.958328258880545
+143,Shyro,Tawang,Tawang,Arunachal Pradesh,True,27.5744459,91.9464757,11.81775390032878
+144,Singsore Ani Gompa,Tawang,Tawang,Arunachal Pradesh,True,27.5952914,91.8697249,14.559523015455596
+145,Tawang Gompa,Tawang,Tawang,Arunachal Pradesh,True,27.5866091,91.8573902,13.524373378705649
+146,Thongleng,Tawang,Tawang,Arunachal Pradesh,True,27.57294,91.79215,12.753686437523037
+147,Brokenthang,Tawang,Zemithang-Dudunghar,Arunachal Pradesh,True,27.7352592,91.724121,7.75708472110812
+148,Gorsam,Tawang,Zemithang-Dudunghar,Arunachal Pradesh,True,27.6973252,91.7142454,9.010226017829485
+149,Kharman,Tawang,Zemithang-Dudunghar,Arunachal Pradesh,True,27.691851,91.7463062,12.269702971065769
+150,Lumpo,Tawang,Zemithang-Dudunghar,Arunachal Pradesh,True,27.7204821,91.7144005,8.406890552341261
+151,Maling,Tawang,Zemithang-Dudunghar,Arunachal Pradesh,True,27.6350823,92.0693622,14.243113767364411
+152,Muktur,Tawang,Zemithang-Dudunghar,Arunachal Pradesh,True,27.5800562,91.6627629,7.516955165509983
+153,Ramyang,Tawang,Zemithang-Dudunghar,Arunachal Pradesh,True,27.514701,91.6549664,2.1465378797216714
+154,Shakti,Tawang,Zemithang-Dudunghar,Arunachal Pradesh,True,27.61139,91.71387,13.359345712043941
+155,Shoktsen,Tawang,Zemithang-Dudunghar,Arunachal Pradesh,True,27.7416556,91.7318533,7.02024430747143
+156,Sirdi,Tawang,Zemithang-Dudunghar,Arunachal Pradesh,True,27.6466524,91.7230296,12.39150433857883
+157,Bishing,Upper Siang,Singa-Gelling,Arunachal Pradesh,True,29.1107736,95.0268102,3.8139433614062392
+158,Bona,Upper Siang,Singa-Gelling,Arunachal Pradesh,True,29.0974164,94.9475348,6.707024322830903
+159,Mankota,Upper Siang,Singa-Gelling,Arunachal Pradesh,True,28.8878329,95.0759463,24.47993926011527
+160,Mayum,Upper Siang,Singa-Gelling,Arunachal Pradesh,True,29.0924208,94.9597907,7.179490538239215
+161,Tashi Gaon,Upper Siang,Singa-Gelling,Arunachal Pradesh,True,28.8743385,95.1028336,24.265593030816824
+162,Jido,Upper Siang,Tuting,Arunachal Pradesh,True,28.9820594,94.904882,20.063968511426438
+163,Lali,Upper Siang,Tuting,Arunachal Pradesh,True,29.0003932,94.8912175,18.09358966235435
+164,Ngaming,Upper Siang,Tuting,Arunachal Pradesh,True,28.9686342,94.9381419,21.33336634899785
+165,Nyering,Upper Siang,Tuting,Arunachal Pradesh,True,28.9360701,95.0104597,21.999268832330515
+166,Pango,Upper Siang,Tuting,Arunachal Pradesh,True,28.8870297,94.7578559,31.73653852295484
+167,Pekong,Upper Siang,Tuting,Arunachal Pradesh,True,28.9878787,94.8919255,19.50265496111552
+168,Pekong,Upper Siang,Tuting,Arunachal Pradesh,True,28.9878787,94.8919255,19.50265496111552
+169,Pokbir,Upper Siang,Tuting,Arunachal Pradesh,True,28.963981,94.9375517,21.863728679399237
+170,Rishing,Upper Siang,Tuting,Arunachal Pradesh,True,28.9984023,94.8852907,18.362643721956463
+171,Tenggo,Upper Siang,Tuting,Arunachal Pradesh,True,29.0668244,94.478654,13.91632761192635
+172,Dadu,Upper Subansiri,Limeking,Arunachal Pradesh,True,28.3625828,93.5395735,30.85618204171934
+173,Gumsing,Upper Subansiri,Limeking,Arunachal Pradesh,True,28.4321817,93.2172532,2.0289552748217994
+174,Lingbing,Upper Subansiri,Limeking,Arunachal Pradesh,True,28.4367283,93.2151175,1.5038568706480528
+175,Redding,Upper Subansiri,Limeking,Arunachal Pradesh,True,28.4851077,93.4621565,17.725994350501505
+176,Redding Camp,Upper Subansiri,Limeking,Arunachal Pradesh,True,28.4851077,93.4621565,17.725994350501505
+177,Taying,Upper Subansiri,Limeking,Arunachal Pradesh,True,28.4321817,93.2172532,2.0289552748217994
+178,Yaja,Upper Subansiri,Limeking,Arunachal Pradesh,True,28.4354329,93.2468461,3.7342133196733847
+179,Chokar,Upper Subansiri,Nacho,Arunachal Pradesh,True,28.4279157,93.8094041,28.66365466399398
+180,Jerigaon,West Kameng,Nafra,Arunachal Pradesh,True,27.3403204,92.4726477,38.944612365757386
+181,Khellong,West Kameng,Nafra,Arunachal Pradesh,True,27.0133852,92.4145185,34.398663824167414
+182,Gatam,Kra daadi,Pipsorang,Arunachal Pradesh,True,28.0979458,93.6001405,47.81661925477557
+183,Habak,Kra daadi,Pipsorang,Arunachal Pradesh,True,28.1084846,93.5827385,45.7071861820773
+184,Hapuk (I),Kra daadi,Pipsorang,Arunachal Pradesh,True,28.0967863,93.5839299,46.57366647457608
+185,Kokso,Kra daadi,Pipsorang,Arunachal Pradesh,True,28.0838152,93.6115937,49.6751880503433
+186,Richik,Kra daadi,Pipsorang,Arunachal Pradesh,True,28.064816,93.6543383,54.40793260813597
+187,Chungthang,North,Chungthang,Sikkim,True,27.604236,88.6465196,11.237658233187938
+188,Tung,North,Chungthang,Sikkim,True,27.5475,88.6493,9.122853334504649
+189,Chawang,North,Kabi Tingda,Sikkim,True,27.4415,88.5992,15.647578781357508
+190,Labi,North,Kabi Tingda,Sikkim,True,27.4373,88.6584,9.913643292485538
+191,Paney-Phensong,North,Kabi Tingda,Sikkim,True,27.4340487,88.6127695,14.4528153627749
+192,Phamtam,North,Kabi Tingda,Sikkim,True,27.4557,88.61,14.396784758306476
+193,Phodong,North,Kabi Tingda,Sikkim,True,27.4130306,88.5838702,17.676951287512615
+194,Ramthang,North,Kabi Tingda,Sikkim,True,27.4039854,88.550947,21.07588890728595
+195,Rongong,North,Kabi Tingda,Sikkim,True,27.4092,88.5635,19.74732274065223
+196,Tangyek,North,Kabi Tingda,Sikkim,True,27.4207,88.527,23.11759458947411
+197,Tingchim,North,Kabi Tingda,Sikkim,True,27.4607586,88.5277316,22.553376225412784
+198,Tingda,North,Kabi Tingda,Sikkim,True,27.3957,88.6272,13.910969973233948
+199,Tumlong,North,Kabi Tingda,Sikkim,True,27.4198712,88.5898311,16.965675837347067
+200,Lachen,North,Lachen,Sikkim,True,27.7305455,88.5469054,26.39530683921855
+201,Lachung,North,Lachung,Sikkim,True,27.7794,88.7152648,11.821609586083358
+202,Barfok,North,Passingdang,Sikkim,True,27.4977,88.491,25.213558696360757
+203,Gor,North,Passingdang,Sikkim,True,27.4302826,88.4984203,25.74928847563567
+204,Hee-Gyathang,North,Passingdang,Sikkim,True,27.4816,88.4991,24.761774289735385
+205,Lingdem,North,Passingdang,Sikkim,True,27.5494817,88.4569319,28.247240497068763
+206,Lingdong,North,Passingdang,Sikkim,True,27.5073091,88.5194632,22.262506348131918
+207,Lingthem,North,Passingdang,Sikkim,True,27.5224732,88.5014686,23.905496389308073
+208,Lingzah-Tolung,North,Passingdang,Sikkim,True,27.571,88.4466,29.40375441274914
+209,Lum,North,Passingdang,Sikkim,True,27.394,88.48,28.22481092335307
+210,Namok,North,Passingdang,Sikkim,True,27.4504654,88.5375829,21.625507270139252
+211,Sakyong-Pentong,North,Passingdang,Sikkim,True,27.5797,88.4049,29.937883050226084
+212,Salim Pakel,North,Passingdang,Sikkim,True,27.5379,88.5518,18.834811739476855
+213,Sangtok,North,Passingdang,Sikkim,True,27.4091,88.504,25.58953415281719
+214,Sheyam,North,Passingdang,Sikkim,True,27.4367,88.528,22.734016709751884
+215,Shipgyer,North,Passingdang,Sikkim,True,27.5544461,88.6336147,10.724262598099125
+216,Tingbong,North,Passingdang,Sikkim,True,27.5524,88.4984,24.133501704670746
+217,Zimchung,North,Passingdang,Sikkim,True,27.4903,88.5321,21.346072712968652
+218,Bampa,Chamoli,Joshimath,Uttarakhand,True,30.7436664,79.8297153,17.457498129291356
+219,Gamsali,Chamoli,Joshimath,Uttarakhand,True,30.7559986,79.8261873,16.491584153191166
+220,Gurguti,Chamoli,Joshimath,Uttarakhand,True,30.7738,79.8758,12.31713974794954
+221,Joshimath,Chamoli,Joshimath,Uttarakhand,True,30.5555752,79.5612607,42.46112085304972
+222,Kailashpur,Chamoli,Joshimath,Uttarakhand,True,30.7148,79.8639,18.751797137191165
+223,Mahargaon,Chamoli,Joshimath,Uttarakhand,True,30.4061118,79.4205814,60.892685995025936
+224,Malari,Chamoli,Joshimath,Uttarakhand,True,30.6845508,79.8893688,19.948505803543966
+225,Mana,Chamoli,Joshimath,Uttarakhand,True,30.9671228,79.4109692,5.91320308936922
+226,Bilju,Pithoragarh,Munsyari,Uttarakhand,True,30.3949398,80.1659059,18.284059727912076
+227,Burphu,Pithoragarh,Munsyari,Uttarakhand,True,30.3666548,80.1842308,21.3738316335641
+228,Martoli,Pithoragarh,Munsyari,Uttarakhand,True,30.3482498,80.1931552,23.444230113887883
+229,Rilkot,Pithoragarh,Munsyari,Uttarakhand,True,30.3104468,80.2080315,27.73118282968345
+230,Tola,Pithoragarh,Munsyari,Uttarakhand,True,30.3356863,80.2121168,24.99450908689625
+231,Baling,Pithoragarh,Dharchula or Kanalichhina (unresolved),Uttarakhand,True,30.2092254,80.5479905,25.006359327981542
+232,Dar,Pithoragarh,Dharchula or Kanalichhina (unresolved),Uttarakhand,True,30.069216,80.602947,11.336421537683076
+233,Dugtu,Pithoragarh,Dharchula or Kanalichhina (unresolved),Uttarakhand,True,30.21,80.5679,23.414330013605007
+234,Garbyang,Pithoragarh,Dharchula or Kanalichhina (unresolved),Uttarakhand,True,30.1251387,80.8575277,1.742763382827987
+235,Gunji,Pithoragarh,Dharchula or Kanalichhina (unresolved),Uttarakhand,True,30.1865763,80.8508108,0.2987799352144547
+236,Kuti,Pithoragarh,Dharchula or Kanalichhina (unresolved),Uttarakhand,True,30.3078792,80.7599224,2.4537624715149766
+237,Navi,Pithoragarh,Dharchula or Kanalichhina (unresolved),Uttarakhand,True,30.2049725,80.8373063,2.6027295636311147
+238,Rongkong (Raung Kong),Pithoragarh,Dharchula or Kanalichhina (unresolved),Uttarakhand,True,30.2033451,80.8316381,2.906237019232429
+239,Sela,Pithoragarh,Dharchula or Kanalichhina (unresolved),Uttarakhand,True,30.1472581,80.6056591,17.11665136759223
+240,Tidang,Pithoragarh,Dharchula or Kanalichhina (unresolved),Uttarakhand,True,30.246,80.5487,22.712244714622308
+241,Amali,Pithoragarh,Dharchula or Kanalichhina (unresolved),Uttarakhand,True,29.7039,80.3278,2.5757220460001973
+242,Bagori,Uttarkashi,Bhatwari,Uttarakhand,True,30.7702443,78.4746317,64.61831219704634
+243,Dharali,Uttarkashi,Bhatwari,Uttarakhand,True,31.0408468,78.7815312,27.437795246663185
+244,Harshil,Uttarkashi,Bhatwari,Uttarakhand,True,31.0350501,78.7572289,28.199625881054338
+245,Jadung,Uttarkashi,Bhatwari,Uttarakhand,True,31.1648,79.0397,16.222643973039563
+246,Jaspur,Uttarkashi,Bhatwari,Uttarakhand,True,30.727214,78.4636435,69.3564558633376
+247,Jhala,Uttarkashi,Bhatwari,Uttarakhand,True,31.0248573,78.7101354,30.058223846792746
+248,Mukhawa,Uttarkashi,Bhatwari,Uttarakhand,True,31.0542,78.7901,25.944444022605246
+249,Nelang,Uttarkashi,Bhatwari,Uttarakhand,True,31.121954,79.0304088,19.417708673214328
+250,Purali,Uttarkashi,Bhatwari,Uttarakhand,True,31.0299258,78.7099965,29.515476300742417
+251,Sukki,Uttarkashi,Bhatwari,Uttarakhand,True,31.014,78.7108,31.21526320016012
+252,Chhitkul,Kinnaur,Unknown,Himachal Pradesh,False,31.3881,78.46219,24.793093990078006
+253,Pooh,Kinnaur,Unknown,Himachal Pradesh,False,31.76159,78.5839324,8.298557572222235
+254,Nako,Kinnaur,Unknown,Himachal Pradesh,False,31.8813748,78.6270483,8.125486750433014
+255,Leo,Kinnaur,Unknown,Himachal Pradesh,False,31.8839167,78.5935199,11.304869885333602
+256,Chango,Kinnaur,Unknown,Himachal Pradesh,False,31.9777573,78.5944015,8.322995007655162
+257,Gue,Lahaul and Spiti,Unknown,Himachal Pradesh,False,32.1310531,78.5697113,0.10100087332081757
+258,Lalung,Lahaul and Spiti,Unknown,Himachal Pradesh,False,32.14927,78.27071,19.78901163048687

@@ -1,0 +1,47 @@
+District,Block,Habitation,geocode_query_used,latitude,longitude,geocode_status,bhuvan_vid,bhuvan_population
+East,Gnathang,Changu,"Changu, East, Sikkim, India",,,NO MATCH — Bhuvan also failed or district mismatch,,
+East,Gnathang,Thegu,"Thegu, East, Sikkim, India",,,NO MATCH — Bhuvan also failed or district mismatch,,
+East,Gnathang,Gnathang,"Gnathang, East, Sikkim, India",,,NO MATCH — Bhuvan also failed or district mismatch,,
+East,Gnathang,Gnathang Forest Block,"Gnathang Forest Block, Gnathang, East, Sikkim, India",,,"EXCLUDED — forest block, not an inhabited settlement",,
+North,Chungthang,Chungthang,"Chungthang, Chungthang, North, Sikkim, India",27.604236,88.6465196,matched,,
+North,Chungthang,Thangu Forest Block,"Thangu Forest Block, Chungthang, North, Sikkim, India",,,"EXCLUDED — forest block, not an inhabited settlement",,
+North,Chungthang,Tung,"Tung, North, Sikkim, India",27.5475,88.6493,matched via Bhuvan (district-verified),1101000100000500.0,201.0
+North,Kabi Tingda,Chawang,"Chawang, North, Sikkim, India",27.4415,88.5992,matched via Bhuvan (district-verified),1101000200004200.0,590.0
+North,Kabi Tingda,Kabi Forest Block,"Kabi Forest Block, Kabi Tingda, North, Sikkim, India",,,"EXCLUDED — forest block, not an inhabited settlement",,
+North,Kabi Tingda,Labi,"Labi, North, Sikkim, India",27.4373,88.6584,matched via Bhuvan (district-verified),1101000200004600.0,406.0
+North,Kabi Tingda,Paney-Phensong,"Paney-Phensong, North, Sikkim, India",27.4340487,88.6127695,"matched (fallback query, no block)",,
+North,Kabi Tingda,Phamtam,"Phamtam, North, Sikkim, India",27.4557,88.61,matched via Bhuvan (district-verified),1101000200004300.0,214.0
+North,Kabi Tingda,Phodong,"Phodong, North, Sikkim, India",27.4130306,88.5838702,"matched (fallback query, no block)",,
+North,Kabi Tingda,Phodong Forest Block,"Phodong Forest Block, Kabi Tingda, North, Sikkim, India",,,"EXCLUDED — forest block, not an inhabited settlement",,
+North,Kabi Tingda,Ramthang,"Ramthang, North, Sikkim, India",27.4039854,88.550947,"matched (fallback query, no block)",,
+North,Kabi Tingda,Rongong,"Rongong, North, Sikkim, India",27.4092,88.5635,matched via Bhuvan (district-verified),1101000200003900.0,728.0
+North,Kabi Tingda,Tangyek,"Tangyek, North, Sikkim, India",27.4207,88.527,matched via Bhuvan (district-verified),1101000200003700.0,754.0
+North,Kabi Tingda,Tingchim,"Tingchim, North, Sikkim, India",27.4607586,88.5277316,"matched (fallback query, no block)",,
+North,Kabi Tingda,Tingda,"Tingda, North, Sikkim, India",27.3957,88.6272,matched via Bhuvan (district-verified),1101000200004800.0,764.0
+North,Kabi Tingda,Tumlong,"Tumlong, North, Sikkim, India",27.4198712,88.5898311,"matched (fallback query, no block)",,
+North,Lachen,Lachen,"Lachen, Lachen, North, Sikkim, India",27.7305455,88.5469054,matched,,
+North,Lachen,Lachen Forest Block,"Lachen Forest Block, Lachen, North, Sikkim, India",,,"EXCLUDED — forest block, not an inhabited settlement",,
+North,Lachen,Thangu,"Thangu, North, Sikkim, India",,,NO MATCH — Bhuvan also failed or district mismatch,,
+North,Lachung,Lachung,"Lachung, North, Sikkim, India",27.7794,88.7152648,"matched (fallback query, no block)",,
+North,Lachung,Lachung Forest Block,"Lachung Forest Block, Lachung, North, Sikkim, India",,,"EXCLUDED — forest block, not an inhabited settlement",,
+North,Mangan,Mangan Forest Block,"Mangan Forest Block, Mangan, North, Sikkim, India",,,"EXCLUDED — forest block, not an inhabited settlement",,
+North,Passingdang,Barfok,"Barfok, North, Sikkim, India",27.4977,88.491,matched via Bhuvan (district-verified),1101000200002600.0,642.0
+North,Passingdang,Gor,"Gor, North, Sikkim, India",27.4302826,88.4984203,"matched (fallback query, no block)",,
+North,Passingdang,Hee-Gyathang,"Hee-Gyathang, North, Sikkim, India",27.4816,88.4991,matched via Bhuvan (district-verified),1101000200002500.0,1162.0
+North,Passingdang,Lower Mangshila,"Lower Mangshila, North, Sikkim, India",,,NO MATCH — Bhuvan also failed or district mismatch,,
+North,Passingdang,Lingdem,"Lingdem, North, Sikkim, India",27.5494817,88.4569319,"matched (fallback query, no block)",,
+North,Passingdang,Lingdong,"Lingdong, North, Sikkim, India",27.5073091,88.5194632,"matched (fallback query, no block)",,
+North,Passingdang,Lingthem,"Lingthem, North, Sikkim, India",27.5224732,88.5014686,"matched (fallback query, no block)",,
+North,Passingdang,Lingzah-Tolung,"Lingzah-Tolung, North, Sikkim, India",27.571,88.4466,matched via Bhuvan (district-verified),1101000200001900.0,397.0
+North,Passingdang,Lower Dzongu Forest Block,"Lower Dzongu Forest Block, Passingdang, North, Sikkim, India",,,"EXCLUDED — forest block, not an inhabited settlement",,
+North,Passingdang,Lum,"Lum, North, Sikkim, India",27.394,88.48,matched via Bhuvan (district-verified),1101000200002100.0,338.0
+North,Passingdang,Namok,"Namok, North, Sikkim, India",27.4504654,88.5375829,"matched (fallback query, no block)",,
+North,Passingdang,Sakyong-Pentong,"Sakyong-Pentong, North, Sikkim, India",27.5797,88.4049,matched via Bhuvan (district-verified),1101000200002000.0,196.0
+North,Passingdang,Salim Pakel,"Salim Pakel, North, Sikkim, India",27.5379,88.5518,matched via Bhuvan (district-verified),1101000200001500.0,615.0
+North,Passingdang,Sangtok,"Sangtok, North, Sikkim, India",27.4091,88.504,matched via Bhuvan (district-verified),1101000200002200.0,708.0
+North,Passingdang,Sheyam,"Sheyam, North, Sikkim, India",27.4367,88.528,matched via Bhuvan (district-verified),1101000200003600.0,617.0
+North,Passingdang,Shipgyer,"Shipgyer, North, Sikkim, India",27.5544461,88.6336147,"matched (fallback query, no block)",,
+North,Passingdang,Tingbong,"Tingbong, North, Sikkim, India",27.5524,88.4984,matched via Bhuvan (district-verified),1101000200001800.0,1001.0
+North,Passingdang,Upper Mangshila,"Upper Mangshila, North, Sikkim, India",,,NO MATCH — Bhuvan also failed or district mismatch,,
+North,Passingdang,Upper Dzongu Forest Block,"Upper Dzongu Forest Block, Passingdang, North, Sikkim, India",,,"EXCLUDED — forest block, not an inhabited settlement",,
+North,Passingdang,Zimchung,"Zimchung, North, Sikkim, India",27.4903,88.5321,matched via Bhuvan (district-verified),1101000200002800.0,2697.0
