@@ -1,0 +1,66 @@
+# BORDER OPTICS
+
+### Independently Verifying Whether India's ₹4,800 Crore Border-Villages Programme Produced Measurable Development That Was Never Independently Assessed
+
+**Project Journal**
+
+## Project Overview
+
+BORDER OPTICS is an independent satellite-verification study of India's Vibrant Villages Programme (VVP-I), the Government of India's border-area development scheme launched in 2022–23. VVP-I sanctioned approximately ₹4,800 crore — later detailed as 2,558 works worth ₹3,431 crore — across 2,967 border villages in 46 blocks, 19 districts, and 5 states/UTs (Arunachal Pradesh, Himachal Pradesh, Uttarakhand, Sikkim, and Ladakh), with 662 of those villages designated "priority" villages for Phase 1 development.
+
+Rather than treating the programme's development claims as a matter of official record to be taken on trust, this project makes them directly testable: comparing multi-temporal satellite imagery against the scheme's sanctioned budgets and stated priorities, at the level of individual villages, to determine whether physical development actually occurred and whether its distribution matches developmental need or a border-proximity-driven securitization logic instead.
+
+## Problem Statement
+
+VVP sits at the intersection of political science, geospatial science, and economics — three fields this project treats as inseparable rather than academic silos. Politically, VVP is a textbook case of securitization theory (Buzan and Waever): border infrastructure framed as civilian welfare development while simultaneously functioning as a geopolitical signal along a contested frontier. Economically, it is a large, multi-year public investment whose actual delivery has never been independently measured. Geospatially, it is a rare case where a government development claim can be tested directly against satellite evidence — built-up area change, night-time light intensity — rather than accepted on faith.
+
+The empirical hook for this project is a matter of parliamentary record: a government reply on record states explicitly that no impact assessment has ever been carried out for VVP. A scheme this large, this strategically framed, and this expensive has no independent, public, evidence-based accounting of whether the development it promised has actually happened on the ground — this project exists to close that gap using open satellite and government data.
+
+## Aim
+
+To independently verify, using multi-temporal satellite imagery and open government data, whether VVP-I's priority villages show measurable physical development — built-up area expansion and night-time light change — between programme sanction and the present, and whether that development, where present, correlates with each state's sanctioned budget or instead diverges from it in ways consistent with securitization logic overriding developmental need.
+
+**Research Questions:** (RQ1) Do priority villages show statistically detectable built-up area growth since programme sanction? (RQ2) Does the magnitude of physical change correlate with each state's sanctioned budget, or do large-budget states show muted change? (RQ3) Do night-time light trends corroborate or contradict the built-up area findings? (RQ4) Is development concentrated by border proximity rather than developmental need?
+
+## Study Area
+
+262 geocoded villages across five Himalayan border states/union territories — Arunachal Pradesh, Sikkim, Uttarakhand, Himachal Pradesh, and Ladakh — spanning a range of 0.1 km to 69.4 km from India's international border/Line of Actual Control. Arunachal Pradesh, Sikkim, and Uttarakhand form the core statistical sample (251 villages); Himachal Pradesh's 7 confirmed villages are carried as an illustrative case study; Ladakh is excluded from village-level analysis due to a genuine, documented data-availability gap.
+
+## Methodology
+
+### Village-Level Dataset Compilation
+
+Village lists were compiled from state VVP-I portals, Rajya Sabha and Lok Sabha parliamentary question annexures, and — where no official annexure existed — cross-referenced secondary sources, with every list validated against officially reported aggregate counts before acceptance. Arunachal Pradesh (455/455) and Sikkim (46/46) were fully resolved against primary government and parliamentary sources respectively. Uttarakhand (51/51 names) was resolved via a secondary tourism directory whose district-level counts matched official government totals exactly, though block assignment for 19 of Pithoragarh's villages remains genuinely unresolved and is marked as such rather than guessed. Himachal Pradesh (7 of 51 inhabited priority villages) and Ladakh (0 of 35) could not be fully resolved from any publicly indexed source — a specific, dated government Action Plan is known to exist for Himachal Pradesh but was never published online, and Ladakh's list was found to require an RTI request not pursued within this project's scope. Both gaps are treated as documented limitations rather than papered over with estimated data.
+
+### Geocoding Pipeline
+
+Villages were geocoded via OpenStreetMap's Nominatim API (primary), with ISRO's Bhuvan Village Geocoding API used as a Census-linked fallback. Bhuvan's results required manual district validation, since a direct test confirmed the API does not filter by state — a query for "Kharman" (Anjaw district, Arunachal Pradesh) initially returned an unrelated same-named village in Haryana. Of 559 villages attempted, 258 were successfully geocoded (Arunachal Pradesh 186/455, Sikkim 31/46, Uttarakhand 34/51, Himachal Pradesh 7/7). Inspection of the unmatched Arunachal Pradesh entries revealed a substantive finding in its own right: many are not civilian revenue villages at all but Border Roads Task Force camps, army staging huts, and labour-camp designations — inhabited points along the frontier that were never classified as villages in any civilian geospatial database, a direct illustration of what "village-level development" consists of on a securitized border.
+
+### Satellite-Based Change Detection
+
+For each of the 258 geocoded villages, a 500m buffer was used to extract Sentinel-2 NDBI (built-up index) and VIIRS night-lights radiance for a pre-programme baseline (2021) and a present-day window (2025), via Google Earth Engine. Two independent compositing windows were tested: a full calendar year, and a season-matched June–September window, following the same discipline used to avoid a seasonal-artifact confound in prior work.
+
+### Robustness Verification (Compositing-Window Check)
+
+A full-year composite showed no significant increase in built-up area (Wilcoxon signed-rank p = 1.000); a season-matched summer composite on the same villages showed a highly significant increase (p < 0.000001) — the opposite conclusion, driven by the full-year window's exposure to snow-cover variation at high altitude. The summer window's own trade-off was equally revealing: it eliminated Sikkim's data entirely, since June–September is peak monsoon in the Eastern Himalaya and every one of Sikkim's 31 villages returned zero cloud-free imagery in that window for at least one period. Night-lights radiance, tested identically under both windows, gave a stable answer throughout — no significant increase in either version — making it the more trustworthy signal precisely because it did not change with the compositing choice.
+
+### Border-Proximity Testing (H3)
+
+Distance from each village to the nearest segment of Natural Earth's Admin-0 boundary line (filtered to India-relevant segments, reprojected to UTM 44N) was correlated against NDBI and night-lights change under both compositing windows. NDBI change showed no relationship with border proximity in either window (full-year ρ = 0.043, p = 0.497; summer ρ = 0.037, p = 0.650) — a stable non-finding. Night-lights change showed a significant relationship in the full-year window (ρ = -0.259, p < 0.0001) but not in the summer-matched window (ρ = -0.076, p = 0.233) — the same window-sensitivity pattern found in the core built-up-area test, and treated with the same caution rather than reported as a confirmed result.
+
+## Key Finding
+
+Once subjected to a compositing-window robustness check, this project finds no confirmed evidence that VVP-I priority villages have undergone statistically reliable, verifiable built-up-area growth since programme sanction — the only metric that produced a "significant increase" did so in exactly one of two equally defensible measurement choices, while the more temporally stable proxy (night-lights) showed no increase under either. Descriptively, where valid data allowed comparison, budget scale did not translate proportionally into physical change: Arunachal Pradesh's sanctioned budget (₹2,749.74 crore, 2,082 projects) was roughly ten times Uttarakhand's (₹270.58 crore, 200 projects), yet the two states' mean measured built-up-area change was nearly identical. Border-proximity effects were similarly non-robust. Taken together, the honest conclusion is not that VVP has failed, but that its claimed development is not currently demonstrable with confidence from satellite evidence alone — precisely the accountability gap the project's founding premise identified: a scheme of this scale has never been independently assessed, and this project's own results show why that gap matters rather than resolving it with a convenient answer.
+
+## Verification and Quality Assurance
+
+Every result in this project was tested under two independent compositing windows before being trusted, rather than reported from a single run. Where a result changed direction between windows (built-up-area change, border-proximity vs. night-lights), that instability is reported as a genuine methodological finding rather than resolved by selectively citing the more favourable version. Anomalies were investigated to a definitive conclusion rather than assumed to be errors: a Bhuvan cross-state name collision was caught and corrected via explicit district validation before being accepted into the dataset; a resume-logic bug that briefly reverted already-matched village counts was identified and the lost matches restored; and Sikkim's complete data loss under the summer compositing window was traced to genuine monsoon cloud cover rather than a pipeline fault, and reported as such.
+
+## Deliverables
+
+A verified, village-level dataset of 258 geocoded VVP-I priority villages across five states/UTs; a dual-source geocoding pipeline (Nominatim primary, Bhuvan fallback) with cross-state validation; a satellite change-detection pipeline extracting NDBI and VIIRS night-lights under two independent compositing windows; a full statistical test suite (Wilcoxon signed-rank, Spearman correlation) covering all four research questions with an explicit robustness comparison; three static charts and five interactive Folium maps visualizing built-up change, night-lights change, and border proximity; and a multi-page interactive dashboard presenting the complete methodology, results, and limitations.
+
+## Limitations
+
+Ladakh (35 sanctioned villages) is fully excluded from village-level analysis — no publicly indexed source names its villages, and closing this gap would require an RTI request not pursued within this project's timeline. Himachal Pradesh (7 of 51 inhabited priority villages identified) is carried only as an illustrative case study, not the core statistical sample. Nineteen of Uttarakhand's Pithoragarh villages have confirmed names but unresolved block assignment, documented rather than guessed. Distance-to-border figures rely on Natural Earth's cartographic boundary line, a simplification of a Line of Actual Control that is itself disputed and has no single internationally agreed alignment — these figures should be read as relative and comparative, not as an authoritative statement of the boundary's legal position. The budget-correlation observation (RQ2) rests on only two states with sufficient valid data and is reported as descriptive rather than statistically confirmatory. Most centrally, the built-up-area and border-proximity findings are compositing-window-sensitive rather than stable, and this instability is reported as a limitation of single-date spectral comparison in this terrain, not resolved by preferring whichever result looks cleanest.
+
