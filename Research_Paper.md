@@ -30,7 +30,7 @@ VVP-I's sanctioned scope is documented across multiple government sources: a Raj
 
 ### 2.3 Remote Sensing Approaches to Built-Up Area and Economic Activity Detection
 
-The Normalized Difference Built-up Index (NDBI), computed from short-wave infrred and near-infrared reflectance, is an established proxy for built-up surface extent in multi-temporal satellite comparison (Zha, Gao, & Ni, 2003). VIIRS Day/Night Band night-time radiance is a complementary, independent proxy for economic and electrification activity, with documented advantages over older DMSP-OLS night-lights products in dynamic range and spatial resolution (Elvidge, Baugh, Zhizhin, Hsu, & Ghosh, 2017). This study uses both indices in parallel specifically because they are subject to different confounds — NDBI to vegetation phenology and snow cover, VIIRS to cloud cover and sensor saturation at very low radiance — so that agreement between the two carries more evidentiary weight than either alone.
+The Normalized Difference Built-up Index (NDBI), computed from short-wave infrared and near-infrared reflectance, is an established proxy for built-up surface extent in multi-temporal satellite comparison (Zha, Gao, & Ni, 2003). VIIRS Day/Night Band night-time radiance is a complementary, independent proxy for economic and electrification activity, with documented advantages over older DMSP-OLS night-lights products in dynamic range and spatial resolution (Elvidge, Baugh, Zhizhin, Hsu, & Ghosh, 2017). This study uses both indices in parallel specifically because they are subject to different confounds — NDBI to vegetation phenology and snow cover, VIIRS to cloud cover and sensor saturation at very low radiance — so that agreement between the two carries more evidentiary weight than either alone.
 
 ### 2.4 Compositing-Window Sensitivity in Multi-Temporal Satellite Analysis
 
@@ -60,6 +60,8 @@ Village lists were cross-verified against officially reported aggregate counts b
 ### 3.4 Satellite Change Detection
 
 For each geocoded village, a 500m buffer was used to extract mean NDBI and VIIRS night-lights radiance via Google Earth Engine, comparing a 2021 baseline against 2025.
+
+NDBI was computed using Sentinel-2 Level-2A Surface Reflectance Harmonized bands B11 (SWIR1) and B8 (NIR), with cloud masking applied via the QA60 band. Night-lights radiance was drawn from the VIIRS Day/Night Band monthly composite product (NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG).
 
 ### 3.5 Compositing-Window Robustness Testing
 

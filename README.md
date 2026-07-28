@@ -4,7 +4,7 @@
 
 ## 🔗 Live Dashboard
 
-**[View the interactive dashboard →](#)** *(https://borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app/)*
+**[View the interactive dashboard →](https://borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app/)**
 
 ## 📄 Project Documentation
 
