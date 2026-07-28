@@ -18,18 +18,21 @@ st.markdown("---")
 
 st.markdown("""
 Aggregating village-level results up to the state level to compare the pace of change
-across Arunachal Pradesh, Sikkim, Uttarakhand, and Himachal Pradesh, and to explore
-whether it tracks allocated VVP-I budget.
+across the core statistical sample (Arunachal Pradesh, Sikkim, Uttarakhand), with
+Himachal Pradesh reported separately as an illustrative case study, and to explore
+whether change tracks allocated VVP-I budget.
 """)
 
 st.markdown("---")
 
 # ============================================================
-# STATE-WISE COMPARISON (PLOTLY)
+# STATE-WISE COMPARISON (CORE SAMPLE ONLY)
 # ============================================================
-st.markdown("### State-Wise Mean Change (Summer-Matched)")
+st.markdown("### Core Sample: State-Wise Mean Change (Summer-Matched)")
 
-valid = summer.dropna(subset=["ndbi_change"])
+core = summer[summer["is_core_sample"] == True] if "is_core_sample" in summer.columns else summer
+valid = core.dropna(subset=["ndbi_change"])
+
 state_stats = valid.groupby("state").agg(
     villages=("village_id", "count"),
     mean_ndbi_change=("ndbi_change", "mean"),
@@ -40,11 +43,13 @@ metric_choice = st.radio("Metric", ["NDBI Change", "Lights Change"], horizontal=
 metric_col = "mean_ndbi_change" if metric_choice == "NDBI Change" else "mean_lights_change"
 bar_color = PALETTE["border_up"] if metric_choice == "NDBI Change" else PALETTE["lights"]
 
+chart_stats = state_stats.dropna(subset=[metric_col])
+
 fig = go.Figure()
 fig.add_trace(go.Bar(
-    x=state_stats["State"], y=state_stats[metric_col],
+    x=chart_stats["State"], y=chart_stats[metric_col],
     marker_color=bar_color,
-    text=state_stats[metric_col].round(4), textposition="outside",
+    text=chart_stats[metric_col].round(4), textposition="outside",
 ))
 fig.update_layout(
     template="plotly_dark",
@@ -57,9 +62,56 @@ fig.update_layout(
 )
 st.plotly_chart(fig, use_container_width=True)
 
-col1, col2 = st.columns([1.2, 1])
-with col1:
-    st.dataframe(state_stats, use_container_width=True, hide_index=True)
+st.dataframe(state_stats, use_container_width=True, hide_index=True)
+
+st.caption(
+    "Sikkim may be absent from one or both metrics above — its summer-matched composite "
+    "returned zero cloud-free imagery for most villages due to monsoon cloud cover (see "
+    "Statistical Validation and Methodology & Limitations)."
+)
+
+with st.expander("📄 View static exports (used in Research Paper)"):
+    st.image(
+        "outputs/figures/04_state_mean_ndbi_change.png",
+        caption="Static export: state-wise mean NDBI change",
+        use_container_width=True,
+    )
+    st.image(
+        "outputs/figures/05_state_mean_lights_change.png",
+        caption="Static export: state-wise mean night-lights change",
+        use_container_width=True,
+    )
+
+st.markdown("---")
+
+# ============================================================
+# HIMACHAL PRADESH — ILLUSTRATIVE CASE STUDY (SEPARATE, NOT CORE SAMPLE)
+# ============================================================
+st.markdown("### Himachal Pradesh — Illustrative Case Study (Not Core Sample)")
+
+hp = summer[summer["state"] == "Himachal Pradesh"].dropna(subset=["ndbi_change"])
+
+if len(hp) > 0:
+    h1, h2, h3 = st.columns(3)
+    h1.metric("Villages", len(hp))
+    h2.metric("Mean NDBI Change", f"{hp['ndbi_change'].mean():.4f}")
+    h3.metric("Mean Lights Change", f"{hp['lights_change'].mean():.4f}")
+
+    st.markdown(f"""
+    <div class="recon-card" style="border-left: 4px solid {PALETTE['lights']};">
+        <p style="color: {PALETTE['lights']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Why This Is Separate</p>
+        <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
+            Only 7 of Himachal Pradesh's 51 inhabited priority villages could be confidently
+            named and geocoded, out of 75 total priority villages under the state's VVP-I
+            Action Plan. This is not a random or representative sample of the state, so its
+            numbers are shown here for transparency but excluded from the core three-state
+            statistical comparison above and from the formal hypothesis tests in Statistical
+            Validation.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+else:
+    st.warning("No valid Himachal Pradesh data for this composite window.")
 
 st.markdown("---")
 
@@ -78,10 +130,10 @@ st.markdown(f"""
 <div class="recon-card" style="border-left: 4px solid {PALETTE['warning']};">
     <p style="color: {PALETTE['warning']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Interpretation Caveat</p>
     <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
-        This correlation is <b>exploratory only</b> — with just four states in the sample, a
-        Spearman correlation at the state level has very limited statistical power. It is a
-        directional signal worth revisiting with a larger multi-state sample, not evidence of
-        a causal budget-to-outcome link.
+        This correlation is <b>exploratory only</b> — with just two core states with
+        sufficient valid data, this has very limited statistical power. It is a directional
+        signal worth revisiting with a larger multi-state sample, not evidence of a causal
+        budget-to-outcome link.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -89,12 +141,16 @@ st.markdown(f"""
 st.markdown("---")
 
 # ============================================================
-# LIVE STATE DRILL-DOWN
+# LIVE STATE DRILL-DOWN (ALL STATES, FOR EXPLORATION)
 # ============================================================
 st.markdown("### 🎛️ Live State Drill-Down")
 
-selected_state = st.selectbox("Select a state", sorted(valid["state"].unique()))
-state_df = valid[valid["state"] == selected_state]
+all_valid = summer.dropna(subset=["ndbi_change"])
+selected_state = st.selectbox("Select a state", sorted(all_valid["state"].unique()))
+state_df = all_valid[all_valid["state"] == selected_state]
+
+if selected_state == "Himachal Pradesh":
+    st.caption("Illustrative case study only — not part of the core statistical sample.")
 
 d1, d2, d3 = st.columns(3)
 d1.metric("Villages", len(state_df))

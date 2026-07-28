@@ -112,6 +112,12 @@ h3_table = pd.DataFrame({
 st.dataframe(h3_table, use_container_width=True, hide_index=True)
 st.caption("Exploratory — treat with caution given sample size and border-geometry caveats (see Methodology & Limitations).")
 
+st.image(
+    "outputs/figures/03_h3_border_distance_vs_lights.png",
+    caption="Static export: distance-to-border vs. NDBI change and lights change, both composite windows",
+    use_container_width=True,
+)
+
 st.markdown("---")
 
 # ============================================================

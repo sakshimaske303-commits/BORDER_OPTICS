@@ -49,8 +49,8 @@ st.markdown("---")
 st.markdown("### Distribution of Change")
 
 counts, bin_edges = np.histogram(valid["lights_change"], bins=20)
-bin_labels = [f"{bin_edges[i]:.2f}" for i in range(len(bin_edges) - 1)]
-hist_df = pd.DataFrame({"lights_change_bin": bin_labels, "count": counts}).set_index("lights_change_bin")
+bin_starts = [round(bin_edges[i], 2) for i in range(len(bin_edges) - 1)]
+hist_df = pd.DataFrame({"lights_change_bin": bin_starts, "count": counts}).set_index("lights_change_bin")
 st.bar_chart(hist_df, color=PALETTE["lights"])
 
 st.markdown("---")

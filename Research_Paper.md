@@ -16,6 +16,8 @@ India's border villages have historically been framed in policy discourse as sec
 
 This study addresses that gap directly, using multi-temporal satellite imagery — built-up area indices and night-time light radiance — to test, village by village, whether physical development detectable from space has occurred since programme sanction, whether its magnitude tracks each state's sanctioned budget, and whether its distribution is better explained by border proximity than by developmental need, consistent with securitization theory's prediction that border infrastructure functions as a geopolitical signal as much as a welfare intervention.
 
+Specifically, this study tests four research questions: (RQ1) whether priority villages show statistically detectable built-up area growth since programme sanction; (RQ2) whether the magnitude of that change correlates with each state's sanctioned budget; (RQ3) whether night-time light trends corroborate the built-up area findings; and (RQ4) whether development is spatially concentrated by border proximity rather than developmental need. Correspondingly, three hypotheses are tested: **H1** predicts a statistically significant post-sanction increase in built-up area; **H2** predicts that the size of this change will not be uniformly proportional to sanctioned budget, with some high-budget states showing comparatively muted physical change; and **H3** predicts that villages nearer the border/LAC will show disproportionately faster change than villages farther back within the same state, consistent with securitization theory's prediction that border proximity — not developmental need — drives priority.
+
 ## 2. Literature Review
 
 ### 2.1 Securitization Theory and Border Development
