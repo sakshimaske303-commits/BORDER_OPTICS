@@ -1,20 +1,20 @@
 import streamlit as st
 
 # ============================================================
-# BORDER OPTICS — Smoky Vintage / Tech-Noir Theme
+# BORDER OPTICS — Watermelon & Mint Theme
 # ============================================================
 PALETTE = {
-    "bg_main": "#100E0C",
-    "bg_card": "#1B1713",
-    "bg_sidebar": "#0A0908",
-    "border_up": "#3FB78C",      # tech-teal — growth / increase
-    "border_down": "#B23A48",    # muted vintage crimson — decrease
-    "lights": "#D9A441",         # antique brass — night-lights theme
-    "warning": "#C97A3D",        # burnt copper — warnings
-    "text_primary": "#EDE6DA",   # warm parchment off-white
-    "text_secondary": "#9C9184", # smoky taupe
-    "accent": "#2FD1C5",         # neon-tech teal glow — primary highlight
-    "accent_vintage": "#B9863F", # antique brass — secondary highlight
+    "bg_main": "#1C1C1C",
+    "bg_card": "#262626",
+    "bg_sidebar": "#141414",
+    "border_up": "#A7E1C1",      # mint — growth / increase
+    "border_down": "#FF7CAC",    # watermelon — decrease
+    "lights": "#FF7CAC",         # watermelon — night-lights theme
+    "warning": "#E8709D",        # deeper watermelon — warnings
+    "text_primary": "#F2F2F0",   # warm off-white
+    "text_secondary": "#9A9A98", # muted gray
+    "accent": "#A7E1C1",         # mint — primary highlight
+    "accent_vintage": "#FF7CAC", # watermelon — secondary highlight
 }
 
 # Backward-compatible aliases (used by some pages)
@@ -43,14 +43,23 @@ def inject_theme():
             padding-bottom: 2rem !important;
         }}
 
-        header[data-testid="stHeader"] {{
-            background: transparent;
-            height: 0px;
+        [data-testid="stHeader"] {{
+            background-color: transparent !important;
+            height: 0rem !important;
+        }}
+        [data-testid="stToolbar"] {{
+            display: none !important;
+        }}
+        [data-testid="stDecoration"] {{
+            display: none !important;
+        }}
+        #MainMenu {{
+            visibility: hidden !important;
         }}
 
         section[data-testid="stSidebar"] {{
             background: {p['bg_sidebar']};
-            border-right: 1px solid rgba(47, 209, 197, 0.15);
+            border-right: 1px solid rgba(167, 225, 193, 0.2);
         }}
         section[data-testid="stSidebar"] label,
         section[data-testid="stSidebar"] p,
@@ -60,16 +69,19 @@ def inject_theme():
         }}
 
         h1 {{
-            color: {p['text_primary']} !important;
+            background: linear-gradient(90deg, {p['accent']}, {p['accent_vintage']});
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: 900 !important;
             font-size: 2.9rem !important;
             letter-spacing: -0.5px;
             text-align: center;
-            text-shadow: 0 0 30px rgba(47, 209, 197, 0.28);
+            filter: drop-shadow(0 0 22px rgba(167, 225, 193, 0.35));
         }}
 
         h2 {{
-            color: {p['text_primary']} !important;
+            color: {p['accent_vintage']} !important;
             font-weight: 800 !important;
             border-left: 4px solid {p['accent']};
             padding-left: 14px;
@@ -77,7 +89,7 @@ def inject_theme():
         }}
 
         h3 {{
-            color: {p['text_secondary']} !important;
+            color: {p['accent']} !important;
             font-weight: 700 !important;
         }}
 
@@ -92,12 +104,13 @@ def inject_theme():
         }}
 
         div[data-testid="stMetric"] {{
-            background: rgba(27, 23, 19, 0.7);
+            background: rgba(38, 38, 38, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 12px;
             padding: 20px;
-            border: 1px solid rgba(47, 209, 197, 0.25);
+            border: 1px solid rgba(167, 225, 193, 0.25);
+            border-top: 3px solid {p['accent_vintage']};
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
         }}
         div[data-testid="stMetricValue"] {{
@@ -116,23 +129,39 @@ def inject_theme():
 
         .stButton>button {{
             background: linear-gradient(90deg, {p['accent']}, {p['accent_vintage']});
-            color: #0A0908;
+            color: #141414;
             border-radius: 8px;
             border: none;
             font-weight: 700;
         }}
 
+        div[data-testid="stDownloadButton"] > button {{
+            background: linear-gradient(90deg, {p['accent']}, {p['accent_vintage']});
+            color: #141414;
+            border-radius: 8px;
+            border: none;
+            font-weight: 700;
+        }}
+        div[data-testid="stDownloadButton"] > button:hover {{
+            background: linear-gradient(90deg, {p['accent_vintage']}, {p['accent']});
+            color: #141414;
+        }}
+        div[data-testid="stDownloadButton"] > button p {{
+            color: #141414 !important;
+        }}
+
         div[data-testid="stAlert"] {{
             border-radius: 10px;
             font-weight: 600;
-            background: rgba(27, 23, 19, 0.7);
+            background: rgba(38, 38, 38, 0.7);
             backdrop-filter: blur(10px);
+            border-left: 3px solid {p['accent_vintage']};
         }}
 
         hr {{
             border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, {p['accent']}, transparent);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, {p['accent']}, {p['accent_vintage']}, transparent);
             margin: 1.8rem 0;
         }}
 
@@ -146,42 +175,44 @@ def inject_theme():
             gap: 8px;
         }}
         .stTabs [data-baseweb="tab"] {{
-            background: rgba(27, 23, 19, 0.7);
+            background: rgba(38, 38, 38, 0.7);
             border-radius: 8px 8px 0 0;
             color: {p['text_secondary']};
             font-weight: 700;
         }}
         .stTabs [aria-selected="true"] {{
-            background: rgba(47, 209, 197, 0.2) !important;
+            background: rgba(167, 225, 193, 0.2) !important;
             color: {p['accent']} !important;
             font-weight: 800;
+            border-bottom: 2px solid {p['accent_vintage']} !important;
         }}
 
         .recon-card {{
-            background: rgba(27, 23, 19, 0.7);
+            background: rgba(38, 38, 38, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: 14px;
             padding: 22px;
-            border: 1px solid rgba(47, 209, 197, 0.25);
+            border: 1px solid rgba(167, 225, 193, 0.25);
+            border-top: 3px solid {p['accent']};
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
         }}
 
         [data-testid="stExpander"] {{
-            background-color: rgba(27, 23, 19, 0.7) !important;
-            border: 1px solid rgba(47, 209, 197, 0.25) !important;
+            background-color: rgba(38, 38, 38, 0.7) !important;
+            border: 1px solid rgba(167, 225, 193, 0.25) !important;
             border-radius: 10px !important;
         }}
         [data-testid="stExpander"] summary {{
-            background-color: rgba(27, 23, 19, 0.9) !important;
+            background-color: rgba(38, 38, 38, 0.9) !important;
         }}
         [data-testid="stExpander"] summary p {{
             font-size: 1.05rem !important;
             font-weight: 700 !important;
-            color: {p['text_primary']} !important;
+            color: {p['accent_vintage']} !important;
         }}
         [data-testid="stExpanderDetails"] {{
-            background-color: rgba(27, 23, 19, 0.5) !important;
+            background-color: rgba(38, 38, 38, 0.5) !important;
         }}
         [data-testid="stExpanderDetails"] p, [data-testid="stExpanderDetails"] li {{
             color: {p['text_primary']} !important;

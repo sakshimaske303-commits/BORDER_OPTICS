@@ -143,11 +143,67 @@ for i, (icon, title, desc) in enumerate(nav_items):
 
 st.markdown("---")
 
+# ============================================================
+# FULL PROJECT DOCUMENTATION
+# ============================================================
+st.markdown("### 📄 Full Project Documentation")
+st.markdown(
+    f"<p style='color:{PALETTE['text_secondary']}; font-weight:600;'>"
+    "Download the complete research paper, project journal, and development log.</p>",
+    unsafe_allow_html=True,
+)
+
+doc1, doc2, doc3 = st.columns(3)
+
+with doc1:
+    try:
+        with open("Research_Paper.pdf", "rb") as f:
+            st.download_button(
+                label="📘 Research Paper (PDF)",
+                data=f,
+                file_name="BORDER_OPTICS_Research_Paper.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+            )
+    except FileNotFoundError:
+        st.warning("Research_Paper.pdf not found.")
+
+with doc2:
+    try:
+        with open("Project_Journal.pdf", "rb") as f:
+            st.download_button(
+                label="📗 Project Journal (PDF)",
+                data=f,
+                file_name="BORDER_OPTICS_Project_Journal.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+            )
+    except FileNotFoundError:
+        st.warning("Project_Journal.pdf not found.")
+
+with doc3:
+    try:
+        with open("Development_Log.pdf", "rb") as f:
+            st.download_button(
+                label="📙 Development Log (PDF)",
+                data=f,
+                file_name="BORDER_OPTICS_Development_Log.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+            )
+    except FileNotFoundError:
+        st.warning("Development_Log.pdf not found.")
+
+st.markdown("---")
+
+# ============================================================
+# FOOTER
+# ============================================================
 st.markdown(
     f"""
     <div style="text-align: center; padding: 25px;" class="recon-card">
         <p style="color: {PALETTE['text_secondary']}; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700;">Developed by</p>
-        <h2 style="color: {PALETTE['text_primary']}; margin: 5px 0; border: none; padding: 0;">SAKSHI D. MASKE</h2>
+        <h2 style="color: {PALETTE['accent_vintage']}; margin: 5px 0; border: none; padding: 0;">SAKSHI D. MASKE</h2>
         <p style="color: {PALETTE['accent']}; font-weight: 700;">Independent Geospatial Researcher</p>
     </div>
     """,
