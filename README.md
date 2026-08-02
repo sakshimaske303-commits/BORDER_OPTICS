@@ -1,5 +1,7 @@
 # 🛰️ BORDER OPTICS — Satellite Verification of India's Vibrant Villages Programme
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21759970.svg)](https://doi.org/10.5281/zenodo.21759970)
+
 **Testing whether India's ₹4,800 crore border-villages programme produced verifiable development — and whether a single satellite-composite choice can flip the answer.**
 
 ## 🔗 Live Dashboard

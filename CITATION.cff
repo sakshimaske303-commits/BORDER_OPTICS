@@ -7,6 +7,11 @@ authors:
     given-names: "Sakshi D."
 repository-code: "https://github.com/sakshimaske303-commits/BORDER_OPTICS"
 url: "https://github.com/sakshimaske303-commits/BORDER_OPTICS"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21759970"
+    description: "Zenodo archive of BORDER OPTICS v1.0.0"
+doi: "10.5281/zenodo.21759970"
 abstract: >-
   An independent satellite-verification study of India's Vibrant Villages
   Programme (VVP-I), a ₹4,800 crore border-area development scheme sanctioned
