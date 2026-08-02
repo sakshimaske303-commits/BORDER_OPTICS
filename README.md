@@ -18,7 +18,34 @@
 
 BORDER OPTICS is an independent satellite-verification framework that tests whether India's Vibrant Villages Programme (VVP-I) — a ₹4,800 crore border-area development scheme sanctioned across 2,967 villages in five Himalayan states/UTs — has produced measurable physical development on the ground. Rather than trusting a single satellite comparison, built-up area change (NDBI) and night-time light growth (VIIRS) are tested as two independent hypotheses, and every result is run under two separate compositing windows (full-year and summer-matched) specifically to test whether the methodology choice itself changes the answer.
 
-This project exists because a government reply on parliamentary record states explicitly that no impact assessment has ever been carried out for VVP. Every hypothesis here is tested rigorously, and every finding — including where a result reverses between two equally defensible measurement choices — is reported honestly rather than resolved by citing whichever version looks cleanest.
+This project exists because, asked directly in Parliament whether VVP's impact had ever been assessed, the Ministry of Home Affairs answered without qualification: *"No impact assessment has been carried out"* (Lok Sabha Unstarred Question No. 508, 3 February 2026). Every hypothesis here is tested rigorously, and every finding — including where a result reverses between two equally defensible measurement choices — is reported honestly rather than resolved by citing whichever version looks cleanest.
+
+---
+
+## 🏗️ Architecture
+
+```text
+Government sources (VVP-I portals, Rajya Sabha/Lok Sabha Q&A) + OSM/Bhuvan
+        │
+        ▼
+Village compilation & geocoding (src/acquisition/)
+        │
+        ▼
+Google Earth Engine extraction — NDBI + VIIRS, two compositing windows
+(src/acquisition/extract_satellite_data.py)
+        │
+        ▼
+Border-distance computation (src/analysis/compute_border_distance.py)
+        │
+        ▼
+Statistical testing — Wilcoxon, Spearman, robustness (src/analysis/)
+        │
+        ▼
+Static figures + interactive maps (src/visualization/) ──► Research_Paper.md / Project_Journal.md
+        │
+        ▼
+Streamlit dashboard (app.py + 7 pages)
+```
 
 ---
 

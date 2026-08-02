@@ -24,24 +24,29 @@ BG = (10, 10, 10)
 ACCENT = (215, 165, 60)
 TEXT = (240, 240, 235)
 
+# NOTE: mapping here MUST match Research_Paper.md's actual (renumbered)
+# figure sequence, not the source PNG filename numbers — the filenames were
+# assigned in generation order (Development_Log.md, Entries 5 and 7), which
+# is not the same as the paper's reading-order sequence. Cross-checked
+# against every "Figure N." caption in Research_Paper.md before finalizing.
 ITEMS = [
     ("outputs/figures/01_ndbi_change_distribution.png",
      "Figure 1 — NDBI Change Distribution",
      "Full-year vs summer-matched composites, all geocoded villages."),
-    ("outputs/figures/02_state_change_vs_budget.png",
-     "Figure 2 — State-Level Built-up Change vs Sanctioned Budget",
-     "Summer-matched NDBI change, Arunachal Pradesh vs Uttarakhand (RQ2)."),
-    ("outputs/figures/03_h3_border_distance_vs_lights.png",
-     "Figure 3 — Distribution of Night-Lights Change",
-     "Summer-matched composite, all geocoded villages."),
     ("outputs/figures/04_state_mean_ndbi_change.png",
-     "Figure 4 — State-Wise Mean Built-Up Area Change",
-     "Summer-matched composite, by state."),
-    ("outputs/figures/05_state_mean_lights_change.png",
-     "Figure 5 — State-Wise Mean Night-Lights Change",
+     "Figure 2 — State-Wise Mean Built-Up Area Change",
      "Summer-matched composite, by state."),
     ("outputs/figures/06_lights_change_distribution.png",
-     "Figure 6 — H3: Border Distance vs Night-Light Change",
+     "Figure 3 — Distribution of Night-Lights Change",
+     "Summer-matched composite, all geocoded villages."),
+    ("outputs/figures/05_state_mean_lights_change.png",
+     "Figure 4 — State-Wise Mean Night-Lights Change",
+     "Summer-matched composite, by state."),
+    ("outputs/figures/02_state_change_vs_budget.png",
+     "Figure 5 — State-Level Built-up Change vs Sanctioned Budget",
+     "Summer-matched NDBI change, Arunachal Pradesh vs Uttarakhand (RQ2)."),
+    ("outputs/figures/03_h3_border_distance_vs_lights.png",
+     "Figure 6 — H3: Border Distance vs NDBI and Night-Light Change",
      "Full-year vs summer-matched composites."),
     ("outputs/figures/07_robustness_summary.png",
      "Figure 7 — Robustness Summary",

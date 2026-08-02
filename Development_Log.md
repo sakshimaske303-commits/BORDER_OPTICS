@@ -1,5 +1,18 @@
 # BORDER OPTICS — Development Log
 
+## Index
+
+1. [Entry 1: Project Framing and Motivation](#entry-1-project-framing-and-motivation)
+2. [Entry 2: Village-Level Dataset Acquisition Across the Five States/UTs](#entry-2-village-level-dataset-acquisition-across-the-five-statesuts)
+3. [Entry 3: Geocoding Pipeline and Coordinate Resolution](#entry-3-geocoding-pipeline-and-coordinate-resolution)
+4. [Entry 4: Satellite Imagery Pipeline — Google Earth Engine Setup](#entry-4-satellite-imagery-pipeline-google-earth-engine-setup)
+5. [Entry 5: Seasonal Compositing and a Robustness-Check Finding](#entry-5-seasonal-compositing-and-a-robustness-check-finding)
+6. [Entry 6: Border-Proximity Analysis (H3)](#entry-6-border-proximity-analysis-h3)
+7. [Entry 7: Visualization — Charts and Interactive Maps](#entry-7-visualization-charts-and-interactive-maps)
+8. [Entry 8: Dashboard, Documentation, and Publication Prep](#entry-8-dashboard-documentation-and-publication-prep)
+9. [Entry 9: Panel-Readiness Review and Robustness Pass](#entry-9-panel-readiness-review-and-robustness-pass)
+10. [Entry 10: External Review Round and a Second Robustness Pass](#entry-10-external-review-round-and-a-second-robustness-pass)
+
 ## Entry 1: Project Framing and Motivation
 
 **What this project is.** BORDER OPTICS is an independent satellite-verification study of
@@ -609,3 +622,88 @@ saved its output to `outputs/maps/`, a path that was never correct relative
 to the rest of the pipeline's `outputs/interactive_maps/maps/` convention.
 Corrected the path for consistency, though `make_interactive_map.py` is the
 version actually used to regenerate the live maps.
+
+## Entry 10: External Review Round and a Second Robustness Pass
+
+Circulated the finished project for outside review before treating it as
+submission-ready. The most useful catch was a bug in the compiled
+`BORDER_OPTICS_Maps_and_Plots.pdf` itself: the script that builds it had
+labelled each image by its *source PNG filename number* (`01_...`
+through `07_...`) rather than by the figure's actual position in
+Research_Paper.md's renumbered sequence (Entry 9 renumbered the paper's
+figures to a clean 1–7, but the PDF-compilation script was written
+separately and never cross-checked against that renumbering). The result
+was that the compiled PDF's "Figure 3" and "Figure 6" pages showed the
+wrong charts relative to their labels — a real, confirmed mismatch, not a
+stylistic nitpick. Fixed by remapping every entry against the paper's
+actual captions and adding a comment in the script explaining why the
+filename number and the figure number are not the same thing.
+
+**An uncited pivotal claim, now cited precisely.** Every parliamentary
+fact in the paper carried an exact Question number and date except the
+single most load-bearing one — "no impact assessment has ever been carried
+out for VVP" — which had been stated generically without a citation.
+Searched specifically for the source and found it: Lok Sabha Unstarred
+Question No. 508 (3 February 2026), asked by Shri Baijayant Panda and
+answered by Shri Nityanand Rai (Minister of State, Home Affairs), whose
+reply states verbatim: "No impact assessment has been carried out."
+Replaced the generic phrasing with this exact citation throughout
+Research_Paper.md, README.md, and Project_Journal.md, and added the
+corresponding References entry.
+
+**Multiple-testing check.** This project runs four distinct statistical
+tests under two compositing windows each (eight tests total) without a
+multiple-comparisons correction, since each test answers a different
+research question rather than the same hypothesis tested repeatedly. As a
+conservative sanity check anyway, applied a Holm-Bonferroni correction
+across all eight simultaneously — both results already reported as
+significant survive even the strictest step of the correction, and nothing
+already reported as non-significant becomes significant. Documented this
+directly in Research_Paper.md's robustness section rather than leaving it
+as an unaddressed question a reviewer would have to raise themselves.
+
+**Selection-bias check, tested rather than asserted.** Geocoding coverage
+is uneven (258/559 attempted villages, 46%), which raises an obvious
+question: are villages that fail to geocode systematically different from
+ones that succeed? Arunachal Pradesh's raw village list carries Census 2011
+population and household counts for every village regardless of geocoding
+outcome, so this was testable directly rather than left as a caveat. A
+Mann-Whitney U test found no significant population or household
+difference between geocoded and non-geocoded Arunachal Pradesh villages
+(p = 0.310 and p = 0.540) — evidence against a size-driven selection bias
+in the analyzed sample, for the one state where it could actually be
+checked. Sikkim and Uttarakhand's raw lists don't carry these fields, so
+the check is explicitly scoped to Arunachal Pradesh rather than implied to
+cover the whole sample.
+
+**Ground-truth positive control — attempted, not found, documented
+honestly.** Reviewers asked whether NDBI/VIIRS are even sensitive enough
+at 500m to detect the scale of development VVP-I typically funds. The
+direct way to answer that is a positive control: a specific, dated,
+independently-confirmed completed VVP-I project that also happens to fall
+within the 258-village geocoded sample. Searched for one rather than
+assuming it didn't exist — found VVP's original 2023 launch village
+(Kibithoo, Arunachal Pradesh) referenced in a Ministry press release, but
+it is not itself among the 258 geocoded villages, so it could not serve as
+a real positive control without fabricating a match. Recorded as an
+explicit open item in the new Future Work section rather than forcing a
+weak match or quietly dropping the question.
+
+**New Future Work section added to Research_Paper.md** (Section 7,
+Conclusion renumbered to Section 8), consolidating every extension
+identified during this review that requires new data acquisition rather
+than a documentation fix: SAR-based change detection (Sentinel-1, immune
+to the cloud/snow confounds this study already documents), building-
+footprint or sub-500m structural analysis, a genuine Difference-in-
+Differences design against non-VVP control villages, a multi-year
+phenology-normalized trend instead of two single-year composites, buffer-
+size sensitivity testing (250m/500m/1km, following the same robustness
+discipline already applied to the compositing window), the ground-truth
+positive-control check described above, and RTI follow-through for
+Himachal Pradesh and Ladakh's still-missing village annexures.
+
+**Reproducibility package.** Added `DATA_DICTIONARY.md`, documenting every
+column in the processed CSVs (including the two GEE-export artifact
+columns, `system:index` and `.geo`, that are harmless but otherwise
+unexplained) and the exact date ranges used for each compositing window,
+alongside the already-existing `requirements.txt` and pipeline scripts.
