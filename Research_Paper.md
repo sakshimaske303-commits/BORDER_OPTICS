@@ -89,37 +89,45 @@ The geocoding pipeline resolved 258 of 559 attempted villages. Inspection of unm
 
 Under the full-year composite, mean NDBI change across the 251-village core sample showed no significant increase (Wilcoxon signed-rank, p = 1.000), trending slightly negative at the median. Under the season-matched (June–September) composite, the same test on the same villages (n = 154 with valid data after seasonal dropout) showed a highly significant increase (p < 0.000001) — the opposite conclusion. This reversal is attributed to snow-cover contamination varying between the 2021 and 2025 full-year composites at high altitude, a confound the summer window was designed to avoid; the summer window in turn eliminated Sikkim's data entirely, since all 31 of its geocoded villages returned zero cloud-free imagery in at least one period of that window — Sikkim sits in the peak-monsoon zone during exactly the months chosen to avoid snow.
 
-![Figure 4](outputs/figures/04_state_mean_ndbi_change.png)
+![Figure 2](outputs/figures/04_state_mean_ndbi_change.png)
 
-**Figure 4.** State-wise mean built-up-area change (summer-matched composite), by state.
+**Figure 2.** State-wise mean built-up-area change (summer-matched composite), by state.
 
 ### 4.3 Night-Lights Change: A Stable Null
 
-![Figure 6](outputs/figures/06_lights_change_distribution.png)
+![Figure 3](outputs/figures/06_lights_change_distribution.png)
 
-**Figure 6.** Distribution of VIIRS night-lights change (summer-matched composite).
+**Figure 3.** Distribution of VIIRS night-lights change (summer-matched composite).
 
 VIIRS night-lights, tested identically under both compositing windows, showed no significant increase in either (full-year p = 0.050, borderline; summer-matched p = 0.9999). Because night-lights radiance is not subject to the same vegetation/snow phenology confound as a spectral built-up index, its consistency across both windows is read as the more trustworthy signal of the two — and that signal does not support a confirmed increase in night-time economic activity following programme sanction.
 
-![Figure 5](outputs/figures/05_state_mean_lights_change.png)
+![Figure 4](outputs/figures/05_state_mean_lights_change.png)
 
-**Figure 5.** State-wise mean night-lights change (summer-matched composite), by state.
+**Figure 4.** State-wise mean night-lights change (summer-matched composite), by state.
 
 ### 4.4 Budget Independence (RQ2)
 
-![Figure 2](outputs/figures/02_state_change_vs_budget.png)
+![Figure 5](outputs/figures/02_state_change_vs_budget.png)
 
-**Figure 2.** State-level mean built-up-area change plotted against sanctioned VVP-I budget.
+**Figure 5.** State-level mean built-up-area change plotted against sanctioned VVP-I budget.
 
 Restricting to states with sufficient valid summer-window NDBI coverage left two comparable data points: Arunachal Pradesh (120 villages, mean NDBI change +0.0284; ₹2,749.74 crore sanctioned, 2,082 projects) and Uttarakhand (34 villages, mean NDBI change +0.0293; ₹270.58 crore sanctioned, 200 projects). Despite a roughly tenfold difference in sanctioned budget and project count, the two states' mean measured built-up change is nearly identical. Two data points cannot support a formal statistical claim, but this pattern is descriptively consistent with H2: budget scale is not translating proportionally into a correspondingly larger physical development signal.
 
 ### 4.5 Border-Proximity Testing (H3)
 
-![Figure 3](outputs/figures/03_h3_border_distance_vs_lights.png)
+![Figure 6](outputs/figures/03_h3_border_distance_vs_lights.png)
 
-**Figure 3.** Distance-to-border versus NDBI change and night-lights change, both compositing windows.
+**Figure 6.** Distance-to-border versus NDBI change and night-lights change, both compositing windows.
 
 Distance to the border/LAC ranged from 0.1 km to 69.4 km across the sample (mean 27.3 km). NDBI change showed no relationship with border proximity in either compositing window (full-year ρ = 0.043, p = 0.497; summer-matched ρ = 0.037, p = 0.650) — a stable non-finding. Night-lights change showed a significant relationship in the full-year window (ρ = -0.259, p < 0.0001, consistent with H3's prediction that closer villages change more) but not in the summer-matched window (ρ = -0.076, p = 0.233) — the same window-sensitivity pattern documented in Section 4.2, and reported with the same caution rather than as a confirmed result.
+
+### 4.6 Robustness Summary
+
+![Figure 7](outputs/figures/07_robustness_summary.png)
+
+**Figure 7.** Significance (p-value, log scale) for all four tests under both compositing windows, with a reference line at p = 0.05. A test whose two points fall on opposite sides of the line reverses conclusion depending on which window is used.
+
+Read together, the four tests split into two distinct patterns rather than one. H1 (built-up change) and the H3 night-lights correlation both cross the p = 0.05 line between windows — full-year non-significant, summer-matched significant for H1 (and the reverse for H3 night-lights) — the signature of a compositing-window-sensitive result. The H3 NDBI-proximity test, by contrast, stays non-significant in both windows (p = 0.497 full-year, p = 0.650 summer-matched): a genuinely stable null, not merely a result that happened not to flip. This distinction matters for how each finding should be read — the unstable results are reported as open questions, not as confirmed effects in either direction, while the stable null is reported with more confidence precisely because it did not depend on which window was chosen.
 
 ## 5. Discussion
 

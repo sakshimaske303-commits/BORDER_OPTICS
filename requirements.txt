@@ -3,3 +3,11 @@ pandas
 numpy
 scipy
 plotly
+geopandas
+shapely
+matplotlib
+requests
+folium
+branca
+earthengine-api
+python-dotenv

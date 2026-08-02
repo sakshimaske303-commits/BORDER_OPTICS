@@ -483,3 +483,129 @@ windows), all four RQ/hypothesis tests, and both static and interactive
 visual outputs. What remains is deciding the next build priority — a full
 dashboard (as with the prior project) versus moving straight into Research
 Paper drafting now that the plots and maps exist to draw on.
+
+## Entry 8: Dashboard, Documentation, and Publication Prep
+
+With the analysis and visualization phase closed out, the final build
+priority was a multi-page Streamlit dashboard, mirroring the structure used
+for the prior project rather than a static write-up alone — the raw
+figures, interactive maps, and live-recalculating statistical tests all
+benefit from an explorable interface more than a fixed document does.
+
+**Dashboard structure.** Built `app.py` as the entry point (Home page) with
+a `pages/` directory holding seven sub-pages — Study Design, Built-Up
+Change, Night-Lights, Statistical Validation, Explore Trends, Interactive
+Maps, and Methodology & Limitations — plus a shared `utils/theme.py`
+(watermelon-and-mint dark theme, consistent styling across every page) and
+`utils/data.py` (a single cached `load_data()` used by every page, merging
+the master village table with both compositing-window result files so
+`latitude`/`longitude`/`distance_to_border_km` are available wherever
+needed without re-reading the merge logic per page).
+
+**Live recomputation over static numbers.** Several pages compute their
+statistics live from the underlying CSVs on every load (Wilcoxon tests on
+Statistical Validation, Spearman correlations on H3, state-level aggregates
+on Explore Trends) rather than hardcoding the numbers already reported in
+the Research Paper — this keeps the dashboard honest against the
+underlying data if it's ever regenerated, at the cost of needing the raw
+`data/processed/` CSVs to ship with the repository rather than only the
+derived figures.
+
+**Full Project Documentation section.** Added a section to the Home page
+with three download buttons for the Research Paper, Project Journal, and
+Development Log as PDFs, matching the pattern used for the prior project's
+dashboard.
+
+**Research Paper.** Drafted the formal academic write-up from the completed
+analysis — literature review grounding the securitization-theory framing,
+full methodology section documenting every acquisition, geocoding, and
+compositing-window decision made in Entries 1–7, results section reporting
+both compositing windows side by side rather than a single preferred
+version, and a limitations section carrying forward every documented data
+gap (Ladakh exclusion, Himachal illustrative-only status, Pithoragarh block
+ambiguity, LAC cartographic caveat) rather than treating them as resolved.
+
+## Entry 9: Panel-Readiness Review and Robustness Pass
+
+Before treating the project as submission-ready, went back through every
+file — all three documents, `requirements.txt`, `app.py`, every dashboard
+page, and every script in `src/` — looking specifically for the kind of
+issue that survives a first pass: stale numbers that drifted from the data,
+scripts referenced in the documentation but missing from the repository,
+and anything that would silently fail for a reader trying to reproduce the
+pipeline end to end.
+
+**Village-count discrepancy.** The Project Journal's Study Area section
+stated "262 geocoded villages," while the Research Paper, README, and the
+underlying `border_optics_master_villages.csv` all agree on 258. Traced
+this to a stale figure left over from an earlier point in the geocoding
+pipeline (Entry 3 records the geocoding pass evolving in stages) that never
+got updated in the Journal after the final Bhuvan-fallback numbers landed.
+Corrected to 258 throughout.
+
+**Figure numbering out of sequence.** The Research Paper's Results section
+referenced figures in the order Figure 1, 4, 6, 5, 2, 3 — each individual
+reference was internally correct (pointing at the right image), but the
+numbering itself wasn't sequential with reading order, since figures were
+numbered by the order their source PNGs were generated (Entries 5 and 7)
+rather than the order they appear in the paper. Renumbered to a clean 1–6
+sequence matching reading order; no image files needed to change, only the
+figure labels and captions referencing them.
+
+**A live secret committed to source, not just to `.env`.** Unlike the
+Sentinel Hub credentials pattern from the prior project (kept in a
+`.env` file that `.gitignore` failed to exclude), this project's exposed
+credential was worse in one respect: the Bhuvan API token was hardcoded
+directly inside `geocode_villages_bhuvan.py` itself, committed to source
+control with no `.gitignore` entry that could have caught it. Moved it to
+an environment variable (`BHUVAN_TOKEN`, loaded via `python-dotenv`),
+added a `.env.example` template, and added `.env` plus common
+service-account-key filename patterns to `.gitignore`. Since this token
+was live in a public repository, it should be treated as compromised and
+regenerated from the Bhuvan API portal rather than reused — the old value
+needs to be scrubbed from git history separately, since removing it from
+the current file alone leaves it recoverable from any prior commit.
+
+**Missing satellite-extraction script.** The single script that actually
+pulls Sentinel-2 NDBI and VIIRS night-lights values from Google Earth
+Engine — described in detail in Entry 4 (buffer-then-`.geometry()` fix,
+QA60 cloud masking, per-village null-safe extraction) — was never checked
+into `src/acquisition/`, even though every downstream script depends on its
+output. Reconstructed it as `extract_satellite_data.py`, matching the
+documented logic exactly, runnable against either compositing window via a
+`--window` flag, so the pipeline is reproducible from source rather than
+only from its cached CSV outputs.
+
+**Missing full-year counterpart to the core analysis script.**
+`analyze_results.py` only ever covered the summer-matched window; the
+full-year analyzed output (`border_optics_village_results_analyzed.csv`,
+used throughout the Research Paper and dashboard) had no corresponding
+script in the repository that could regenerate it. Added
+`analyze_results_fullyear.py`, mirroring the same logic against the
+full-year extraction output.
+
+**`requirements.txt` incompleteness.** The file listed five packages
+(`streamlit`, `pandas`, `numpy`, `scipy`, `plotly`) against a pipeline that
+actually imports `geopandas`, `shapely`, `matplotlib`, `requests`,
+`folium`, `branca`, and (once the satellite-extraction script above was
+restored) `earthengine-api` and `python-dotenv`. A clean install from this
+file alone would have failed the moment any acquisition or analysis script
+ran. Expanded it to match actual usage.
+
+**Full Project Documentation download buttons were dead.** The three
+download buttons on the dashboard's Home page pointed at
+`Research_Paper.pdf`, `Project_Journal.pdf`, and `Development_Log.pdf` —
+none of which had ever been generated; only the three source `.md` files
+existed. Every visit to the Home page was silently showing "file not found"
+warnings in place of working downloads. Built all three PDFs from the
+source Markdown (via `pandoc`/`wkhtmltopdf`, embedding the actual result
+figures) and added `build_docs_pdfs.sh` so they can be regenerated
+whenever the underlying `.md` files change, rather than going stale again.
+
+**Stale output path in a superseded fix script.** `fix_lights_map.py` (an
+earlier patch script addressing the night-lights map's colorbar/marker
+color issue, later folded properly into `make_interactive_map.py`) still
+saved its output to `outputs/maps/`, a path that was never correct relative
+to the rest of the pipeline's `outputs/interactive_maps/maps/` convention.
+Corrected the path for consistency, though `make_interactive_map.py` is the
+version actually used to regenerate the live maps.

@@ -24,7 +24,7 @@ To independently verify, using multi-temporal satellite imagery and open governm
 
 ## Study Area
 
-262 geocoded villages across five Himalayan border states/union territories — Arunachal Pradesh, Sikkim, Uttarakhand, Himachal Pradesh, and Ladakh — spanning a range of 0.1 km to 69.4 km from India's international border/Line of Actual Control. Arunachal Pradesh, Sikkim, and Uttarakhand form the core statistical sample (251 villages); Himachal Pradesh's 7 confirmed villages are carried as an illustrative case study; Ladakh is excluded from village-level analysis due to a genuine, documented data-availability gap.
+258 geocoded villages across five Himalayan border states/union territories — Arunachal Pradesh, Sikkim, Uttarakhand, Himachal Pradesh, and Ladakh — spanning a range of 0.1 km to 69.4 km from India's international border/Line of Actual Control. Arunachal Pradesh, Sikkim, and Uttarakhand form the core statistical sample (251 villages); Himachal Pradesh's 7 confirmed villages are carried as an illustrative case study; Ladakh is excluded from village-level analysis due to a genuine, documented data-availability gap.
 
 ## Methodology
 

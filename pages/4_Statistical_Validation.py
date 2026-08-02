@@ -121,6 +121,19 @@ st.image(
 st.markdown("---")
 
 # ============================================================
+# ROBUSTNESS SUMMARY CHART
+# ============================================================
+st.markdown("### Robustness Summary — All Four Tests, Both Windows")
+
+st.image(
+    "outputs/figures/07_robustness_summary.png",
+    caption="Significance (p-value, log scale) for every test under both compositing windows — points on opposite sides of the p = 0.05 line indicate a result that reverses conclusion depending on window choice.",
+    use_container_width=True,
+)
+
+st.markdown("---")
+
+# ============================================================
 # ROBUSTNESS VERDICT
 # ============================================================
 verdict_html = (

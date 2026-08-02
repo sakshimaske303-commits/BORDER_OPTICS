@@ -9,14 +9,24 @@ the dataset with a wrong-state match.
 
 NOTE: Bhuvan tokens expire in ~1 day. If you see repeated failures,
 regenerate a token from https://bhuvan-app1.nrsc.gov.in/api/ and
-update BHUVAN_TOKEN below.
+set it as the BHUVAN_TOKEN environment variable (see .env.example).
 """
 
+import os
 import time
 import requests
 import pandas as pd
+from dotenv import load_dotenv
 
-BHUVAN_TOKEN = "3e2aa5b31e548f184f34075a655157def1e1ef54"
+load_dotenv()
+
+BHUVAN_TOKEN = os.environ.get("BHUVAN_TOKEN")
+if not BHUVAN_TOKEN:
+    raise RuntimeError(
+        "BHUVAN_TOKEN environment variable is not set. Create a .env file "
+        "(see .env.example) with BHUVAN_TOKEN=<your token>, or export it "
+        "in your shell before running this script."
+    )
 
 STATE_FILES = {
     "Arunachal Pradesh": "data/processed/arunachal_pradesh_geocoded.csv",

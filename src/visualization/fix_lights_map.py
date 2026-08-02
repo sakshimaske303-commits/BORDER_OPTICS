@@ -73,5 +73,5 @@ title_html = f"""
 """
 m.get_root().html.add_child(folium.Element(title_html))
 
-m.save("outputs/maps/village_lights_change_map.html")
-print("Saved fixed lights map to outputs/maps/village_lights_change_map.html")
+m.save("outputs/interactive_maps/maps/village_lights_change_map.html")
+print("Saved fixed lights map to outputs/interactive_maps/maps/village_lights_change_map.html")
