@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use this software or its findings, please cite it using the metadata below."
+title: "BORDER OPTICS: Satellite Verification of India's Vibrant Villages Programme"
+type: software
+authors:
+  - family-names: "Maske"
+    given-names: "Sakshi D."
+repository-code: "https://github.com/sakshimaske303-commits/BORDER_OPTICS"
+url: "https://github.com/sakshimaske303-commits/BORDER_OPTICS"
+abstract: >-
+  An independent satellite-verification study of India's Vibrant Villages
+  Programme (VVP-I), a ₹4,800 crore border-area development scheme sanctioned
+  across 2,967 villages in five Himalayan border states/union territories.
+  Using Sentinel-2 built-up-index (NDBI) and VIIRS night-lights data at 258
+  individually geocoded villages, this study tests whether VVP-I's priority
+  villages show measurable physical development since programme sanction,
+  under two independent compositing windows (full-year and summer-matched)
+  as an explicit robustness check rather than trusting a single satellite
+  comparison. A full-year composite shows no significant increase in built-up
+  area, while a season-matched composite on the same villages shows the
+  opposite result — a reversal traced to snow-cover contamination and monsoon
+  cloud cover respectively. Night-lights, the more temporally stable proxy,
+  shows no confirmed increase under either window. The instability itself is
+  reported as the central finding, addressing a parliamentary record showing
+  no independent impact assessment has ever been carried out for VVP-I.
+keywords:
+  - Vibrant Villages Programme
+  - border development
+  - securitization theory
+  - satellite verification
+  - NDBI
+  - VIIRS night-lights
+  - remote sensing
+  - robustness testing
+  - India
+  - geospatial analysis
+license: CC-BY-4.0
+version: 1.0.0
+date-released: "2026-08-02"
