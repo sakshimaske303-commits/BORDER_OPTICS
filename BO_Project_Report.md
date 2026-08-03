@@ -2,7 +2,7 @@
 
 *Independently Verifying Whether India's ₹4,800 Crore Border-Villages Programme Produced Measurable Development That Was Never Independently Assessed*
 
-**Project Journal**
+**Project Report**
 
 ## Project Overview
 

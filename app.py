@@ -191,11 +191,11 @@ doc1, doc2, doc3 = st.columns(3)
 
 with doc1:
     try:
-        with open("Research_Paper.pdf", "rb") as f:
+        with open("BO_Research_Paper.pdf", "rb") as f:
             st.download_button(
                 label="📘 Research Paper (PDF)",
                 data=f,
-                file_name="BORDER_OPTICS_Research_Paper.pdf",
+                file_name="BO_Research_Paper.pdf",
                 mime="application/pdf",
                 use_container_width=True,
             )
@@ -204,11 +204,11 @@ with doc1:
 
 with doc2:
     try:
-        with open("Project_Journal.pdf", "rb") as f:
+        with open("BO_Project_Report.pdf", "rb") as f:
             st.download_button(
-                label="📗 Project Journal (PDF)",
+                label="📗 Project Report (PDF)",
                 data=f,
-                file_name="BORDER_OPTICS_Project_Journal.pdf",
+                file_name="BO_Project_Report.pdf",
                 mime="application/pdf",
                 use_container_width=True,
             )
@@ -217,11 +217,11 @@ with doc2:
 
 with doc3:
     try:
-        with open("Development_Log.pdf", "rb") as f:
+        with open("BO_Development_Log.pdf", "rb") as f:
             st.download_button(
                 label="📙 Development Log (PDF)",
                 data=f,
-                file_name="BORDER_OPTICS_Development_Log.pdf",
+                file_name="BO_Development_Log.pdf",
                 mime="application/pdf",
                 use_container_width=True,
             )
