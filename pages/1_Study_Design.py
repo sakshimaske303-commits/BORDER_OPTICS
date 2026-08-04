@@ -133,25 +133,81 @@ st.markdown("---")
 
 st.markdown("### Methodology at a Glance")
 
-st.markdown("""
-1. **Village Acquisition** — Government portals and parliamentary annexures, cross-verified
-   against official aggregate counts.
+# ============================================================
+# PROOF-OF-WORK POPOVERS — tiny, pulsing "📸" buttons next to the
+# exact methodology step they back up. Click to reveal the screenshot
+# inline; nothing pushes the page layout around. Drop the 3 PNGs into
+# outputs/proof_screenshots/ (see filenames below) and these activate
+# automatically — until then each falls back to a quiet "not added yet"
+# note instead of breaking the page.
+# ============================================================
+st.markdown(f"""
+<style>
+    div[data-testid="stPopover"] button {{
+        animation: proof-blink 1.8s ease-in-out infinite;
+        border: 3px solid {PALETTE['accent_vintage']} !important;
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 50% !important;
+        padding: 0 !important;
+        min-height: unset !important;
+        min-width: unset !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }}
+    div[data-testid="stPopover"] button p {{
+        margin: 0 !important;
+        font-size: 0.95rem !important;
+        line-height: 1 !important;
+    }}
+    @keyframes proof-blink {{
+        0%, 100% {{ box-shadow: 0 0 0px rgba(255, 124, 172, 0); }}
+        50% {{ box-shadow: 0 0 12px rgba(255, 124, 172, 0.85); }}
+    }}
+</style>
+""", unsafe_allow_html=True)
 
-2. **Geocoding** — Nominatim (primary), Bhuvan (Census-linked fallback), with manual
-   district validation.
+import os as _os
+PROOF_DIR = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))), "outputs", "proof_screenshots")
 
-3. **Satellite Extraction** — Sentinel-2 NDBI and VIIRS night-lights via Google Earth Engine,
-   500m village buffers, cloud-masked composites.
+def proof_popover(filename, caption):
+    path = _os.path.join(PROOF_DIR, filename)
+    with st.popover("📸"):
+        if _os.path.exists(path):
+            st.image(path, caption=caption, use_container_width=True)
+        else:
+            st.caption(f"Screenshot not added yet — save it as `outputs/proof_screenshots/{filename}`.")
 
-4. **Dual Compositing Windows** — Full-year and summer-matched (Jun–Sep), to separate genuine
-   signal from seasonal artifacts.
+st.markdown("1. **Village Acquisition** — Government portals and parliamentary annexures, cross-verified against official aggregate counts.")
 
-5. **Border Distance** — GeoPandas nearest-point distance to Natural Earth's border/LAC
-   geometry, UTM-reprojected for accuracy.
+col_m1, col_m2 = st.columns([0.94, 0.06])
+with col_m1:
+    st.markdown("2. **Geocoding** — Nominatim (primary), Bhuvan (Census-linked fallback), with manual district validation.")
+with col_m2:
+    proof_popover("01_village_data_excel.png", "Village dataset opened in Excel — raw geocoded village list with coordinates and border distance.")
 
-6. **Statistical Testing** — Wilcoxon signed-rank (paired before/after) and Spearman
-   correlation (RQ2, H3), with sample-size caveats disclosed throughout.
-""")
+col_m3, col_m4 = st.columns([0.94, 0.06])
+with col_m3:
+    st.markdown("3. **Satellite Extraction** — Sentinel-2 NDBI and VIIRS night-lights via Google Earth Engine, 500m village buffers, cloud-masked composites.")
+with col_m4:
+    proof_popover("02_gee_extraction_vscode.png", "extract_satellite_data.py open in VS Code, running the Earth Engine NDBI/VIIRS extraction pipeline.")
+
+st.markdown("4. **Dual Compositing Windows** — Full-year and summer-matched (Jun–Sep), to separate genuine signal from seasonal artifacts.")
+
+col_m5, col_m6, col_m6b = st.columns([0.88, 0.06, 0.06])
+with col_m5:
+    st.markdown("5. **Border Distance** — GeoPandas nearest-point distance to Natural Earth's border/LAC geometry, UTM-reprojected for accuracy.")
+with col_m6:
+    proof_popover("03_border_distance_vscode.png", "compute_border_distance.py open in VS Code — the GeoPandas nearest-point distance calculation.")
+with col_m6b:
+    proof_popover("05_qgis_border_distance_qa.png", "QGIS — visual QA of the border/LAC line against village points, graduated by distance-to-border, to sanity-check the GeoPandas calculation.")
+
+col_m7, col_m8 = st.columns([0.94, 0.06])
+with col_m7:
+    st.markdown("6. **Statistical Testing** — Wilcoxon signed-rank (paired before/after) and Spearman correlation (RQ2, H3), with sample-size caveats disclosed throughout.")
+with col_m8:
+    proof_popover("04_statistical_testing_vscode.png", "Statistical Validation page code open in VS Code — the Wilcoxon signed-rank and Spearman correlation tests.")
 
 st.markdown("---")
 st.markdown(

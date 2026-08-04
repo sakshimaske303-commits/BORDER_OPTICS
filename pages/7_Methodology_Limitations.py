@@ -118,31 +118,6 @@ legal boundary.
 """)
 
 st.markdown("---")
-
-st.markdown(
-    f"""
-    <div style="text-align: center; padding: 25px;" class="recon-card">
-        <p style="color: {PALETTE['accent']}; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700; margin-bottom: 10px;">GitHub Repository</p>
-        <p style="color: {PALETTE['text_primary']}; font-size: 0.95rem; margin: 0;">
-            <a href="https://github.com/sakshimaske303-commits/BORDER_OPTICS" target="_blank" style="color: {PALETTE['accent']};">github.com/sakshimaske303-commits/BORDER_OPTICS</a>
-        </p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    f"""
-    <div style="text-align: center; padding: 25px; margin-top: 16px;" class="recon-card">
-        <p style="color: {PALETTE['text_secondary']}; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700;">Project Author</p>
-        <h2 style="color: {PALETTE['text_primary']}; margin: 5px 0; border: none; padding: 0;">SAKSHI D. MASKE</h2>
-        <p style="color: {PALETTE['accent']}; font-weight: 700;">Independent Geospatial Researcher</p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown("---")
 st.markdown(
     "<p class='caption-text' style='text-align:center;'>BORDER OPTICS — A Satellite-Based Verification Framework</p>",
     unsafe_allow_html=True,

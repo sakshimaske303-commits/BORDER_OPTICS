@@ -195,12 +195,12 @@ with doc1:
             st.download_button(
                 label="📘 Research Paper (PDF)",
                 data=f,
-                file_name="BO_Research_Paper.pdf",
+                file_name="BORDER_OPTICS_Research_Paper.pdf",
                 mime="application/pdf",
                 use_container_width=True,
             )
     except FileNotFoundError:
-        st.warning("Research_Paper.pdf not found.")
+        st.warning("BO_Research_Paper.pdf not found.")
 
 with doc2:
     try:
@@ -208,12 +208,12 @@ with doc2:
             st.download_button(
                 label="📗 Project Report (PDF)",
                 data=f,
-                file_name="BO_Project_Report.pdf",
+                file_name="BORDER_OPTICS_Project_Report.pdf",
                 mime="application/pdf",
                 use_container_width=True,
             )
     except FileNotFoundError:
-        st.warning("Project_Journal.pdf not found.")
+        st.warning("BO_Project_Report.pdf not found.")
 
 with doc3:
     try:
@@ -221,12 +221,25 @@ with doc3:
             st.download_button(
                 label="📙 Development Log (PDF)",
                 data=f,
-                file_name="BO_Development_Log.pdf",
+                file_name="BORDER_OPTICS_Development_Log.pdf",
                 mime="application/pdf",
                 use_container_width=True,
             )
     except FileNotFoundError:
-        st.warning("Development_Log.pdf not found.")
+        st.warning("BO_Development_Log.pdf not found.")
+
+st.markdown(
+    f"""
+    <div style="text-align:center; margin: 22px 0 6px 0;">
+        <a href="https://github.com/sakshimaske303-commits/BORDER_OPTICS" target="_blank" style="text-decoration:none;">
+            <span style="display:inline-block; background: linear-gradient(90deg, {PALETTE['accent']}, {PALETTE['accent_vintage']}); color:#1C1C1C; font-weight:800; font-size:0.95rem; padding:12px 28px; border-radius:8px;">
+                🔗 View Full Project on GitHub
+            </span>
+        </a>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 st.markdown("---")
 

@@ -70,17 +70,17 @@ st.caption(
     "Statistical Validation and Methodology & Limitations)."
 )
 
-with st.expander("📄 View static exports (used in Research Paper)"):
-    st.image(
-        "outputs/figures/04_state_mean_ndbi_change.png",
-        caption="Static export: state-wise mean NDBI change",
-        use_container_width=True,
-    )
-    st.image(
-        "outputs/figures/05_state_mean_lights_change.png",
-        caption="Static export: state-wise mean night-lights change",
-        use_container_width=True,
-    )
+st.markdown("##### 📄 Static exports (used in Research Paper)")
+st.image(
+    "outputs/figures/04_state_mean_ndbi_change.png",
+    caption="Static export: state-wise mean NDBI change",
+    use_container_width=True,
+)
+st.image(
+    "outputs/figures/05_state_mean_lights_change.png",
+    caption="Static export: state-wise mean night-lights change",
+    use_container_width=True,
+)
 
 st.markdown("---")
 
