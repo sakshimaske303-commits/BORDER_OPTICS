@@ -156,6 +156,7 @@ st.markdown("### Explore the Evidence")
 
 nav_items = [
     ("🏛️", "Study Design", "Research questions, hypotheses, sample overview"),
+    ("🏔️", "Theoretical Foundations", "Why Himalayan terrain and altitude drive measurement uncertainty"),
     ("🏗️", "Built-Up Change", "NDBI findings across all villages"),
     ("💡", "Night-Lights", "VIIRS radiance change findings"),
     ("📊", "Statistical Validation", "Wilcoxon tests, Spearman correlations, robustness"),
