@@ -101,61 +101,41 @@ def inject_theme():
             opacity: 1 !important;
         }}
 
-        /* ---- Sidebar — translucent mint glass ---- */
+        /* ---- Sidebar — same dark-gradient nav-pill language used
+        across the whole portfolio (matched to Double Jeopardy) ---- */
         section[data-testid="stSidebar"] {{
-            background: linear-gradient(180deg, rgba(167,225,193,0.62) 0%, rgba(143,212,174,0.62) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-right: 3px solid {p['accent_vintage']};
+            background: linear-gradient(180deg, {p['bg_sidebar']} 0%, {p['bg_main']} 100%);
+            border-right: 1px solid rgba(167, 225, 193, 0.2);
         }}
         section[data-testid="stSidebar"] * {{
-            color: #1C1C1C !important;
+            color: {p['text_primary']} !important;
         }}
         section[data-testid="stSidebar"] label,
         section[data-testid="stSidebar"] p,
         section[data-testid="stSidebar"] span {{
-            font-weight: 700;
+            font-weight: 500;
         }}
 
-        /* ---- Sidebar page nav list — all-caps, bolder + bigger,
-        packed tight so every page fits without scrolling ---- */
-        section[data-testid="stSidebar"] [data-testid="stSidebarNavItems"] {{
-            padding-top: 4px !important;
-            padding-bottom: 4px !important;
-        }}
-        section[data-testid="stSidebar"] [data-testid="stSidebarNavItems"] li,
-        section[data-testid="stSidebar"] nav ul li,
-        section[data-testid="stSidebar"] ul li {{
-            margin-bottom: 3px !important;
-        }}
         section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"],
         section[data-testid="stSidebar"] [data-testid="stSidebarNavItems"] a,
         section[data-testid="stSidebar"] nav a,
         section[data-testid="stSidebar"] ul li a {{
-            font-weight: 900 !important;
-            font-size: 1.3rem !important;
-            line-height: 1.15 !important;
-            text-transform: uppercase !important;
-            letter-spacing: 0.4px !important;
-            color: #5C1030 !important;
-            -webkit-text-stroke: 0.5px #5C1030;
-            padding: 7px 14px !important;
-            border-radius: 10px !important;
-            transition: background-color 0.15s ease, transform 0.15s ease;
+            border-radius: 8px !important;
+            padding: 8px 14px !important;
+            font-weight: 600 !important;
+            transition: all 0.2s ease;
         }}
         section[data-testid="stSidebar"] [data-testid="stSidebarNavLink"]:hover,
         section[data-testid="stSidebar"] nav a:hover,
         section[data-testid="stSidebar"] ul li a:hover {{
-            background-color: rgba(255, 124, 172, 0.4) !important;
-            transform: translateX(3px);
+            background: rgba(167, 225, 193, 0.12) !important;
+            border-left: 3px solid {p['accent']};
         }}
         section[data-testid="stSidebar"] [aria-selected="true"],
         section[data-testid="stSidebar"] [aria-current="page"] {{
-            background-color: rgba(255, 124, 172, 0.55) !important;
-            color: #3A0A1D !important;
-            -webkit-text-stroke: 0.5px #3A0A1D;
-            border-left: 5px solid {p['accent_vintage']};
-            font-weight: 900 !important;
+            background: rgba(255, 124, 172, 0.18) !important;
+            border-left: 3px solid {p['accent_vintage']};
+            font-weight: 800 !important;
         }}
 
         /* ---- Headers ---- */
