@@ -12,9 +12,10 @@
 
 | Document | What's Inside |
 |---|---|
-| 📘 [`Project_Journal.md`](./Project_Journal.md) | Polished project summary — methodology, findings, conclusions (start here) |
-| 📗 [`Research_Paper.md`](./Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
-| 📙 [`Development_Log.md`](./Development_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
+| ⚡ [`BO_Executive_Summary.pdf`](./BO_Executive_Summary.pdf) | One-page snapshot — question, method, headline finding, robustness checklist, and links (fastest overview) |
+| 📘 [`BO_Project_Report.md`](./BO_Project_Report.md) | Polished project summary — methodology, findings, conclusions (start here) |
+| 📗 [`BO_Research_Paper.md`](./BO_Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
+| 📙 [`BO_Development_Log.md`](./BO_Development_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
 
 ---
 
@@ -43,7 +44,7 @@ Border-distance computation (src/analysis/compute_border_distance.py)
 Statistical testing — Wilcoxon, Spearman, robustness (src/analysis/)
         │
         ▼
-Static figures + interactive maps (src/visualization/) ──► Research_Paper.md / Project_Journal.md
+Static figures + interactive maps (src/visualization/) ──► BO_Research_Paper.md / BO_Project_Report.md
         │
         ▼
 Streamlit dashboard (app.py + 7 pages)
@@ -69,7 +70,7 @@ Streamlit dashboard (app.py + 7 pages)
 
 **Budget scale does not appear to predict development scale.** Arunachal Pradesh's sanctioned budget (₹2,749.74 crore) is roughly ten times Uttarakhand's (₹270.58 crore), yet the two states' mean measured built-up change is nearly identical (+0.0284 vs. +0.0293) — descriptively consistent with budget-independent implementation.
 
-Full methodology, including every hypothesis tested and the compositing-window robustness check applied throughout, is documented in the dashboard's Methodology & Limitations page and in `Project_Journal.md`.
+Full methodology, including every hypothesis tested and the compositing-window robustness check applied throughout, is documented in the dashboard's Methodology & Limitations page and in `BO_Project_Report.md`.
 
 ## 🗂️ Repository Structure
 
@@ -92,9 +93,9 @@ BORDER_OPTICS/
 ├── outputs/
 │   ├── figures/                    # Static PNG charts
 │   └── interactive_maps/maps/      # Folium interactive HTML maps
-├── Project_Journal.md
-├── Research_Paper.md
-├── Development_Log.md
+├── BO_Project_Report.md
+├── BO_Research_Paper.md
+├── BO_Development_Log.md
 └── requirements.txt
 ```
 
@@ -134,4 +135,4 @@ This project is licensed under [CC BY 4.0](./LICENSE) — you are free to share 
 
 ---
 
-*This project's full development process — including every debugging session, methodology iteration, and technical decision — is documented in `Development_Log.md` for full transparency and reproducibility.*
+*This project's full development process — including every debugging session, methodology iteration, and technical decision — is documented in `BO_Development_Log.md` for full transparency and reproducibility.*

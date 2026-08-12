@@ -73,6 +73,28 @@ with col4:
 
 st.markdown("---")
 
+st.markdown(
+    f"""
+    <div style="padding: 20px 26px; margin: 4px 0 20px 0; background: rgba(255, 124, 172, 0.06);
+                border: 1px solid rgba(255, 124, 172, 0.3); border-left: 4px solid {PALETTE['accent_vintage']};
+                border-radius: 10px;">
+        <p style="color:{PALETTE['accent_vintage']}; text-transform:uppercase; letter-spacing:1.5px;
+                  font-weight:800; font-size:0.85rem; margin-bottom:8px;">⚡ Why This Matters</p>
+        <p style="color:{PALETTE['text_primary']}; font-size:1rem; line-height:1.6; margin:0;">
+            Asked directly in Parliament whether the Vibrant Villages Programme's impact had ever been
+            assessed, the Ministry of Home Affairs answered without qualification: "No impact assessment
+            has been carried out" (Lok Sabha Unstarred Question No. 508, 3 February 2026). This project
+            is that missing independent assessment — testing ₹4,800 crore of sanctioned border-development
+            spending against satellite-observed physical change, rather than trusting official progress
+            reports alone. And when the two most defensible measurement choices produce opposite
+            conclusions, that instability is reported as the finding, not resolved by picking whichever
+            version looks better.
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
 col_left, col_right = st.columns([1.1, 1])
 
 with col_left:
@@ -188,7 +210,20 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-doc1, doc2, doc3 = st.columns(3)
+doc0, doc1, doc2, doc3 = st.columns(4)
+
+with doc0:
+    try:
+        with open("BO_Executive_Summary.pdf", "rb") as f:
+            st.download_button(
+                label="⚡ Executive Summary (PDF)",
+                data=f,
+                file_name="BORDER_OPTICS_Executive_Summary.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+            )
+    except FileNotFoundError:
+        st.warning("BO_Executive_Summary.pdf not found.")
 
 with doc1:
     try:

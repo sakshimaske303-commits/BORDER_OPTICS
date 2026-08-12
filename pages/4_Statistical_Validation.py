@@ -16,6 +16,32 @@ st.markdown(
 )
 st.markdown("---")
 
+_checks = [
+    (PALETTE['accent'], "✓", "Dual Compositing-Window Test"),
+    (PALETTE['accent'], "✓", "Two Independent Metrics (NDBI + VIIRS)"),
+    (PALETTE['accent'], "✓", "Wilcoxon Signed-Rank Tests"),
+    (PALETTE['accent'], "✓", "Cross-Checked Against Sanctioned Budget"),
+    (PALETTE['accent'], "✓", "Every Data Gap Disclosed"),
+    (PALETTE['warning'], "!", "NDBI Result Flagged as Window-Sensitive — Not Confirmed"),
+]
+_badges = "".join(
+    f"""<span style="display:inline-flex; align-items:center; gap:6px; background:rgba(167,225,193,0.08);
+        border:1px solid rgba(167,225,193,0.3); border-radius:20px; padding:6px 14px; margin:4px;
+        font-size:0.82rem; color:{PALETTE['text_primary']}; font-weight:600;">
+        <span style="color:{color}; font-weight:900;">{mark}</span>{label}</span>"""
+    for color, mark, label in _checks
+)
+st.markdown(
+    f"""
+    <p style="color:{PALETTE['accent_vintage']}; text-transform:uppercase; letter-spacing:1.5px;
+              font-weight:800; font-size:0.85rem; margin-bottom:6px;">🔍 Robustness At a Glance</p>
+    <div style="display:flex; flex-wrap:wrap; margin-bottom: 6px;">{_badges}</div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown("---")
+
 st.markdown("""
 Every test below is run under both composite windows. Where a result's direction or
 significance flips between windows, that instability is reported explicitly rather than
