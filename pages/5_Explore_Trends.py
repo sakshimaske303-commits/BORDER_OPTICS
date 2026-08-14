@@ -85,6 +85,70 @@ st.image(
 st.markdown("---")
 
 # ============================================================
+# THREE-POINT MULTI-YEAR TREND (2021 / 2023 / 2025)
+# ============================================================
+st.markdown("### 📆 Multi-Year Trend — 2021 / 2023 / 2025")
+st.markdown(
+    "The core comparison above rests on two single years. This extends the same core sample "
+    "to a third, independent time point (2023), so a trend line — not a two-point difference — "
+    "carries the evidentiary weight. Pick a window and a state to see its own trend line."
+)
+
+my_window_choice = st.radio("Compositing window", ["Summer-Matched", "Full-Year"], horizontal=True, key="trend_window")
+my_path = (
+    "data/processed/border_optics_multiyear_summer.csv"
+    if my_window_choice == "Summer-Matched"
+    else "data/processed/border_optics_multiyear_fullyear.csv"
+)
+my_df = pd.read_csv(my_path)
+my_core = my_df[my_df["is_core_sample"] == True] if "is_core_sample" in my_df.columns else my_df
+
+my_state_choice = st.selectbox("State (or All)", ["All"] + sorted(my_core["state"].unique().tolist()), key="trend_state")
+my_scope = my_core if my_state_choice == "All" else my_core[my_core["state"] == my_state_choice]
+
+years = [2021, 2023, 2025]
+trend_col_choice = st.radio("Metric", ["NDBI", "Night-Lights"], horizontal=True, key="trend_metric")
+trend_prefix = "ndbi" if trend_col_choice == "NDBI" else "lights"
+
+means = [my_scope[f"{trend_prefix}_{y}"].mean() for y in years]
+sems = [my_scope[f"{trend_prefix}_{y}"].std() / (my_scope[f"{trend_prefix}_{y}"].count() ** 0.5) for y in years]
+
+fig_trend = go.Figure()
+fig_trend.add_trace(go.Scatter(
+    x=years, y=means, mode="lines+markers",
+    line=dict(color=PALETTE["border_up"] if trend_prefix == "ndbi" else PALETTE["lights"], width=3),
+    marker=dict(size=10),
+    error_y=dict(type="data", array=sems, visible=True),
+    name=f"Mean {trend_col_choice}",
+))
+fig_trend.update_layout(
+    template="plotly_dark",
+    height=380,
+    plot_bgcolor="rgba(0,0,0,0)",
+    paper_bgcolor="rgba(0,0,0,0)",
+    font=dict(family="Inter", color=PALETTE["text_primary"]),
+    margin=dict(t=30, b=40, l=40, r=40),
+    xaxis=dict(tickmode="array", tickvals=years),
+    yaxis_title=f"Mean {trend_col_choice}",
+)
+st.plotly_chart(fig_trend, use_container_width=True)
+
+st.caption(
+    f"{my_state_choice} · {my_window_choice.lower()} window · n = {my_scope[f'{trend_prefix}_2021'].count()} villages with complete 2021/2023/2025 data. "
+    "The overall summer-matched NDBI trend across all three years is not itself statistically significant "
+    "(Wilcoxon on per-village slopes, p = 0.442) — the reported 2021-vs-2025 increase is concentrated in a "
+    "2023-to-2025 recovery following an earlier 2021-to-2023 decline (see Statistical Validation)."
+)
+
+st.image(
+    "outputs/figures/09_multiyear_trend.png",
+    caption="Static export: mean NDBI and night-lights at 2021/2023/2025, core sample, both windows",
+    use_container_width=True,
+)
+
+st.markdown("---")
+
+# ============================================================
 # HIMACHAL PRADESH — ILLUSTRATIVE CASE STUDY (SEPARATE, NOT CORE SAMPLE)
 # ============================================================
 st.markdown("### Himachal Pradesh — Illustrative Case Study (Not Core Sample)")

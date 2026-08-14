@@ -21,6 +21,7 @@ with col1:
     st.markdown("""
     - **Village Lists** — State VVP-I portals, Rajya Sabha / Lok Sabha Q&A annexures
     - **Geocoding** — OpenStreetMap Nominatim, ISRO Bhuvan Village Geocoding API
+    - **Non-VVP Control Villages** — OpenStreetMap Overpass API, district-matched
     - **Built-Up Index** — Sentinel-2 SR Harmonized (NDBI), Google Earth Engine
     """)
 with col2:
@@ -35,11 +36,13 @@ st.markdown("---")
 st.markdown("### Processing Pipeline")
 
 st.markdown("""
-Each village is buffered by 500m and used as the region for `reduceRegion` over
-cloud-masked Sentinel-2 composites (QA60 bitmask) and VIIRS monthly composites, for both
-a full-year window and a season-matched (Jun–Sep) window in 2021 and 2025. Villages with
-an empty composite in either year are marked null rather than defaulted to zero, and
-image-count columns are retained for quality auditing. Village coordinates and
+Each village — treated and, identically, the 753-village non-VVP control group — is
+buffered (500m primary, with 250m and 1km run as a robustness check) and used as the
+region for `reduceRegion` over cloud-masked Sentinel-2 composites (QA60 bitmask) and
+VIIRS monthly composites, for both a full-year window and a season-matched (Jun–Sep)
+window at 2021 and 2025, plus a third time point (2023) for the core treated sample.
+Villages with an empty composite in any period are marked null rather than defaulted to
+zero, and image-count columns are retained for quality auditing. Village coordinates and
 distance-to-border are computed separately via GeoPandas (UTM 44N / EPSG:32644
 reprojection, nearest-point distance to the nearest India border/LAC segment) and merged
 in by village ID.
@@ -51,10 +54,15 @@ st.markdown("### Statistical Methods")
 
 st.markdown("""
 **Wilcoxon signed-rank test** (paired, non-parametric) for before/after change in NDBI
-and night-lights, since normality cannot be assumed at this sample size. **Spearman
-correlation** (rank-based, robust to non-linear monotonic relationships) for state-level
-budget vs. change (RQ2) and distance-to-border vs. change (H3). Both correlations are
-explicitly exploratory given small state and moderate village counts respectively.
+and night-lights, since normality cannot be assumed at this sample size, and for
+per-village multi-year trend slopes tested against zero. **Spearman correlation**
+(rank-based, robust to non-linear monotonic relationships) for state-level budget vs.
+change (RQ2) and distance-to-border vs. change (H3) — both explicitly exploratory given
+small state and moderate village counts respectively. **Difference-in-Differences (OLS)**
+with district fixed effects and cluster-robust standard errors (14 district clusters,
+plus a parallel HC3 no-fixed-effects specification) for the treated-vs-control comparison
+(H4), and a **village-fixed-effects panel regression** as a second specification for the
+multi-year trend.
 """)
 
 st.markdown("---")
@@ -102,6 +110,42 @@ with st.expander("**Composite Window Trade-Off — Snow vs. Monsoon Cloud**"):
     cloud cover, which eliminated nearly all valid observations for Sikkim in that window.
     Where a result's direction or significance changes between the two windows, that
     instability is reported as a finding in itself — see Statistical Validation.
+    """)
+
+with st.expander("**Control-Group Baseline Imbalance — Level-Balance, Not a Confirmed Pre-Trend**"):
+    st.markdown("""
+    The H4 control-group comparison found treated villages start from a significantly
+    lower mean 2021 NDBI than the 753-village control group in both windows — expected,
+    given VVP-I priority villages were themselves selected partly for remoteness and
+    security proximity, but a genuine parallel-pre-trends placebo test could not be run
+    because the control group's satellite extraction covers only the same single
+    before/after pair as the treated sample, not a multi-year pre-treatment panel. The
+    reported baseline check is a level-balance check, not a confirmed shared pre-trend —
+    district fixed effects address baseline differences between districts, not
+    village-level selection into the treated group itself.
+    """)
+
+with st.expander("**Multi-Year Trend Is Not Monotonic**"):
+    st.markdown("""
+    Extending the core sample to a third time point (2023) shows the reported
+    2021-vs-2025 summer NDBI increase is not a steady trend: mean NDBI declines from 2021
+    to 2023, then rises significantly from 2023 to 2025. The overall three-point linear
+    trend across all three years is not itself statistically significant. This study's
+    satellite-only evidence cannot distinguish between possible explanations for that
+    shape (a late-starting rollout, a weather-driven dip earlier in the window, or some
+    combination) — see Statistical Validation.
+    """)
+
+with st.expander("**Buffer-Radius Comparison — An Archive-Timing Confound, Diagnosed and Controlled For**"):
+    st.markdown("""
+    The 250m and 1km buffer extractions were run at a later date than the original 500m
+    extraction, against the identical fixed 2021/2025 date ranges but a Sentinel-2 archive
+    that had continued to backfill scenes in the meantime — 97 core-sample villages that
+    were null at 500m turned out to be valid at both 250m and 1km, a signature of archive
+    coverage rather than a genuine buffer-radius effect. Comparing "all valid villages per
+    buffer" directly would conflate that timing artifact with the buffer-radius question
+    being asked, so the reported buffer-sensitivity result restricts all three radii to
+    the subsample valid at every radius, holding sample composition fixed.
     """)
 
 st.markdown("---")

@@ -17,17 +17,24 @@ abstract: >-
   Programme (VVP-I), a ₹4,800 crore border-area development scheme sanctioned
   across 2,967 villages in five Himalayan border states/union territories.
   Using Sentinel-2 built-up-index (NDBI) and VIIRS night-lights data at 258
-  individually geocoded villages, this study tests whether VVP-I's priority
-  villages show measurable physical development since programme sanction,
-  under two independent compositing windows (full-year and summer-matched)
-  as an explicit robustness check rather than trusting a single satellite
-  comparison. A full-year composite shows no significant increase in built-up
-  area, while a season-matched composite on the same villages shows the
-  opposite result — a reversal traced to snow-cover contamination and monsoon
-  cloud cover respectively. Night-lights, the more temporally stable proxy,
-  shows no confirmed increase under either window. The instability itself is
-  reported as the central finding, addressing a parliamentary record showing
-  no independent impact assessment has ever been carried out for VVP-I.
+  individually geocoded villages against a matched non-VVP control group of
+  753 villages in the same 14 districts, this study tests whether VVP-I's
+  priority villages show measurable physical development since programme
+  sanction, under two independent compositing windows (full-year and
+  summer-matched) as an explicit robustness check rather than trusting a
+  single satellite comparison. A full-year composite shows no significant
+  increase in built-up area, while a season-matched composite on the same
+  villages shows the opposite result — a reversal traced to snow-cover
+  contamination and monsoon cloud cover respectively. A district-fixed-effects
+  Difference-in-Differences model against the control group reproduces this
+  same window-sensitivity pattern, and a three-point 2021/2023/2025 extension
+  shows the summer-matched result is concentrated in a 2023-to-2025 recovery
+  rather than steady growth, while a 250m/500m/1km buffer-radius sweep shows
+  the result is stable to that methodological choice once sample composition
+  is matched. Night-lights, the more temporally stable proxy, shows no
+  confirmed increase under either window. The instability itself is reported
+  as the central finding, addressing a parliamentary record showing no
+  independent impact assessment has ever been carried out for VVP-I.
 keywords:
   - Vibrant Villages Programme
   - border development
@@ -37,8 +44,9 @@ keywords:
   - VIIRS night-lights
   - remote sensing
   - robustness testing
+  - difference-in-differences
   - India
   - geospatial analysis
 license: CC-BY-4.0
-version: 1.0.0
-date-released: "2026-08-02"
+version: 1.1.0
+date-released: "2026-08-14"

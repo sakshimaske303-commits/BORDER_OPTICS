@@ -1,0 +1,75 @@
+{
+  "as_extracted": [
+    {
+      "buffer_m": 250,
+      "n_core": 251,
+      "ndbi_n_valid": 251,
+      "ndbi_mean_change": 0.001742272474250527,
+      "ndbi_median_change": 0.001840874096021794,
+      "ndbi_wilcoxon_stat": 17131.0,
+      "ndbi_wilcoxon_p": 0.12616215590187885,
+      "lights_n_valid": 251,
+      "lights_mean_change": 0.02300350474989289,
+      "lights_median_change": -0.060453545269185394,
+      "lights_wilcoxon_stat": 11127.0,
+      "lights_wilcoxon_p": 0.999976486353053
+    },
+    {
+      "buffer_m": 500,
+      "n_core": 251,
+      "ndbi_n_valid": 154,
+      "ndbi_mean_change": 0.02855330555012629,
+      "ndbi_median_change": 0.0368310279240252,
+      "ndbi_wilcoxon_stat": 10214.0,
+      "ndbi_wilcoxon_p": 9.292860347241844e-15,
+      "lights_n_valid": 251,
+      "lights_mean_change": 0.01714833296196028,
+      "lights_median_change": -0.05984268931860337,
+      "lights_wilcoxon_stat": 10768.0,
+      "lights_wilcoxon_p": 0.9999941130208815
+    },
+    {
+      "buffer_m": 1000,
+      "n_core": 251,
+      "ndbi_n_valid": 251,
+      "ndbi_mean_change": -0.002920205439941458,
+      "ndbi_median_change": -0.0016189457476411817,
+      "ndbi_wilcoxon_stat": 14342.0,
+      "ndbi_wilcoxon_p": 0.8993060003087094,
+      "lights_n_valid": 251,
+      "lights_mean_change": 0.0020673432665735273,
+      "lights_median_change": -0.06089619881249447,
+      "lights_wilcoxon_stat": 9605.0,
+      "lights_wilcoxon_p": 0.9999999651285135
+    }
+  ],
+  "coverage_note": {
+    "n_valid_250m": 251,
+    "n_valid_500m": 154,
+    "n_valid_1000m": 251,
+    "n_common_all_three": 154
+  },
+  "matched_subsample": [
+    {
+      "buffer_m": 250,
+      "outcome": "ndbi",
+      "n": 154,
+      "mean_change": 0.009783849840307647,
+      "wilcoxon_p": 9.284394934128469e-06
+    },
+    {
+      "buffer_m": 500,
+      "outcome": "ndbi",
+      "n": 154,
+      "mean_change": 0.02855330555012629,
+      "wilcoxon_p": 9.292860347241844e-15
+    },
+    {
+      "buffer_m": 1000,
+      "outcome": "ndbi",
+      "n": 154,
+      "mean_change": 0.0056261621736975525,
+      "wilcoxon_p": 0.0014714120447724488
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @page { margin: 20mm; }
+  body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; font-size: 10.3pt; line-height: 1.45; }
+  h1 { font-size: 17pt; margin-bottom: 2px; }
+  .subtitle { font-size: 10.5pt; color: #333; margin-bottom: 2px; }
+  .meta { font-size: 9pt; color: #555; margin-bottom: 14px; }
+  h2 { font-size: 11.5pt; border-bottom: 1.5px solid #333; padding-bottom: 2px; margin-top: 14px; margin-bottom: 6px; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 9.3pt; }
+  th, td { border: 1px solid #999; padding: 4px 7px; text-align: left; }
+  th { background: #eee; }
+  ul.checklist { list-style: none; padding-left: 0; margin: 6px 0; }
+  ul.checklist li { margin-bottom: 3px; }
+  .check { color: #2a7a2a; font-weight: bold; }
+  .flag { color: #a05a00; font-weight: bold; }
+  .footer { font-size: 8.5pt; color: #555; margin-top: 12px; border-top: 1px solid #ccc; padding-top: 6px; }
+  p { margin: 5px 0; }
+</style>
+</head>
+<body>
+
+<h1>BORDER OPTICS</h1>
+<div class="subtitle">A Satellite-Based Verification Framework for India's Vibrant Villages Programme (VVP-I)</div>
+<div class="meta">Executive Summary &middot; DOI: 10.5281/zenodo.21759970 &middot; Sakshi D. Maske</div>
+
+<h2>The Question</h2>
+<p>Asked directly in Parliament whether the Vibrant Villages Programme's impact had ever been assessed, the Ministry of Home Affairs answered without qualification: &ldquo;No impact assessment has been carried out&rdquo; (Lok Sabha Unstarred Question No. 508, 3 February 2026). Did India's Rs. 4,800 crore border-village development scheme produce measurable physical development on the ground &mdash; and can the answer be trusted, or does it depend on an arbitrary measurement choice?</p>
+
+<h2>The Method</h2>
+<p>258 individually geocoded villages across five Himalayan border states/UTs (Arunachal Pradesh, Sikkim, Uttarakhand, Himachal Pradesh, Ladakh) were tested using Sentinel-2 built-up-area change (NDBI) and VIIRS night-lights, 2021&ndash;2025, against a matched non-VVP control group of 753 villages in the same 14 districts. Every test was run under two independent satellite compositing windows &mdash; full-year and summer-matched &mdash; specifically to test whether the methodology choice itself changes the answer, using Wilcoxon signed-rank tests for before/after change, Spearman correlations for budget and border-proximity relationships, and a district-fixed-effects Difference-in-Differences model against the control group. The core two-year comparison is extended to a three-point 2021/2023/2025 trend, and the fixed 500m extraction buffer is tested against 250m and 1km alternatives.</p>
+
+<h2>The Finding</h2>
+<p>Built-up area change is compositing-window sensitive, not confirmed. A full-year composite shows no significant increase (p = 1.000); the identical villages under a summer-matched composite show a highly significant increase (p &lt; 0.000001) &mdash; traced to snow-cover contamination in the full-year window and monsoon cloud cover eliminating Sikkim's data in the summer window. That significant summer result survives three further stress tests: it is significantly larger than the change in a matched non-VVP control group (district-FE DiD, p = 0.0021), it holds at 250m and 1km buffer radii as well as 500m (all p &lt; 0.002, sample-matched), and it clears Holm-Bonferroni correction for multiple testing. But it is not a steady trend &mdash; a three-point 2021/2023/2025 extension shows the change is concentrated in a 2023-to-2025 recovery following an earlier 2021-to-2023 decline.</p>
+
+<table>
+<tr><th>Test</th><th>Full-Year Window</th><th>Summer-Matched Window</th></tr>
+<tr><td>NDBI change (Wilcoxon)</td><td>p = 1.000 &mdash; not significant</td><td>p &lt; 0.000001 &mdash; highly significant</td></tr>
+<tr><td>Night-lights change (Wilcoxon)</td><td>p = 0.050</td><td>p = 0.9999</td></tr>
+<tr><td>Control-group DiD (NDBI, H4)</td><td>p = 0.215 &mdash; not significant</td><td>p = 0.0021 &mdash; significant</td></tr>
+<tr><td>Budget vs. measured change</td><td colspan="2">~10x budget gap (AP vs. UK) &rarr; nearly identical mean change</td></tr>
+</table>
+
+<p>Night-lights, the more temporally stable proxy, shows a consistent null across both windows &mdash; carrying more weight than the window-sensitive NDBI result. Arunachal Pradesh's sanctioned budget (Rs. 2,749.74 crore) is roughly ten times Uttarakhand's (Rs. 270.58 crore), yet the two states' mean measured built-up change is nearly identical &mdash; descriptively consistent with budget-independent implementation.</p>
+
+<h2>Validation &amp; Robustness Checklist</h2>
+<ul class="checklist">
+<li><span class="check">&#10003;</span> Dual compositing-window test (full-year + summer-matched)</li>
+<li><span class="check">&#10003;</span> Two independent metrics tested separately (NDBI + VIIRS)</li>
+<li><span class="check">&#10003;</span> Matched non-VVP control group (753 villages, same 14 districts, DiD design)</li>
+<li><span class="check">&#10003;</span> Three-point multi-year trend (2021/2023/2025), not a single before/after pair</li>
+<li><span class="check">&#10003;</span> Buffer-radius sensitivity swept (250m/500m/1km)</li>
+<li><span class="check">&#10003;</span> Cross-checked against sanctioned budget (Parliamentary record)</li>
+<li><span class="check">&#10003;</span> Every data gap disclosed (Ladakh, HP, Uttarakhand caveats)</li>
+<li><span class="flag">!</span> NDBI result flagged as window-sensitive &mdash; and, once significant, shown to be concentrated in 2023&ndash;2025 rather than sustained since sanction</li>
+</ul>
+
+<h2>Honest Limitation</h2>
+<p>This project's own headline result is an instability disclosure rather than a clean confirmation: Himalayan terrain introduces genuine seasonal measurement artifacts (snow cover in winter months, monsoon cloud cover eliminating usable Sikkim data in summer) that make a single compositing choice unreliable evidence on its own. The control-group comparison strengthens the surviving signal but rests on a baseline NDBI-level imbalance between treated and control villages, not a confirmed shared pre-trend. The border-proximity (H3) correlation is explicitly treated as exploratory given sample size and border-geometry caveats. Data gaps &mdash; Ladakh's unresolved villages, Himachal Pradesh's partial sample, Uttarakhand's block ambiguity &mdash; are disclosed rather than smoothed over.</p>
+
+<h2>Real-World Relevance</h2>
+<p>This project is the independent impact assessment Parliament was told does not exist for a Rs. 4,800 crore government scheme spanning 2,967 sanctioned villages. It demonstrates that satellite-based verification of public infrastructure spending is both feasible and necessary &mdash; and that when the two most defensible measurement choices produce opposite conclusions, disclosing that instability, then stress-testing whichever result survives against a control group, a multi-year trend, and a methodological sensitivity sweep, is more useful to policymakers than a false confidence in either single result.</p>
+
+<div class="footer">
+GitHub: github.com/sakshimaske303-commits/BORDER_OPTICS &nbsp;|&nbsp; Live Dashboard: borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app &nbsp;|&nbsp; Zenodo DOI: 10.5281/zenodo.21759970<br>
+Sakshi D. Maske &mdash; Independent Geospatial Researcher
+</div>
+
+</body>
+</html>

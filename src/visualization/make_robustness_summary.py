@@ -3,7 +3,7 @@ BORDER OPTICS — Robustness Summary Chart
 
 The project's central finding is that results are compositing-window
 sensitive rather than confirmed — the Statistical Validation dashboard page
-and Research_Paper.md discuss this explicitly, but until now there was no
+and BO_Research_Paper.md discuss this explicitly, but until now there was no
 single figure showing all four tests' significance side by side across both
 windows. Every other figure shows one test/window at a time; this one is
 the "at a glance" summary the honesty-check narrative refers to.

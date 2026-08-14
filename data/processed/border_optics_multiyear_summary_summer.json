@@ -1,0 +1,34 @@
+[
+  {
+    "outcome": "ndbi",
+    "window": "summer",
+    "n_villages": 251,
+    "mean_slope": -0.00022744479065701855,
+    "median_slope": 0.0003338847751502977,
+    "mean_trend_r2": 0.3219149480990348,
+    "wilcoxon_stat": 15980.0,
+    "wilcoxon_p": 0.44233788892076337,
+    "subperiod_2021_2023_mean_change": -0.023065684677777813,
+    "subperiod_2021_2023_p": 0.9999999811463834,
+    "subperiod_2023_2025_mean_change": 0.022155905515149735,
+    "subperiod_2023_2025_p": 1.8190695119840087e-07,
+    "panel_fe_year_coef": -0.00022744479065729797,
+    "panel_fe_year_p": 0.7275830143239668
+  },
+  {
+    "outcome": "lights",
+    "window": "summer",
+    "n_villages": 251,
+    "mean_slope": 0.004286798900765823,
+    "median_slope": -0.014990858683368883,
+    "mean_trend_r2": 0.49068260163970695,
+    "wilcoxon_stat": 10768.0,
+    "wilcoxon_p": 0.9999941130208815,
+    "subperiod_2021_2023_mean_change": -0.06652680403685979,
+    "subperiod_2021_2023_p": 0.999999999999972,
+    "subperiod_2023_2025_mean_change": 0.08367399963992309,
+    "subperiod_2023_2025_p": 1.7345486693604365e-11,
+    "panel_fe_year_coef": 0.004286798900762766,
+    "panel_fe_year_p": 0.6227316383228689
+  }
+]

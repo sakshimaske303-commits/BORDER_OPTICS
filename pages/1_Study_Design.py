@@ -21,8 +21,10 @@ st.markdown("""
 Rather than relying on official VVP-I progress reports alone, this project measures
 physical, observable change from space — built-up area expansion and night-time light
 growth — at 258 individually geocoded villages, then tests whether that change is
-statistically meaningful, correlated with budget, and predicted by proximity to the
-border/LAC itself.
+statistically meaningful, correlated with budget, predicted by proximity to the
+border/LAC itself, and attributable to VVP-I specifically rather than a regional trend
+shared by every village in these districts — benchmarked against a matched non-VVP
+control group of 753 villages and a three-point 2021/2023/2025 trend.
 """)
 
 st.markdown("---")
@@ -81,6 +83,20 @@ with col4:
     </div>
     """, unsafe_allow_html=True)
 
+st.markdown(f"""
+<div class="recon-card" style="border-left: 4px solid {PALETTE['accent']}; margin-top: 16px;">
+    <p style="color: {PALETTE['accent']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">🎯 RQ5 / H4 — VVP-I-Attributable Effect</p>
+    <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
+        Is any detected change attributable to VVP-I specifically, or does it merely reflect
+        a regional trend shared by every village in these border districts regardless of
+        programme status? <b>H4:</b> VVP-I priority villages will show a significantly
+        larger increase than a matched set of 753 non-VVP villages in the same 14
+        districts over the same period — tested with a district-fixed-effects
+        Difference-in-Differences model (see Statistical Validation).
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
 st.markdown("---")
 
 # ============================================================
@@ -110,7 +126,9 @@ with col_b:
         <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
             Arunachal Pradesh, Sikkim, and Uttarakhand form the <b>core statistical sample</b>.
             Himachal Pradesh (7 villages) is an <b>illustrative case study</b> only — see
-            Methodology & Limitations.
+            Methodology & Limitations. A matched <b>non-VVP control group</b> of 753 villages,
+            drawn from the identical 14 districts, benchmarks this sample's change against
+            the surrounding region's own trend over the same period.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -189,7 +207,7 @@ with col_m2:
 
 col_m3, col_m4 = st.columns([0.94, 0.06])
 with col_m3:
-    st.markdown("3. **Satellite Extraction** — Sentinel-2 NDBI and VIIRS night-lights via Google Earth Engine, 500m village buffers, cloud-masked composites.")
+    st.markdown("3. **Satellite Extraction** — Sentinel-2 NDBI and VIIRS night-lights via Google Earth Engine, run identically for the treated sample and the 753-village non-VVP control group, at three time points (2021/2023/2025) and three buffer radii (250m/500m/1km), cloud-masked composites.")
 with col_m4:
     proof_popover("02_gee_extraction_vscode.png", "extract_satellite_data.py open in VS Code, running the Earth Engine NDBI/VIIRS extraction pipeline.")
 
@@ -208,6 +226,10 @@ with col_m7:
     st.markdown("6. **Statistical Testing** — Wilcoxon signed-rank (paired before/after) and Spearman correlation (RQ2, H3), with sample-size caveats disclosed throughout.")
 with col_m8:
     proof_popover("04_statistical_testing_vscode.png", "Statistical Validation page code open in VS Code — the Wilcoxon signed-rank and Spearman correlation tests.")
+
+st.markdown("7. **Control-Group DiD** — 753 non-VVP villages from the same 14 districts, via the OpenStreetMap Overpass API, compared against the treated sample with a district-fixed-effects Difference-in-Differences model (RQ5/H4).")
+st.markdown("8. **Multi-Year Trend** — A third time point (2023) fit as a per-village linear trend across 2021/2023/2025, so a trend line — not a two-point difference — carries the evidentiary weight.")
+st.markdown("9. **Buffer-Radius Sensitivity** — The same summer-window test re-run at 250m and 1km, on a sample-matched subset, to check the 500m buffer choice isn't itself driving the result.")
 
 st.markdown("---")
 st.markdown(

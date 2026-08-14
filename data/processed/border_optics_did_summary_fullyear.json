@@ -1,0 +1,52 @@
+{
+  "did": [
+    {
+      "outcome": "ndbi",
+      "window": "full_year",
+      "n_obs": 2008,
+      "n_treated": 251,
+      "n_control": 753,
+      "did_coef": 0.008198964247167354,
+      "did_se": 0.006616793505362312,
+      "did_p": 0.2153031275045545,
+      "did_ci_lo": -0.004769712716481314,
+      "did_ci_hi": 0.021167641210816022,
+      "did_coef_nofe_hc3": 0.008198964247168867,
+      "did_p_nofe_hc3": 0.5457404993432151
+    },
+    {
+      "outcome": "lights",
+      "window": "full_year",
+      "n_obs": 2008,
+      "n_treated": 251,
+      "n_control": 753,
+      "did_coef": -0.027281228705529056,
+      "did_se": 0.07694557619364514,
+      "did_p": 0.7229250389034103,
+      "did_ci_lo": -0.17809178681475613,
+      "did_ci_hi": 0.123529329403698,
+      "did_coef_nofe_hc3": -0.027281228705534122,
+      "did_p_nofe_hc3": 0.7820941972736397
+    }
+  ],
+  "baseline_balance": [
+    {
+      "outcome": "ndbi",
+      "window": "full_year",
+      "baseline_treated_mean": -0.18458696776060254,
+      "baseline_control_mean": -0.09779383462050194,
+      "baseline_n_treated": 251,
+      "baseline_n_control": 753,
+      "baseline_balance_p": 4.383719522046957e-19
+    },
+    {
+      "outcome": "lights",
+      "window": "full_year",
+      "baseline_treated_mean": 0.4282140800253048,
+      "baseline_control_mean": 0.4436699778913852,
+      "baseline_n_treated": 251,
+      "baseline_n_control": 753,
+      "baseline_balance_p": 0.011959299425043443
+    }
+  ]
+}

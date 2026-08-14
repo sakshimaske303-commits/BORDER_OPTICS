@@ -108,10 +108,12 @@ with col_left:
     change on the ground.
 
     This project fills that gap: applying **Sentinel-2 built-up-area indices (NDBI)** and
-    **VIIRS night-lights** data to 258 individually geocoded villages, testing whether
-    measurable change occurred between 2021 and 2025, whether it correlates with state-wise
-    budget allocation, and whether proximity to the border/LAC itself predicts the pace
-    of development — with every data gap and methodological trade-off disclosed transparently.
+    **VIIRS night-lights** data to 258 individually geocoded villages, benchmarked against
+    a matched non-VVP control group of 753 villages in the same districts, testing whether
+    measurable change occurred between 2021 and 2025, whether it is attributable to VVP-I
+    specifically, whether it correlates with state-wise budget allocation, and whether
+    proximity to the border/LAC itself predicts the pace of development — with every data
+    gap and methodological trade-off disclosed transparently.
     """)
 
 with col_right:
@@ -124,7 +126,10 @@ with col_right:
             compositing windows — full-year and summer-matched — to guard against
             seasonal artifacts. Where the two windows agree, the result is reported with
             confidence; where they diverge, that instability is disclosed as a genuine
-            finding rather than resolved by discarding one window. See Statistical
+            finding rather than resolved by discarding one window. The summer-matched
+            result survives a matched-control-group comparison, a buffer-radius sweep, and
+            multiple-testing correction — but a three-point 2021/2023/2025 trend shows it
+            is concentrated in 2023–2025, not sustained since sanction. See Statistical
             Validation for the full breakdown.
         </p>
     </div>
@@ -141,9 +146,10 @@ with m1:
     <div class="recon-card" style="min-height: 190px;">
         <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">🛰️ Satellite Verification</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
-            Sentinel-2 NDBI and VIIRS night-lights extracted at 258 village points (500m
-            buffer), across paired 2021/2025 composites, under both full-year and
-            season-matched windows.
+            Sentinel-2 NDBI and VIIRS night-lights extracted at 258 treated village points
+            plus 753 matched control villages, across paired 2021/2025 composites (plus
+            2023) under both full-year and season-matched windows, at 250m/500m/1km
+            buffers.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -153,9 +159,10 @@ with m2:
     <div class="recon-card" style="min-height: 190px;">
         <p style="color: {PALETTE['lights']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">📊 Statistical Testing</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
-            Wilcoxon signed-rank tests for before/after change, and Spearman correlations
-            for budget (RQ2) and border-proximity (H3), with sample-size caveats disclosed
-            wherever a test is exploratory.
+            Wilcoxon signed-rank tests for before/after and multi-year trend change,
+            Spearman correlations for budget (RQ2) and border-proximity (H3), and a
+            district-fixed-effects Difference-in-Differences model against the control
+            group (H4), with sample-size caveats disclosed wherever a test is exploratory.
         </p>
     </div>
     """, unsafe_allow_html=True)

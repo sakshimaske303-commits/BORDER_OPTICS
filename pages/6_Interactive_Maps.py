@@ -17,8 +17,8 @@ st.markdown(
 st.markdown("---")
 
 st.markdown("""
-Every geocoded village plotted on a live satellite/dark basemap. Hover or click any
-marker for its individual before/after values.
+Every geocoded village — plus the 753-village non-VVP control group — plotted on a live
+satellite/dark basemap. Hover or click any marker for its individual before/after values.
 """)
 
 st.markdown("---")
@@ -31,6 +31,9 @@ MAP_OPTIONS = {
     "Night-Lights Change": "village_lights_change_map.html",
     "Border / LAC Proximity": "village_border_distance_map.html",
     "State Overview": "village_state_overview_map.html",
+    "Treated vs. Non-VVP Control Group (H4)": "village_treated_vs_control_map.html",
+    "2023-to-2025 Recovery (Multi-Year Trend)": "village_recovery_2023_2025_map.html",
+    "500m Coverage Gap (Buffer-Sensitivity Diagnostic)": "village_coverage_gap_map.html",
 }
 
 choice = st.selectbox("Select a map layer", list(MAP_OPTIONS.keys()))
@@ -51,8 +54,9 @@ st.markdown(f"""
     <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
         Each map is a standalone Folium visualization with its own dark-mode and satellite
         basemap toggle. Marker color encodes the selected metric (built-up change,
-        night-lights change, or distance to border), and marker click reveals the underlying
-        village name, block, district, state, and raw before/after values used in the analysis.
+        night-lights change, distance to border, treated/control group, or 500m coverage),
+        and marker click reveals the underlying village name, block, district, state, and
+        raw values used in the analysis.
     </p>
 </div>
 """, unsafe_allow_html=True)

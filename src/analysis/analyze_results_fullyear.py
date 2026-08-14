@@ -5,7 +5,7 @@ RQ1 (built-up change significance) + RQ2 (state-level budget correlation)
 Full-year counterpart of analyze_results.py (which covers the summer-matched
 window only) — kept as a separate script, mirroring the same logic against
 the full-year extraction output, so both compositing-window results in the
-paper's robustness check (Research_Paper.md, Section 3.5 / 4.2) are each
+paper's robustness check (BO_Research_Paper.md, Section 3.5 / 4.2) are each
 reproducible from a script actually checked into this repo.
 """
 

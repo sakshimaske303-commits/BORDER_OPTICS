@@ -2,12 +2,13 @@ import streamlit as st
 import pandas as pd
 from scipy import stats
 from utils.theme import inject_theme, PALETTE
-from utils.data import load_data
+from utils.data import load_data, load_expanded_results
 
 st.set_page_config(page_title="Statistical Validation — BORDER OPTICS", page_icon="📊", layout="wide")
 inject_theme()
 
 villages, full_year, summer = load_data()
+expanded = load_expanded_results()
 
 st.markdown("<h1>📊 STATISTICAL VALIDATION</h1>", unsafe_allow_html=True)
 st.markdown(
@@ -20,6 +21,9 @@ _checks = [
     (PALETTE['accent'], "✓", "Dual Compositing-Window Test"),
     (PALETTE['accent'], "✓", "Two Independent Metrics (NDBI + VIIRS)"),
     (PALETTE['accent'], "✓", "Wilcoxon Signed-Rank Tests"),
+    (PALETTE['accent'], "✓", "Matched Non-VVP Control Group (753 villages, DiD)"),
+    (PALETTE['accent'], "✓", "Three-Point Multi-Year Trend (2021/2023/2025)"),
+    (PALETTE['accent'], "✓", "Buffer-Radius Sweep (250m / 500m / 1km)"),
     (PALETTE['accent'], "✓", "Cross-Checked Against Sanctioned Budget"),
     (PALETTE['accent'], "✓", "Every Data Gap Disclosed"),
     (PALETTE['warning'], "!", "NDBI Result Flagged as Window-Sensitive — Not Confirmed"),
@@ -147,9 +151,104 @@ st.image(
 st.markdown("---")
 
 # ============================================================
+# H4 — CONTROL-GROUP DIFFERENCE-IN-DIFFERENCES
+# ============================================================
+st.markdown("### H4 — Control-Group Difference-in-Differences")
+st.markdown(
+    "A treated-only before/after comparison can't tell VVP-I's own effect apart from a "
+    "regional trend every village in these districts shares. This benchmarks the treated "
+    "core sample against 753 matched non-VVP villages in the same 14 districts — district "
+    "fixed effects, standard errors clustered by district."
+)
+
+did_col1, did_col2 = st.columns(2)
+for col, window_key, window_label, border in [
+    (did_col1, "did_fullyear", "Full-Year", PALETTE["accent"]),
+    (did_col2, "did_summer", "Summer-Matched", PALETTE["border_up"]),
+]:
+    ndbi_r = next(r for r in expanded[window_key]["did"] if r["outcome"] == "ndbi")
+    sig_text = "Significant at α = 0.05" if ndbi_r["did_p"] < 0.05 else "Not significant at α = 0.05"
+    card_html = (
+        '<div class="recon-card" style="border-left: 4px solid ' + border + '; min-height: 160px;">'
+        + '<p style="color: ' + border + '; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">' + window_label + ' — NDBI DiD</p>'
+        + '<p style="color: ' + PALETTE["text_primary"] + '; font-size: 1.6rem; font-weight: 900; margin-bottom: 4px;">did = ' + f"{ndbi_r['did_coef']:+.4f}" + '</p>'
+        + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.85rem; margin-bottom: 4px;">p = ' + f"{ndbi_r['did_p']:.4f}" + ' · n = ' + str(ndbi_r['n_treated']) + ' treated / ' + str(ndbi_r['n_control']) + ' control</p>'
+        + '<p style="color: ' + border + '; font-size: 0.82rem; font-weight: 700; margin: 0;">' + sig_text + '</p>'
+        + '</div>'
+    )
+    with col:
+        st.markdown(card_html, unsafe_allow_html=True)
+
+st.image(
+    "outputs/figures/08_control_group_did_effect.png",
+    caption="District-fixed-effects DiD coefficient (treated-vs-control gap in change) with 95% CIs, NDBI and night-lights, both windows.",
+    use_container_width=True,
+)
+st.caption(
+    "Baseline (2021) balance check: treated villages start from a significantly lower mean NDBI "
+    "than control villages in both windows — expected, given priority villages were themselves "
+    "selected partly for remoteness, but a reminder this is a level-balance check, not a confirmed "
+    "shared pre-trend (see Methodology & Limitations)."
+)
+
+st.markdown("---")
+
+# ============================================================
+# MULTI-YEAR TREND (2021 / 2023 / 2025)
+# ============================================================
+st.markdown("### Multi-Year Trend — 2021 / 2023 / 2025")
+st.markdown(
+    "The core comparison rests on two single years, vulnerable to either being a weather "
+    "anomaly. A third time point (2023) lets a trend — not a two-point difference — carry "
+    "the evidentiary weight."
+)
+
+my_summer_ndbi = next(r for r in expanded["multiyear_summer"] if r["outcome"] == "ndbi")
+trend_col1, trend_col2, trend_col3 = st.columns(3)
+trend_col1.metric("Overall 3-yr trend (summer)", f"p = {my_summer_ndbi['wilcoxon_p']:.3f}", "Not significant")
+trend_col2.metric("2021 → 2023 change", f"{my_summer_ndbi['subperiod_2021_2023_mean_change']:+.4f}", f"p = {my_summer_ndbi['subperiod_2021_2023_p']:.3f}")
+trend_col3.metric("2023 → 2025 change", f"{my_summer_ndbi['subperiod_2023_2025_mean_change']:+.4f}", f"p = {my_summer_ndbi['subperiod_2023_2025_p']:.6f}")
+
+st.image(
+    "outputs/figures/09_multiyear_trend.png",
+    caption="Mean NDBI and night-lights radiance at 2021, 2023, and 2025, core sample, both windows, error bars ± 1 SE.",
+    use_container_width=True,
+)
+st.caption(
+    "The reported 2021-vs-2025 summer NDBI increase is concentrated in the 2023-to-2025 "
+    "recovery, following an earlier 2021-to-2023 decline — not a steady trend since sanction."
+)
+
+st.markdown("---")
+
+# ============================================================
+# BUFFER-RADIUS SENSITIVITY
+# ============================================================
+st.markdown("### Buffer-Radius Sensitivity — 250m / 500m / 1km")
+st.markdown(
+    "The 500m extraction buffer used throughout was a fixed choice. This re-runs the "
+    "summer-window NDBI test at 250m and 1km, on the subsample of villages valid at all "
+    "three radii, to isolate buffer radius from an unrelated archive-coverage difference "
+    "between extraction dates (see Methodology & Limitations)."
+)
+
+buf_cols = st.columns(3)
+for col, r in zip(buf_cols, expanded["buffer_sensitivity"]["matched_subsample"]):
+    sig_text = "Significant" if r["wilcoxon_p"] < 0.05 else "Not significant"
+    col.metric(f"{r['buffer_m']}m buffer (n={r['n']})", f"p = {r['wilcoxon_p']:.6f}", sig_text)
+
+st.image(
+    "outputs/figures/10_buffer_sensitivity.png",
+    caption="NDBI Wilcoxon p-value (log scale) at each buffer radius — as-extracted samples vs. the matched subsample present at all three radii.",
+    use_container_width=True,
+)
+
+st.markdown("---")
+
+# ============================================================
 # ROBUSTNESS SUMMARY CHART
 # ============================================================
-st.markdown("### Robustness Summary — All Four Tests, Both Windows")
+st.markdown("### Robustness Summary — All Four Core Tests, Both Windows")
 
 st.image(
     "outputs/figures/07_robustness_summary.png",
@@ -170,7 +269,10 @@ verdict_html = (
     'sign and significance across both windows is treated as the more trustworthy finding. '
     'A result that flips \u2014 in direction, significance, or both \u2014 is reported as evidence '
     'of methodological instability rather than silently resolved by preferring one window. '
-    'This comparison is the core honesty check of the entire analysis.'
+    'The summer-matched NDBI result is the one signal that clears significance here \u2014 and it '
+    'holds up against a matched control group (H4), a buffer-radius sweep, and Holm-Bonferroni '
+    'correction, while the multi-year trend shows it is concentrated in 2023\u20132025 rather than '
+    'sustained since sanction. This comparison is the core honesty check of the entire analysis.'
     '</p></div>'
 )
 st.markdown(verdict_html, unsafe_allow_html=True)

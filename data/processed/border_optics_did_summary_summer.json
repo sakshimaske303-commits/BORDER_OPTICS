@@ -1,0 +1,52 @@
+{
+  "did": [
+    {
+      "outcome": "ndbi",
+      "window": "summer",
+      "n_obs": 1880,
+      "n_treated": 220,
+      "n_control": 753,
+      "did_coef": 0.0377103996118765,
+      "did_se": 0.012233940085459805,
+      "did_p": 0.0020531036333698766,
+      "did_ci_lo": 0.01373231765535441,
+      "did_ci_hi": 0.06168848156839859,
+      "did_coef_nofe_hc3": 0.028727361432844722,
+      "did_p_nofe_hc3": 0.011611963479790426
+    },
+    {
+      "outcome": "lights",
+      "window": "summer",
+      "n_obs": 2008,
+      "n_treated": 251,
+      "n_control": 753,
+      "did_coef": -0.009706809282283674,
+      "did_se": 0.05079899188027789,
+      "did_p": 0.8484607896378228,
+      "did_ci_lo": -0.10927100381857098,
+      "did_ci_hi": 0.08985738525400362,
+      "did_coef_nofe_hc3": -0.009706809282288072,
+      "did_p_nofe_hc3": 0.851176969769093
+    }
+  ],
+  "baseline_balance": [
+    {
+      "outcome": "ndbi",
+      "window": "summer",
+      "baseline_treated_mean": -0.24614447107663692,
+      "baseline_control_mean": -0.18504914882095355,
+      "baseline_n_treated": 154,
+      "baseline_n_control": 753,
+      "baseline_balance_p": 1.3306694136533982e-16
+    },
+    {
+      "outcome": "lights",
+      "window": "summer",
+      "baseline_treated_mean": 0.4016834535601705,
+      "baseline_control_mean": 0.4178488091050764,
+      "baseline_n_treated": 251,
+      "baseline_n_control": 753,
+      "baseline_balance_p": 0.3264034894932494
+    }
+  ]
+}
