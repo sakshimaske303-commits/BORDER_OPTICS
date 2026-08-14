@@ -190,7 +190,7 @@ nav_items = [
     ("💡", "Night-Lights", "VIIRS radiance change findings"),
     ("📊", "Statistical Validation", "Wilcoxon tests, Spearman correlations, robustness"),
     ("📈", "Explore Trends", "Cross-state comparison, budget correlation"),
-    ("🗺️", "Interactive Maps", "Live village-level geospatial exploration"),
+    ("🗺️", "Interactive Maps & Plots", "Live village-level geospatial exploration plus the three headline charts"),
     ("📖", "Methodology & Limitations", "Full transparency on data and methods"),
 ]
 

@@ -64,7 +64,11 @@ Streamlit dashboard (app.py + 7 pages)
 - Explicitly tests **compositing-window sensitivity** (full-year vs. summer-matched) as its own robustness check, rather than trusting a single satellite comparison
 - Benchmarks treated-village change against a matched **non-VVP control group** of 753 villages in the same 14 districts, via a district-fixed-effects Difference-in-Differences model, to isolate a programme-attributable effect from the region's own trend
 - Extends the core 2021-vs-2025 comparison to a **three-point 2021/2023/2025 trend**, and tests the fixed 500m extraction buffer against 250m and 1km alternatives, so neither a single anomalous year nor a single buffer choice can be driving the result unnoticed
-- Presents all findings through a multi-page interactive Streamlit dashboard with live-recalculating statistical tests and embedded Folium interactive maps
+- Presents all findings through a multi-page interactive Streamlit dashboard with live-recalculating statistical tests, embedded Folium interactive maps, and Plotly interactive plots
+
+## 🗺️ Interactive Maps & Plots
+
+Every village-level map and the three headline statistical charts are hoverable and toggleable, not flat images — view them together on the dashboard's **[Interactive Maps & Plots page](https://borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app/Interactive_Maps)**, or via the map/plot viewers linked from the portfolio site.
 
 ## 🔬 Key Findings
 
@@ -87,7 +91,7 @@ BORDER_OPTICS/
 ├── app.py                          # Streamlit dashboard entry point (Home page)
 ├── pages/                          # Dashboard sub-pages (Study Design, Built-Up Change,
 │                                    #   Night-Lights, Statistical Validation, Explore Trends,
-│                                    #   Interactive Maps, Methodology & Limitations)
+│                                    #   Interactive Maps & Plots, Methodology & Limitations)
 ├── utils/
 │   ├── theme.py                    # Shared dashboard styling
 │   └── data.py                     # Shared data-loading functions
@@ -99,10 +103,12 @@ BORDER_OPTICS/
 │   │                                #   multi-year, buffer-radius sweep)
 │   ├── analysis/                   # Statistical testing, border-distance computation,
 │   │                                #   DiD model, multi-year trend, buffer sensitivity
-│   └── visualization/              # Static chart + interactive map generation
+│   └── visualization/              # Static chart + interactive map/plot generation
 ├── outputs/
 │   ├── figures/                    # Static PNG charts
-│   └── interactive_maps/maps/      # Folium interactive HTML maps
+│   └── interactive_maps/
+│       ├── maps/                   # Folium interactive HTML maps
+│       └── plots/                  # Plotly interactive HTML charts
 ├── BO_Project_Report.md
 ├── BO_Research_Paper.md
 ├── BO_Development_Log.md
