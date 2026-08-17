@@ -15,13 +15,13 @@ st.markdown("---")
 # ============================================================
 # DIAGRAM
 # ============================================================
-IMG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "outputs", "figures", "img1.png")
-col_a, col_b, col_c = st.columns([1, 4, 1])
+IMG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "outputs", "figures", "imgg1.png")
+col_a, col_b, col_c = st.columns([0.2, 5.9, 0.2])
 with col_b:
     if os.path.exists(IMG_PATH):
         st.image(IMG_PATH, use_container_width=True)
     else:
-        st.warning("Diagram not found at outputs/figures/img1.png")
+        st.warning("Diagram not found at outputs/figures/imgg1.png")
     st.markdown(
         "<p style='text-align:center;' class='caption-text'>🤖 AI-generated diagram — visual only</p>",
         unsafe_allow_html=True,
