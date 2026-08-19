@@ -1,27 +1,8 @@
 """
-BORDER OPTICS — Multi-Year (2021 / 2023 / 2025) Satellite Extraction
-
-Addresses Research Paper Section 7.4: the core analysis compares only two
-single years (2021, 2025), so a genuinely anomalous weather year at either
-end could be driving the result on its own. This script adds a third,
-independent time point — 2023, roughly midway between the two — for the
-same VVP-I treated villages already in border_optics_master_villages.csv,
-under the same two compositing windows already used everywhere else in this
-study, so a three-point trend line can be fit instead of a single two-point
-difference.
-
-This extracts a single NDBI/lights VALUE per village per year (not a
-before/after pair) — three snapshots instead of one difference — since a
-trend line needs individual time-point values, not another before/after
-delta.
-
-Run per window:
-    python extract_multiyear_satellite_data.py --window full_year
-        -> data/processed/border_optics_multiyear_fullyear.csv
-    python extract_multiyear_satellite_data.py --window summer
-        -> data/processed/border_optics_multiyear_summer.csv
-
-Requires the same Google Earth Engine setup as extract_satellite_data.py.
+Adds a third time point (2023, between the 2021/2025 before-after pair) so
+a three-point trend can be fit instead of a single two-year difference.
+Pulls one value per village per year, not a before/after delta.
+Run: python extract_multiyear_satellite_data.py --window full_year|summer
 """
 
 import argparse

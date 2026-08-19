@@ -1,46 +1,12 @@
 """
-BORDER OPTICS — Non-VVP Control Village Selection
-
-Builds the control group this study's own Research Paper names as its most
-significant open design gap (Section 7.3): a set of villages in the same
-districts as the VVP-I priority-village sample, but NOT sanctioned under
-VVP-I, so the before/after satellite comparison can become a genuine
-Difference-in-Differences design instead of an uncontrolled before/after.
-
-Design choices, stated explicitly rather than left implicit:
-  - Matched on DISTRICT, not exact distance-to-border, since district is the
-    coarsest unit at which "same regional trend" is defensible, and pinning
-    control villages to the treated sample's exact distance band would
-    (a) sharply shrink the candidate pool, and (b) risk selecting only the
-    handful of non-VVP villages immediately adjacent to a treated village,
-    which are the *most* likely to have been excluded from VVP-I for a
-    reason (e.g., smaller, less accessible) rather than by chance.
-  - Distance-to-border is still used as a soft filter: candidates are kept
-    only within [0, 1.5x the treated sample's max distance] for that
-    district, so the control group stays "border-region" villages of a
-    comparable character rather than pulling in distant lowland towns.
-  - Only OpenStreetMap-named place=village/hamlet nodes are considered —
-    the same category the original geocoding pipeline matches against, so
-    treated and control villages are drawn from the same source population.
-  - Any candidate whose name exactly matches (case-insensitive, whitespace-
-    normalized) a treated village's name in the same district is dropped —
-    this is almost certainly the same physical settlement showing up under
-    a second OSM node, not a genuinely distinct village.
-  - Per district, candidates are capped at 3x the treated village count
-    (or all available candidates if fewer), to keep the control group
-    large enough for a real DiD comparison without turning the downstream
-    Earth Engine extraction into an unbounded job.
-
-Requires network access to the public Overpass API (openstreetmap.org's
-query backend) — run this on your own machine, the same way
-geocode_villages.py already talks to Nominatim; this environment's sandbox
-cannot reach either service directly.
-
-Output: data/processed/border_optics_control_villages.csv — same schema as
-border_optics_master_villages_with_distance.csv (village, district, block,
-state, latitude, longitude, distance_to_border_km), plus a
-`village_source` column so it's always traceable which villages are the
-VVP-I treated sample and which are the added control group.
+Builds the non-VVP control group (same districts as the treated sample, not
+sanctioned under VVP-I) for a proper DiD design. Matched on district, soft
+filter at 1.5x treated max distance-to-border, capped at 3x treated count
+per district, name-matches against treated villages dropped as duplicates.
+Needs Overpass API access — run on my own machine, not over a limited
+connection.
+Output: data/processed/border_optics_control_villages.csv, same schema as
+the treated file plus a `village_source` column.
 """
 
 import time
@@ -64,12 +30,8 @@ REQUEST_PAUSE_S = 2.0  # be polite to the shared public Overpass instance
 # identifying header geocode_villages.py already sends to Nominatim
 HEADERS = {"User-Agent": "border_optics_research_sakshi_maske (contact: sakshimaske303@gmail.com)"}
 
-# The shared public Overpass instance rate-limits (429) and times out (504)
-# under load, especially on the larger bounding-box queries. Same retry
-# convention as geocode_villages.py, but with longer, escalating waits —
-# Nominatim's per-request rate limit clears in seconds, Overpass's shared-
-# instance load doesn't. MAX_RETRIES=5 with a 20/40/80/160s backoff caps a
-# single stuck district at ~5 minutes before moving on.
+# Overpass rate-limits (429) / times out (504) under load — 5 retries with
+# 20/40/80/160s backoff caps a stuck district at ~5 min before moving on.
 MAX_RETRIES = 5
 RETRY_WAIT_SECONDS = 20
 RETRYABLE_STATUS_CODES = {429, 502, 503, 504}
@@ -150,16 +112,11 @@ def distance_to_border_km(lat, lon, border_union_metric):
 
 def main():
     treated = pd.read_csv(TREATED_PATH)
-    # Control group is only drawn from the three core-sample states — Himachal
-    # Pradesh stays an illustrative-only case study throughout this project,
-    # per the scope decision already made in merge_geocoded.py.
+    # Core-sample states only — Himachal Pradesh stays illustrative-only (see merge_geocoded.py)
     treated = treated[treated["is_core_sample"] == True].copy()
     treated["village_norm"] = treated["village"].apply(normalize_name)
 
-    # Resume support: a district already saved in OUT_PATH from an earlier,
-    # partially-failed run is skipped rather than re-queried — this both
-    # saves time and avoids burning through the same rate limit again on
-    # districts that already succeeded.
+    # Resume support: skip districts already saved from an earlier run
     existing_rows = []
     completed_districts = set()
     try:
@@ -230,9 +187,7 @@ def main():
 
         all_control_rows.extend(kept)
 
-        # Checkpoint after every district, not just at the end — so a later
-        # district's failure (or the run being interrupted) never loses
-        # progress already made this run, on top of the resume support above.
+        # Checkpoint after every district so an interruption doesn't lose progress
         _save(all_control_rows)
         print(f"  checkpoint saved ({len(all_control_rows)} control villages so far)")
 

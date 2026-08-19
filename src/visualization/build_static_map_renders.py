@@ -1,14 +1,6 @@
 """
-BORDER OPTICS — Static Renders of the Interactive Maps
-
-The five Folium maps under outputs/interactive_maps/maps/ are interactive
-(pan, zoom, click-to-inspect) and depend on live tile servers (CartoDB,
-Esri) plus Leaflet loaded from a CDN — none of which are meaningfully
-capturable in a static PDF. This script produces a matplotlib scatter-plot
-counterpart of each one (villages plotted at their real lat/lon, colored by
-the same metric), purely for the combined print/offline PDF
-(build_maps_plots_pdf.py) — the live dashboard's Interactive Maps page
-remains the actual interactive version.
+Matplotlib scatter-plot counterparts of the five interactive Folium maps
+(which can't be captured in a static PDF) — for build_maps_plots_pdf.py.
 """
 
 import os

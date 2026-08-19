@@ -1,17 +1,7 @@
 """
-BORDER_OPTICS — cleanup script for two stale/duplicate artifacts found during
-the documentation audit. Run this yourself from inside the BORDER_OPTICS folder:
-
-    python cleanup_stale_files.py
-
-What it removes:
-  1. dashboard/  — an empty legacy folder (only contains an empty "pages"
-     subfolder, no files). The real dashboard lives at the project root
-     (app.py + pages/), so this leftover folder does nothing.
-  2. "border optics maps.pdf" — an older, stray duplicate of
-     BORDER_OPTICS_Maps_and_Plots.pdf, which is the file actually in use.
-
-The script only touches these two specific paths and prints what it did.
+Removes two stale leftovers: the empty dashboard/ folder (dashboard is
+actually app.py + pages/) and the old duplicate "border optics maps.pdf".
+Run: python cleanup_stale_files.py
 """
 
 import os

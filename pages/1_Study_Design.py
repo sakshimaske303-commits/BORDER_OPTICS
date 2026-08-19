@@ -151,14 +151,7 @@ st.markdown("---")
 
 st.markdown("### Methodology at a Glance")
 
-# ============================================================
-# PROOF-OF-WORK POPOVERS — tiny, pulsing "📸" buttons next to the
-# exact methodology step they back up. Click to reveal the screenshot
-# inline; nothing pushes the page layout around. Drop the 3 PNGs into
-# outputs/proof_screenshots/ (see filenames below) and these activate
-# automatically — until then each falls back to a quiet "not added yet"
-# note instead of breaking the page.
-# ============================================================
+# Proof-of-work popovers — pulsing button next to each methodology step, click to reveal screenshot
 st.markdown(f"""
 <style>
     div[data-testid="stPopover"] button {{

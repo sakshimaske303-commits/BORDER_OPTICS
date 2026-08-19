@@ -1,26 +1,8 @@
 """
-BORDER OPTICS — Buffer-Radius Sensitivity Extraction (250m, 1km)
-
-Addresses Research Paper Section 7.5: the 500m buffer radius used everywhere
-else in this study was a fixed choice, never tested against alternatives.
-This script re-runs the same NDBI/VIIRS before/after extraction at 250m and
-1km radii, so the reported result's stability to this specific choice can
-be checked directly — the same "don't just report the answer, test whether
-the method itself changes it" discipline this study's own compositing-
-window robustness check already applies.
-
-Scoped to the summer (season-matched) window only — the window carrying
-this study's significant NDBI finding, i.e. the one actually worth stress-
-testing here. The full-year window's own null/near-null result isn't the
-one buffer choice needs to defend.
-
-Run once per buffer radius:
-    python extract_buffer_sensitivity_data.py --buffer 250
-        -> data/processed/border_optics_buffer250_summer.csv
-    python extract_buffer_sensitivity_data.py --buffer 1000
-        -> data/processed/border_optics_buffer1000_summer.csv
-
-Requires the same Google Earth Engine setup as extract_satellite_data.py.
+Re-runs the summer-window NDBI/VIIRS extraction at 250m and 1km buffers to
+check the 500m radius used elsewhere isn't driving the result on its own.
+Run: python extract_buffer_sensitivity_data.py --buffer 250|1000
+Same EE setup as extract_satellite_data.py.
 """
 
 import argparse

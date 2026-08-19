@@ -38,15 +38,8 @@ fig.savefig("outputs/figures/01_ndbi_change_distribution.png", bbox_inches="tigh
 plt.close(fig)
 
 # --- Figure 2: State-level mean NDBI change vs sanctioned budget ---
-# NOTE: this must use the SUMMER-MATCHED window, not full-year. Section 4.4
-# of the Research Paper reports the budget-independence finding
-# (Arunachal +0.0284 vs Uttarakhand +0.0293, "nearly identical") using
-# summer-matched NDBI change restricted to states with valid summer
-# coverage — Sikkim has zero valid summer villages (see BO_Development_Log.md,
-# Entry 5) and is excluded from that comparison. Plotting full-year data
-# here previously showed a different, contradictory pattern (Arunachal
-# negative, Uttarakhand strongly positive, Sikkim included) that did not
-# match the text this figure sits next to.
+# Must use summer-matched window, not full-year — full-year gives a
+# contradictory pattern. Sikkim excluded (zero valid summer villages).
 budget_data = {
     "Arunachal Pradesh": {"projects": 2082, "budget_cr": 2749.74},
     "Uttarakhand":        {"projects": 200,  "budget_cr": 270.58},

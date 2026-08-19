@@ -1,12 +1,6 @@
 import streamlit as st
 
-# ============================================================
-# BORDER OPTICS — Watermelon & Mint Theme
-# (styling pattern matched to GREEN_ALIBI's utils/style.py —
-#  same palette as before, just restyled: flat cards instead of
-#  glass/blur, centered solid-color headers instead of gradient
-#  text, simpler buttons/hr/alerts. See Devlopment_Log.md.)
-# ============================================================
+# Watermelon & Mint theme — flat cards, solid-color headers, matches GREEN_ALIBI's style pattern
 PALETTE = {
     "bg_main": "#1C1C1C",
     "bg_card": "#262626",

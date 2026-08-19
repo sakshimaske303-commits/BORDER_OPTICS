@@ -1,17 +1,7 @@
 """
-BORDER OPTICS — Robustness Summary Chart
-
-The project's central finding is that results are compositing-window
-sensitive rather than confirmed — the Statistical Validation dashboard page
-and BO_Research_Paper.md discuss this explicitly, but until now there was no
-single figure showing all four tests' significance side by side across both
-windows. Every other figure shows one test/window at a time; this one is
-the "at a glance" summary the honesty-check narrative refers to.
-
-Produces a horizontal dot-and-line chart: one row per test, one point per
-compositing window, x-axis = p-value (log scale), with a dashed
-significance threshold at p = 0.05. A test whose two points fall on
-opposite sides of the line is the visual definition of "not robust."
+Figure 7 — horizontal dot-and-line chart, one row per test, one point per
+compositing window, p-value on a log x-axis with the p=0.05 line. Points on
+opposite sides of the line = not robust.
 """
 
 import pandas as pd

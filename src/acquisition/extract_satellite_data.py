@@ -1,48 +1,10 @@
 """
-BORDER OPTICS — Satellite Data Extraction (Google Earth Engine)
-
-For each geocoded village, buffers the point by 500m and extracts:
-  - NDBI (Normalized Difference Built-up Index) from Sentinel-2 SR Harmonized
-    (B11 SWIR1, B8 NIR), cloud-masked via the QA60 band
-  - Night-lights radiance from the VIIRS DNB monthly composite
-    (NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG, 'avg_rad' band)
-
-Run twice — once per compositing window — to reproduce the two output files
-this pipeline's downstream scripts (analyze_results.py, check_gee_results.py)
-expect:
-
-    python extract_satellite_data.py --window full_year
-        -> data/processed/border_optics_village_results.csv
-    python extract_satellite_data.py --window summer
-        -> data/processed/border_optics_village_results_summer.csv
-
-Both windows compare a 2021 baseline ("before") against a 2025 ("after")
-period:
-  - full_year window: Jan 1 - Dec 31 of each year
-  - summer window:    Jun 1 - Sep 30 of each year (season-matched, avoids the
-                       snow-cover confound the full-year window is subject to
-                       at this elevation — see BO_Development_Log.md, Entry 5)
-
-A village with zero cloud-free images in a given period is written as a null
-value rather than defaulted to zero or dropped — the per-period image count
-is kept as its own column specifically so a null (or a low-confidence
-near-zero count) can be told apart from a genuine, well-supported reading.
-This is what surfaced Sikkim's complete data loss in the summer window
-(monsoon cloud cover — see BO_Development_Log.md, Entry 5).
-
-Requires a Google Earth Engine account with API access enabled
-(https://code.earthengine.google.com/). On first run this will open a
-browser window for authentication (ee.Authenticate()); after that,
-credentials are cached locally and ee.Initialize() alone is sufficient.
-
-NOTE ON REPRODUCTION: the original pipeline uploaded the merged village list
-as an Earth Engine Table asset and iterated over it there (see
-BO_Development_Log.md, Entry 4 — this is also where the buffered-Feature-vs-
-Geometry bug documented below was first hit). This script is functionally
-identical but reads village coordinates directly from
-`border_optics_master_villages.csv` and builds each buffer client-side with
-`ee.Geometry.Point(...).buffer(500)`, so reproducing results doesn't depend
-on any account-specific Earth Engine asset ID.
+Buffers each village point 500m, pulls NDBI (Sentinel-2 B11/B8, QA60 cloud
+mask) and VIIRS night-lights radiance for full_year and summer windows.
+Null (not zero) when a period has zero cloud-free images — that's what
+caught Sikkim's summer-window data loss to monsoon cloud cover.
+Run: python extract_satellite_data.py --window full_year|summer
+Needs an EE account; first run opens a browser auth window.
 """
 
 import argparse
@@ -112,11 +74,7 @@ def ndbi_for_period(buffered_geom, start, end):
     composite = collection.median()
     ndbi_image = composite.normalizedDifference(["B11", "B8"]).rename("NDBI")
 
-    # NOTE: `buffered_geom` must already be an ee.Geometry, not an ee.Feature —
-    # reduceRegion's `geometry` argument requires a Geometry specifically.
-    # Buffering an ee.Feature returns another Feature, so the original
-    # pipeline had to call `.geometry()` on it explicitly before this step
-    # (see BO_Development_Log.md, Entry 4).
+    # reduceRegion needs an ee.Geometry, not ee.Feature — call .geometry() first if buffering a Feature
     stats = ndbi_image.reduceRegion(
         reducer=ee.Reducer.mean(),
         geometry=buffered_geom,

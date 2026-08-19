@@ -1,23 +1,8 @@
 """
-BORDER OPTICS — Satellite Data Extraction for the Non-VVP Control Group
-
-Identical extraction logic to extract_satellite_data.py (same buffer radius,
-same NDBI/VIIRS definitions, same cloud-masking, same two compositing
-windows, same 2021-vs-2025 before/after structure) but run against
-data/processed/border_optics_control_villages.csv — the non-VVP control
-group built by select_control_villages.py — instead of the VVP-I treated
-sample. Kept as a separate script rather than a flag on the original so the
-historically-run treated-sample extraction stays exactly reproducible as
-documented in BO_Development_Log.md, Entry 4.
-
-Run twice, same as the original:
-    python extract_control_satellite_data.py --window full_year
-        -> data/processed/border_optics_control_results.csv
-    python extract_control_satellite_data.py --window summer
-        -> data/processed/border_optics_control_results_summer.csv
-
-Requires the same Google Earth Engine setup as extract_satellite_data.py.
-Run select_control_villages.py first to generate the input file.
+Same extraction logic as extract_satellite_data.py but for the non-VVP
+control group (select_control_villages.py builds the input CSV first).
+Kept separate so the original treated-sample run stays untouched.
+Run: python extract_control_satellite_data.py --window full_year|summer
 """
 
 import argparse
