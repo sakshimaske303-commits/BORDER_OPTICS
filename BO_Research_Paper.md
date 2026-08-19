@@ -237,7 +237,7 @@ As noted in Limitations, no by-name, dated, independently-confirmed completed VV
 
 ### 7.4 RTI Follow-Through for Himachal Pradesh and Ladakh
 
-Development_Log.md records a deliberate decision not to file Right to Information requests for the two states' missing village-wise annexures, given this study's timeline. Filing those requests remains open and would close the two largest documented coverage gaps with primary-source data rather than the illustrative/excluded treatment used here.
+BO_Development_Log.md records a deliberate decision not to file Right to Information requests for the two states' missing village-wise annexures, given this study's timeline. Filing those requests remains open and would close the two largest documented coverage gaps with primary-source data rather than the illustrative/excluded treatment used here.
 
 ### 7.5 A Genuine Pre-Treatment Panel for the Control Group
 
@@ -249,28 +249,28 @@ This study finds that India's Vibrant Villages Programme (VVP-I), sanctioned at 
 
 ## References
 
-Buzan, B., Wæver, O., & de Wilde, J. (1998). *Security: A New Framework for Analysis*. Lynne Rienner Publishers.
+Buzan, B., Wæver, O., & de Wilde, J. (1998). *Security: A New Framework for Analysis*. Lynne Rienner Publishers. [https://www.rienner.com/title/Security_A_New_Framework_for_Analysis](https://www.rienner.com/title/Security_A_New_Framework_for_Analysis)
 
-Zha, Y., Gao, J., & Ni, S. (2003). Use of normalized difference built-up index in automatically mapping urban areas from TM imagery. *International Journal of Remote Sensing*, 24(3), 583–594.
+Zha, Y., Gao, J., & Ni, S. (2003). Use of normalized difference built-up index in automatically mapping urban areas from TM imagery. *International Journal of Remote Sensing*, 24(3), 583–594. [https://doi.org/10.1080/01431160304987](https://doi.org/10.1080/01431160304987)
 
-Elvidge, C. D., Baugh, K., Zhizhin, M., Hsu, F. C., & Ghosh, T. (2017). VIIRS night-time lights. *International Journal of Remote Sensing*, 38(21), 5860–5879.
+Elvidge, C. D., Baugh, K., Zhizhin, M., Hsu, F. C., & Ghosh, T. (2017). VIIRS night-time lights. *International Journal of Remote Sensing*, 38(21), 5860–5879. [https://doi.org/10.1080/01431161.2017.1342050](https://doi.org/10.1080/01431161.2017.1342050)
 
-Wilcoxon, F. (1945). Individual comparisons by ranking methods. *Biometrics Bulletin*, 1(6), 80–83.
+Wilcoxon, F. (1945). Individual comparisons by ranking methods. *Biometrics Bulletin*, 1(6), 80–83. [https://doi.org/10.2307/3001968](https://doi.org/10.2307/3001968)
 
-Spearman, C. (1904). The proof and measurement of association between two things. *American Journal of Psychology*, 15(1), 72–101.
+Spearman, C. (1904). The proof and measurement of association between two things. *American Journal of Psychology*, 15(1), 72–101. [https://doi.org/10.2307/1412159](https://doi.org/10.2307/1412159)
 
-Angrist, J. D., & Pischke, J.-S. (2009). *Mostly Harmless Econometrics: An Empiricist's Companion*. Princeton University Press. [Difference-in-Differences specification, Section 3.7]
+Angrist, J. D., & Pischke, J.-S. (2009). *Mostly Harmless Econometrics: An Empiricist's Companion*. Princeton University Press. [Difference-in-Differences specification, Section 3.7] [https://press.princeton.edu/books/paperback/9780691120355/mostly-harmless-econometrics](https://press.princeton.edu/books/paperback/9780691120355/mostly-harmless-econometrics)
 
-Ministry of Home Affairs. (2023, August 9). *Rajya Sabha Unstarred Question No. 2321: Vibrant Villages Programme*.
+Ministry of Home Affairs. (2023, August 9). *Rajya Sabha Unstarred Question No. 2321: Vibrant Villages Programme*. [https://www.mha.gov.in/MHA1/Par2017/pdfs/par2023-pdfs/RS09082023/2321.pdf](https://www.mha.gov.in/MHA1/Par2017/pdfs/par2023-pdfs/RS09082023/2321.pdf)
 
-Ministry of Home Affairs. (2023). *Lok Sabha Question No. 2104: Vibrant Villages Programme*.
+Ministry of Home Affairs. (2023). *Lok Sabha Question No. 2104: Vibrant Villages Programme*. [https://sansad.in/ls/questions/questions-and-answers](https://sansad.in/ls/questions/questions-and-answers)
 
-Ministry of Home Affairs. (2025). *Rajya Sabha Question No. 401: Vibrant Villages Programme*.
+Ministry of Home Affairs. (2025). *Rajya Sabha Question No. 401: Vibrant Villages Programme*. [https://sansad.in/rs/questions/questions-and-answers](https://sansad.in/rs/questions/questions-and-answers)
 
-Ministry of Home Affairs. (2025). *Lok Sabha Question No. 4360: Vibrant Villages Programme*.
+Ministry of Home Affairs. (2025). *Lok Sabha Question No. 4360: Vibrant Villages Programme*. [https://sansad.in/ls/questions/questions-and-answers](https://sansad.in/ls/questions/questions-and-answers)
 
-Ministry of Home Affairs. (2026, February 3). *Lok Sabha Unstarred Question No. 508: Vibrant Villages Programme*. Reply by Shri Nityanand Rai, Minister of State, to a question by Shri Baijayant Panda.
+Ministry of Home Affairs. (2026, February 3). *Lok Sabha Unstarred Question No. 508: Vibrant Villages Programme*. Reply by Shri Nityanand Rai, Minister of State, to a question by Shri Baijayant Panda. [https://www.mha.gov.in/MHA1/Par2017/pdfs/par2026-pdfs/LS03022026/508.pdf](https://www.mha.gov.in/MHA1/Par2017/pdfs/par2026-pdfs/LS03022026/508.pdf)
 
-Natural Earth. (2024). *1:10m Cultural Vectors — Admin 0 Boundary Lines*. naturalearthdata.com
+Natural Earth. (2024). *1:10m Cultural Vectors — Admin 0 Boundary Lines*. [https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-boundary-lines/](https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-boundary-lines/)
 
-OpenStreetMap contributors. (2024). *Overpass API*. overpass-api.de [Non-VVP control-group village identification, Section 3.7]
+OpenStreetMap contributors. (2024). *Overpass API*. [https://overpass-api.de/](https://overpass-api.de/) [Non-VVP control-group village identification, Section 3.7]

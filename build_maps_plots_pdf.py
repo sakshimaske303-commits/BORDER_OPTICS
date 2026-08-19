@@ -26,7 +26,7 @@ TEXT = (240, 240, 235)
 
 # NOTE: mapping here MUST match Research_Paper.md's actual (renumbered)
 # figure sequence, not the source PNG filename numbers — the filenames were
-# assigned in generation order (Development_Log.md, Entries 5 and 7), which
+# assigned in generation order (BO_Development_Log.md, Entries 5 and 7), which
 # is not the same as the paper's reading-order sequence. Cross-checked
 # against every "Figure N." caption in Research_Paper.md before finalizing.
 ITEMS = [

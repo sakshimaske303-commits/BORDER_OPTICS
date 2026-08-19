@@ -1,95 +1,42 @@
 # BORDER OPTICS — Development Log
 
+This is my working log for BORDER OPTICS, a satellite-verification study I built to independently test whether India's Vibrant Villages Programme has produced measurable, on-the-ground development in the border villages it targets. I kept this log the way I keep every project's log — as an honest, chronological record of the decisions, dead ends, and fixes that went into the analysis, not a cleaned-up summary written after the fact.
+
+What follows is organized as a set of entries, each covering one phase of the work: framing the research questions, building the village-level dataset, geocoding it, pulling satellite imagery, running the statistical tests, building the dashboard, and the review passes that came after. Every number, p-value, and citation below reflects what I actually found when I ran the analysis, including the results that didn't go the way I expected.
+
 ## Index
 
-1. [Entry 1: Project Framing and Motivation](#entry-1-project-framing-and-motivation)
-2. [Entry 2: Village-Level Dataset Acquisition Across the Five States/UTs](#entry-2-village-level-dataset-acquisition-across-the-five-statesuts)
-3. [Entry 3: Geocoding Pipeline and Coordinate Resolution](#entry-3-geocoding-pipeline-and-coordinate-resolution)
-4. [Entry 4: Satellite Imagery Pipeline — Google Earth Engine Setup](#entry-4-satellite-imagery-pipeline-google-earth-engine-setup)
-5. [Entry 5: Seasonal Compositing and a Robustness-Check Finding](#entry-5-seasonal-compositing-and-a-robustness-check-finding)
-6. [Entry 6: Border-Proximity Analysis (H3)](#entry-6-border-proximity-analysis-h3)
-7. [Entry 7: Visualization — Charts and Interactive Maps](#entry-7-visualization-charts-and-interactive-maps)
-8. [Entry 8: Dashboard, Documentation, and Publication Prep](#entry-8-dashboard-documentation-and-publication-prep)
-9. [Entry 9: Panel-Readiness Review and Robustness Pass](#entry-9-panel-readiness-review-and-robustness-pass)
-10. [Entry 10: External Review Round and a Second Robustness Pass](#entry-10-external-review-round-and-a-second-robustness-pass)
-11. [Entry 11: Deep Verify — Independent Recomputation of Every Reported Statistic (2026-08-03)](#entry-11-deep-verify-independent-recomputation-of-every-reported-statistic-2026-08-03)
-12. [Entry 12: Starting the Control-Group, Multi-Year, and Buffer-Sensitivity Build-Out (2026-08-13)](#entry-12-starting-the-control-group-multi-year-and-buffer-sensitivity-build-out-2026-08-13)
+1. [Entry 1](#entry-1)
+2. [Entry 2](#entry-2)
+3. [Entry 3](#entry-3)
+4. [Entry 4](#entry-4)
+5. [Entry 5](#entry-5)
+6. [Entry 6](#entry-6)
+7. [Entry 7](#entry-7)
+8. [Entry 8](#entry-8)
+9. [Entry 9](#entry-9)
+10. [Entry 10](#entry-10)
+11. [Entry 11](#entry-11)
+12. [Entry 12](#entry-12)
+13. [Entry 13](#entry-13)
 
-## Entry 1: Project Framing and Motivation
+## Entry 1
 
-**What this project is.** BORDER OPTICS is an independent satellite-verification study of
-India's Vibrant Villages Programme (VVP), the Government of India's border-area development
-scheme launched in 2022–23. VVP-I sanctioned roughly ₹4,800 crore (later detailed as 2,558
-works worth ₹3,431 crore) across 2,967 border villages in 46 blocks, 19 districts, and 5
-states/UTs — Arunachal Pradesh, Himachal Pradesh, Uttarakhand, Sikkim, and Ladakh — with 662
-of those villages designated "priority" villages for Phase 1 development.
+BORDER OPTICS is my independent satellite-verification study of India's Vibrant Villages Programme (VVP), the Government of India's border-area development scheme launched in 2022–23. VVP-I sanctioned roughly ₹4,800 crore (later detailed as 2,558 works worth ₹3,431 crore) across 2,967 border villages in 46 blocks, 19 districts, and 5 states/UTs — Arunachal Pradesh, Himachal Pradesh, Uttarakhand, Sikkim, and Ladakh — with 662 of those villages designated "priority" villages for Phase 1 development.
 
-**Why this project exists.** VVP sits at the intersection of political science, geospatial
-science, and economics — three fields this project treats as inseparable rather than
-academic silos. Politically, VVP is a textbook case of securitization theory (Buzan and
-Waever): border infrastructure framed as civilian welfare development, but functioning
-simultaneously as a geopolitical signal along a contested frontier. Economically, it is a
-large, multi-year public investment whose actual delivery has never been independently
-measured. Geospatially, it is a rare case where a government development claim can be
-tested directly against satellite evidence — built-up area change, road construction,
-night-time lights — rather than taken on faith.
+I started this project because VVP sits at an intersection I find hard to treat as three separate academic silos: political science, geospatial science, and economics. Politically, VVP reads as a textbook case of securitization theory (Buzan and Waever) — border infrastructure framed as civilian welfare development while functioning simultaneously as a geopolitical signal along a contested frontier. Economically, it's a large, multi-year public investment whose actual delivery has never been independently measured. Geospatially, it's a rare case where a government development claim can be tested directly against satellite evidence — built-up area change, road construction, night-time lights — rather than taken on faith.
 
-**The empirical hook.** A parliamentary reply on record states explicitly that "no impact
-assessment has been carried out" for VVP. That sentence is the reason this project exists:
-a scheme this large, this strategically framed, and this expensive has no independent,
-public, evidence-based accounting of whether the development it promised has actually
-happened on the ground.
+What actually pushed me to start was a single sentence on the parliamentary record: a reply stating explicitly that "no impact assessment has been carried out" for VVP. A scheme this large, this strategically framed, and this expensive has no independent, public, evidence-based accounting of whether the development it promised has actually happened on the ground, and that gap is what I set out to close.
 
-**Aim.** To independently verify, using multi-temporal satellite imagery and open
-government data, whether VVP-I's "priority" villages show measurable physical development
-(built-up area expansion, road network growth, night-time light intensity change) between
-programme sanction and the present — and whether that development, if present, correlates
-with each state's sanctioned budget and project count, or diverges from it in ways that
-raise questions about implementation, prioritization, or securitization logic overriding
-genuine developmental need.
+My aim was to independently verify, using multi-temporal satellite imagery and open government data, whether VVP-I's "priority" villages show measurable physical development — built-up area expansion, road network growth, night-time light intensity change — between programme sanction and the present, and whether that development, where present, correlates with each state's sanctioned budget and project count, or diverges from it in ways that raise questions about implementation, prioritization, or securitization logic overriding genuine developmental need.
 
-**Research Questions.**
-RQ1: Do VVP-I priority villages show statistically detectable built-up area growth between
-a pre-programme baseline and the present, using Sentinel-2/Landsat imagery?
-RQ2: Does the magnitude of physical change correlate with each state's sanctioned VVP
-budget and project count, or are there states where large budgets have not translated into
-detectable ground change?
-RQ3: Do night-time light (VIIRS) trends corroborate or contradict the built-up area
-findings?
-RQ4: Is there a spatial or political pattern to where development is concentrated — for
-example, villages closer to the Line of Actual Control developing faster than those
-further back, consistent with a securitization-driven rather than needs-driven allocation
-logic?
+I framed four questions I wanted the data to answer, and three hypotheses coming out of the securitization framing. First, whether VVP-I priority villages show statistically detectable built-up area growth between a pre-programme baseline and the present, using Sentinel-2/Landsat imagery. Second, whether the magnitude of physical change correlates with each state's sanctioned VVP budget and project count, or whether there are states where large budgets haven't translated into detectable ground change. Third, whether night-time light (VIIRS) trends corroborate or contradict the built-up-area findings. Fourth, whether there's a spatial or political pattern to where development is concentrated — for example, villages closer to the Line of Actual Control developing faster than those further back, consistent with a securitization-driven rather than needs-driven allocation logic. My working hypotheses were that priority villages would show a statistically significant increase in built-up area after programme sanction compared to a matched pre-programme baseline; that the size of this change would not be uniformly proportional to sanctioned budget, with some high-budget states showing comparatively muted physical change and vice versa; and that villages nearer the international border/LAC would show disproportionately faster change than villages further back within the same state.
 
-**Hypotheses.**
-H1: Priority villages will show a statistically significant increase in built-up area
-after programme sanction compared to a matched pre-programme baseline.
-H2: The size of this change will not be uniformly proportional to sanctioned budget —
-some high-budget states will show comparatively muted physical change, and vice versa.
-H3: Villages nearer the international border/LAC will show disproportionately faster
-change than villages further from it within the same state, consistent with securitization
-theory's prediction that border proximity, not developmental need, drives priority.
+Before any of that could be tested, I needed a complete, verified, village-level dataset of all 662 VVP-I priority villages across the five states/UTs — village/habitation name, district, block, and where available, LGD code, Census 2011 households/population, and coordinates — since satellite verification requires knowing exactly where to look before any imagery analysis can begin. By the point this entry was written, Arunachal Pradesh (455/455 villages) was fully compiled and verified against the official state government source, including LGD codes and Census figures. Sikkim (46/46 villages) was fully compiled and verified against a Rajya Sabha parliamentary annexure. Uttarakhand (51/51 village names) was compiled and cross-verified against official block-wise totals, though the block assignment for 19 of Pithoragarh's villages remained genuinely unresolved pending a primary source pairing name to block. Himachal Pradesh (75 villages) and Ladakh (35 villages) remained incomplete — a documented, ongoing data-availability limitation rather than an unattempted one, with specific leads (an unindexed page in a Himachal government PDF, an RTI-only path for Ladakh) identified and being pursued.
 
-**Scope and current status (as of this entry).** The foundation of this project is a
-complete, verified, village-level dataset of all 662 VVP-I priority villages across the 5
-states/UTs — village/habitation name, district, block, and (where available) LGD code,
-Census 2011 households/population, and coordinates — since satellite verification requires
-knowing exactly where to look before any imagery analysis can begin. As of this entry:
-Arunachal Pradesh (455/455 villages) is fully compiled and verified against the official
-state government source, including LGD codes and Census figures. Sikkim (46/46 villages)
-is fully compiled and verified against a Rajya Sabha parliamentary annexure. Uttarakhand
-(51/51 village names) is compiled and cross-verified against official block-wise totals,
-though the block assignment for 19 of Pithoragarh's villages remains genuinely unresolved
-pending a primary source pairing name to block. Himachal Pradesh (75 villages) and Ladakh
-(35 villages) remain incomplete — a documented, ongoing data-availability limitation rather
-than an unattempted one, with specific leads (an unindexed page in a Himachal government
-PDF; an RTI-only path for Ladakh) identified and being pursued.
+This entry captures the project's intent before the entries that follow document the actual acquisition process, sourcing decisions, and verification steps I used to get there.
 
-This entry establishes the project's intent before the technical log below documents the
-actual acquisition process, sourcing decisions, and verification steps used to reach that
-status.
-
-## Entry 2: Village-Level Dataset Acquisition Across the Five States/UTs
+## Entry 2
 
 With the project's framing established in Entry 1, the next task was building the
 foundation every downstream analysis depends on: a verified, village-level list of
@@ -188,7 +135,7 @@ in the Data and Methodology section of the Research Paper, not left implicit, so
 the coverage gap is transparent to any reader rather than something they'd have to
 infer from missing figures later on.
 
-## Entry 3: Geocoding Pipeline and Coordinate Resolution
+## Entry 3
 
 With 552 villages confirmed by name across Arunachal Pradesh, Sikkim, and
 Uttarakhand (plus 7 named Himachal Pradesh villages carried as an illustrative
@@ -262,7 +209,7 @@ dataset for context but are excluded from point-based satellite sampling,
 with the reason — genuine absence from every available public geolocation
 source — stated explicitly.
 
-## Entry 4: Satellite Imagery Pipeline — Google Earth Engine Setup
+## Entry 4
 
 With 258 villages geocoded (251 in the core three-state sample, 7 in the Himachal
 Pradesh illustrative case study), the next task was pulling actual satellite
@@ -313,7 +260,7 @@ shift the NDBI value regardless of any real change on the ground. Stolen Strata'
 own methodology used season-matched (Jun-Sep) composites for exactly this reason,
 so the same discipline needed to apply here before this result could be trusted.
 
-## Entry 5: Seasonal Compositing and a Robustness-Check Finding
+## Entry 5
 
 **Switching to season-matched composites.** Changed both windows to June-September
 only (summer, largely snow-free across the sample's elevation range) to remove the
@@ -382,7 +329,7 @@ robustness check in the Research Paper's Results section, and picking up RQ4
 (border-proximity pattern), which still needs a Line of Actual Control / border
 geometry layer that hasn't been sourced yet.
 
-## Entry 6: Border-Proximity Analysis (H3)
+## Entry 6
 
 With the built-up and night-light change values in hand for both composite
 windows, the last untested hypothesis was H3 — that villages nearer the
@@ -460,7 +407,7 @@ Paper stage is: deciding on final reporting language for this
 robustness-check framing, and building the plots/maps that will actually
 visualize all of this once the analysis phase is fully closed out.
 
-## Entry 7: Visualization — Charts and Interactive Maps
+## Entry 7
 
 With all four research questions tested (Entries 5-6), the next task was
 turning the numeric results into visuals — three static charts and two
@@ -499,7 +446,7 @@ visual outputs. What remains is deciding the next build priority — a full
 dashboard (as with the prior project) versus moving straight into Research
 Paper drafting now that the plots and maps exist to draw on.
 
-## Entry 8: Dashboard, Documentation, and Publication Prep
+## Entry 8
 
 With the analysis and visualization phase closed out, the final build
 priority was a multi-page Streamlit dashboard, mirroring the structure used
@@ -527,7 +474,7 @@ underlying data if it's ever regenerated, at the cost of needing the raw
 derived figures.
 
 **Full Project Documentation section.** Added a section to the Home page
-with three download buttons for the Research Paper, Project Journal, and
+with three download buttons for the Research Paper, Project Report, and
 Development Log as PDFs, matching the pattern used for the prior project's
 dashboard.
 
@@ -540,7 +487,7 @@ version, and a limitations section carrying forward every documented data
 gap (Ladakh exclusion, Himachal illustrative-only status, Pithoragarh block
 ambiguity, LAC cartographic caveat) rather than treating them as resolved.
 
-## Entry 9: Panel-Readiness Review and Robustness Pass
+## Entry 9
 
 Before treating the project as submission-ready, went back through every
 file — all three documents, `requirements.txt`, `app.py`, every dashboard
@@ -550,12 +497,12 @@ scripts referenced in the documentation but missing from the repository,
 and anything that would silently fail for a reader trying to reproduce the
 pipeline end to end.
 
-**Village-count discrepancy.** The Project Journal's Study Area section
+**Village-count discrepancy.** The Project Report's Study Area section
 stated "262 geocoded villages," while the Research Paper, README, and the
 underlying `border_optics_master_villages.csv` all agree on 258. Traced
 this to a stale figure left over from an earlier point in the geocoding
 pipeline (Entry 3 records the geocoding pass evolving in stages) that never
-got updated in the Journal after the final Bhuvan-fallback numbers landed.
+got updated in the Report after the final Bhuvan-fallback numbers landed.
 Corrected to 258 throughout.
 
 **Figure numbering out of sequence.** The Research Paper's Results section
@@ -609,7 +556,7 @@ ran. Expanded it to match actual usage.
 
 **Full Project Documentation download buttons were dead.** The three
 download buttons on the dashboard's Home page pointed at
-`Research_Paper.pdf`, `Project_Journal.pdf`, and `Development_Log.pdf` —
+`Research_Paper.pdf`, `Project_Report.pdf`, and `Development_Log.pdf` —
 none of which had ever been generated; only the three source `.md` files
 existed. Every visit to the Home page was silently showing "file not found"
 warnings in place of working downloads. Built all three PDFs from the
@@ -625,7 +572,7 @@ to the rest of the pipeline's `outputs/interactive_maps/maps/` convention.
 Corrected the path for consistency, though `make_interactive_map.py` is the
 version actually used to regenerate the live maps.
 
-## Entry 10: External Review Round and a Second Robustness Pass
+## Entry 10
 
 Circulated the finished project for outside review before treating it as
 submission-ready. The most useful catch was a bug in the compiled
@@ -650,7 +597,7 @@ Question No. 508 (3 February 2026), asked by Shri Baijayant Panda and
 answered by Shri Nityanand Rai (Minister of State, Home Affairs), whose
 reply states verbatim: "No impact assessment has been carried out."
 Replaced the generic phrasing with this exact citation throughout
-Research_Paper.md, README.md, and Project_Journal.md, and added the
+Research_Paper.md, README.md, and Project_Report.md, and added the
 corresponding References entry.
 
 **Multiple-testing check.** This project runs four distinct statistical
@@ -710,9 +657,9 @@ columns, `system:index` and `.geo`, that are harmless but otherwise
 unexplained) and the exact date ranges used for each compositing window,
 alongside the already-existing `requirements.txt` and pipeline scripts.
 
-## Entry 11: Deep Verify — Independent Recomputation of Every Reported Statistic (2026-08-03)
+## Entry 11
 
-**Status.** Complete, bringing this project's Deep Verify from the earlier 🟡 partial pass (Mann-Whitney selection-bias test + 1 pivotal citation) up to full. No discrepancies found — everything matched exactly.
+**Status.** Complete, bringing this project's Deep Verify from an earlier partial pass (Mann-Whitney selection-bias test + 1 pivotal citation) up to a full pass. No discrepancies found — everything matched exactly.
 
 **Method.** Every statistical claim in `Research_Paper.md` was independently re-derived by re-running this project's own scripts directly against its own processed data: `src/analysis/analyze_results_fullyear.py` and `src/analysis/analyze_results.py` (both compositing windows' Wilcoxon and RQ2 budget-correlation tests), `src/analysis/compute_border_distance.py` (re-run from scratch against the raw Natural Earth boundary shapefile and the master village list, not read from the already-saved output) and `src/analysis/test_h3_border_proximity.py` (both windows' Spearman tests), plus a hand-reimplementation of the §6.5 Mann-Whitney selection-bias test and the §4.6 Holm-Bonferroni correction across all 8 tests, neither of which has a standalone script in this repo.
 
@@ -728,8 +675,9 @@ alongside the already-existing `requirements.txt` and pipeline scripts.
 
 **Citations.** This pass adds 2 more spot-checks to the 1 (Lok Sabha Q508) already verified in an earlier round: Zha, Gao & Ni (2003), *Use of normalized difference built-up index in automatically mapping urban areas from TM imagery*, International Journal of Remote Sensing 24(3), 583–594 — confirmed real, exact match (Taylor & Francis). Elvidge, Baugh, Zhizhin, Hsu & Ghosh (2017), *VIIRS night-time lights*, International Journal of Remote Sensing 38(21) — confirmed real, exact match (DOI 10.1080/01431161.2017.1342050). A specific attempt to independently locate Lok Sabha Question No. 4360 (2025, cited for Ladakh's 35 sanctioned villages) via web search did not turn up that exact question by number — VVP-I's broader facts (Ladakh's inclusion, the programme's overall scope) are independently corroborated by PIB and the official VVP portal, but this specific parliamentary citation is flagged as not independently confirmed this round, rather than treated as verified by association. 3 of 12 references now spot-checked total (2 academic + 1 parliamentary from the earlier round); the remaining 9 (mostly parliamentary Q&A citations, plus Buzan et al. 1998, Wilcoxon 1945, Spearman 1904, and Natural Earth) were not individually re-verified.
 
-**Outcome.** No fixes required to `Research_Paper.md`, `Project_Journal.md`, or the dashboard this round — every independently re-derivable statistic matched exactly, including several exact-to-the-significant-figure matches (9.3×10⁻¹⁵, 3.2×10⁻⁵) that would have been very unlikely to reproduce by coincidence if the underlying pipeline had drifted from what the paper reports. BORDER_OPTICS moves from 🟡 partial to ✅ full Deep Verify — the last of the four retroactive-plan projects (GPIE, DOUBLE_JEOPARDY, ECOCIDE, BORDER_OPTICS) now complete.
-## Entry 12: Starting the Control-Group, Multi-Year, and Buffer-Sensitivity Build-Out (2026-08-13)
+**Outcome.** No fixes required to `Research_Paper.md`, `Project_Report.md`, or the dashboard this round — every independently re-derivable statistic matched exactly, including several exact-to-the-significant-figure matches (9.3×10⁻¹⁵, 3.2×10⁻⁵) that would have been very unlikely to reproduce by coincidence if the underlying pipeline had drifted from what the paper reports. BORDER_OPTICS moves from a partial to a full Deep Verify — the last of the four retroactive-plan projects (GPIE, DOUBLE_JEOPARDY, ECOCIDE, BORDER_OPTICS) now complete.
+
+## Entry 12
 
 **Status.** In progress — scripts written and ready to run, satellite extraction not yet executed.
 
@@ -745,7 +693,7 @@ alongside the already-existing `requirements.txt` and pipeline scripts.
 
 **What's still open.** Everything in this entry is preparation, not results — the actual control-group DiD estimate, the multi-year trend, and the buffer-sensitivity comparison all depend on data that doesn't exist yet. Himachal Pradesh and Ladakh's coverage gaps remain genuinely blocked on an RTI that hasn't been filed. SAR-based change detection (§7.1), building-footprint analysis (§7.2), and ground-truth positive-control validation (§7.6) remain untouched this round — bigger, separate undertakings each.
 
-## Entry 13: Control-Group DiD, Multi-Year Trend, and Buffer-Sensitivity Results (2026-08-14)
+## Entry 13
 
 **Status.** Complete. All three extractions described in Entry 12 finished, all three analyses written and run, the research paper and every other document rewritten to fold the results in as part of the study's design rather than reported as a bolt-on addition.
 

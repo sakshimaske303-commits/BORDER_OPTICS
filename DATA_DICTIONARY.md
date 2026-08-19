@@ -11,7 +11,7 @@ One row per successfully geocoded village (258 rows).
 | `village_id` | int | Stable integer ID assigned during `merge_geocoded.py`; the join key used across every other processed file. |
 | `village` | string | Village/habitation name (from `Habitation` in the raw state lists). |
 | `district` | string | District name. |
-| `block` | string | Administrative block. May be blank/"unresolved" for the 19 Pithoragarh (Uttarakhand) villages documented in Development_Log.md, Entry 2. |
+| `block` | string | Administrative block. May be blank/"unresolved" for the 19 Pithoragarh (Uttarakhand) villages documented in BO_Development_Log.md, Entry 2. |
 | `state` | string | One of Arunachal Pradesh, Sikkim, Uttarakhand, Himachal Pradesh. |
 | `is_core_sample` | bool | `True` for Arunachal Pradesh / Sikkim / Uttarakhand (the 251-village core statistical sample); `False` for Himachal Pradesh (7-village illustrative case study, excluded from formal hypothesis tests). |
 | `latitude`, `longitude` | float | WGS84 (EPSG:4326) coordinates from the geocoding pipeline (Nominatim primary, Bhuvan fallback). |
@@ -30,7 +30,7 @@ One row per village per compositing window, produced by `extract_satellite_data.
 | `ndbi_change` | float | `ndbi_after - ndbi_before`. Added during analysis, not part of the raw GEE export. |
 | `lights_before`, `lights_after` | float | Mean VIIRS DNB monthly radiance (`avg_rad`) over the same buffer/periods. |
 | `lights_change` | float | `lights_after - lights_before`. |
-| `before_image_count`, `after_image_count` | int | Number of Sentinel-2 images that went into each period's composite — present only in the summer-matched files, since this is what surfaced Sikkim's complete data loss in that window (Development_Log.md, Entry 5). Not present in the full-year files; a null `ndbi_before`/`ndbi_after` is the only signal of a missing full-year composite. |
+| `before_image_count`, `after_image_count` | int | Number of Sentinel-2 images that went into each period's composite — present only in the summer-matched files, since this is what surfaced Sikkim's complete data loss in that window (BO_Development_Log.md, Entry 5). Not present in the full-year files; a null `ndbi_before`/`ndbi_after` is the only signal of a missing full-year composite. |
 | `system:index`, `.geo` | — | Google Earth Engine export artifacts (feature index and geometry, GeoJSON-encoded). Not used downstream; harmless to ignore. |
 
 ## Compositing windows, defined precisely

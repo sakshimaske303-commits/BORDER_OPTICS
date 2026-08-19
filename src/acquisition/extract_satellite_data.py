@@ -21,14 +21,14 @@ period:
   - full_year window: Jan 1 - Dec 31 of each year
   - summer window:    Jun 1 - Sep 30 of each year (season-matched, avoids the
                        snow-cover confound the full-year window is subject to
-                       at this elevation — see Development_Log.md, Entry 5)
+                       at this elevation — see BO_Development_Log.md, Entry 5)
 
 A village with zero cloud-free images in a given period is written as a null
 value rather than defaulted to zero or dropped — the per-period image count
 is kept as its own column specifically so a null (or a low-confidence
 near-zero count) can be told apart from a genuine, well-supported reading.
 This is what surfaced Sikkim's complete data loss in the summer window
-(monsoon cloud cover — see Development_Log.md, Entry 5).
+(monsoon cloud cover — see BO_Development_Log.md, Entry 5).
 
 Requires a Google Earth Engine account with API access enabled
 (https://code.earthengine.google.com/). On first run this will open a
@@ -37,7 +37,7 @@ credentials are cached locally and ee.Initialize() alone is sufficient.
 
 NOTE ON REPRODUCTION: the original pipeline uploaded the merged village list
 as an Earth Engine Table asset and iterated over it there (see
-Development_Log.md, Entry 4 — this is also where the buffered-Feature-vs-
+BO_Development_Log.md, Entry 4 — this is also where the buffered-Feature-vs-
 Geometry bug documented below was first hit). This script is functionally
 identical but reads village coordinates directly from
 `border_optics_master_villages.csv` and builds each buffer client-side with
@@ -116,7 +116,7 @@ def ndbi_for_period(buffered_geom, start, end):
     # reduceRegion's `geometry` argument requires a Geometry specifically.
     # Buffering an ee.Feature returns another Feature, so the original
     # pipeline had to call `.geometry()` on it explicitly before this step
-    # (see Development_Log.md, Entry 4).
+    # (see BO_Development_Log.md, Entry 4).
     stats = ndbi_image.reduceRegion(
         reducer=ee.Reducer.mean(),
         geometry=buffered_geom,

@@ -42,7 +42,7 @@ plt.close(fig)
 # of the Research Paper reports the budget-independence finding
 # (Arunachal +0.0284 vs Uttarakhand +0.0293, "nearly identical") using
 # summer-matched NDBI change restricted to states with valid summer
-# coverage — Sikkim has zero valid summer villages (see Development_Log.md,
+# coverage — Sikkim has zero valid summer villages (see BO_Development_Log.md,
 # Entry 5) and is excluded from that comparison. Plotting full-year data
 # here previously showed a different, contradictory pattern (Arunachal
 # negative, Uttarakhand strongly positive, Sikkim included) that did not

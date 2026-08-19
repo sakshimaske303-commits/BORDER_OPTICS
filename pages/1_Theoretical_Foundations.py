@@ -1,6 +1,6 @@
 import streamlit as st
 import os
-from utils.theme import inject_theme, PALETTE
+from utils.theme import inject_theme
 
 st.set_page_config(page_title="Mountain Geomorphology & Climatology — BORDER OPTICS", page_icon="🏔️", layout="wide")
 inject_theme()
@@ -23,19 +23,7 @@ with col_b:
     else:
         st.warning("Diagram not found at outputs/figures/imgg1.png")
     st.markdown(
-        "<p style='text-align:center;' class='caption-text'>🤖 AI-generated diagram — visual only</p>",
-        unsafe_allow_html=True,
-    )
-    st.markdown(
-        f"""
-        <div class="recon-card" style="margin-top:6px;">
-            <p style="color:{PALETTE['text_secondary']}; font-size:0.85rem; font-style:italic; margin:0; text-align:center;">
-                Generated with an AI image tool from a fully-specified brief — every process, label, and
-                physical relationship shown was authored by me from my own understanding of mountain
-                geomorphology; the AI was directed to illustrate it, not to originate it.
-            </p>
-        </div>
-        """,
+        "<p style='text-align:center;' class='caption-text'>AI was used to help generate this image, but the concept and every detail in it are mine.</p>",
         unsafe_allow_html=True,
     )
 

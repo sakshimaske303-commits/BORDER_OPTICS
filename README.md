@@ -1,21 +1,21 @@
-# 🛰️ BORDER OPTICS — Satellite Verification of India's Vibrant Villages Programme
+# BORDER OPTICS — Satellite Verification of India's Vibrant Villages Programme
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21759970.svg)](https://doi.org/10.5281/zenodo.21759970)
 
 **Testing whether India's ₹4,800 crore border-villages programme produced verifiable development — and whether a single satellite-composite choice can flip the answer.**
 
-## 🔗 Live Dashboard
+## Live Dashboard
 
 **[View the interactive dashboard →](https://borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app/)**
 
-## 📄 Project Documentation
+## Project Documentation
 
 | Document | What's Inside |
 |---|---|
-| ⚡ [`BO_Executive_Summary.pdf`](./BO_Executive_Summary.pdf) | One-page snapshot — question, method, headline finding, robustness checklist, and links (fastest overview) |
-| 📘 [`BO_Project_Report.md`](./BO_Project_Report.md) | Polished project summary — methodology, findings, conclusions (start here) |
-| 📗 [`BO_Research_Paper.md`](./BO_Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
-| 📙 [`BO_Development_Log.md`](./BO_Development_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
+| [`BO_Executive_Summary.pdf`](./BO_Executive_Summary.pdf) | One-page snapshot — question, method, headline finding, robustness checklist, and links (fastest overview) |
+| [`BO_Project_Report.md`](./BO_Project_Report.md) | Polished project summary — methodology, findings, conclusions (start here) |
+| [`BO_Research_Paper.md`](./BO_Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
+| [`BO_Development_Log.md`](./BO_Development_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
 
 ---
 
@@ -25,7 +25,7 @@ This project exists because, asked directly in Parliament whether VVP's impact h
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```text
 Government sources (VVP-I portals, Rajya Sabha/Lok Sabha Q&A) + OSM/Bhuvan
@@ -54,7 +54,7 @@ Streamlit dashboard (app.py + 7 pages)
 
 ---
 
-## 📊 What This Project Does
+## What This Project Does
 
 - Compiles a verified, village-level dataset of VVP-I priority villages across five Himalayan border states/UTs, cross-checked against officially reported aggregate counts
 - Geocodes 258 villages via a dual-source pipeline (OpenStreetMap Nominatim, with ISRO's Bhuvan Village Geocoding API as a Census-linked fallback)
@@ -66,11 +66,11 @@ Streamlit dashboard (app.py + 7 pages)
 - Extends the core 2021-vs-2025 comparison to a **three-point 2021/2023/2025 trend**, and tests the fixed 500m extraction buffer against 250m and 1km alternatives, so neither a single anomalous year nor a single buffer choice can be driving the result unnoticed
 - Presents all findings through a multi-page interactive Streamlit dashboard with live-recalculating statistical tests, embedded Folium interactive maps, and Plotly interactive plots
 
-## 🗺️ Interactive Maps & Plots
+## Interactive Maps & Plots
 
 Every village-level map and the three headline statistical charts are hoverable and toggleable, not flat images — view them together on the dashboard's **[Interactive Maps & Plots page](https://borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app/Interactive_Maps)**, or via the map/plot viewers linked from the portfolio site.
 
-## 🔬 Key Findings
+## Key Findings
 
 **Built-up area change is compositing-window sensitive, not confirmed.** A full-year composite shows no significant increase in NDBI (Wilcoxon signed-rank, p = 1.000); a season-matched (June–September) composite on the same villages shows a highly significant increase (p < 0.000001) — the opposite conclusion, traced to snow-cover contamination in the full-year window and monsoon cloud cover eliminating Sikkim's data entirely in the summer window. This instability, not either single result, is reported as the project's central finding.
 
@@ -84,7 +84,7 @@ Every village-level map and the three headline statistical charts are hoverable 
 
 Full methodology, including every hypothesis tested, the compositing-window robustness check, and the control-group/multi-year/buffer-radius checks applied throughout, is documented in the dashboard's Methodology & Limitations page and in `BO_Project_Report.md`.
 
-## 🗂️ Repository Structure
+## Repository Structure
 
 ```text
 BORDER_OPTICS/
@@ -115,11 +115,11 @@ BORDER_OPTICS/
 └── requirements.txt
 ```
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 Python · Pandas · GeoPandas · SciPy · Folium · Plotly · Streamlit · Google Earth Engine · OpenStreetMap Nominatim · ISRO Bhuvan API · Natural Earth
 
-## 📚 Data Sources
+## Data Sources
 
 | Dataset | Provider |
 |---|---|
@@ -131,7 +131,7 @@ Python · Pandas · GeoPandas · SciPy · Folium · Plotly · Streamlit · Googl
 | Border/LAC Geometry | Natural Earth 10m Admin-0 Boundary Lines |
 | Budget / Project Counts | Parliamentary record (Rajya Sabha / Lok Sabha Q&A) |
 
-## ▶️ Running Locally
+## Running Locally
 
 ```bash
 git clone https://github.com/sakshimaske303-commits/BORDER_OPTICS.git
@@ -140,13 +140,13 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## 👤 Author
+## Author
 
 **Sakshi D. Maske**
 
 Independent Geospatial Researcher
 
-## 📜 License
+## License
 
 This project is licensed under [CC BY 4.0](./LICENSE) — you are free to share and adapt this work for any purpose, including commercially, with attribution.
 

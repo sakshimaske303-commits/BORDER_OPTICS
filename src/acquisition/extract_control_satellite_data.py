@@ -8,7 +8,7 @@ data/processed/border_optics_control_villages.csv — the non-VVP control
 group built by select_control_villages.py — instead of the VVP-I treated
 sample. Kept as a separate script rather than a flag on the original so the
 historically-run treated-sample extraction stays exactly reproducible as
-documented in Development_Log.md, Entry 4.
+documented in BO_Development_Log.md, Entry 4.
 
 Run twice, same as the original:
     python extract_control_satellite_data.py --window full_year
