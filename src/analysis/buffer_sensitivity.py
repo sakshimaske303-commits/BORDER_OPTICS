@@ -1,10 +1,6 @@
-"""
-BORDER OPTICS — Buffer-radius comparison, 250m / 500m / 1km, summer window.
-Also re-runs on the matched subsample valid at all three radii (see note
-in matched_subsample_test() below — the 250m/1km runs picked up extra
-archive coverage the 500m run didn't have, so a raw comparison isn't fair).
-
-    python src/analysis/buffer_sensitivity.py
+"""Buffer-radius comparison (250m/500m/1km), summer window; also re-runs on
+the matched subsample valid at all three radii since archive coverage
+differs by radius.
 """
 
 import json

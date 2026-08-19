@@ -1,8 +1,5 @@
-"""
-BORDER OPTICS — H3 test: does proximity to the border/LAC correlate with
-measured built-up or night-light change? Tested against both the full-year
-and summer-matched composite results, per the robustness-check approach
-already used for RQ1.
+"""H3 test for whether proximity to the border/LAC correlates with measured
+built-up or night-light change.
 """
 
 import pandas as pd

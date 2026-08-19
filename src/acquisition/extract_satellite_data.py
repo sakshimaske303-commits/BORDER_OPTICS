@@ -1,10 +1,6 @@
-"""
-Buffers each village point 500m, pulls NDBI (Sentinel-2 B11/B8, QA60 cloud
-mask) and VIIRS night-lights radiance for full_year and summer windows.
-Null (not zero) when a period has zero cloud-free images — that's what
-caught Sikkim's summer-window data loss to monsoon cloud cover.
-Run: python extract_satellite_data.py --window full_year|summer
-Needs an EE account; first run opens a browser auth window.
+"""Buffers each village 500m, pulls NDBI (Sentinel-2) and VIIRS night-lights
+for full_year/summer windows. Null (not zero) when a period has no
+cloud-free images.
 """
 
 import argparse

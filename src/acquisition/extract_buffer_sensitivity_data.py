@@ -1,8 +1,5 @@
-"""
-Re-runs the summer-window NDBI/VIIRS extraction at 250m and 1km buffers to
-check the 500m radius used elsewhere isn't driving the result on its own.
-Run: python extract_buffer_sensitivity_data.py --buffer 250|1000
-Same EE setup as extract_satellite_data.py.
+"""Re-runs the summer-window NDBI/VIIRS extraction at 250m and 1km buffers
+to check the 500m radius isn't driving the result alone.
 """
 
 import argparse

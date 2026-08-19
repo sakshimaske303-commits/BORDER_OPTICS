@@ -1,13 +1,6 @@
-"""
-BORDER OPTICS — Distance from each village to the nearest India border segment
-(China/LAC and Nepal segments relevant to our 3-state sample).
-
-NOTE ON SOURCE: uses Natural Earth's Admin 0 Boundary Lines (land), a standard,
-citable, publicly available cartographic dataset. Where India's international
-boundary is disputed (notably the India-China sector, commonly referred to as
-the LAC), this dataset's rendering is a simplification, not a legal or official
-claim — this should be stated explicitly in the Research Paper's Methodology
-and Limitations sections.
+"""Distance from each village to the nearest India-China/Nepal border
+segment, using Natural Earth's Admin 0 boundary lines -- a simplification
+in the disputed LAC sector, not an official claim.
 """
 
 import geopandas as gpd

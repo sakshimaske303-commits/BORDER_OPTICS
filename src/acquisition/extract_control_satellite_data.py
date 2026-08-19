@@ -1,8 +1,5 @@
-"""
-Same extraction logic as extract_satellite_data.py but for the non-VVP
-control group (select_control_villages.py builds the input CSV first).
-Kept separate so the original treated-sample run stays untouched.
-Run: python extract_control_satellite_data.py --window full_year|summer
+"""Same extraction logic as extract_satellite_data.py, for the non-VVP
+control group; kept separate so the treated-sample run stays untouched.
 """
 
 import argparse

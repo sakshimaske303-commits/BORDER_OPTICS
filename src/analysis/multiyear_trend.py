@@ -1,9 +1,5 @@
-"""
-BORDER OPTICS — Per-village linear trend, 2021/2023/2025, core sample.
-Also checks the 2021-2023 and 2023-2025 sub-periods separately.
-
-    python src/analysis/multiyear_trend.py --window full_year
-    python src/analysis/multiyear_trend.py --window summer
+"""Per-village linear trend across 2021/2023/2025; also checks the two
+sub-periods separately.
 """
 
 import argparse

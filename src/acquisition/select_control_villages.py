@@ -1,12 +1,6 @@
-"""
-Builds the non-VVP control group (same districts as the treated sample, not
-sanctioned under VVP-I) for a proper DiD design. Matched on district, soft
-filter at 1.5x treated max distance-to-border, capped at 3x treated count
-per district, name-matches against treated villages dropped as duplicates.
-Needs Overpass API access — run on my own machine, not over a limited
-connection.
-Output: data/processed/border_optics_control_villages.csv, same schema as
-the treated file plus a `village_source` column.
+"""Builds the non-VVP control group for the DiD design: matched on district,
+soft filter at 1.5x treated max border-distance, capped at 3x treated
+count per district.
 """
 
 import time

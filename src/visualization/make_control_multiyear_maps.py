@@ -1,8 +1,5 @@
-"""
-BORDER OPTICS — 3 new interactive maps: control group, 2023-2025 recovery,
-and the 500m coverage gap. Same Folium/dark-theme pattern as make_interactive_map.py.
-
-    python src/visualization/make_control_multiyear_maps.py
+"""3 new interactive maps: control group, 2023-2025 recovery, and the 500m
+coverage gap.
 """
 
 import os

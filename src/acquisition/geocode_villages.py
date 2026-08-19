@@ -1,10 +1,7 @@
-"""
-BORDER OPTICS — Village Geocoding Pipeline (v4)
-- Skips "Forest Block" entries (not inhabited settlements — never in OSM)
-- Tries full query (with Block) first, falls back to a simplified query
-  (name + district + state only) if the full query finds nothing
-- Distinguishes genuine "not in OSM" from "network/timeout failure" so
-  re-runs only retry the failures, not confirmed non-matches
+"""Village geocoding pipeline v4: skips Forest Block entries, falls back to
+a simplified query if the full query finds nothing, and distinguishes
+real not-in-OSM misses from network failures so re-runs only retry the
+failures.
 """
 
 import os

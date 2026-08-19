@@ -1,9 +1,5 @@
-"""
-BORDER OPTICS — DiD: 251-village treated core sample vs. 753-village matched control.
-District fixed effects, SE clustered by district.
-
-    python src/analysis/did_model.py --window full_year
-    python src/analysis/did_model.py --window summer
+"""DiD model: 251-village treated sample vs. 753-village matched control,
+district fixed effects, SEs clustered by district.
 """
 
 import argparse

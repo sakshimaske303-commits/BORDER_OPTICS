@@ -1,15 +1,6 @@
-"""
-BORDER OPTICS — Village Geocoding Pipeline, Phase 2 (Bhuvan fallback)
-Retries villages still unmatched after the OSM/Nominatim pass, using
-Bhuvan's (ISRO) Village Geocoding API. Since this API does NOT filter
-by state/district (a same-named village in another state can be
-returned instead), every result is validated against the expected
-district before being accepted — this avoids silently contaminating
-the dataset with a wrong-state match.
-
-NOTE: Bhuvan tokens expire in ~1 day. If you see repeated failures,
-regenerate a token from https://bhuvan-app1.nrsc.gov.in/api/ and
-set it as the BHUVAN_TOKEN environment variable (see .env.example).
+"""Bhuvan (ISRO) geocoding fallback for villages OSM missed; validates each
+match against the expected district since Bhuvan doesn't filter by state.
+Token expires ~1 day (BHUVAN_TOKEN env var).
 """
 
 import os

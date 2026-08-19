@@ -1,8 +1,5 @@
-"""
-Adds a third time point (2023, between the 2021/2025 before-after pair) so
-a three-point trend can be fit instead of a single two-year difference.
-Pulls one value per village per year, not a before/after delta.
-Run: python extract_multiyear_satellite_data.py --window full_year|summer
+"""Adds a 2023 time point between the 2021/2025 pair so a three-point trend
+can be fit instead of a single before-after difference.
 """
 
 import argparse
