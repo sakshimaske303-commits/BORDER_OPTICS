@@ -1,6 +1,8 @@
+import os
 import streamlit as st
 from utils.theme import inject_theme, PALETTE
 from utils.data import load_data
+from utils.doc_viewer import render_doc_viewer
 
 st.set_page_config(page_title="BORDER OPTICS", page_icon="🛰️", layout="wide", initial_sidebar_state="expanded")
 inject_theme()
@@ -211,63 +213,32 @@ st.markdown("---")
 st.markdown("### Full Project Documentation")
 st.markdown(
     f"<p style='color:{PALETTE['text_secondary']}; font-weight:600;'>"
-    "Download the complete research paper, project journal, and development log.</p>",
+    "The complete research paper, project journal, and development log open directly below, no download needed.</p>",
     unsafe_allow_html=True,
 )
 
-doc0, doc1, doc2, doc3 = st.columns(4)
+_all_docs = [
+    {"label": "Executive Summary", "filename": "BO_Executive_Summary.pdf"},
+    {"label": "Research Paper", "filename": "BO_Research_Paper.pdf"},
+    {"label": "Project Report", "filename": "BO_Project_Report.pdf"},
+    {"label": "Development Log", "filename": "BO_Development_Log.pdf"},
+]
+_docs = [d for d in _all_docs if os.path.exists(os.path.join("static", d["filename"]))]
+_missing = [d for d in _all_docs if d not in _docs]
 
-with doc0:
-    try:
-        with open("BO_Executive_Summary.pdf", "rb") as f:
-            st.download_button(
-                label="Executive Summary (PDF)",
-                data=f,
-                file_name="BORDER_OPTICS_Executive_Summary.pdf",
-                mime="application/pdf",
-                use_container_width=True,
-            )
-    except FileNotFoundError:
-        st.warning("BO_Executive_Summary.pdf not found.")
-
-with doc1:
-    try:
-        with open("BO_Research_Paper.pdf", "rb") as f:
-            st.download_button(
-                label="Research Paper (PDF)",
-                data=f,
-                file_name="BORDER_OPTICS_Research_Paper.pdf",
-                mime="application/pdf",
-                use_container_width=True,
-            )
-    except FileNotFoundError:
-        st.warning("BO_Research_Paper.pdf not found.")
-
-with doc2:
-    try:
-        with open("BO_Project_Report.pdf", "rb") as f:
-            st.download_button(
-                label="Project Report (PDF)",
-                data=f,
-                file_name="BORDER_OPTICS_Project_Report.pdf",
-                mime="application/pdf",
-                use_container_width=True,
-            )
-    except FileNotFoundError:
-        st.warning("BO_Project_Report.pdf not found.")
-
-with doc3:
-    try:
-        with open("BO_Development_Log.pdf", "rb") as f:
-            st.download_button(
-                label="Development Log (PDF)",
-                data=f,
-                file_name="BORDER_OPTICS_Development_Log.pdf",
-                mime="application/pdf",
-                use_container_width=True,
-            )
-    except FileNotFoundError:
-        st.warning("BO_Development_Log.pdf not found.")
+if _docs:
+    render_doc_viewer(
+        docs=_docs,
+        colors={
+            "navy_dark": PALETTE["bg_main"],
+            "navy_med": PALETTE["bg_card"],
+            "magenta": PALETTE["accent_vintage"],
+            "teal": PALETTE["accent"],
+            "text_light": PALETTE["text_primary"],
+        },
+    )
+for d in _missing:
+    st.warning(f"{d['filename']} not found.")
 
 st.markdown(
     f"""
