@@ -70,7 +70,7 @@ st.caption(
     "Statistical Validation and Methodology & Limitations)."
 )
 
-st.markdown("##### 📄 Static exports (used in Research Paper)")
+st.markdown("##### Static exports (used in Research Paper)")
 st.image(
     "outputs/figures/04_state_mean_ndbi_change.png",
     caption="Static export: state-wise mean NDBI change",
@@ -87,7 +87,7 @@ st.markdown("---")
 # ============================================================
 # THREE-POINT MULTI-YEAR TREND (2021 / 2023 / 2025)
 # ============================================================
-st.markdown("### 📆 Multi-Year Trend — 2021 / 2023 / 2025")
+st.markdown("### Multi-Year Trend — 2021 / 2023 / 2025")
 st.markdown(
     "The core comparison above rests on two single years. This extends the same core sample "
     "to a third, independent time point (2023), so a trend line — not a two-point difference — "
@@ -207,7 +207,7 @@ st.markdown("---")
 # ============================================================
 # LIVE STATE DRILL-DOWN (ALL STATES, FOR EXPLORATION)
 # ============================================================
-st.markdown("### 🎛️ Live State Drill-Down")
+st.markdown("### Live State Drill-Down")
 
 all_valid = summer.dropna(subset=["ndbi_change"])
 selected_state = st.selectbox("Select a state", sorted(all_valid["state"].unique()))

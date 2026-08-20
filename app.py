@@ -33,7 +33,6 @@ st.markdown(
                 padding: 16px 32px;
                 box-shadow: 0 4px 20px rgba(255, 124, 172, 0.35);
             ">
-                <span style="font-size:2.1rem; line-height:1;">📦</span>
                 <div style="text-align:left;">
                     <div style="color:{PALETTE['accent']}; font-family:'Inter',sans-serif; font-weight:800; font-size:1.05rem; letter-spacing:0.4px; display:flex; align-items:center; gap:8px;">
                         <span>ARCHIVED &amp; CITABLE ON ZENODO</span>
@@ -79,7 +78,7 @@ st.markdown(
                 border: 1px solid rgba(255, 124, 172, 0.3); border-left: 4px solid {PALETTE['accent_vintage']};
                 border-radius: 10px;">
         <p style="color:{PALETTE['accent_vintage']}; text-transform:uppercase; letter-spacing:1.5px;
-                  font-weight:800; font-size:0.85rem; margin-bottom:8px;">⚡ Why This Matters</p>
+                  font-weight:800; font-size:0.85rem; margin-bottom:8px;">Why This Matters</p>
         <p style="color:{PALETTE['text_primary']}; font-size:1rem; line-height:1.6; margin:0;">
             Asked directly in Parliament whether the Vibrant Villages Programme's impact had ever been
             assessed, the Ministry of Home Affairs answered without qualification: "No impact assessment
@@ -144,7 +143,7 @@ m1, m2, m3 = st.columns(3)
 with m1:
     st.markdown(f"""
     <div class="recon-card" style="min-height: 190px;">
-        <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">🛰️ Satellite Verification</p>
+        <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Satellite Verification</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
             Sentinel-2 NDBI and VIIRS night-lights extracted at 258 treated village points
             plus 753 matched control villages, across paired 2021/2025 composites (plus
@@ -157,7 +156,7 @@ with m1:
 with m2:
     st.markdown(f"""
     <div class="recon-card" style="min-height: 190px;">
-        <p style="color: {PALETTE['lights']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">📊 Statistical Testing</p>
+        <p style="color: {PALETTE['lights']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Statistical Testing</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
             Wilcoxon signed-rank tests for before/after and multi-year trend change,
             Spearman correlations for budget (RQ2) and border-proximity (H3), and a
@@ -170,7 +169,7 @@ with m2:
 with m3:
     st.markdown(f"""
     <div class="recon-card" style="min-height: 190px;">
-        <p style="color: {PALETTE['border_down']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">🔥 Honest Validation</p>
+        <p style="color: {PALETTE['border_down']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Honest Validation</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
             Every data gap — Ladakh's unresolved villages, Himachal Pradesh's partial
             sample, Uttarakhand's block ambiguity — is disclosed transparently, not
@@ -184,22 +183,21 @@ st.markdown("---")
 st.markdown("### Explore the Evidence")
 
 nav_items = [
-    ("🏛️", "Study Design", "Research questions, hypotheses, sample overview"),
-    ("🏔️", "Theoretical Foundations", "Why Himalayan terrain and altitude drive measurement uncertainty"),
-    ("🏗️", "Built-Up Change", "NDBI findings across all villages"),
-    ("💡", "Night-Lights", "VIIRS radiance change findings"),
-    ("📊", "Statistical Validation", "Wilcoxon tests, Spearman correlations, robustness"),
-    ("📈", "Explore Trends", "Cross-state comparison, budget correlation"),
-    ("🗺️", "Interactive Maps & Plots", "Live village-level geospatial exploration plus the three headline charts"),
-    ("📖", "Methodology & Limitations", "Full transparency on data and methods"),
+    ("Study Design", "Research questions, hypotheses, sample overview"),
+    ("Theoretical Foundations", "Why Himalayan terrain and altitude drive measurement uncertainty"),
+    ("Built-Up Change", "NDBI findings across all villages"),
+    ("Night-Lights", "VIIRS radiance change findings"),
+    ("Statistical Validation", "Wilcoxon tests, Spearman correlations, robustness"),
+    ("Explore Trends", "Cross-state comparison, budget correlation"),
+    ("Interactive Maps & Plots", "Live village-level geospatial exploration plus the three headline charts"),
+    ("Methodology & Limitations", "Full transparency on data and methods"),
 ]
 
 cols = st.columns(3)
-for i, (icon, title, desc) in enumerate(nav_items):
+for i, (title, desc) in enumerate(nav_items):
     with cols[i % 3]:
         st.markdown(f"""
         <div class="recon-card" style="margin-bottom: 14px; min-height: 110px;">
-            <p style="font-size: 1.6rem; margin: 0 0 6px 0;">{icon}</p>
             <p style="color: {PALETTE['text_primary']}; font-weight: 800; font-size: 0.95rem; margin: 0 0 4px 0;">{title}</p>
             <p style="color: {PALETTE['text_secondary']}; font-size: 0.8rem; margin: 0; font-weight: 600;">{desc}</p>
         </div>
@@ -210,7 +208,7 @@ st.markdown("---")
 # ============================================================
 # FULL PROJECT DOCUMENTATION
 # ============================================================
-st.markdown("### 📄 Full Project Documentation")
+st.markdown("### Full Project Documentation")
 st.markdown(
     f"<p style='color:{PALETTE['text_secondary']}; font-weight:600;'>"
     "Download the complete research paper, project journal, and development log.</p>",
@@ -223,7 +221,7 @@ with doc0:
     try:
         with open("BO_Executive_Summary.pdf", "rb") as f:
             st.download_button(
-                label="⚡ Executive Summary (PDF)",
+                label="Executive Summary (PDF)",
                 data=f,
                 file_name="BORDER_OPTICS_Executive_Summary.pdf",
                 mime="application/pdf",
@@ -236,7 +234,7 @@ with doc1:
     try:
         with open("BO_Research_Paper.pdf", "rb") as f:
             st.download_button(
-                label="📘 Research Paper (PDF)",
+                label="Research Paper (PDF)",
                 data=f,
                 file_name="BORDER_OPTICS_Research_Paper.pdf",
                 mime="application/pdf",
@@ -249,7 +247,7 @@ with doc2:
     try:
         with open("BO_Project_Report.pdf", "rb") as f:
             st.download_button(
-                label="📗 Project Report (PDF)",
+                label="Project Report (PDF)",
                 data=f,
                 file_name="BORDER_OPTICS_Project_Report.pdf",
                 mime="application/pdf",
@@ -262,7 +260,7 @@ with doc3:
     try:
         with open("BO_Development_Log.pdf", "rb") as f:
             st.download_button(
-                label="📙 Development Log (PDF)",
+                label="Development Log (PDF)",
                 data=f,
                 file_name="BORDER_OPTICS_Development_Log.pdf",
                 mime="application/pdf",
@@ -276,7 +274,7 @@ st.markdown(
     <div style="text-align:center; margin: 22px 0 6px 0;">
         <a href="https://github.com/sakshimaske303-commits/BORDER_OPTICS" target="_blank" style="text-decoration:none;">
             <span style="display:inline-block; background: linear-gradient(90deg, {PALETTE['accent']}, {PALETTE['accent_vintage']}); color:#1C1C1C; font-weight:800; font-size:0.95rem; padding:12px 28px; border-radius:8px;">
-                🔗 View Full Project on GitHub
+                View Full Project on GitHub
             </span>
         </a>
     </div>

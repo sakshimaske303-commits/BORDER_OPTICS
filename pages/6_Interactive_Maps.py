@@ -28,17 +28,17 @@ MAP_DIR = "outputs/interactive_maps/maps"
 PLOT_DIR = "outputs/interactive_maps/plots"
 
 MAP_OPTIONS = {
-    "🗺️ Built-Up Change — Full-Year Composite": (MAP_DIR, "village_ndbi_change_map_fullyear.html"),
-    "🗺️ Built-Up Change — Summer-Matched Composite": (MAP_DIR, "village_ndbi_change_map_summer.html"),
-    "🗺️ Night-Lights Change": (MAP_DIR, "village_lights_change_map.html"),
-    "🗺️ Border / LAC Proximity": (MAP_DIR, "village_border_distance_map.html"),
-    "🗺️ State Overview": (MAP_DIR, "village_state_overview_map.html"),
-    "🗺️ Treated vs. Non-VVP Control Group (H4)": (MAP_DIR, "village_treated_vs_control_map.html"),
-    "🗺️ 2023-to-2025 Recovery (Multi-Year Trend)": (MAP_DIR, "village_recovery_2023_2025_map.html"),
-    "🗺️ 500m Coverage Gap (Buffer-Sensitivity Diagnostic)": (MAP_DIR, "village_coverage_gap_map.html"),
-    "📈 Control-Group DiD Effect": (PLOT_DIR, "control_group_did_effect.html"),
-    "📈 Multi-Year Trend (2021 / 2023 / 2025)": (PLOT_DIR, "multiyear_trend.html"),
-    "📊 Buffer-Radius Sensitivity": (PLOT_DIR, "buffer_sensitivity.html"),
+    "Built-Up Change — Full-Year Composite": (MAP_DIR, "village_ndbi_change_map_fullyear.html"),
+    "Built-Up Change — Summer-Matched Composite": (MAP_DIR, "village_ndbi_change_map_summer.html"),
+    "Night-Lights Change": (MAP_DIR, "village_lights_change_map.html"),
+    "Border / LAC Proximity": (MAP_DIR, "village_border_distance_map.html"),
+    "State Overview": (MAP_DIR, "village_state_overview_map.html"),
+    "Treated vs. Non-VVP Control Group (H4)": (MAP_DIR, "village_treated_vs_control_map.html"),
+    "2023-to-2025 Recovery (Multi-Year Trend)": (MAP_DIR, "village_recovery_2023_2025_map.html"),
+    "500m Coverage Gap (Buffer-Sensitivity Diagnostic)": (MAP_DIR, "village_coverage_gap_map.html"),
+    "Control-Group DiD Effect": (PLOT_DIR, "control_group_did_effect.html"),
+    "Multi-Year Trend (2021 / 2023 / 2025)": (PLOT_DIR, "multiyear_trend.html"),
+    "Buffer-Radius Sensitivity": (PLOT_DIR, "buffer_sensitivity.html"),
 }
 
 choice = st.selectbox("Select a map or chart", list(MAP_OPTIONS.keys()))

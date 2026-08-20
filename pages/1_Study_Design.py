@@ -36,7 +36,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown(f"""
     <div class="recon-card" style="border-left: 4px solid {PALETTE['border_up']}; min-height: 210px; margin-bottom: 16px;">
-        <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">🏗️ RQ1 / H1 — Built-Up Change</p>
+        <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ1 / H1 — Built-Up Change</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
             Has physical built-up area increased in VVP-I sanctioned villages between 2021
             and 2025? <b>H1:</b> Villages will show a statistically significant increase in
@@ -48,7 +48,7 @@ with col1:
 with col2:
     st.markdown(f"""
     <div class="recon-card" style="border-left: 4px solid {PALETTE['accent_vintage']}; min-height: 210px; margin-bottom: 16px;">
-        <p style="color: {PALETTE['accent_vintage']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">💰 RQ2 — Budget Correlation</p>
+        <p style="color: {PALETTE['accent_vintage']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ2 — Budget Correlation</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
             Does the magnitude of observed change correlate with state-wise VVP-I budget
             allocation? Treated as <b>exploratory only</b>, given just four states in the
@@ -62,7 +62,7 @@ col3, col4 = st.columns(2)
 with col3:
     st.markdown(f"""
     <div class="recon-card" style="border-left: 4px solid {PALETTE['lights']}; min-height: 210px;">
-        <p style="color: {PALETTE['lights']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">💡 RQ3 — Economic Activity</p>
+        <p style="color: {PALETTE['lights']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ3 — Economic Activity</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
             Has night-time light radiance (VIIRS) increased in parallel with built-up area
             growth, as a proxy for electrification and economic activity following programme
@@ -74,7 +74,7 @@ with col3:
 with col4:
     st.markdown(f"""
     <div class="recon-card" style="border-left: 4px solid {PALETTE['border_down']}; min-height: 210px;">
-        <p style="color: {PALETTE['border_down']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">📍 RQ4 / H3 — Border Proximity</p>
+        <p style="color: {PALETTE['border_down']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ4 / H3 — Border Proximity</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
             Does distance to the border/LAC predict the pace of change? <b>H3:</b> Villages
             closer to the border will show greater built-up and night-lights change,
@@ -85,7 +85,7 @@ with col4:
 
 st.markdown(f"""
 <div class="recon-card" style="border-left: 4px solid {PALETTE['accent']}; margin-top: 16px;">
-    <p style="color: {PALETTE['accent']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">🎯 RQ5 / H4 — VVP-I-Attributable Effect</p>
+    <p style="color: {PALETTE['accent']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ5 / H4 — VVP-I-Attributable Effect</p>
     <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
         Is any detected change attributable to VVP-I specifically, or does it merely reflect
         a regional trend shared by every village in these border districts regardless of
@@ -184,7 +184,7 @@ PROOF_DIR = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__f
 
 def proof_popover(filename, caption):
     path = _os.path.join(PROOF_DIR, filename)
-    with st.popover("📸"):
+    with st.popover("View"):
         if _os.path.exists(path):
             st.image(path, caption=caption, use_container_width=True)
         else:
