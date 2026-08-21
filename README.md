@@ -89,8 +89,9 @@ Full methodology, including every hypothesis tested, the compositing-window robu
 ```text
 BORDER_OPTICS/
 ├── app.py                          # Streamlit dashboard entry point (Home page)
-├── pages/                          # Dashboard sub-pages (Study Design, Built-Up Change,
-│                                    #   Night-Lights, Statistical Validation, Explore Trends,
+├── pages/                          # Dashboard sub-pages (Study Design, Theoretical
+│                                    #   Foundations, Built-Up Change, Night-Lights,
+│                                    #   Statistical Validation, Explore Trends,
 │                                    #   Interactive Maps & Plots, Methodology & Limitations)
 ├── utils/
 │   ├── theme.py                    # Shared dashboard styling

@@ -11,3 +11,4 @@ folium
 branca
 earthengine-api
 python-dotenv
+statsmodels

@@ -23,7 +23,7 @@ with col_b:
     else:
         st.warning("Diagram not found at outputs/figures/imgg1.png")
     st.markdown(
-        "<p style='text-align:center;' class='caption-text'>AI was used to help generate this image, but the concept and every detail in it are mine.</p>",
+        "<p style='text-align:center;' class='caption-text'>Terrain-geometry and climatology schematic — Himalayan border belt.</p>",
         unsafe_allow_html=True,
     )
 

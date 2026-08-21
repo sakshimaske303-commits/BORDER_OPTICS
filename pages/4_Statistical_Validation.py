@@ -59,7 +59,7 @@ def run_wilcoxon(df, before_col, after_col):
     paired = df.dropna(subset=[before_col, after_col])
     if len(paired) < 2:
         return None, None, len(paired)
-    w_stat, p_val = stats.wilcoxon(paired[before_col], paired[after_col])
+    w_stat, p_val = stats.wilcoxon(paired[after_col], paired[before_col], alternative="greater")
     return w_stat, p_val, len(paired)
 
 

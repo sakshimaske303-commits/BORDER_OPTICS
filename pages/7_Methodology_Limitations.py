@@ -151,8 +151,9 @@ with st.expander("**Buffer-Radius Comparison — An Archive-Timing Confound, Dia
 st.markdown("---")
 
 st.warning("""
-**Budget correlation (RQ2) is exploratory only** — with just four states in the sample,
-this should not be read as a confirmatory or causal result.
+**Budget correlation (RQ2) is exploratory only** — with just two states with sufficient
+valid data (Arunachal Pradesh and Uttarakhand), this should not be read as a confirmatory
+or causal result.
 """)
 
 st.error("""
