@@ -7,7 +7,7 @@ Independent Geospatial Researcher
 
 Ask the Government of India if things have worked out for them with their flagship scheme for the Border Villages, the honest answer (on parliamentary record) is No, it has never been verified anywhere. The Vibrant Villages Programme (VVP-I) has approved around ₹4,800 crore in support of 2,967 villages in five Himalayan border states/union territories including 662 villages marked ‘priority' for Phase-I of the programme since 2022–23. There is no impact assessment in any manner. This study utilizes two satellite proxies: Sentinel-2 built-up-index (NDBI) and VIIRS night-lights at 258 individually geocoded villages across three core states (Arunachal Pradesh, Sikkim, Uttarakhand), an illustrative sample of 7 villages in Himachal Pradesh, and compares them with a matched non-VVP control group of 753 villages across the same 14 districts. To determine if the answer depends on the way the set of 2021-2025 satellite data is synthesized, everything was calculated twice, with two defensible methods of compositing the same satellite record. It does. A full year composite doesn't show any significant difference in built-up area (Wilcoxon signed ranked, p = 1.000), and the same villages, but shifted to one year in the June-September window shows a difference (Wilcoxon signed ranked, p < 0.000001); the data is contaminated by snow and the summer monsoon cloud wipes out Sikkim's data. At that point, before any robustness testing is done, that is the headline. What holds up, then, is narrower than either raw number on its own. The summer-window signal holds (did coefficient = +0.0377, cluster-robust p = 0.0021), but the full-year gap does not (p = 0.215) indicating evidence for an effect specific to VVP-I villages and not the region. Sweep the extraction buffer from 500m down to 250m or out to 1km, and the result is stable for all distances at which samples were extracted (all p < 0.002). Extend the gap to 3 years (2021, 2023, 2025) and a new complication comes to light: 2021 is reported as the gap compared to 2025, but that's really a story of recovery between 2023 and 2025; you'll see it recover nicely from 2023 to 2025, and the reported gap isn't a steady growth. Night-lights, tested the same way the rest of the series were ran, do not show a meaningful trend through either the full year (p = 0.050) or just the summer months (p = 0.9999), making it the more believable of the two proxies, simply because it doesn't change with the seasons. Even the nature of the budget tells its own story, as the amount of sanction in Arunachal Pradesh is roughly ten times higher than Uttarakhand (2,749.74 cr INR vs 270.58 cr INR) but the change is almost similar (measured, +0.0284 vs +0.0293). No significant effect is produced for built-up change from border proximity (H3), though a much more unstable effect is produced for night-lights, strict to the full-year time period (ρ = 0.043–0.037, both not significant). None of this leads to a clear verdict — and that is not the verdict that VVP-I would like to report — although the one signal that does make it past every test thrown at it, and that is the beauty of the business: a control group, three years of data, and three buffer radii, that one signal clears.
 
-The new ideas include the Vibrant Villages Programme, border development, Securitization Theory, satellite verification, NDBI and VIIRS night-lights, robustness testing, remote sensing, difference-in-differences.
+**Keywords**: Vibrant Villages Programme, border development, securitization theory, satellite verification, NDBI, VIIRS night-lights, remote sensing, robustness testing, difference-in-differences.
 
 ---
 
@@ -27,13 +27,9 @@ By shifting the agenda from "ordinary" politics to securitisation, opportunities
 
 ### 2.2 The Vibrant Villages Programme: Policy Context and the Accountability Gap
 
-The Vibrant Villages Programme is firmly grounded in the policy context and the accountability gap.
-
 However, the paper trail in VVP-I's scope lies not altogether in one place in the parliamentary replies. The complete village-wise annexure has been provided in the Rajya Sabha Hansard (Question No. 2321, Ministry of Home Affairs dated 9 August 2023). The 75 priority villages of Himachal Pradesh have been confirmed in Lok Sabha Question No. 2104 (2023) and in Rajya Sabha Question No. 401 (2025) but there is no list of the villages at the name level. Ladakh's 35 sanctioned villages are officially confirmed as such in Lok Sabha Question No. 4360 (2025), but without measures published giving the names of the villages. And answering the question that comes to everyone's mind when reading this article — Lok Sabha Unstarred Question No. 508 (3 Feb 2026) — Shri Baijayant Panda asked whether VVP's effect has been assessed and the Ministry's reply was straightforward — "No impact assessment has been done". As in searching any of the governmental sources, there are none that present an independent, satellite-verified account of actual advances made over the predetermined scope. This study comes to fill that void.
 
 ### 2.3 Remote Sensing Approaches to Built-Up Area and Economic Activity Detection
-
-The objective of this part is to explore Remote Sensing techniques geared towards the detection of Built-up Area and Economy activity.
 
 Here two indices take the analytical weight, selected for various reasons. A widely-used proxy for built‐up surface extent in multi‐temporal comparison is the Normalized Difference Built‐up Index derived from the reflectance in the short‐wave infrared and near‐infrared bands (Zha, Gao, & Ni, 2003). The source of radiance as measured by the VIIRS Day/Night Band is somewhat related, but quite different: the amount of electrification and economic activity, and it has excellent dynamic range and resolution compared to the older DMSP-OLS (Elvidge, Baugh, Zhizhin, Hsu, & Ghosh, 2017). This study uses two indices that work well with each other (NDBI versus vegetation phenology and snow; VIIRS versus cloud cover and sensor saturation at low radiance). If either one disagrees with the other, it doesn't necessarily mean either is wrong — but where they agree, that carries more weight than either alone.
 
@@ -193,13 +189,9 @@ Ladakh's 35 sanctioned villages are fully excluded from village-level analysis, 
 
 ### 6.2 Border Geometry as Cartographic Approximation
 
-The geometry is approximated by the Polygon boundary.
-
 All distance to the border figures in this study are based on the cartographic boundary line used in Natural Earth which is a simplified version of a Line of Actual Control whose alignment is not agreed upon at an international level. These numbers take the place of authoritative numbers and should be read as a comparison instead.
 
 ### 6.3 Budget-Correlation Scope and Ecological Inference (RQ2)
-
-This is an example of budget-correlation scope and ecological inference (RQ2).
 
 RQ2: In only 2 states, valid data was provided, that is why it is represented descriptively and not confirmatively. Now, there is also a gap in thinking: the comparison is of a state level sanctioned budget and the sampled mean at the Village level; and the budget figure describes the spending of the state's entire VVP-I portfolio — not the Village this study happened to geocode. Don't use a like for like test, use suggestive.
 
@@ -224,8 +216,6 @@ The H4 comparison in Section 4.6 revealed that the extracted mean NDBI value for
 The reported 2021-vs-2025 summer NDBI expansion was figured in just one portion of the three-point extension in section 4.7, instead of being a sustained gain over the whole window, but a recovery from a previous 2021-vs-2023 NDBI loss was observed. This should be interpreted in conjunction with Section 4.7 (not as a ‘steady trend’ given that it is a comparison to 2025 made in a period when the rollout was not yet complete), but this is only an approximation looking ahead beyond 2021.
 
 ### 6.9 Archive-Timing Confound in the Buffer-Radius Comparison
-
-This is also the buffer/radius comparison procedure confound.
 
 In Section 4.8, the 250m and 1km buffer extractions ran on a later date than the original 500m extraction, and because of this — and the Sentinel-2 archive-backfill effect — complete data was available for 97 core-sample villages that were null at 500m (but were not null at 250m and 1km), which was diagnosed as a Sentinel-2 archive data back-fill effect and not as an error about buffer size. It is corrected by the matched-subsample comparison in that section, but the inherent asymmetry will not make the three buffer extractions exact replicas of the same archive state. Technically, for a complete "clean" re-run, all three radii would need to be reextracted on the same day.
 
