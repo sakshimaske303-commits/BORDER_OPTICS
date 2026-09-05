@@ -45,7 +45,7 @@ Statistical testing — Wilcoxon, Spearman, district-FE DiD, multi-year trend,
 buffer sensitivity (src/analysis/)
         │
         ▼
-Static figures + interactive maps (src/visualization/) ──► BO_Research_Paper.md / BO_Project_Report.md
+Static figures + interactive maps (src/visualization/) ──► BO_Research_Paper.md
         │
         ▼
 Streamlit dashboard (app.py + 7 pages)
@@ -81,7 +81,7 @@ Tested similarly for both windows, the VIIRS radiance results indicate no signif
 
 An arithmetical comparison of the mean measured built-up change in the two states shows Arunachal Pradesh (+0.0284) and Uttarakhand (+0.0293) landing almost identical — despite Arunachal Pradesh's sanctioned budget (₹2,749.74 crore) running roughly ten times Uttarakhand's (₹270.58 crore). The two states' measured change tracks each other far more closely than their budgets do, giving an intuitive picture of budget-independent implementation.
 
-The full methodological approach, including all of the hypotheses tested as well as the "robustness" check of the compositing window and the control group/multi-year/buffer-radius checks taken throughout, can be found on the Methodology & Limitations page of the dashboard and in `BO_Project_Report.md`.
+The full methodological approach, including all of the hypotheses tested as well as the "robustness" check of the compositing window and the control group/multi-year/buffer-radius checks taken throughout, can be found on the Methodology & Limitations page of the dashboard.
 
 ## Repository Structure
 
@@ -109,7 +109,6 @@ BORDER_OPTICS/
 │   └── interactive_maps/
 │       ├── maps/                   # Folium interactive HTML maps
 │       └── plots/                  # Plotly interactive HTML charts
-├── BO_Project_Report.md
 ├── BO_Research_Paper.md
 ├── BO_Development_Log.md
 └── requirements.txt
