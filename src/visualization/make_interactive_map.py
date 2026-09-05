@@ -224,14 +224,14 @@ def make_metric_map(df, metric_col, colors, caption, title, subtitle, out_path, 
 make_map(
     full_year,
     "BORDER OPTICS — NDBI Change (Full-Year Composite)",
-    "Built-up area change, 2021 vs 2025 (annual composite)",
+    "NDBI change (built-up-surface proxy), 2021 vs 2025 (annual composite)",
     "outputs/interactive_maps/maps/village_ndbi_change_map_fullyear.html",
 )
 
 make_map(
     summer,
     "BORDER OPTICS — NDBI Change (Summer-Matched Composite)",
-    "Built-up area change, 2021 vs 2025 (Jun–Sep composite, season-matched)",
+    "NDBI change (built-up-surface proxy), 2021 vs 2025 (Jun–Sep composite, season-matched)",
     "outputs/interactive_maps/maps/village_ndbi_change_map_summer.html",
 )
 

@@ -34,7 +34,7 @@ villages_metric = villages_gdf.to_crs(METRIC_CRS)
 india_segments_metric = india_segments.to_crs(METRIC_CRS)
 
 # Merge all India boundary segments into one geometry for nearest-distance search
-border_union = india_segments_metric.unary_union
+border_union = india_segments_metric.union_all()
 
 # --- Compute distance from each village to the nearest point on the border ---
 def distance_to_border_km(point):

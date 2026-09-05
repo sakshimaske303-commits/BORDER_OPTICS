@@ -123,8 +123,8 @@ with col_right:
         <p style="color:{PALETTE['accent']}; text-transform:uppercase; font-size:0.78rem;
                   letter-spacing:1.5px; font-weight:800; margin-bottom:12px;">Core Finding</p>
         <p style="color:{PALETTE['text_primary']}; font-size:0.95rem; line-height:1.7; margin:0; font-weight:500;">
-            Built-up area change across the sample was tested under two independent
-            compositing windows — full-year and summer-matched — to guard against
+            NDBI (a built-up-surface proxy) was tested across the sample under two
+            separate compositing windows — full-year and summer-matched — to guard against
             seasonal artifacts. Where the two windows agree, the result is reported with
             confidence; where they diverge, that instability is disclosed as a genuine
             finding rather than resolved by discarding one window. The summer-matched
