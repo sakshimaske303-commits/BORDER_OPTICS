@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Regenerates Research_Paper.pdf, Project_Journal.pdf, and Development_Log.pdf
-# from their source .md files — these three PDFs are what the dashboard's
-# "Full Project Documentation" download buttons on the Home page serve.
+# Regenerates BO_Executive_Summary.pdf, BO_Research_Paper.pdf, and
+# BO_Development_Log.pdf from their source .md files, and copies all three
+# into static/ — this is where the dashboard's "Full Project Documentation"
+# viewer on the Home page reads them from (see app.py / utils/doc_viewer.py).
 #
 # Requires pandoc + wkhtmltopdf (both open-source, freely installable).
 # Run from the repository root:
@@ -10,9 +11,11 @@
 set -euo pipefail
 export LANG=C.utf8 LC_ALL=C.utf8
 
-for doc in "Research_Paper:BORDER OPTICS — Research Paper" \
-           "Project_Journal:BORDER OPTICS — Project Journal" \
-           "Development_Log:BORDER OPTICS — Development Log"; do
+mkdir -p static
+
+for doc in "BO_Executive_Summary:BORDER OPTICS — Executive Summary" \
+           "BO_Research_Paper:BORDER OPTICS — Research Paper" \
+           "BO_Development_Log:BORDER OPTICS — Development Log"; do
     name="${doc%%:*}"
     title="${doc#*:}"
     echo "Building ${name}.pdf..."
@@ -21,6 +24,7 @@ for doc in "Research_Paper:BORDER OPTICS — Research Paper" \
         -V margin-top=20mm -V margin-bottom=20mm -V margin-left=20mm -V margin-right=20mm \
         --metadata title="${title}" \
         --toc
+    cp "${name}.pdf" "static/${name}.pdf"
 done
 
-echo "Done. Research_Paper.pdf, Project_Journal.pdf, and Development_Log.pdf are up to date."
+echo "Done. BO_Executive_Summary.pdf, BO_Research_Paper.pdf, and BO_Development_Log.pdf are up to date (root + static/)."

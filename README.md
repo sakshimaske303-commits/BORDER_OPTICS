@@ -12,16 +12,15 @@
 
 | Document | What's Inside |
 |---|---|
-| [`BO_Executive_Summary.pdf`](./BO_Executive_Summary.pdf) | One-page snapshot — question, method, headline finding, robustness checklist, and links (fastest overview) |
-| [`BO_Project_Report.md`](./BO_Project_Report.md) | Polished project summary — methodology, findings, conclusions (start here) |
+| [`BO_Executive_Summary.md`](./BO_Executive_Summary.md) | Project overview, question, method, headline finding, robustness checklist, and links (start here). Source for `BO_Executive_Summary.pdf`, the styled one-page PDF generated from it |
 | [`BO_Research_Paper.md`](./BO_Research_Paper.md) | Formal academic paper — literature review, statistical methodology, results, discussion |
 | [`BO_Development_Log.md`](./BO_Development_Log.md) | Full technical development log — every bug, debugging session, and methodology iteration |
 
 ---
 
-BORDER OPTICS is an independent satellite-verification framework that tests whether India's Vibrant Villages Programme (VVP-I) — a ₹4,800 crore border-area development scheme sanctioned across 2,967 villages in five Himalayan states/UTs — has produced measurable physical development on the ground. Rather than trusting a single satellite comparison, built-up area change (NDBI) and night-time light growth (VIIRS) are tested as two independent hypotheses, every result is run under two separate compositing windows (full-year and summer-matched) specifically to test whether the methodology choice itself changes the answer, and the significant result that survives is further checked against a matched non-VVP control group, a three-point multi-year trend, and a buffer-radius sensitivity sweep before being trusted.
+Established as an independent research project, BORDER OPTICS is a verification tool that assesses and measures the physical development on the ground of India's Vibrant Villages Programme (VVP-I), a Rs. 4,800 crore investment in border areas across five Himalayan states/UTs. Built-up area change (NDBI) and night-time light growth (VIIRS) are tested as two separate and distinct hypotheses – in order to determine if the result is due to the hypothesis rather than the data – and no result is handed over for trust without first being tested under two separate compositing windows (full-year and summer-matched) – specifically to determine if the answer changes depending on window choice – then a further test is performed on a matched non-VVP control sample, a multi-year three-point trend, and a buffer-radius sensitivity sweep across 250m, 500m, and 1km – before it is trusted.
 
-This project exists because, asked directly in Parliament whether VVP's impact had ever been assessed, the Ministry of Home Affairs answered without qualification: *"No impact assessment has been carried out"* (Lok Sabha Unstarred Question No. 508, 3 February 2026). Every hypothesis here is tested rigorously, and every finding — including where a result reverses between two equally defensible measurement choices — is reported honestly rather than resolved by citing whichever version looks cleanest.
+This project exists to fill that exact gap: responding to Parliament's direct enquiry into whether VVP's effect had ever been assessed, the Ministry of Home Affairs replied: *"No impact assessment has been carried out"* (Lok Sabha Unstarred Question No. 508, 3 February 2026). Each of the hypotheses presented here has been tested thoroughly, and any result that could be defended by one of two possible measurements is presented both ways — no claimed result is hidden in the "don't know/other" bucket.
 
 ---
 
@@ -56,33 +55,33 @@ Streamlit dashboard (app.py + 7 pages)
 
 ## What This Project Does
 
-- Compiles a verified, village-level dataset of VVP-I priority villages across five Himalayan border states/UTs, cross-checked against officially reported aggregate counts
-- Geocodes 258 villages via a dual-source pipeline (OpenStreetMap Nominatim, with ISRO's Bhuvan Village Geocoding API as a Census-linked fallback)
-- Independently tracks **built-up area change (NDBI)** and **night-time light growth (VIIRS)** across a 2021–2025 baseline — treating them as two separate hypotheses, not one combined assumption
-- Tests whether measured change correlates with each state's sanctioned VVP-I budget, or diverges from it
-- Tests whether proximity to the border/Line of Actual Control predicts the pace of development, consistent with securitization theory's prediction that border proximity — not developmental need — drives priority
-- Explicitly tests **compositing-window sensitivity** (full-year vs. summer-matched) as its own robustness check, rather than trusting a single satellite comparison
-- Benchmarks treated-village change against a matched **non-VVP control group** of 753 villages in the same 14 districts, via a district-fixed-effects Difference-in-Differences model, to isolate a programme-attributable effect from the region's own trend
-- Extends the core 2021-vs-2025 comparison to a **three-point 2021/2023/2025 trend**, and tests the fixed 500m extraction buffer against 250m and 1km alternatives, so neither a single anomalous year nor a single buffer choice can be driving the result unnoticed
-- Presents all findings through a multi-page interactive Streamlit dashboard with live-recalculating statistical tests, embedded Folium interactive maps, and Plotly interactive plots
+- Assists in collating a village-level extant data base of villages identified as VVP-I priority villages for five Himalayan border states/UTs and calibrates them with the aggregate numbers given by officials
+- Geocodes 258 villages using a dual source pipeline (OpenStreetMap Nominatim and ISRO's Bhuvan Village Geocoding API with Census linked fallback option)
+- Treats built-up area change (NDBI) and night-time light growth (VIIRS) as two hypotheses and not a combined assumption for a baseline of 2021-2025.
+- Examines if there is a relationship between actual change and the budget for VVP-I for each state, or if the actual changes departs from it
+- Tests if proximity to the border/Line of Actual Control is correlated to the pace of development, which is within the prediction of securitization theory of borders where proximity to the border – not developmental need – drives priority
+- Explicitly tests the robustness of "compositing-window sensitive" (full-year vs. summer matched) as its own robustness test, instead of relying on a single satellite comparison
+- To separate out a programme-attributable effect from the region's own trend, a change in the change that took place among treated villages was compared against a matched non-VVP control group of 753 villages, also in the 14 districts, using a difference in differences model with a district fixed-effect model.
+- Adds a three-point 2021-vs-2023-vs-2025 comparison to the core trend, and compares the fixed 500m trend extraction buffer with 250m and 1km buffers to see if the results of another extreme year or buffer size preference are skewing the results
+- Presents all information on a multi-page interactive Streamlit dashboard via live recalculating statistical tests, embedded Folium (interactive) maps and Plotly (interactive) plots
 
 ## Interactive Maps & Plots
 
-Every village-level map and the three headline statistical charts are hoverable and toggleable, not flat images — view them together on the dashboard's **[Interactive Maps & Plots page](https://borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app/Interactive_Maps)**, or via the map/plot viewers linked from the portfolio site.
+Each map and the three statistical charts at the head of the dashboard are not flat pictures but readable and interactive: hover them and toggle them either together as part of the dashboard's **[Interactive Maps & Plots page](https://borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app/Interactive_Maps)**, or on individual map/plot viewers provided by the portfolio site link.
 
 ## Key Findings
 
-**Built-up area change is compositing-window sensitive, not confirmed.** A full-year composite shows no significant increase in NDBI (Wilcoxon signed-rank, p = 1.000); a season-matched (June–September) composite on the same villages shows a highly significant increase (p < 0.000001) — the opposite conclusion, traced to snow-cover contamination in the full-year window and monsoon cloud cover eliminating Sikkim's data entirely in the summer window. This instability, not either single result, is reported as the project's central finding.
+Built-up area change is not confirmed, but sensitive to the size of the compositing window. A full-year composite does not show any significant change in NDBI (Wilcoxon signed-rank, p = 1.000); a composite of just the summer months (June–September) on the same villages shows a highly significant increase in NDBI instead (Wilcoxon signed-rank, p < 0.000001). The opposite conclusion is drawn, partly because the full-year window is snow-cover contaminated and partly because the summer window excludes data from Sikkim. Not either of these outcomes alone, but this instability, is reported as the project's focus.
 
-**The summer-matched result survives three further stress tests.** Against a matched 753-village non-VVP control group in the same districts, the summer-matched treated-vs-control gap is significant (district-fixed-effects DiD, p = 0.0021) while the full-year gap is not (p = 0.215) — the same window-sensitivity pattern, now shown to hold after controlling for the region's own trend. The result also holds at 250m and 1km buffer radii, not just the 500m radius used throughout (all p < 0.002 on a sample-matched comparison), and survives Holm-Bonferroni correction for multiple testing.
+Against a matched non-VVP control group of 753 villages across the same region, results from the summer-matched sample are statistically different (district-fixed-effects DiD, p = 0.0021), whereas those from the full-year sample are not (p = 0.215) — the same window-sensitivity pattern, now shown to hold after controlling for each region's own trend. This also holds at 250m and 1km buffer radii, so it isn't an artifact of the 500m radius used everywhere (all p < 0.002 on a sample-matched comparison), and it survives Holm-Bonferroni correction for multiple testing.
 
-**But the change is not a steady trend.** A three-point 2021/2023/2025 extension shows the reported increase is concentrated in a 2023-to-2025 recovery following an earlier 2021-to-2023 decline — the overall three-year trend is not itself statistically significant, so the two-point 2021-vs-2025 comparison should be read as a late-window effect, not sustained growth since programme sanction.
+But as a general trend the change is not consistent. The reported increase is also mostly in a recoverable sub-period (2023 to 2025) after an earlier down period (2021 to 2023): the latter three-year comparison is not statistically significant, therefore the two-point comparison (2021 to 2025) is to be interpreted as "a late-window effect" rather than sustained growth since the programme sanctioned.
 
-**Night-lights, the more temporally stable proxy, shows no confirmed increase.** Tested identically under both windows, VIIRS radiance shows no significant change either way (p = 0.050 full-year, p = 0.9999 summer-matched) — a consistent null that carries more weight than the window-sensitive NDBI result.
+Tested similarly for both windows, the VIIRS radiance results indicate no significant change either way (p = 0.050 full-year, p = 0.9999 summer-matched), a more consistent null result, given more weight than the window-sensitive NDBI result.
 
-**Budget scale does not appear to predict development scale.** Arunachal Pradesh's sanctioned budget (₹2,749.74 crore) is roughly ten times Uttarakhand's (₹270.58 crore), yet the two states' mean measured built-up change is nearly identical (+0.0284 vs. +0.0293) — descriptively consistent with budget-independent implementation.
+An arithmetical comparison of the mean measured built-up change in the two states shows Arunachal Pradesh (+0.0284) and Uttarakhand (+0.0293) landing almost identical — despite Arunachal Pradesh's sanctioned budget (₹2,749.74 crore) running roughly ten times Uttarakhand's (₹270.58 crore). The two states' measured change tracks each other far more closely than their budgets do, giving an intuitive picture of budget-independent implementation.
 
-Full methodology, including every hypothesis tested, the compositing-window robustness check, and the control-group/multi-year/buffer-radius checks applied throughout, is documented in the dashboard's Methodology & Limitations page and in `BO_Project_Report.md`.
+The full methodological approach, including all of the hypotheses tested as well as the "robustness" check of the compositing window and the control group/multi-year/buffer-radius checks taken throughout, can be found on the Methodology & Limitations page of the dashboard and in `BO_Project_Report.md`.
 
 ## Repository Structure
 

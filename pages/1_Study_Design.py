@@ -51,7 +51,7 @@ with col2:
         <p style="color: {PALETTE['accent_vintage']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ2 — Budget Correlation</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
             Does the magnitude of observed change correlate with state-wise VVP-I budget
-            allocation? Treated as <b>exploratory only</b>, given just four states in the
+            allocation? Treated as <b>exploratory only</b>, given just two states in the
             sample — a directional signal, not a confirmatory test.
         </p>
     </div>

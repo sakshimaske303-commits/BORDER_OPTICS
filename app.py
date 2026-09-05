@@ -220,7 +220,6 @@ st.markdown(
 _all_docs = [
     {"label": "Executive Summary", "filename": "BO_Executive_Summary.pdf"},
     {"label": "Research Paper", "filename": "BO_Research_Paper.pdf"},
-    {"label": "Project Report", "filename": "BO_Project_Report.pdf"},
     {"label": "Development Log", "filename": "BO_Development_Log.pdf"},
 ]
 _docs = [d for d in _all_docs if os.path.exists(os.path.join("static", d["filename"]))]

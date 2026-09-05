@@ -1,0 +1,13 @@
+state,village,district,block,ndbi_change,lights_change,distance_to_border_km,latitude,longitude,window
+Arunachal Pradesh,Ramu,Kurung Kumey,Damin,0.1309528736552053,-0.1448640393694815,33.63348546910175,28.1084035,93.4191096,summer-matched
+Arunachal Pradesh,Katuk,Kurung Kumey,Damin,0.1120762790932934,-0.1092809672113013,25.3272991102268,28.1189094,93.2501395,summer-matched
+Arunachal Pradesh,Nisuk,Kurung Kumey,Damin,0.1054523974101945,-0.1853329640349061,33.39233200993765,28.1081822,93.414929,summer-matched
+Uttarakhand,Mana,Chamoli,Joshimath,0.0862545929905281,0.1324677171889368,5.91320308936922,30.9671228,79.4109692,summer-matched
+Uttarakhand,Dharali,Uttarkashi,Bhatwari,0.0739678022277735,1.2696655947863733,27.437795246663185,31.0408468,78.7815312,summer-matched
+Uttarakhand,Sukki,Uttarkashi,Bhatwari,0.0718635269898794,0.3013618928115961,31.21526320016012,31.014,78.7108,summer-matched
+Himachal Pradesh,Chhitkul,Kinnaur,Unknown,0.2783710849700009,0.0365776779389304,24.79309399007801,31.3881,78.46219,summer-matched
+Himachal Pradesh,Pooh,Kinnaur,Unknown,0.0225678858104053,0.3309071260557104,8.298557572222235,31.76159,78.5839324,summer-matched
+Himachal Pradesh,Chango,Kinnaur,Unknown,0.0035902692924661,0.1052236567480495,8.322995007655162,31.9777573,78.5944015,summer-matched
+Sikkim,Tung,North,Chungthang,0.022501661276066,-0.0155908674034918,9.122853334504647,27.5475,88.6493,full-year (Sikkim has zero usable summer images)
+Sikkim,Chungthang,North,Chungthang,0.0133478463955841,0.6640476569799436,11.237658233187938,27.604236,88.6465196,full-year (Sikkim has zero usable summer images)
+Sikkim,Lachen,North,Lachen,0.0009007276739881,-0.5578320313777239,26.39530683921855,27.7305455,88.5469054,full-year (Sikkim has zero usable summer images)
