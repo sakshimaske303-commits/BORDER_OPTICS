@@ -21,7 +21,7 @@ _checks = [
     (PALETTE['accent'], "✓", "Dual Compositing-Window Test"),
     (PALETTE['accent'], "✓", "Two Independent Metrics (NDBI + VIIRS)"),
     (PALETTE['accent'], "✓", "Wilcoxon Signed-Rank Tests"),
-    (PALETTE['accent'], "✓", "Matched Non-VVP Control Group (753 villages, DiD)"),
+    (PALETTE['accent'], "✓", "Matched Non-VVP Control Group (735 villages, DiD)"),
     (PALETTE['accent'], "✓", "Three-Point Multi-Year Trend (2021/2023/2025)"),
     (PALETTE['accent'], "✓", "Buffer-Radius Sweep (250m / 500m / 1km)"),
     (PALETTE['accent'], "✓", "Cross-Checked Against Sanctioned Budget"),
@@ -157,7 +157,7 @@ st.markdown("### H4 — Control-Group Difference-in-Differences")
 st.markdown(
     "A treated-only before/after comparison can't tell VVP-I's own effect apart from a "
     "regional trend every village in these districts shares. This benchmarks the treated "
-    "core sample against 753 matched non-VVP villages in the same 14 districts — district "
+    "core sample against 735 matched non-VVP villages in the same 14 districts — district "
     "fixed effects, standard errors clustered by district."
 )
 
@@ -179,16 +179,43 @@ for col, window_key, window_label, border in [
     with col:
         st.markdown(card_html, unsafe_allow_html=True)
 
+st.markdown("")
+did_col3, did_col4 = st.columns(2)
+for col, window_key, window_label, border in [
+    (did_col3, "did_fullyear", "Full-Year", PALETTE["accent"]),
+    (did_col4, "did_summer", "Summer-Matched", PALETTE["border_up"]),
+]:
+    lights_r = next(r for r in expanded[window_key]["did"] if r["outcome"] == "lights")
+    sig_text = "Significant at α = 0.05" if lights_r["did_p"] < 0.05 else "Not significant at α = 0.05"
+    card_html = (
+        '<div class="recon-card" style="border-left: 4px solid ' + border + '; min-height: 160px;">'
+        + '<p style="color: ' + border + '; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">' + window_label + ' — Night-Lights DiD</p>'
+        + '<p style="color: ' + PALETTE["text_primary"] + '; font-size: 1.6rem; font-weight: 900; margin-bottom: 4px;">did = ' + f"{lights_r['did_coef']:+.4f}" + '</p>'
+        + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.85rem; margin-bottom: 4px;">p = ' + f"{lights_r['did_p']:.4f}" + ' · n = ' + str(lights_r['n_treated']) + ' treated / ' + str(lights_r['n_control']) + ' control</p>'
+        + '<p style="color: ' + border + '; font-size: 0.82rem; font-weight: 700; margin: 0;">' + sig_text + '</p>'
+        + '</div>'
+    )
+    with col:
+        st.markdown(card_html, unsafe_allow_html=True)
+st.caption(
+    "Night-lights' DiD gap is not an absolute rise in treated villages — their own before/after "
+    "night-lights change is a clean null (see H1 below) — it reflects control villages declining "
+    "over the same period while treated villages held flat. The full-year figure above is significant "
+    "under district fixed effects but not under the no-fixed-effects comparison; see Methodology & "
+    "Limitations for why."
+)
+
 st.image(
     "outputs/figures/08_control_group_did_effect.png",
     caption="District-fixed-effects DiD coefficient (treated-vs-control gap in change) with 95% CIs, NDBI and night-lights, both windows.",
     use_container_width=True,
 )
 st.caption(
-    "Baseline (2021) balance check: treated villages start from a significantly lower mean NDBI "
-    "than control villages in both windows — expected, given priority villages were themselves "
-    "selected partly for remoteness, but a reminder this is a level-balance check, not a confirmed "
-    "shared pre-trend (see Methodology & Limitations)."
+    "Baseline (2021) balance check: treated villages start from a significantly different mean "
+    "than control villages in three of the four outcome/window combinations (NDBI summer, and both "
+    "windows of night-lights) — expected, given priority villages were themselves selected partly "
+    "for remoteness, but a reminder this is a level-balance check, not a confirmed shared pre-trend "
+    "(see Methodology & Limitations)."
 )
 
 st.markdown("---")

@@ -17,7 +17,7 @@ st.markdown(
 st.markdown("---")
 
 st.markdown("""
-Every geocoded village — plus the 753-village non-VVP control group — plotted on a live
+Every geocoded village — plus the 735-village non-VVP control group — plotted on a live
 satellite/dark basemap, plus the three headline statistical charts as hoverable, toggleable
 plots instead of flat images. Hover or click any marker or data point for its exact value.
 """)

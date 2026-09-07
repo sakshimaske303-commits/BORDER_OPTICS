@@ -36,7 +36,7 @@ st.markdown("---")
 st.markdown("### Processing Pipeline")
 
 st.markdown("""
-Each village — treated and, identically, the 753-village non-VVP control group — is
+Each village — treated and, identically, the 735-village non-VVP control group — is
 buffered (500m primary, with 250m and 1km run as a robustness check) and used as the
 region for `reduceRegion` over cloud-masked Sentinel-2 composites (QA60 bitmask) and
 VIIRS monthly composites, for both a full-year window and a season-matched (Jun–Sep)
@@ -115,14 +115,16 @@ with st.expander("**Composite Window Trade-Off — Snow vs. Monsoon Cloud**"):
 with st.expander("**Control-Group Baseline Imbalance — Level-Balance, Not a Confirmed Pre-Trend**"):
     st.markdown("""
     The H4 control-group comparison found treated villages start from a significantly
-    lower mean 2021 NDBI than the 753-village control group in both windows — expected,
-    given VVP-I priority villages were themselves selected partly for remoteness and
-    security proximity, but a genuine parallel-pre-trends placebo test could not be run
-    because the control group's satellite extraction covers only the same single
-    before/after pair as the treated sample, not a multi-year pre-treatment panel. The
-    reported baseline check is a level-balance check, not a confirmed shared pre-trend —
-    district fixed effects address baseline differences between districts, not
-    village-level selection into the treated group itself.
+    different mean 2021 baseline than the 735-village control group in three of the four
+    outcome/window combinations (NDBI summer, and both windows of night-lights — night-lights
+    full-year is the most imbalanced, and also the one combination where the two DiD
+    specifications disagree on significance) — expected, given VVP-I priority villages were
+    themselves selected partly for remoteness and security proximity, but a genuine
+    parallel-pre-trends placebo test could not be run because the control group's satellite
+    extraction covers only the same single before/after pair as the treated sample, not a
+    multi-year pre-treatment panel. The reported baseline check is a level-balance check, not
+    a confirmed shared pre-trend — district fixed effects address baseline differences
+    between districts, not village-level selection into the treated group itself.
     """)
 
 with st.expander("**Multi-Year Trend Is Not Monotonic**"):
