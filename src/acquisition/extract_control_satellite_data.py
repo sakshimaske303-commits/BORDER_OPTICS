@@ -91,12 +91,22 @@ def extract_window(window_key, checkpoint_every=10):
     after_start, after_end = cfg["after"]
     out_path = cfg["out_path"]
 
-    villages = pd.read_csv(VILLAGES_PATH)
-
-    for col in [
+    outcome_cols = [
         "ndbi_before", "ndbi_after", "ndbi_before_image_count", "ndbi_after_image_count",
         "lights_before", "lights_after", "lights_before_image_count", "lights_after_image_count",
-    ]:
+    ]
+
+    # Resume from the checkpointed output, not the original control-village list —
+    # matches the same fix applied to extract_satellite_data.py / extract_buffer_
+    # sensitivity_data.py: re-reading VILLAGES_PATH on every run means "resume"
+    # never actually picks up where a checkpoint left off.
+    if os.path.exists(out_path):
+        villages = pd.read_csv(out_path)
+        print(f"Resuming from existing checkpoint: {out_path}")
+    else:
+        villages = pd.read_csv(VILLAGES_PATH)
+
+    for col in outcome_cols:
         if col not in villages.columns:
             villages[col] = None
 
@@ -105,8 +115,10 @@ def extract_window(window_key, checkpoint_every=10):
     print(f"{len(villages)} control villages to process")
 
     for i, row in villages.iterrows():
-        if pd.notna(row.get("ndbi_before")) and pd.notna(row.get("ndbi_after")):
-            continue  # resume support
+        # Skip only if ALL outcome AND image-count columns are already present —
+        # same completeness fix as the treated-village extraction scripts.
+        if all(pd.notna(row.get(c)) for c in outcome_cols):
+            continue  # already extracted (resume support)
 
         point = ee.Geometry.Point([row["longitude"], row["latitude"]])
         buffered_geom = point.buffer(BUFFER_RADIUS_M)
