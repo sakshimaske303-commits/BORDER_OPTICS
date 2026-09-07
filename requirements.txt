@@ -5,6 +5,7 @@ scipy
 plotly
 geopandas
 shapely
+pyproj
 matplotlib
 requests
 folium

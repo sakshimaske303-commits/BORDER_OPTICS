@@ -18,7 +18,7 @@ abstract: >-
   across 2,967 villages in five Himalayan border states/union territories.
   Using Sentinel-2 built-up-index (NDBI) and VIIRS night-lights data at 258
   individually geocoded villages against a matched non-VVP control group of
-  753 villages in the same 14 districts, this study tests whether VVP-I's
+  735 villages in the same 14 districts, this study tests whether VVP-I's
   priority villages show measurable physical development since programme
   sanction, under two independent compositing windows (full-year and
   summer-matched) as an explicit robustness check rather than trusting a
@@ -27,14 +27,17 @@ abstract: >-
   villages shows the opposite result — a reversal traced to snow-cover
   contamination and monsoon cloud cover respectively. A district-fixed-effects
   Difference-in-Differences model against the control group reproduces this
-  same window-sensitivity pattern, and a three-point 2021/2023/2025 extension
-  shows the summer-matched result is concentrated in a 2023-to-2025 recovery
-  rather than steady growth, while a 250m/500m/1km buffer-radius sweep shows
-  the result is stable to that methodological choice once sample composition
-  is matched. Night-lights, the more temporally stable proxy, shows no
-  confirmed increase under either window. The instability itself is reported
-  as the central finding, addressing a parliamentary record showing no
-  independent impact assessment has ever been carried out for VVP-I.
+  same window-sensitivity pattern for built-up area (significant summer gap,
+  null full-year gap), survives a buffer-radius sweep (250m/500m/1km) and
+  Holm-Bonferroni correction for multiple testing, and a three-point
+  2021/2023/2025 extension shows the summer-matched result is concentrated in
+  a 2023-to-2025 recovery rather than steady growth since sanction.
+  Night-lights show no absolute before/after increase of their own in either
+  window, but do show a significant positive gap against the control group in
+  both windows — driven by control villages declining rather than treated
+  villages rising. The instability itself is reported as the central finding,
+  addressing a parliamentary record showing no independent impact assessment
+  has ever been carried out for VVP-I.
 keywords:
   - Vibrant Villages Programme
   - border development
@@ -48,5 +51,5 @@ keywords:
   - India
   - geospatial analysis
 license: CC-BY-4.0
-version: 1.1.0
-date-released: "2026-08-14"
+version: 1.2.0
+date-released: "2026-09-07"
