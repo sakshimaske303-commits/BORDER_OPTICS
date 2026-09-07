@@ -1,0 +1,9 @@
+test,raw_p,holm_adjusted_p,significant_after_holm
+H1_ndbi_change_full-year,0.9999999999999993,1.0,False
+H3_lights_change_full-year,0.050075027733072784,0.3004501663984367,False
+H3_border_proximity_ndbi_full-year,0.49675540797986373,1.0,False
+H3_border_proximity_lights_full-year,3.207117546203026e-05,0.0002244982282342118,True
+H1_ndbi_change_summer-matched,9.292860347241844e-15,7.434288277793475e-14,True
+H3_lights_change_summer-matched,0.9999941130208815,1.0,False
+H3_border_proximity_ndbi_summer-matched,0.6501413655483326,1.0,False
+H3_border_proximity_lights_summer-matched,0.23254437680623352,1.0,False

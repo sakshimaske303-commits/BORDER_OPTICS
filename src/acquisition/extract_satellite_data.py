@@ -127,10 +127,12 @@ def extract_window(window_key, checkpoint_every=10):
     print(f"Before: {before_start} to {before_end}  |  After: {after_start} to {after_end}")
 
     for i, row in villages.iterrows():
-        # Skip only if ALL four outcome values are already present — checking just
-        # NDBI meant a village with complete NDBI but missing VIIRS would never be
-        # re-attempted on a rerun.
-        if all(pd.notna(row.get(c)) for c in ("ndbi_before", "ndbi_after", "lights_before", "lights_after")):
+        # Skip only if ALL outcome AND image-count columns are already present —
+        # checking just the four value columns meant a row that was checkpointed
+        # mid-write (or from before the image-count columns existed at all) with
+        # valid ndbi/lights values but null image counts would be silently
+        # skipped forever, leaving those counts permanently unpopulated.
+        if all(pd.notna(row.get(c)) for c in outcome_cols):
             continue  # already extracted (resume support)
 
         point = ee.Geometry.Point([row["longitude"], row["latitude"]])

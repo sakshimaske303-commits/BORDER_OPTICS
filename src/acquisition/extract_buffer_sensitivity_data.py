@@ -98,10 +98,10 @@ def extract_buffer(buffer_m, checkpoint_every=10):
     print(f"{len(villages)} villages to process")
 
     for i, row in villages.iterrows():
-        # Skip only if ALL four outcome values are already present — checking just
-        # NDBI meant a village with complete NDBI but missing VIIRS would never be
-        # re-attempted on a rerun.
-        if all(pd.notna(row.get(c)) for c in ("ndbi_before", "ndbi_after", "lights_before", "lights_after")):
+        # Skip only if ALL outcome AND image-count columns are already present —
+        # checking just the four value columns would leave a row's image-count
+        # columns permanently unpopulated if they were ever null on a checkpoint.
+        if all(pd.notna(row.get(c)) for c in outcome_cols):
             continue  # already extracted (resume support)
 
         point = ee.Geometry.Point([row["longitude"], row["latitude"]])

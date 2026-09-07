@@ -147,21 +147,42 @@ def main():
     treated = treated[treated["is_core_sample"] == True].copy()
     treated["village_norm"] = treated["village"].apply(normalize_name)
 
-    # Resume support: skip districts already saved from an earlier run
+    # Resume support: skip districts already saved from an earlier run.
+    #
+    # This used to add EVERY (state, district) already present in the output
+    # file to completed_districts and skip it unconditionally on resume —
+    # including districts saved before the polygon-membership check existed,
+    # whose rows are now marked district_verified=False specifically so they
+    # get looked at again. That flag was being set and then completely
+    # ignored: a resume run always skipped every already-present district
+    # regardless of whether it had ever actually been polygon-verified, so
+    # the boundary check below could never fix a district that already had
+    # (unverified, bbox-only) rows in the file. Now a district is only
+    # treated as "done" if ALL of its existing rows are verified; anything
+    # else gets its old rows dropped and rebuilt fresh this run.
     existing_rows = []
     completed_districts = set()
     try:
         existing_df = pd.read_csv(OUT_PATH)
         if "district_verified" not in existing_df.columns:
-            # Rows saved before the polygon-membership check below existed were
-            # never actually confirmed to sit inside the district they're
-            # labeled with — mark them explicitly instead of implying they were checked.
             existing_df["district_verified"] = False
-        existing_rows = existing_df.to_dict("records")
-        completed_districts = set(zip(existing_df["state"], existing_df["district"]))
+
+        verified_per_district = existing_df.groupby(["state", "district"])["district_verified"].all()
+        completed_districts = set(verified_per_district[verified_per_district].index)
+        stale_districts = set(zip(existing_df["state"], existing_df["district"])) - completed_districts
+
+        keep_mask = list(zip(existing_df["state"], existing_df["district"]))
+        keep_mask = [pair in completed_districts for pair in keep_mask]
+        existing_rows = existing_df[keep_mask].to_dict("records")
+
         if completed_districts:
-            print(f"Resuming: {len(completed_districts)} district(s) already saved in {OUT_PATH}, will skip:")
+            print(f"Resuming: {len(completed_districts)} fully-verified district(s) already saved in {OUT_PATH}, will skip:")
             for state, district in sorted(completed_districts):
+                print(f"  - {state} / {district}")
+        if stale_districts:
+            print(f"Re-processing {len(stale_districts)} district(s) with unverified/bbox-only rows from an earlier run "
+                  f"(their old rows are dropped and rebuilt with the polygon check below):")
+            for state, district in sorted(stale_districts):
                 print(f"  - {state} / {district}")
     except FileNotFoundError:
         pass
@@ -170,10 +191,15 @@ def main():
     border_union = load_border_union()
 
     all_control_rows = list(existing_rows)
+    # Coordinates already claimed by a kept (verified) row, anywhere — used below
+    # to stop the SAME physical OSM point being re-added under a different
+    # district just because it also fell inside that district's search bbox
+    # (adjacent districts' 0.6°-margin bboxes overlap by design).
+    claimed_coords = {(round(r["latitude"], 6), round(r["longitude"], 6)) for r in existing_rows}
 
     for (state, district), group in treated.groupby(["state", "district"]):
         if (state, district) in completed_districts:
-            print(f"\n--- {state} / {district}: already done, skipping (resume) ---")
+            print(f"\n--- {state} / {district}: already done and verified, skipping (resume) ---")
             continue
         treated_names = set(group["village_norm"])
         max_dist = group["distance_to_border_km"].max()
@@ -215,9 +241,20 @@ def main():
                   f"candidates outside the true district (but inside the bbox) will NOT be filtered out.")
         time.sleep(NOMINATIM_PAUSE_S)
 
-        # Distance filter + district-polygon membership check + cap
+        # Distance filter + district-polygon membership check + cross-district
+        # coordinate dedup + cap
+        dupe_skipped = 0
         kept = []
         for c in candidates:
+            coord_key = (round(c["latitude"], 6), round(c["longitude"], 6))
+            if coord_key in claimed_coords:
+                # Same physical OSM point already claimed by another district this
+                # run (or a verified earlier run) — adjacent districts' bboxes
+                # overlap, so the same village can otherwise be pulled in twice
+                # under two different district labels.
+                dupe_skipped += 1
+                continue
+
             d = distance_to_border_km(c["latitude"], c["longitude"], border_union)
             if d > max_dist * MAX_DISTANCE_MULTIPLIER:
                 continue
@@ -229,11 +266,13 @@ def main():
                 c["district_verified"] = False
             c["distance_to_border_km"] = d
             kept.append(c)
+            claimed_coords.add(coord_key)
 
         cap = len(group) * MAX_CANDIDATES_PER_DISTRICT_MULTIPLIER
         kept = sorted(kept, key=lambda c: c["distance_to_border_km"])[:cap]
         print(f"  {len(kept)} candidates kept after distance filter (<= {max_dist * MAX_DISTANCE_MULTIPLIER:.1f} km), "
-              f"district-boundary check, and per-district cap ({cap})")
+              f"district-boundary check, cross-district dedup ({dupe_skipped} duplicate coordinates skipped), "
+              f"and per-district cap ({cap})")
 
         all_control_rows.extend(kept)
 

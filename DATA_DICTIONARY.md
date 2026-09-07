@@ -58,8 +58,8 @@ Control-group villages run through the identical extraction pipeline (same 500m 
 
 | Column | Type | Description |
 |---|---|---|
-| `ndbi_before`, `ndbi_after`, `ndbi_before_image_count`, `ndbi_after_image_count` | float / int | Same meaning as the treated village-results files, extracted for control villages. |
-| `lights_before`, `lights_after`, `lights_before_image_count`, `lights_after_image_count` | float / int | VIIRS radiance equivalents. |
+| `ndbi_before`, `ndbi_after`, `ndbi_before_image_count`, `ndbi_after_image_count` | float / int | Same NDBI meaning as the treated village-results files, extracted for control villages — but note the image-count columns here are per-metric (`ndbi_*_image_count`) and present in BOTH the full-year and summer-matched control files, unlike the treated files' generic `before_image_count`/`after_image_count` pair described above, which exists only in the summer-matched treated file. |
+| `lights_before`, `lights_after`, `lights_before_image_count`, `lights_after_image_count` | float / int | VIIRS radiance equivalents, same per-metric/both-windows image-count columns as the NDBI ones above. |
 
 ## `border_optics_did_panel_fullyear.csv` / `border_optics_did_panel_summer.csv`
 
