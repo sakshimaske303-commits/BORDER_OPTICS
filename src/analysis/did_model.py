@@ -1,4 +1,5 @@
-"""DiD model: 251-village treated sample vs. 753-village matched control,
+"""DiD model: 251-village treated sample vs. 735-village matched control
+(deduped, district-boundary-verified — see select_control_villages.py),
 district fixed effects, SEs clustered by district.
 """
 

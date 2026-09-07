@@ -44,7 +44,7 @@ See `src/acquisition/extract_satellite_data.py` for the exact implementation.
 
 ## `border_optics_control_villages.csv`
 
-One row per non-VVP control village (753 rows), assembled via the OpenStreetMap Overpass API from the same 14 districts as the treated core sample, excluding any village on a VVP-I priority list. Produced by `select_control_villages.py`.
+One row per non-VVP control village (735 rows — deduped and district-boundary-verified; see `BO_Development_Log.md` Entries 14-15), assembled via the OpenStreetMap Overpass API from the same 14 districts as the treated core sample, excluding any village on a VVP-I priority list. Produced by `select_control_villages.py`.
 
 | Column | Type | Description |
 |---|---|---|
