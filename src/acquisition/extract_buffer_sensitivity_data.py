@@ -75,12 +75,22 @@ def lights_for_period(buffered_geom, start, end):
 
 def extract_buffer(buffer_m, checkpoint_every=10):
     out_path = f"data/processed/border_optics_buffer{buffer_m}_summer.csv"
-    villages = pd.read_csv(VILLAGES_PATH)
 
-    for col in [
+    outcome_cols = [
         "ndbi_before", "ndbi_after", "ndbi_before_image_count", "ndbi_after_image_count",
         "lights_before", "lights_after", "lights_before_image_count", "lights_after_image_count",
-    ]:
+    ]
+
+    # Resume from the checkpointed output, not the original master list — this used
+    # to always re-read VILLAGES_PATH (which never carries these columns at all), so
+    # "resume support" silently reprocessed every village from scratch on every run.
+    if os.path.exists(out_path):
+        villages = pd.read_csv(out_path)
+        print(f"Resuming from existing checkpoint: {out_path}")
+    else:
+        villages = pd.read_csv(VILLAGES_PATH)
+
+    for col in outcome_cols:
         if col not in villages.columns:
             villages[col] = None
 
@@ -88,8 +98,11 @@ def extract_buffer(buffer_m, checkpoint_every=10):
     print(f"{len(villages)} villages to process")
 
     for i, row in villages.iterrows():
-        if pd.notna(row.get("ndbi_before")) and pd.notna(row.get("ndbi_after")):
-            continue  # resume support
+        # Skip only if ALL four outcome values are already present — checking just
+        # NDBI meant a village with complete NDBI but missing VIIRS would never be
+        # re-attempted on a rerun.
+        if all(pd.notna(row.get(c)) for c in ("ndbi_before", "ndbi_after", "lights_before", "lights_after")):
+            continue  # already extracted (resume support)
 
         point = ee.Geometry.Point([row["longitude"], row["latitude"]])
         buffered_geom = point.buffer(buffer_m)

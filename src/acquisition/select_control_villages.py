@@ -1,6 +1,7 @@
-"""Builds the non-VVP control group for the DiD design: matched on district,
-soft filter at 1.5x treated max border-distance, capped at 3x treated
-count per district.
+"""Builds the non-VVP control group for the DiD design: matched on district
+(verified against the district's real Nominatim boundary polygon, not just
+the Overpass search bbox), soft filter at 1.5x treated max border-distance,
+capped at 3x treated count per district.
 """
 
 import time
@@ -9,7 +10,7 @@ import unicodedata
 import geopandas as gpd
 import pandas as pd
 import requests
-from shapely.geometry import Point
+from shapely.geometry import Point, shape
 from shapely.ops import nearest_points
 
 TREATED_PATH = "data/processed/border_optics_master_villages_with_distance.csv"
@@ -19,6 +20,9 @@ OUT_PATH = "data/processed/border_optics_control_villages.csv"
 OVERPASS_URL = "https://overpass-api.de/api/interpreter"
 OVERPASS_TIMEOUT_S = 90
 REQUEST_PAUSE_S = 2.0  # be polite to the shared public Overpass instance
+
+NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
+NOMINATIM_PAUSE_S = 1.0  # Nominatim's usage policy asks for max 1 req/sec
 
 # Overpass rejects requests with no User-Agent (406 Not Acceptable) — same
 # identifying header geocode_villages.py already sends to Nominatim
@@ -89,6 +93,39 @@ def overpass_query_for_bbox(south, west, north, east):
     raise last_err
 
 
+def fetch_district_polygon(district, state):
+    """Looks up the district's real administrative boundary via Nominatim
+    (polygon_geojson=1).
+
+    The candidate search below queries Overpass for a rectangular bounding
+    box around the treated villages and then labeled every result found in
+    that box as belonging to the treated district — a village just across
+    the district line, still inside the bbox margin, got assigned the
+    treated district's name with nothing checking it was actually inside
+    that district's boundary. This fetches the real polygon so candidates
+    can be tested for actual membership instead.
+
+    Returns a shapely (Multi)Polygon, or None if Nominatim didn't resolve a
+    usable boundary for this name (caller falls back to bbox-only matching
+    and marks those rows as unverified rather than guessing).
+    """
+    params = {"q": f"{district}, {state}, India", "format": "json", "polygon_geojson": 1, "limit": 1}
+    try:
+        resp = requests.get(NOMINATIM_URL, params=params, headers=HEADERS, timeout=30)
+        resp.raise_for_status()
+        results = resp.json()
+    except requests.exceptions.RequestException as e:
+        print(f"  Nominatim boundary lookup failed for {district}, {state}: {e}")
+        return None
+
+    if not results or "geojson" not in results[0]:
+        return None
+    geom = results[0]["geojson"]
+    if geom.get("type") not in ("Polygon", "MultiPolygon"):
+        return None
+    return shape(geom)
+
+
 def load_border_union():
     boundary = gpd.read_file(BOUNDARY_PATH)
     if "ADM0_A3_1" in boundary.columns:
@@ -115,6 +152,11 @@ def main():
     completed_districts = set()
     try:
         existing_df = pd.read_csv(OUT_PATH)
+        if "district_verified" not in existing_df.columns:
+            # Rows saved before the polygon-membership check below existed were
+            # never actually confirmed to sit inside the district they're
+            # labeled with — mark them explicitly instead of implying they were checked.
+            existing_df["district_verified"] = False
         existing_rows = existing_df.to_dict("records")
         completed_districts = set(zip(existing_df["state"], existing_df["district"]))
         if completed_districts:
@@ -166,18 +208,32 @@ def main():
 
         print(f"  {len(elements)} OSM place nodes found, {len(candidates)} after removing treated-name matches")
 
-        # Distance filter + cap
+        district_polygon = fetch_district_polygon(district, state)
+        if district_polygon is None:
+            print(f"  WARNING: could not resolve a real boundary polygon for {state}/{district} — "
+                  f"falling back to bbox-only matching. These rows will be marked district_verified=False; "
+                  f"candidates outside the true district (but inside the bbox) will NOT be filtered out.")
+        time.sleep(NOMINATIM_PAUSE_S)
+
+        # Distance filter + district-polygon membership check + cap
         kept = []
         for c in candidates:
             d = distance_to_border_km(c["latitude"], c["longitude"], border_union)
-            if d <= max_dist * MAX_DISTANCE_MULTIPLIER:
-                c["distance_to_border_km"] = d
-                kept.append(c)
+            if d > max_dist * MAX_DISTANCE_MULTIPLIER:
+                continue
+            if district_polygon is not None:
+                if not district_polygon.contains(Point(c["longitude"], c["latitude"])):
+                    continue  # bbox candidate that isn't actually inside this district
+                c["district_verified"] = True
+            else:
+                c["district_verified"] = False
+            c["distance_to_border_km"] = d
+            kept.append(c)
 
         cap = len(group) * MAX_CANDIDATES_PER_DISTRICT_MULTIPLIER
         kept = sorted(kept, key=lambda c: c["distance_to_border_km"])[:cap]
-        print(f"  {len(kept)} candidates kept after distance filter (<= {max_dist * MAX_DISTANCE_MULTIPLIER:.1f} km) "
-              f"and per-district cap ({cap})")
+        print(f"  {len(kept)} candidates kept after distance filter (<= {max_dist * MAX_DISTANCE_MULTIPLIER:.1f} km), "
+              f"district-boundary check, and per-district cap ({cap})")
 
         all_control_rows.extend(kept)
 
@@ -199,9 +255,11 @@ def _save(rows):
     control_df["is_core_sample"] = True
     control_df["village_source"] = "control (non-VVP)"
     control_df["village_id"] = range(1, len(control_df) + 1)
+    if "district_verified" not in control_df.columns:
+        control_df["district_verified"] = False
     control_df = control_df[[
         "village_id", "village", "district", "block", "state", "is_core_sample",
-        "latitude", "longitude", "distance_to_border_km", "village_source",
+        "latitude", "longitude", "distance_to_border_km", "village_source", "district_verified",
     ]]
     control_df.to_csv(OUT_PATH, index=False)
     return control_df

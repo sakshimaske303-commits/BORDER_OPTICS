@@ -49,6 +49,20 @@ def district_matches(returned_dist, expected_dist):
     return r in e or e in r
 
 
+def state_matches(returned_state, expected_state):
+    """Bhuvan's response carries state_name on every candidate, but it was
+    fetched and printed without ever being checked — only district was
+    validated. A same-named district in a different state (or a Bhuvan
+    mismatch) could pass the district check alone. Same fuzzy substring
+    comparison as district_matches, for consistency.
+    """
+    if not returned_state or not expected_state:
+        return False
+    r = str(returned_state).strip().lower()
+    e = str(expected_state).strip().lower()
+    return r in e or e in r
+
+
 def bhuvan_lookup(village_name):
     params = {"village": village_name, "token": BHUVAN_TOKEN}
     for attempt in range(1, MAX_RETRIES + 1):
@@ -100,7 +114,8 @@ def process_state(state, filepath):
 
         accepted = None
         for candidate in results:
-            if district_matches(candidate.get("dist_name"), expected_district):
+            if district_matches(candidate.get("dist_name"), expected_district) and \
+               state_matches(candidate.get("state_name"), state):
                 accepted = candidate
                 break
 
@@ -116,7 +131,7 @@ def process_state(state, filepath):
             df.at[i, "geocode_status"] = STATUS_BHUVAN_NO_MATCH
             if results:
                 found_in = ", ".join(f"{c.get('dist_name')}/{c.get('state_name')}" for c in results)
-                print(f"    DISTRICT MISMATCH (discarded): {habitation} — Bhuvan only found it in: {found_in}")
+                print(f"    DISTRICT/STATE MISMATCH (discarded): {habitation} — Bhuvan only found it in: {found_in}")
             else:
                 print(f"    NOT FOUND: {habitation}")
 
