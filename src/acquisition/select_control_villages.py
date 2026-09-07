@@ -265,11 +265,21 @@ def main():
             else:
                 c["district_verified"] = False
             c["distance_to_border_km"] = d
+            c["_coord_key"] = coord_key
             kept.append(c)
-            claimed_coords.add(coord_key)
+            # NOT claiming coord_key here — this candidate might still get cut by
+            # the per-district cap below, and a coordinate that never actually
+            # makes it into the saved dataset must not block a legitimate
+            # candidate at the same physical point in a later district.
 
         cap = len(group) * MAX_CANDIDATES_PER_DISTRICT_MULTIPLIER
         kept = sorted(kept, key=lambda c: c["distance_to_border_km"])[:cap]
+        # Only coordinates that survive the cap and are actually kept this run
+        # get claimed — claiming earlier (before the cap) let a coordinate the
+        # cap discarded still block the same physical village from being picked
+        # up by a later, legitimately-matching district.
+        for c in kept:
+            claimed_coords.add(c.pop("_coord_key"))
         print(f"  {len(kept)} candidates kept after distance filter (<= {max_dist * MAX_DISTANCE_MULTIPLIER:.1f} km), "
               f"district-boundary check, cross-district dedup ({dupe_skipped} duplicate coordinates skipped), "
               f"and per-district cap ({cap})")

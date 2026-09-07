@@ -76,14 +76,22 @@ YEARS = [2021, 2023, 2025]
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
 
 for outcome, ax, ylabel in [("ndbi", axes[0], "Mean NDBI"), ("lights", axes[1], "Mean night-lights radiance")]:
+    # n was a hardcoded "251" here — accurate only because the current committed
+    # data happens to have zero missing values across all three years. Computing
+    # it from the actual per-year counts means the label can't silently drift out
+    # of sync with the data on a future rerun that does have missing years.
+    counts_seen = set()
     for label, df, color in [("Full-Year", my_fy_core, BLUE), ("Summer-Matched", my_sm_core, ORANGE)]:
         means = [df[f"{outcome}_{yr}"].mean() for yr in YEARS]
+        counts = [df[f"{outcome}_{yr}"].count() for yr in YEARS]
         sems = [df[f"{outcome}_{yr}"].std() / np.sqrt(df[f"{outcome}_{yr}"].count()) for yr in YEARS]
+        counts_seen.update(counts)
         ax.errorbar(YEARS, means, yerr=sems, marker="o", capsize=4, label=label, color=color, linewidth=2)
     ax.set_xticks(YEARS)
     ax.set_xlabel("Year")
     ax.set_ylabel(ylabel)
-    ax.set_title(f"{'NDBI' if outcome == 'ndbi' else 'Night-lights'} — mean ± SE, core sample (n=251)")
+    n_label = f"n={counts_seen.pop()}" if len(counts_seen) == 1 else f"n={min(counts_seen)}-{max(counts_seen)}, varies by year"
+    ax.set_title(f"{'NDBI' if outcome == 'ndbi' else 'Night-lights'} — mean ± SE, core sample ({n_label})")
 
 axes[0].legend(loc="best", fontsize=9)
 fig.suptitle("Figure 9 — Three-Point Trend (2021 / 2023 / 2025), Both Compositing Windows", y=1.03, fontsize=12, fontweight="bold")
