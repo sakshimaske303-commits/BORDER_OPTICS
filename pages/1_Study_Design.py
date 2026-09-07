@@ -208,7 +208,7 @@ st.markdown("4. **Dual Compositing Windows** — Full-year and summer-matched (J
 
 col_m5, col_m6, col_m6b = st.columns([0.88, 0.06, 0.06])
 with col_m5:
-    st.markdown("5. **Border Distance** — GeoPandas nearest-point distance to Natural Earth's border/LAC geometry, UTM-reprojected for accuracy.")
+    st.markdown("5. **Border Distance** — GeoPandas nearest-point distance to Natural Earth's border/LAC geometry, computed geodesically (WGS84 ellipsoid) rather than via a single map-projection zone, since the study area spans roughly 20 degrees of longitude.")
 with col_m6:
     proof_popover("03_border_distance_vscode.png", "compute_border_distance.py open in VS Code — the GeoPandas nearest-point distance calculation.")
 with col_m6b:

@@ -101,6 +101,20 @@ with st.expander("**Border/LAC Geometry — A Cartographic Proxy, Not a Legal Cl
     Along the Line of Actual Control this is a cartographic convenience for measurement
     purposes only — it is not a legal, diplomatic, or political claim. The LAC is disputed
     and is not a settled international boundary.
+
+    A second, more specific point worth being explicit about: "distance to border/LAC" is
+    computed as distance to the *nearest* India-related boundary segment in Natural Earth's
+    data, not specifically the China boundary. Checking this directly against the core
+    sample's actual nearest segments: 220 of 251 villages (88%) are indeed nearest to the
+    China boundary, but 19 (Arunachal Pradesh, mostly Tawang and West Kameng) are nearest
+    to Bhutan, 8 (Sikkim's North district and Uttarakhand's Pithoragarh) are nearest to
+    Nepal, and 4 (Arunachal's Anjaw district) are nearest to Myanmar. For those 31 villages,
+    the H3 "border proximity" variable is measuring distance to a different country's
+    frontier than the LAC specifically — a reasonable variable for a general
+    border-securitization hypothesis (VVP-I villages are, after all, still border villages
+    in that broader sense), but not literally "distance to the LAC" for that minority of
+    the sample. H3 is already treated as exploratory in this study for other reasons; this
+    is an additional reason to read it that way rather than as a clean LAC-proximity test.
     """)
 
 with st.expander("**Composite Window Trade-Off — Snow vs. Monsoon Cloud**"):
