@@ -1,6 +1,7 @@
-"""DiD model: 251-village treated sample vs. 735-village matched control
-(deduped, district-boundary-verified — see select_control_villages.py),
-district fixed effects, SEs clustered by district.
+"""DiD model: 251-village treated sample vs. 735-village district-restricted
+non-VVP control group (deduped, district-boundary-verified — see
+select_control_villages.py), district fixed effects, SEs clustered by
+district.
 """
 
 import argparse
@@ -140,7 +141,7 @@ def per_district_summary(long, outcome, window):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Village-level DiD: VVP-I treated vs. matched non-VVP control.")
+    parser = argparse.ArgumentParser(description="Village-level DiD: VVP-I treated vs. district-restricted non-VVP control.")
     parser.add_argument("--window", choices=["full_year", "summer"], required=True)
     args = parser.parse_args()
     window = args.window

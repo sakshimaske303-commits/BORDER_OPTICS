@@ -89,7 +89,7 @@ def make_treated_vs_control_map():
     folium.LayerControl(collapsed=False).add_to(m)
     m.get_root().html.add_child(folium.Element(title_html(
         "BORDER OPTICS — Treated vs. Non-VVP Control Group",
-        "251 treated villages (watermelon) vs. 735 matched control villages (mint), same 14 districts",
+        "251 treated villages (watermelon) vs. 735 district-restricted control villages (mint), same 14 districts",
     )))
     out_path = "outputs/interactive_maps/maps/village_treated_vs_control_map.html"
     m.save(out_path)

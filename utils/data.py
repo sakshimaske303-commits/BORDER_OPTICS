@@ -20,7 +20,7 @@ def load_data():
 def load_expanded_results():
     """Control-group DiD, multi-year trend, and buffer-sensitivity summaries -
     the three robustness checks that stress-test the summer-matched NDBI
-    result against a matched control group, a three-point trend, and a
+    result against a district-restricted control group, a three-point trend, and a
     buffer-radius sweep (Research Paper Sections 3.7-3.9 / 4.6-4.8)."""
     with open("data/processed/border_optics_did_summary_fullyear.json") as f:
         did_fullyear = json.load(f)

@@ -43,9 +43,11 @@ VIIRS monthly composites, for both a full-year window and a season-matched (Junâ
 window at 2021 and 2025, plus a third time point (2023) for the core treated sample.
 Villages with an empty composite in any period are marked null rather than defaulted to
 zero, and image-count columns are retained for quality auditing. Village coordinates and
-distance-to-border are computed separately via GeoPandas (UTM 44N / EPSG:32644
-reprojection, nearest-point distance to the nearest India border/LAC segment) and merged
-in by village ID.
+distance-to-border are computed separately via GeoPandas (nearest-point distance to the
+nearest India border/LAC segment, computed geodesically on the WGS84 ellipsoid via
+`pyproj.Geod` rather than a single UTM-zone reprojection, since the study area spans
+roughly 20 degrees of longitude â€” see Development Log Entry 18) and merged in by
+village ID.
 """)
 
 st.markdown("---")

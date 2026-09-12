@@ -15,7 +15,7 @@ One row per successfully geocoded village (258 rows).
 | `state` | string | One of Arunachal Pradesh, Sikkim, Uttarakhand, Himachal Pradesh. |
 | `is_core_sample` | bool | `True` for Arunachal Pradesh / Sikkim / Uttarakhand (the 251-village core statistical sample); `False` for Himachal Pradesh (7-village illustrative case study, excluded from formal hypothesis tests). |
 | `latitude`, `longitude` | float | WGS84 (EPSG:4326) coordinates from the geocoding pipeline (Nominatim primary, Bhuvan fallback). |
-| `distance_to_border_km` | float | Straight-line distance to the nearest India-relevant Natural Earth Admin-0 boundary segment, computed in UTM 44N (EPSG:32644) then converted to km. Added by `compute_border_distance.py`. Present only in the `_with_distance` version. |
+| `distance_to_border_km` | float | Distance to the nearest India-relevant Natural Earth Admin-0 boundary segment, computed geodesically (WGS84 ellipsoid, via `pyproj.Geod`) rather than by reprojecting into a single UTM zone -- the study area spans roughly 20 degrees of longitude, so a single-zone projection (the original method, before Development Log Entry 18) is only accurate near its own central meridian. Added by `compute_border_distance.py`. Present only in the `_with_distance` version, along with `nearest_border_country` (which country's segment was actually nearest -- not always China; see Entry 18). |
 
 ## `border_optics_village_results.csv` / `_analyzed.csv` (full-year window) and `_summer.csv` / `_summer_analyzed.csv` (summer-matched window)
 
@@ -68,7 +68,7 @@ The treated and control villages reshaped into a two-period panel with a treatme
 | Column | Type | Description |
 |---|---|---|
 | `village_id` | int | Join key (separate ID spaces for treated vs. control, as above). |
-| `treatment` | int | `1` for a treated (VVP-I priority) village, `0` for a matched non-VVP control village. |
+| `treatment` | int | `1` for a treated (VVP-I priority) village, `0` for a district-restricted non-VVP control village. |
 | `ndbi`, `lights` | float | The outcome value for this village-period row (one row per village per period, not a before/after delta). |
 | `post` | int | `0` for the "before" period, `1` for the "after" period. |
 | `did_term` | int | `treatment × post` — the interaction term whose coefficient is the DiD estimate. |

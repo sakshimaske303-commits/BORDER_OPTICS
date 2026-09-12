@@ -21,7 +21,8 @@ _checks = [
     (PALETTE['accent'], "✓", "Dual Compositing-Window Test"),
     (PALETTE['accent'], "✓", "Two Independent Metrics (NDBI + VIIRS)"),
     (PALETTE['accent'], "✓", "Wilcoxon Signed-Rank Tests"),
-    (PALETTE['accent'], "✓", "Matched Non-VVP Control Group (735 villages, DiD)"),
+    (PALETTE['accent'], "✓", "District-Restricted Non-VVP Control Group (735 villages, DiD)"),
+    (PALETTE['accent'], "✓", "Control-Group DiD Checked Further (Leave-One-District-Out + Randomization Inference)"),
     (PALETTE['accent'], "✓", "Three-Point Multi-Year Trend (2021/2023/2025)"),
     (PALETTE['accent'], "✓", "Buffer-Radius Sweep (250m / 500m / 1km)"),
     (PALETTE['accent'], "✓", "Cross-Checked Against Sanctioned Budget"),
@@ -157,8 +158,10 @@ st.markdown("### H4 — Control-Group Difference-in-Differences")
 st.markdown(
     "A treated-only before/after comparison can't tell VVP-I's own effect apart from a "
     "regional trend every village in these districts shares. This benchmarks the treated "
-    "core sample against 735 matched non-VVP villages in the same 14 districts — district "
-    "fixed effects, standard errors clustered by district."
+    "core sample against 735 district-restricted non-VVP villages in the same 14 districts — district "
+    "fixed effects, standard errors clustered by district. Checked further by dropping each "
+    "district one at a time (significant in all 14/14 reruns) and by randomization inference "
+    "(p = 0.0005) — see the Research Paper's Section 4.6."
 )
 
 did_col1, did_col2 = st.columns(2)
@@ -297,7 +300,8 @@ verdict_html = (
     'A result that flips \u2014 in direction, significance, or both \u2014 is reported as evidence '
     'of methodological instability rather than silently resolved by preferring one window. '
     'The summer-matched NDBI result is the one signal that clears significance here \u2014 and it '
-    'holds up against a matched control group (H4), a buffer-radius sweep, and Holm-Bonferroni '
+    'holds up against a district-restricted control group (H4, itself checked further by leave-one-'
+    'district-out reruns and randomization inference), a buffer-radius sweep, and Holm-Bonferroni '
     'correction, while the multi-year trend shows it is concentrated in 2023\u20132025 rather than '
     'sustained since sanction. This comparison is the core honesty check of the entire analysis.'
     '</p></div>'

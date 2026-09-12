@@ -7,6 +7,16 @@ those cited numbers turned out to be the raw p-values relabeled, not
 actually Holm-adjusted. This recomputes it properly from the same
 result files the rest of the pipeline already produces.
 
+Fix: the plain treated-only before/after Wilcoxon test on night-lights was
+previously mislabeled "H3_lights_change" -- same test design as H1's NDBI
+before/after comparison (no border distance involved at all), so it belongs
+under H1, not H3. The actual H3 (border-proximity) tests are the two
+"H3_border_proximity_*" rows below, which were always labeled correctly.
+This mislabeling never affected any p-value or Holm-adjusted value, only
+the test's name in this script's output CSV -- Research_Paper.md's own
+Section 4.9 already described this test as "H1 lights-change," so the code
+is being brought in line with what the paper always meant.
+
 Run from the repo root: python src/analysis/holm_correction.py
 """
 
@@ -58,7 +68,7 @@ def main():
     for window, path in RESULT_FILES.items():
         p_ndbi, p_lights = wilcoxon_ndbi_lights(path)
         tests[f"H1_ndbi_change_{window}"] = p_ndbi
-        tests[f"H3_lights_change_{window}"] = p_lights
+        tests[f"H1_lights_change_{window}"] = p_lights
 
         h3 = h3_border_proximity(path, distances)
         tests[f"H3_border_proximity_ndbi_{window}"] = h3["ndbi_change"]

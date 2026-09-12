@@ -23,7 +23,7 @@ physical, observable change from space — built-up area expansion and night-tim
 growth — at 258 individually geocoded villages, then tests whether that change is
 statistically meaningful, correlated with budget, predicted by proximity to the
 border/LAC itself, and attributable to VVP-I specifically rather than a regional trend
-shared by every village in these districts — benchmarked against a matched non-VVP
+shared by every village in these districts — benchmarked against a district-restricted non-VVP
 control group of 735 villages and a three-point 2021/2023/2025 trend.
 """)
 
@@ -126,7 +126,7 @@ with col_b:
         <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
             Arunachal Pradesh, Sikkim, and Uttarakhand form the <b>core statistical sample</b>.
             Himachal Pradesh (7 villages) is an <b>illustrative case study</b> only — see
-            Methodology & Limitations. A matched <b>non-VVP control group</b> of 735 villages,
+            Methodology & Limitations. A district-restricted <b>non-VVP control group</b> of 735 villages,
             drawn from the identical 14 districts, benchmarks this sample's change against
             the surrounding region's own trend over the same period.
         </p>

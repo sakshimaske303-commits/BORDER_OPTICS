@@ -1,7 +1,15 @@
 """
-Figure 7 — horizontal dot-and-line chart, one row per test, one point per
+Figure 10 — horizontal dot-and-line chart, one row per test, one point per
 compositing window, p-value on a log x-axis with the p=0.05 line. Points on
 opposite sides of the line = not robust.
+
+NOTE: this is numbered Figure 10, not Figure 7, even though its source PNG
+is named 07_robustness_summary.png — the filename reflects generation order
+(Entries 5/7 of the Development Log), while the in-image title and every
+other reference to this chart use the paper's reading-order sequence, where
+this chart is the last figure (Section 4.9), after the control-group DiD,
+multi-year trend, and buffer-sensitivity figures (Sections 4.6-4.8). See
+Development Log for the prior renumbering this follows the same convention as.
 """
 
 import pandas as pd
@@ -86,7 +94,7 @@ ax.set_xscale("log")
 ax.set_yticks(list(y_pos.values()))
 ax.set_yticklabels(list(y_pos.keys()))
 ax.set_xlabel("p-value (log scale)")
-ax.set_title("Figure 7 — Robustness Summary: Significance Across Both Compositing Windows", fontsize=12, fontweight="bold")
+ax.set_title("Figure 10 — Robustness Summary: Significance Across Both Compositing Windows", fontsize=12, fontweight="bold")
 ax.legend(loc="lower right", frameon=True)
 ax.set_ylim(-0.6, len(test_labels) - 0.4)
 ax.invert_yaxis()
