@@ -123,55 +123,68 @@ with st.expander("**Composite Window Trade-Off — Snow vs. Monsoon Cloud**"):
     st.markdown("""
     Full-year composites risk snow-cover contamination in high-altitude Himalayan
     terrain. Summer-matched (Jun–Sep) composites avoid snow but are vulnerable to monsoon
-    cloud cover, which eliminated nearly all valid observations for Sikkim in that window.
-    Where a result's direction or significance changes between the two windows, that
-    instability is reported as a finding in itself — see Statistical Validation.
+    cloud cover — at one point, this eliminated all valid summer observations for Sikkim.
+    That gap turned out to be an archive-timing artifact rather than a permanent one: the
+    Sentinel-2 archive had not yet backfilled scenes for those dates when the original
+    extraction ran. A complete re-extraction recovered valid data for all 31 Sikkim
+    villages, and on that complete data, both compositing windows now agree that built-up
+    change is not significant (Development Log Entries 21–22; see Statistical Validation).
+    Where a result's direction or significance still changes between the two windows for
+    other tests, that instability continues to be reported as a finding in itself.
     """)
 
 with st.expander("**Control-Group Baseline Imbalance — Level-Balance, Not a Confirmed Pre-Trend**"):
     st.markdown("""
-    The H4 control-group comparison found treated villages start from a significantly
-    different mean 2021 baseline than the 735-village control group in three of the four
-    outcome/window combinations (NDBI summer, and both windows of night-lights — night-lights
-    full-year is the most imbalanced, and also the one combination where the two DiD
-    specifications disagree on significance) — expected, given VVP-I priority villages were
-    themselves selected partly for remoteness and security proximity, but a genuine
-    parallel-pre-trends placebo test could not be run because the control group's satellite
+    On the complete data (Development Log Entry 22), only one of the four outcome/window
+    combinations still shows treated villages starting from a significantly different mean
+    2021 baseline than the 735-village control group: night-lights, full-year — which is
+    also the one control-group DiD result still significant under any specification, and
+    the one combination where the two DiD specifications disagree on significance. The
+    summer window's baseline imbalance, previously present for both NDBI and night-lights,
+    is now resolved once the extraction is complete. A genuine parallel-pre-trends placebo
+    test still could not be run either way, because the control group's satellite
     extraction covers only the same single before/after pair as the treated sample, not a
-    multi-year pre-treatment panel. The reported baseline check is a level-balance check, not
-    a confirmed shared pre-trend — district fixed effects address baseline differences
-    between districts, not village-level selection into the treated group itself.
+    multi-year pre-treatment panel. The reported baseline check is a level-balance check,
+    not a confirmed shared pre-trend — district fixed effects address baseline differences
+    between districts, not village-level selection into the treated group itself, so the
+    one remaining significant DiD result should be read with this in mind.
     """)
 
-with st.expander("**Multi-Year Trend Is Not Monotonic**"):
+with st.expander("**Multi-Year Trend Is Not Monotonic (and Nets Out to a Null, Like the Two-Point Comparison)**"):
     st.markdown("""
-    Extending the core sample to a third time point (2023) shows the reported
-    2021-vs-2025 summer NDBI increase is not a steady trend: mean NDBI declines from 2021
-    to 2023, then rises significantly from 2023 to 2025. The overall three-point linear
-    trend across all three years is not itself statistically significant. This study's
-    satellite-only evidence cannot distinguish between possible explanations for that
-    shape (a late-starting rollout, a weather-driven dip earlier in the window, or some
-    combination) — see Statistical Validation.
+    Extending the core sample to a third time point (2023) shows the 2021-vs-2025 summer
+    NDBI comparison — itself not significant on the complete data — is not a steady trend
+    either: mean NDBI declines from 2021 to 2023, then rises significantly from 2023 to
+    2025, netting out to no significant three-point linear trend overall. This is
+    consistent with, not a contradiction of, the two-point comparison's own null result.
+    This study's satellite-only evidence cannot distinguish between possible explanations
+    for the decline-then-recovery shape (a late-starting rollout, a weather-driven dip
+    earlier in the window, or some combination) — see Statistical Validation.
     """)
 
-with st.expander("**Buffer-Radius Comparison — An Archive-Timing Confound, Diagnosed and Controlled For**"):
+with st.expander("**Buffer-Radius Comparison — An Archive-Timing Confound, Present in Both Directions**"):
     st.markdown("""
-    The 250m and 1km buffer extractions were run at a later date than the original 500m
-    extraction, against the identical fixed 2021/2025 date ranges but a Sentinel-2 archive
-    that had continued to backfill scenes in the meantime — 97 core-sample villages that
-    were null at 500m turned out to be valid at both 250m and 1km, a signature of archive
-    coverage rather than a genuine buffer-radius effect. Comparing "all valid villages per
-    buffer" directly would conflate that timing artifact with the buffer-radius question
-    being asked, so the reported buffer-sensitivity result restricts all three radii to
-    the subsample valid at every radius, holding sample composition fixed.
+    Sentinel-2's archive keeps backfilling scenes for past dates, so any two extractions
+    of the same fixed date range, run on different days, can disagree on scene counts and
+    composite values even with identical query parameters — a mechanism this project has
+    now seen affect both the 500m extraction (Development Log Entries 21–22, where a
+    stale extraction was missing an entire state's villages) and, separately, the 250m/1km
+    comparison here (where the two smaller/larger radii were run in August, before the
+    fresh, complete 500m re-extraction). The buffer-radius conclusion is unaffected either
+    way — all three radii are null on the summer NDBI test, whether compared as-extracted
+    or restricted to villages valid at every radius (now the full core sample at every
+    radius) — but a same-day re-pull of all three radii together was not done for this
+    entry, given the time cost of a full re-extraction at each radius and the fact that
+    the conclusion is already consistent across all three as extracted.
     """)
 
 st.markdown("---")
 
 st.warning("""
-**Budget correlation (RQ2) is exploratory only** — with just two states with sufficient
-valid data (Arunachal Pradesh and Uttarakhand), this should not be read as a confirmatory
-or causal result.
+**Budget correlation (RQ2) is exploratory only** — with just three states with sufficient
+valid data (Arunachal Pradesh, Uttarakhand, and — as of the complete summer-window
+extraction — Sikkim), and a correlation whose direction itself flips between compositing
+windows at this sample size, this should not be read as a confirmatory or causal result.
 """)
 
 st.error("""

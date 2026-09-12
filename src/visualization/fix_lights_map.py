@@ -8,8 +8,10 @@ GOLD = "#D4AF37"
 villages = pd.read_csv("data/processed/border_optics_master_villages_with_distance.csv")
 summer = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
 
-merge_cols = ["village_id", "latitude", "longitude", "distance_to_border_km"]
-summer = summer.merge(villages[merge_cols], on="village_id", how="left")
+# summer's fresh extraction already carries its own latitude/longitude -- only
+# pull distance_to_border_km from villages, or the merge silently renames the
+# plain lat/lon columns to latitude_x/latitude_y (see utils/data.py).
+summer = summer.merge(villages[["village_id", "distance_to_border_km"]], on="village_id", how="left")
 
 valid = summer.dropna(subset=["lights_change", "latitude", "longitude"]).copy()
 

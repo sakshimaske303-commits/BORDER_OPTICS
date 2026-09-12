@@ -65,9 +65,11 @@ st.plotly_chart(fig, use_container_width=True)
 st.dataframe(state_stats, use_container_width=True, hide_index=True)
 
 st.caption(
-    "Sikkim may be absent from one or both metrics above — its summer-matched composite "
-    "returned zero cloud-free imagery for most villages due to monsoon cloud cover (see "
-    "Statistical Validation and Methodology & Limitations)."
+    "Sikkim's summer-matched composite once returned zero cloud-free imagery for all of its "
+    "villages, due to an archive-timing gap rather than permanent monsoon-cloud data loss — "
+    "resolved as of a complete re-extraction (Development Log Entries 21–22), so all three "
+    "core states now appear above in both windows (see Statistical Validation and "
+    "Methodology & Limitations)."
 )
 
 st.markdown("##### Static exports (used in Research Paper)")
@@ -136,8 +138,9 @@ st.plotly_chart(fig_trend, use_container_width=True)
 st.caption(
     f"{my_state_choice} · {my_window_choice.lower()} window · n = {my_scope[f'{trend_prefix}_2021'].count()} villages with complete 2021/2023/2025 data. "
     "The overall summer-matched NDBI trend across all three years is not itself statistically significant "
-    "(Wilcoxon on per-village slopes, p = 0.442) — the reported 2021-vs-2025 increase is concentrated in a "
-    "2023-to-2025 recovery following an earlier 2021-to-2023 decline (see Statistical Validation)."
+    "(Wilcoxon on per-village slopes, p = 0.442) — consistent with the two-point 2021-vs-2025 comparison, "
+    "also not significant on the complete data. This shape is a 2023-to-2025 recovery following an earlier "
+    "2021-to-2023 decline that nets out to no overall trend either way (see Statistical Validation)."
 )
 
 st.image(
@@ -194,10 +197,12 @@ st.markdown(f"""
 <div class="recon-card" style="border-left: 4px solid {PALETTE['warning']};">
     <p style="color: {PALETTE['warning']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Interpretation Caveat</p>
     <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
-        This correlation is <b>exploratory only</b> — with just two core states with
-        sufficient valid data, this has very limited statistical power. It is a directional
-        signal worth revisiting with a larger multi-state sample, not evidence of a causal
-        budget-to-outcome link.
+        This correlation is <b>exploratory only</b> — with just three core states with
+        valid data (as of a complete summer-window extraction; previously two, before
+        Sikkim's data was recovered), this has very limited statistical power, and its
+        direction itself flips between compositing windows at this sample size. It is a
+        directional signal worth revisiting with a larger multi-state sample, not evidence
+        of a causal budget-to-outcome link.
     </p>
 </div>
 """, unsafe_allow_html=True)

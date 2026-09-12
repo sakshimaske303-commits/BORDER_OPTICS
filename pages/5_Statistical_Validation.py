@@ -27,7 +27,8 @@ _checks = [
     (PALETTE['accent'], "✓", "Buffer-Radius Sweep (250m / 500m / 1km)"),
     (PALETTE['accent'], "✓", "Cross-Checked Against Sanctioned Budget"),
     (PALETTE['accent'], "✓", "Every Data Gap Disclosed"),
-    (PALETTE['warning'], "!", "NDBI Result Flagged as Window-Sensitive — Not Confirmed"),
+    (PALETTE['accent'], "✓", "Original Summer NDBI Signal Re-Checked Once Extraction Was Completed — Did Not Survive"),
+    (PALETTE['warning'], "!", "New Summer Border-Proximity Correlation (H3) — Open, Not Yet Stress-Tested"),
 ]
 _badges = "".join(
     f"""<span style="display:inline-flex; align-items:center; gap:6px; background:rgba(167,225,193,0.08);
@@ -160,9 +161,15 @@ st.markdown(
     "regional trend every village in these districts shares. This benchmarks the treated "
     "core sample against 735 district-restricted non-VVP villages in the same 14 districts — district "
     "fixed effects, standard errors clustered by district. Checked further by dropping each "
-    "district one at a time (significant in all 14/14 reruns) and by randomization inference "
-    "(p = 0.0005) — see the Research Paper's Section 4.6."
+    "district one at a time and by randomization inference that doesn't lean on cluster "
+    "asymptotics — see the cards below for each window's own leave-one-out and randomization "
+    "results, and the Research Paper's Section 4.6 for the full breakdown, including why the "
+    "summer-window checks (which used to hold 14/14 and p = 0.0005) no longer do."
 )
+
+_loo = expanded["robustness_extended"]["leave_one_district_out"]
+_rand = expanded["robustness_extended"]["randomization_inference"]
+_fy_lights_robust = expanded["robustness_extended"]["fullyear_lights_did_robustness"]
 
 did_col1, did_col2 = st.columns(2)
 for col, window_key, window_label, border in [
@@ -171,12 +178,17 @@ for col, window_key, window_label, border in [
 ]:
     ndbi_r = next(r for r in expanded[window_key]["did"] if r["outcome"] == "ndbi")
     sig_text = "Significant at α = 0.05" if ndbi_r["did_p"] < 0.05 else "Not significant at α = 0.05"
+    if window_key == "did_summer":
+        loo_text = f"Leave-one-district-out: {_loo['ndbi']['n_significant_of_14']}/14 significant · Randomization p = {_rand['ndbi']['p_randomization']:.4f}"
+    else:
+        loo_text = "Leave-one-out / randomization inference not run for full-year NDBI — not significant to begin with"
     card_html = (
-        '<div class="recon-card" style="border-left: 4px solid ' + border + '; min-height: 160px;">'
+        '<div class="recon-card" style="border-left: 4px solid ' + border + '; min-height: 190px;">'
         + '<p style="color: ' + border + '; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">' + window_label + ' — NDBI DiD</p>'
         + '<p style="color: ' + PALETTE["text_primary"] + '; font-size: 1.6rem; font-weight: 900; margin-bottom: 4px;">did = ' + f"{ndbi_r['did_coef']:+.4f}" + '</p>'
         + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.85rem; margin-bottom: 4px;">p = ' + f"{ndbi_r['did_p']:.4f}" + ' · n = ' + str(ndbi_r['n_treated']) + ' treated / ' + str(ndbi_r['n_control']) + ' control</p>'
-        + '<p style="color: ' + border + '; font-size: 0.82rem; font-weight: 700; margin: 0;">' + sig_text + '</p>'
+        + '<p style="color: ' + border + '; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px;">' + sig_text + '</p>'
+        + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.75rem; margin: 0;">' + loo_text + '</p>'
         + '</div>'
     )
     with col:
@@ -190,12 +202,19 @@ for col, window_key, window_label, border in [
 ]:
     lights_r = next(r for r in expanded[window_key]["did"] if r["outcome"] == "lights")
     sig_text = "Significant at α = 0.05" if lights_r["did_p"] < 0.05 else "Not significant at α = 0.05"
+    if window_key == "did_summer":
+        loo_text = f"Leave-one-district-out: {_loo['lights']['n_significant_of_14']}/14 significant · Randomization p = {_rand['lights']['p_randomization']:.4f}"
+    else:
+        _fy_loo = _fy_lights_robust["leave_one_out"]
+        _fy_rand = _fy_lights_robust["randomization"]
+        loo_text = f"The one control-group result still significant here — leave-one-district-out: {_fy_loo['n_significant_of_14']}/14 significant · Randomization p = {_fy_rand['p_randomization']:.4f}"
     card_html = (
-        '<div class="recon-card" style="border-left: 4px solid ' + border + '; min-height: 160px;">'
+        '<div class="recon-card" style="border-left: 4px solid ' + border + '; min-height: 190px;">'
         + '<p style="color: ' + border + '; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">' + window_label + ' — Night-Lights DiD</p>'
         + '<p style="color: ' + PALETTE["text_primary"] + '; font-size: 1.6rem; font-weight: 900; margin-bottom: 4px;">did = ' + f"{lights_r['did_coef']:+.4f}" + '</p>'
         + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.85rem; margin-bottom: 4px;">p = ' + f"{lights_r['did_p']:.4f}" + ' · n = ' + str(lights_r['n_treated']) + ' treated / ' + str(lights_r['n_control']) + ' control</p>'
-        + '<p style="color: ' + border + '; font-size: 0.82rem; font-weight: 700; margin: 0;">' + sig_text + '</p>'
+        + '<p style="color: ' + border + '; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px;">' + sig_text + '</p>'
+        + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.75rem; margin: 0;">' + loo_text + '</p>'
         + '</div>'
     )
     with col:
@@ -214,11 +233,12 @@ st.image(
     use_container_width=True,
 )
 st.caption(
-    "Baseline (2021) balance check: treated villages start from a significantly different mean "
-    "than control villages in three of the four outcome/window combinations (NDBI summer, and both "
-    "windows of night-lights) — expected, given priority villages were themselves selected partly "
-    "for remoteness, but a reminder this is a level-balance check, not a confirmed shared pre-trend "
-    "(see Methodology & Limitations)."
+    "Baseline (2021) balance check: on the complete data, only one of the four outcome/window "
+    "combinations still shows a significantly different mean between treated and control villages — "
+    "night-lights, full-year (the same combination that is the one control-group result still "
+    "significant above). The summer window's baseline imbalance, previously flagged for both NDBI "
+    "and night-lights, is now resolved. This is a level-balance check, not a confirmed shared "
+    "pre-trend, either way (see Methodology & Limitations)."
 )
 
 st.markdown("---")
@@ -245,8 +265,9 @@ st.image(
     use_container_width=True,
 )
 st.caption(
-    "The reported 2021-vs-2025 summer NDBI increase is concentrated in the 2023-to-2025 "
-    "recovery, following an earlier 2021-to-2023 decline — not a steady trend since sanction."
+    "The 2021-vs-2025 summer NDBI comparison is a null on its own (see H1 above). This three-point "
+    "breakdown shows why: a 2021-to-2023 decline followed by a 2023-to-2025 recovery nets out to "
+    "no significant overall trend either way — consistent with, not contradicting, that null result."
 )
 
 st.markdown("---")
@@ -257,9 +278,10 @@ st.markdown("---")
 st.markdown("### Buffer-Radius Sensitivity — 250m / 500m / 1km")
 st.markdown(
     "The 500m extraction buffer used throughout was a fixed choice. This re-runs the "
-    "summer-window NDBI test at 250m and 1km, on the subsample of villages valid at all "
-    "three radii, to isolate buffer radius from an unrelated archive-coverage difference "
-    "between extraction dates (see Methodology & Limitations)."
+    "summer-window NDBI test at 250m and 1km, on villages valid at all three radii (now the "
+    "full core sample at every radius), to isolate buffer radius from an unrelated archive-"
+    "coverage difference between extraction dates (see Methodology & Limitations). All three "
+    "radii now agree — none significant."
 )
 
 buf_cols = st.columns(3)
@@ -299,11 +321,15 @@ verdict_html = (
     'sign and significance across both windows is treated as the more trustworthy finding. '
     'A result that flips \u2014 in direction, significance, or both \u2014 is reported as evidence '
     'of methodological instability rather than silently resolved by preferring one window. '
-    'The summer-matched NDBI result is the one signal that clears significance here \u2014 and it '
-    'holds up against a district-restricted control group (H4, itself checked further by leave-one-'
-    'district-out reruns and randomization inference), a buffer-radius sweep, and Holm-Bonferroni '
-    'correction, while the multi-year trend shows it is concentrated in 2023\u20132025 rather than '
-    'sustained since sanction. This comparison is the core honesty check of the entire analysis.'
+    'An earlier version of this analysis found the summer-matched NDBI result clearing every '
+    'check run against it \u2014 a control-group comparison, leave-one-district-out reruns, '
+    'randomization inference, a buffer-radius sweep, and Holm-Bonferroni correction. That result '
+    'depended on an incomplete extraction missing an entire state\u2019s villages; once completed, '
+    'it failed every one of those same checks (see the cards and figures above). The one '
+    'control-group result still significant under any specification \u2014 night-lights, full-year \u2014 '
+    'is also the one resting on this study\u2019s worst baseline imbalance and the weakest leave-one-'
+    'out result, so it is reported as a fragile candidate, not a confirmed one. This reversal, not '
+    'either individual result, is the core honesty check of the entire analysis.'
     '</p></div>'
 )
 st.markdown(verdict_html, unsafe_allow_html=True)

@@ -107,9 +107,11 @@ st.markdown(
             has been carried out" (Lok Sabha Unstarred Question No. 508, 3 February 2026). This project
             is that missing independent assessment — testing ₹4,800 crore of sanctioned border-development
             spending against satellite-observed physical change, rather than trusting official progress
-            reports alone. And when the two most defensible measurement choices produce opposite
-            conclusions, that instability is reported as the finding, not resolved by picking whichever
-            version looks better.
+            reports alone. An earlier version of this project reported an unresolved instability between
+            two measurement choices as its headline finding; once the underlying satellite extraction was
+            completed rather than left partial, that instability resolved to a consistent null across both
+            windows — and that reversal, including how it happened, is reported here rather than the
+            original result left standing.
         </p>
     </div>
     """,
@@ -143,16 +145,17 @@ with col_right:
         <p style="color:{PALETTE['accent']}; text-transform:uppercase; font-size:0.78rem;
                   letter-spacing:1.5px; font-weight:800; margin-bottom:12px;">Core Finding</p>
         <p style="color:{PALETTE['text_primary']}; font-size:0.95rem; line-height:1.7; margin:0; font-weight:500;">
-            NDBI (a built-up-surface proxy) was tested across the sample under two
+            NDBI (a built-up-surface proxy) is tested across the sample under two
             separate compositing windows — full-year and summer-matched — to guard against
-            seasonal artifacts. Where the two windows agree, the result is reported with
-            confidence; where they diverge, that instability is disclosed as a genuine
-            finding rather than resolved by discarding one window. The summer-matched
-            result survives a district-restricted-control-group comparison (itself checked
-            further by leave-one-district-out reruns and randomization inference), a buffer-radius sweep, and
-            multiple-testing correction — but a three-point 2021/2023/2025 trend shows it
-            is concentrated in 2023–2025, not sustained since sanction. See Statistical
-            Validation for the full breakdown.
+            seasonal artifacts. An earlier extraction found the two windows disagreeing, with
+            the summer-matched result surviving every robustness check run against it — a
+            control-group comparison, leave-one-district-out reruns, randomization inference,
+            a buffer-radius sweep, and multiple-testing correction. That result depended on an
+            incomplete extraction missing an entire state's villages; once completed, both
+            windows agree on a null, and every one of those same checks now agrees too. The
+            one control-group result still significant under any specification — night-lights,
+            full-year — is also this study's most fragile, resting on its worst baseline
+            imbalance. See Statistical Validation for the full breakdown.
         </p>
     </div>
     """, unsafe_allow_html=True)

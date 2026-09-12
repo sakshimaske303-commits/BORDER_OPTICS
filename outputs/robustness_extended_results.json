@@ -1,30 +1,30 @@
 {
   "leave_one_district_out": {
     "ndbi": {
-      "coef_min": 0.024001512367961785,
-      "coef_max": 0.035919416995255644,
-      "n_significant_of_14": 14
+      "coef_min": -0.0072494767932593795,
+      "coef_max": -0.0007045326399289786,
+      "n_significant_of_14": 0
     },
     "lights": {
-      "coef_min": 0.11166604864226293,
-      "coef_max": 0.17309426629965996,
-      "n_significant_of_14": 14
+      "coef_min": 0.011053437749806605,
+      "coef_max": 0.06417466825782792,
+      "n_significant_of_14": 0
     }
   },
   "randomization_inference": {
     "ndbi": {
-      "observed_coef": 0.032219808702355635,
+      "observed_coef": -0.003797833683035101,
       "n_permutations": 2000,
-      "perm_mean": 0.00046488169716937957,
-      "perm_sd": 0.004796945065063246,
-      "p_randomization": 0.0004997501249375312
+      "perm_mean": 0.00040205374176123466,
+      "perm_sd": 0.0023952850667154765,
+      "p_randomization": 0.11544227886056972
     },
     "lights": {
-      "observed_coef": 0.141333301782818,
+      "observed_coef": 0.037369394342686935,
       "n_permutations": 2000,
-      "perm_mean": 0.003254981552283282,
-      "perm_sd": 0.032251100094714956,
-      "p_randomization": 0.0004997501249375312
+      "perm_mean": 0.0010182436322736669,
+      "perm_sd": 0.02273847805259627,
+      "p_randomization": 0.0944527736131934
     }
   },
   "log_viirs": {
@@ -63,21 +63,21 @@
       },
       "summer": {
         "raw": {
-          "coef": 0.141333301782818,
-          "se": 0.04956946620292109,
-          "p": 0.004355224388263468,
-          "ci_lo": 0.044177148025092663,
-          "ci_hi": 0.23848945554054335,
-          "n": 1002,
+          "coef": 0.037369394342686935,
+          "se": 0.04129739145679461,
+          "p": 0.365526259590892,
+          "ci_lo": -0.043573492912630504,
+          "ci_hi": 0.11831228159800437,
+          "n": 1972,
           "n_districts": 14
         },
         "log1p": {
-          "coef": 0.08113604756364623,
-          "se": 0.022489017271218808,
-          "p": 0.00030879533033896766,
-          "ci_lo": 0.03705757371205737,
-          "ci_hi": 0.1252145214152351,
-          "n": 1002,
+          "coef": 0.013564790146041839,
+          "se": 0.01704072061974494,
+          "p": 0.42601919250586084,
+          "ci_lo": -0.01983502226865825,
+          "ci_hi": 0.046964602560741926,
+          "n": 1972,
           "n_districts": 14
         }
       }
@@ -85,14 +85,179 @@
   },
   "summer_missingness": {
     "n_core": 251,
-    "n_summer_valid": 154,
-    "n_summer_invalid": 97,
-    "state_chi2": 71.41617178963371,
-    "state_chi2_p": 3.10581323674569e-16,
-    "baseline_ndbi_valid_mean": -0.20470095259243593,
-    "baseline_ndbi_invalid_mean": -0.1526534248317124,
-    "baseline_ndbi_mw_p": 0.0006303202302160914,
-    "n_valid_baseline": 154,
-    "n_invalid_baseline": 97
+    "n_summer_valid": 251,
+    "n_summer_invalid": 0,
+    "moot": true,
+    "note": "No missingness remains as of Entry 22's fresh extraction."
+  },
+  "fullyear_lights_did_robustness": {
+    "leave_one_out": {
+      "coef_min": 0.1160700190550723,
+      "coef_max": 0.2165967484923672,
+      "n_significant_of_14": 10,
+      "rows": [
+        {
+          "coef": 0.2165967484923672,
+          "se": 0.09513886014779205,
+          "p": 0.022807849070379013,
+          "ci_lo": 0.030124582602694794,
+          "ci_hi": 0.4030689143820396,
+          "n": 682,
+          "n_districts": 13,
+          "dropped_district": "Anjaw",
+          "significant": true
+        },
+        {
+          "coef": 0.12919756137360783,
+          "se": 0.06696601995786827,
+          "p": 0.05369359442612461,
+          "ci_lo": -0.0020558377438139874,
+          "ci_hi": 0.26045096049102967,
+          "n": 866,
+          "n_districts": 13,
+          "dropped_district": "Chamoli",
+          "significant": false
+        },
+        {
+          "coef": 0.1160700190550723,
+          "se": 0.06516612775068423,
+          "p": 0.07488952674875318,
+          "ci_lo": -0.011655591336268784,
+          "ci_hi": 0.2437956294464134,
+          "n": 738,
+          "n_districts": 13,
+          "dropped_district": "Dibang Valley",
+          "significant": false
+        },
+        {
+          "coef": 0.19423160207617185,
+          "se": 0.09383356759080251,
+          "p": 0.038456219666050416,
+          "ci_lo": 0.010317809598198946,
+          "ci_hi": 0.37814539455414475,
+          "n": 754,
+          "n_districts": 13,
+          "dropped_district": "East Kameng",
+          "significant": true
+        },
+        {
+          "coef": 0.16898564415951745,
+          "se": 0.08321909677414766,
+          "p": 0.0422944333595461,
+          "ci_lo": 0.005876214482188058,
+          "ci_hi": 0.33209507383684683,
+          "n": 846,
+          "n_districts": 13,
+          "dropped_district": "Kra daadi",
+          "significant": true
+        },
+        {
+          "coef": 0.2071346934706797,
+          "se": 0.08713757062190268,
+          "p": 0.01744937077659555,
+          "ci_lo": 0.03634505505175045,
+          "ci_hi": 0.37792433188960894,
+          "n": 742,
+          "n_districts": 13,
+          "dropped_district": "Kurung Kumey",
+          "significant": true
+        },
+        {
+          "coef": 0.16553955742687032,
+          "se": 0.07939640897214667,
+          "p": 0.03707153601656823,
+          "ci_lo": 0.00992259584146285,
+          "ci_hi": 0.3211565190122778,
+          "n": 880,
+          "n_districts": 13,
+          "dropped_district": "Lower Dibang",
+          "significant": true
+        },
+        {
+          "coef": 0.17460706936016113,
+          "se": 0.08599997329014561,
+          "p": 0.042324490787185254,
+          "ci_lo": 0.006047121711475728,
+          "ci_hi": 0.34316701700884655,
+          "n": 820,
+          "n_districts": 13,
+          "dropped_district": "North",
+          "significant": true
+        },
+        {
+          "coef": 0.16294375443727205,
+          "se": 0.08180616900564562,
+          "p": 0.046390018240932085,
+          "ci_lo": 0.0026036631862066395,
+          "ci_hi": 0.32328384568833746,
+          "n": 850,
+          "n_districts": 13,
+          "dropped_district": "Pithoragarh",
+          "significant": true
+        },
+        {
+          "coef": 0.13908029670397037,
+          "se": 0.07549769252814957,
+          "p": 0.06544890725944115,
+          "ci_lo": -0.008895180651202789,
+          "ci_hi": 0.2870557740591435,
+          "n": 830,
+          "n_districts": 13,
+          "dropped_district": "Tawang",
+          "significant": false
+        },
+        {
+          "coef": 0.17020929186161915,
+          "se": 0.08237942484053848,
+          "p": 0.03881312295498495,
+          "ci_lo": 0.008745619174163721,
+          "ci_hi": 0.3316729645490746,
+          "n": 852,
+          "n_districts": 13,
+          "dropped_district": "Upper Siang",
+          "significant": true
+        },
+        {
+          "coef": 0.16900387800646466,
+          "se": 0.08095620082149917,
+          "p": 0.03683425187746929,
+          "ci_lo": 0.01032972439632629,
+          "ci_hi": 0.327678031616603,
+          "n": 866,
+          "n_districts": 13,
+          "dropped_district": "Upper Subansiri",
+          "significant": true
+        },
+        {
+          "coef": 0.15152325273458822,
+          "se": 0.07806853904516367,
+          "p": 0.05227036870341368,
+          "ci_lo": -0.0014910837939325627,
+          "ci_hi": 0.30453758926310903,
+          "n": 862,
+          "n_districts": 13,
+          "dropped_district": "Uttarkashi",
+          "significant": false
+        },
+        {
+          "coef": 0.16563920648982222,
+          "se": 0.07957896228936238,
+          "p": 0.037393224035267084,
+          "ci_lo": 0.009664440402671948,
+          "ci_hi": 0.3216139725769725,
+          "n": 878,
+          "n_districts": 13,
+          "dropped_district": "West Kameng",
+          "significant": true
+        }
+      ]
+    },
+    "randomization": {
+      "observed_coef": 0.16532328120547635,
+      "n_permutations": 2000,
+      "perm_mean": 0.0006111576439045424,
+      "perm_sd": 0.06741318503312803,
+      "p_randomization": 0.015492253873063468
+    }
   }
 }

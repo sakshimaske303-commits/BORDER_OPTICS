@@ -116,6 +116,22 @@ def extract_window(window_key, checkpoint_every=10):
     if os.path.exists(out_path):
         villages = pd.read_csv(out_path)
         print(f"Resuming from existing checkpoint: {out_path}")
+        if "latitude" not in villages.columns or "longitude" not in villages.columns:
+            # The committed checkpoint files predate this per-row-loop script (they
+            # still carry system:index/.geo, artifacts of an earlier GEE
+            # Export.table-based version of this pipeline) and never had
+            # latitude/longitude columns at all — only VILLAGES_PATH does. Without
+            # this, a resume run has no coordinates to build ee.Geometry.Point from
+            # for any row that still needs (re-)extracting, and crashes with
+            # KeyError: 'longitude' the moment it reaches one. Pull coordinates back
+            # in from the master village list, joined on village_id (the stable
+            # join key across every processed file — see DATA_DICTIONARY.md).
+            coords = pd.read_csv(VILLAGES_PATH)[["village_id", "latitude", "longitude"]]
+            villages = villages.merge(coords, on="village_id", how="left")
+            missing_coords = villages["latitude"].isna().sum()
+            if missing_coords:
+                print(f"  WARNING: {missing_coords} row(s) in the checkpoint have no matching "
+                      f"village_id in {VILLAGES_PATH} — their coordinates are still missing.")
     else:
         villages = pd.read_csv(VILLAGES_PATH)
 

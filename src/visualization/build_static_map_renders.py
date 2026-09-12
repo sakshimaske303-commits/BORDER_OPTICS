@@ -57,9 +57,12 @@ def main():
     full_year = pd.read_csv("data/processed/border_optics_village_results_analyzed.csv")
     summer = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
 
+    # summer's fresh extraction already carries its own latitude/longitude -- only
+    # pull distance_to_border_km from villages for it, or the merge silently renames
+    # the plain lat/lon columns to latitude_x/latitude_y (see utils/data.py).
     merge_cols = ["village_id", "latitude", "longitude", "distance_to_border_km"]
     full_year = full_year.merge(villages[merge_cols], on="village_id", how="left")
-    summer = summer.merge(villages[merge_cols], on="village_id", how="left")
+    summer = summer.merge(villages[["village_id", "distance_to_border_km"]], on="village_id", how="left")
 
     out_dir = "outputs/figures/static_map_renders"
     os.makedirs(out_dir, exist_ok=True)

@@ -30,7 +30,7 @@ One row per village per compositing window, produced by `extract_satellite_data.
 | `ndbi_change` | float | `ndbi_after - ndbi_before`. Added during analysis, not part of the raw GEE export. |
 | `lights_before`, `lights_after` | float | Mean VIIRS DNB monthly radiance (`avg_rad`) over the same buffer/periods. |
 | `lights_change` | float | `lights_after - lights_before`. |
-| `before_image_count`, `after_image_count` | int | Number of Sentinel-2 images that went into each period's composite — present only in the summer-matched files, since this is what surfaced Sikkim's complete data loss in that window (BO_Development_Log.md, Entry 5). Not present in the full-year files; a null `ndbi_before`/`ndbi_after` is the only signal of a missing full-year composite. |
+| `before_image_count`, `after_image_count` | int | Number of Sentinel-2 images that went into each period's composite — present only in the summer-matched files, since this is what originally surfaced Sikkim's complete data loss in that window (BO_Development_Log.md, Entry 5). That data loss was later found to be an archive-timing artifact rather than a permanent gap, and is resolved as of the complete re-extraction in Entry 22 — all core-sample villages, Sikkim included, now carry non-zero counts. Not present in the full-year files; a null `ndbi_before`/`ndbi_after` is the only signal of a missing full-year composite. |
 | `system:index`, `.geo` | — | Google Earth Engine export artifacts (feature index and geometry, GeoJSON-encoded). Not used downstream; harmless to ignore. |
 
 ## Compositing windows, defined precisely
@@ -120,7 +120,7 @@ The core-sample villages re-extracted at 250m and 1km buffer radii (summer-match
 
 ## `border_optics_buffer_sensitivity_summary.json`
 
-Top-level keys: `as_extracted` (Wilcoxon results at each radius using all villages with valid data at that radius, varying n), `coverage_note` (the archive-timing/Sentinel-2 backfill explanation for why the 250m/1km extractions picked up more villages than the original 500m pull), and `matched_subsample` (the same test restricted to the 154-village subsample with valid data at all three radii — the version actually reported as the robustness result in Section 4.8).
+Top-level keys: `as_extracted` (Wilcoxon results at each radius using all villages with valid data at that radius), `coverage_note` (the archive-timing/Sentinel-2 backfill explanation for why the three extraction dates can disagree on scene counts even for identical query parameters — see Development Log Entry 22 for the current direction of that gap), and `matched_subsample` (the same test restricted to villages with valid data at all three radii — as of Entry 22's complete 500m re-extraction, this is the full 251-village core sample at all three radii, not a smaller subset; the version reported as the robustness result in Section 4.8, now null at all three radii).
 
 ## Statuses used in the geocoding pipeline (`data/processed/<state>_geocoded.csv`)
 

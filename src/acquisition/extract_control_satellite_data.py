@@ -121,15 +121,39 @@ def extract_window(window_key, checkpoint_every=10):
             if {"latitude", "longitude"}.issubset(existing.columns) else set()
         )
         if existing_coords and existing_coords == current_coords:
+            # Build both sides' lookup keys with the SAME rounding call
+            # (pandas' vectorized Series.round(6)) and look them up via a
+            # plain dict rather than a DataFrame index. A previous version
+            # of this block computed the checkpoint's keys with
+            # Series.round(6) but each row's own key with Python's
+            # built-in round() on a scalar — for almost every coordinate
+            # those agree, but for some (e.g. Shirong, Anjaw:
+            # 27.903587, 96.940911) the two rounding paths disagree at
+            # the 6th decimal due to floating-point representation, even
+            # though the aggregate coordinate SETS still matched overall.
+            # That made a real, non-corrupted row fail a `.at[]` lookup
+            # with a raw KeyError and crash the whole run partway through
+            # a resume. Using one rounding path for both sides, and a
+            # dict `.get()` instead of `.at[]`, removes the mismatch and
+            # degrades gracefully (re-extracts the row) if a key is ever
+            # genuinely still missing instead of crashing.
             lookup = existing.copy()
             lookup["_coord_key"] = list(zip(lookup["latitude"].round(6), lookup["longitude"].round(6)))
-            lookup = lookup.set_index("_coord_key")
-            for i, row in villages.iterrows():
-                key = (round(row["latitude"], 6), round(row["longitude"], 6))
+            lookup_dict = lookup.set_index("_coord_key")[outcome_cols].to_dict("index")
+            villages_keys = list(zip(villages["latitude"].round(6), villages["longitude"].round(6)))
+            missing_keys = 0
+            for i, key in zip(villages.index, villages_keys):
+                values = lookup_dict.get(key)
+                if values is None:
+                    missing_keys += 1
+                    continue
                 for col in outcome_cols:
-                    if col in lookup.columns:
-                        villages.at[i, col] = lookup.at[key, col]
+                    villages.at[i, col] = values[col]
             print(f"Resuming from existing checkpoint: {out_path} (matched by coordinate, {len(existing)} rows)")
+            if missing_keys:
+                print(f"  NOTE: {missing_keys} row(s) had no exact coordinate match in the checkpoint despite "
+                      f"the aggregate coordinate sets matching (a rounding edge case) — left unfilled, will be "
+                      f"(re-)extracted below rather than skipped.")
         else:
             print(f"  Existing checkpoint at {out_path} ({len(existing)} rows) doesn't match the current "
                   f"{len(villages)}-village list in {VILLAGES_PATH} — the control-village list was regenerated "

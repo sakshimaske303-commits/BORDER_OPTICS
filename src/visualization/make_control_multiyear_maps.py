@@ -44,8 +44,9 @@ def fit_bounds(m, lat_col, lon_col, df):
 def make_treated_vs_control_map():
     treated = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
     treated = treated[treated["is_core_sample"] == True].copy()
-    villages = pd.read_csv("data/processed/border_optics_master_villages_with_distance.csv")
-    treated = treated.merge(villages[["village_id", "latitude", "longitude"]], on="village_id", how="left")
+    # treated's fresh extraction already carries its own latitude/longitude columns --
+    # no merge needed (and merging villages' copy back in would silently rename them
+    # to latitude_x/latitude_y, dropping the plain columns; see utils/data.py).
     treated["group"] = "Treated (VVP-I)"
 
     control = pd.read_csv("data/processed/border_optics_control_results_summer.csv")

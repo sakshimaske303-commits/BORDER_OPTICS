@@ -238,13 +238,28 @@ def log_viirs_sensitivity():
 
 def summer_missingness():
     print("=" * 70)
-    print("4. SUMMER-WINDOW MISSINGNESS MECHANISM (core sample)")
+    print("4. SUMMER-WINDOW MISSINGNESS MECHANISM (core sample) -- HISTORICAL")
     print("=" * 70)
     summer = pd.read_csv(TREATED_PATHS["summer"])
     core = summer[summer["is_core_sample"] == True].copy()
     core["summer_valid"] = core["ndbi_before"].notna() & core["ndbi_after"].notna()
     n_valid, n_invalid = int(core["summer_valid"].sum()), int((~core["summer_valid"]).sum())
     print(f"  n core = {len(core)}, summer-valid = {n_valid}, summer-invalid = {n_invalid}")
+
+    if n_invalid == 0:
+        # As of Development Log Entry 22, the summer window's extraction is
+        # complete (251/251 core-sample villages valid) -- the missingness
+        # this check was built to quantify (Entry 20) no longer exists. Left
+        # in place rather than deleted, so the "before" state stays
+        # reproducible, but there is no second group left to compare against.
+        print("  No summer-invalid villages remain (fresh, complete extraction -- see Entry 22).")
+        print("  This check is now moot: nothing left to compare against. Historical result")
+        print("  (154 valid / 97 invalid, chi2=71.42 p~3.1e-16, baseline NDBI Mann-Whitney p=0.00063)")
+        print("  is preserved in Development Log Entry 20 and superseded Research Paper drafts.\n")
+        return {
+            "n_core": len(core), "n_summer_valid": n_valid, "n_summer_invalid": n_invalid,
+            "moot": True, "note": "No missingness remains as of Entry 22's fresh extraction.",
+        }
 
     tab = pd.crosstab(core["state"], core["summer_valid"])
     chi2, chi2_p, _, _ = stats.chi2_contingency(tab)
@@ -271,12 +286,75 @@ def summer_missingness():
     }
 
 
+# ---------------------------------------------------------------------------
+# 5. Leave-one-district-out + randomization inference on the full-year
+# night-lights DiD -- added in Entry 22, once the summer-window DiD (which
+# checks 1-2 above were originally built to stress-test) stopped being
+# significant on the fresh, complete data. The full-year lights gap is now
+# the only control-group DiD result still significant at all, so it gets the
+# same stress test the summer result got in Entry 20 -- not assumed solid
+# just because it's the one left standing.
+# ---------------------------------------------------------------------------
+
+def fullyear_lights_robustness():
+    print("=" * 70)
+    print("5. LEAVE-ONE-OUT + RANDOMIZATION INFERENCE, FULL-YEAR LIGHTS DiD")
+    print("   (the last still-significant control-group DiD result, post-Entry-22)")
+    print("=" * 70)
+    df = pd.read_csv(PANEL_PATHS["full_year"])
+    districts = sorted(df["district"].unique())
+    rows = []
+    for d in districts:
+        r = run_did(df[df["district"] != d], "lights")
+        r["dropped_district"] = d
+        r["significant"] = r["p"] < 0.05
+        rows.append(r)
+        print(f"  drop {d:16s} coef={r['coef']:+.5f}  p={r['p']:.5f}  {'YES' if r['significant'] else 'no'}")
+    n_sig = sum(r["significant"] for r in rows)
+    coefs = [r["coef"] for r in rows]
+    print(f"  -> coef range [{min(coefs):+.5f}, {max(coefs):+.5f}], significant (p<0.05) in "
+          f"{n_sig}/{len(rows)} district-dropped reruns\n")
+
+    rng = np.random.RandomState(RNG_SEED)
+    observed = run_did(df, "lights")
+    obs_coef = observed["coef"]
+    df["_key"] = df["treatment"].astype(str) + "_" + df["village_id"].astype(str)
+    villages = df.drop_duplicates(subset=["_key"])[["_key", "district", "treatment"]]
+    perm_coefs = []
+    for _ in range(N_PERMUTATIONS):
+        perm = villages.copy()
+        for d, grp in perm.groupby("district"):
+            perm.loc[grp.index, "treatment"] = rng.permutation(grp["treatment"].values)
+        treat_map = dict(zip(perm["_key"], perm["treatment"]))
+        df_p = df.copy()
+        df_p["treatment"] = df_p["_key"].map(treat_map)
+        df_p["did_term"] = df_p["treatment"] * df_p["post"]
+        perm_coefs.append(run_did(df_p, "lights")["coef"])
+    perm_coefs = np.array(perm_coefs)
+    p_perm = (np.sum(np.abs(perm_coefs) >= np.abs(obs_coef)) + 1) / (len(perm_coefs) + 1)
+    print(f"  observed coef={obs_coef:+.5f} | permutation mean={perm_coefs.mean():+.5f}, "
+          f"SD={perm_coefs.std():.5f} | randomization-inference p={p_perm:.5f}\n")
+
+    return {
+        "leave_one_out": {
+            "coef_min": min(coefs), "coef_max": max(coefs), "n_significant_of_14": n_sig,
+            "rows": rows,
+        },
+        "randomization": {
+            "observed_coef": float(obs_coef), "n_permutations": int(len(perm_coefs)),
+            "perm_mean": float(perm_coefs.mean()), "perm_sd": float(perm_coefs.std()),
+            "p_randomization": float(p_perm),
+        },
+    }
+
+
 def main():
     results = {
         "leave_one_district_out": leave_one_district_out(),
         "randomization_inference": randomization_inference(),
         "log_viirs": log_viirs_sensitivity(),
         "summer_missingness": summer_missingness(),
+        "fullyear_lights_did_robustness": fullyear_lights_robustness(),
     }
     with open(OUT_JSON, "w") as f:
         json.dump(results, f, indent=2, default=str)
