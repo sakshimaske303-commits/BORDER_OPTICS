@@ -25,12 +25,13 @@ One row per village per compositing window, produced by `extract_satellite_data.
 |---|---|---|
 | `village_id` | int | Join key back to the master village table. |
 | `village`, `district`, `block`, `state`, `is_core_sample` | — | Carried through from the master table for convenience. |
-| `ndbi_before` | float | Mean NDBI over the 500m village buffer, "before" period (2021). Null if zero cloud-free Sentinel-2 images were available in that window. |
+| `ndbi_before` | float | Mean NDBI over the 500m village buffer, "before" period (2021). Null if the filtered, QA60-cloud-masked Sentinel-2 collection had zero images for that village/window (see `*_image_count` columns below). Note this is a per-image cloud/cirrus bitmask applied before compositing, not a guarantee that every pixel in the 500m buffer was cloud-free in every contributing image. |
 | `ndbi_after` | float | Mean NDBI, "after" period (2025). Same null convention. |
 | `ndbi_change` | float | `ndbi_after - ndbi_before`. Added during analysis, not part of the raw GEE export. |
 | `lights_before`, `lights_after` | float | Mean VIIRS DNB monthly radiance (`avg_rad`) over the same buffer/periods. |
 | `lights_change` | float | `lights_after - lights_before`. |
-| `before_image_count`, `after_image_count` | int | Number of Sentinel-2 images that went into each period's composite — present only in the summer-matched files, since this is what originally surfaced Sikkim's complete data loss in that window (BO_Development_Log.md, Entry 5). That data loss was later found to be an archive-timing artifact rather than a permanent gap, and is resolved as of the complete re-extraction in Entry 22 — all core-sample villages, Sikkim included, now carry non-zero counts. Not present in the full-year files; a null `ndbi_before`/`ndbi_after` is the only signal of a missing full-year composite. |
+| `before_image_count`, `after_image_count` | int | Number of Sentinel-2 images in the filtered collection that went into each period's composite — present only in the summer-matched treated-village files, since this is what originally surfaced Sikkim's complete data loss in that window (BO_Development_Log.md, Entry 5). That data loss was later found to be an archive-timing artifact rather than a permanent gap, and is resolved as of the complete re-extraction in Entry 22 — all core-sample villages, Sikkim included, now carry non-zero counts. Not present in the full-year treated files; a null `ndbi_before`/`ndbi_after` is the only signal of a missing full-year composite. |
+| `ndbi_before_image_count`, `ndbi_after_image_count`, `lights_before_image_count`, `lights_after_image_count` | int | Per-metric image counts, present alongside the generic pair above in the summer-matched treated-village files as of the Entry 22 re-extraction (the extraction script now reports NDBI and VIIRS counts separately, since they draw from different collections with different revisit cadences). Same per-metric columns as described for the control-results files below, but here also present in the summer-matched treated file specifically, not only in the control files. |
 | `system:index`, `.geo` | — | Google Earth Engine export artifacts (feature index and geometry, GeoJSON-encoded). Not used downstream; harmless to ignore. |
 
 ## Compositing windows, defined precisely
@@ -58,7 +59,7 @@ Control-group villages run through the identical extraction pipeline (same 500m 
 
 | Column | Type | Description |
 |---|---|---|
-| `ndbi_before`, `ndbi_after`, `ndbi_before_image_count`, `ndbi_after_image_count` | float / int | Same NDBI meaning as the treated village-results files, extracted for control villages — but note the image-count columns here are per-metric (`ndbi_*_image_count`) and present in BOTH the full-year and summer-matched control files, unlike the treated files' generic `before_image_count`/`after_image_count` pair described above, which exists only in the summer-matched treated file. |
+| `ndbi_before`, `ndbi_after`, `ndbi_before_image_count`, `ndbi_after_image_count` | float / int | Same NDBI meaning as the treated village-results files, extracted for control villages — the per-metric image-count columns here (`ndbi_*_image_count`) are present in BOTH the full-year and summer-matched control files. The treated files additionally carry a generic `before_image_count`/`after_image_count` pair in the summer-matched file only, described above — as of Entry 22, the summer-matched treated file has both the generic pair and the per-metric columns; the full-year treated file has neither. |
 | `lights_before`, `lights_after`, `lights_before_image_count`, `lights_after_image_count` | float / int | VIIRS radiance equivalents, same per-metric/both-windows image-count columns as the NDBI ones above. |
 
 ## `border_optics_did_panel_fullyear.csv` / `border_optics_did_panel_summer.csv`
