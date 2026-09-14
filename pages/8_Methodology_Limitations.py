@@ -36,7 +36,7 @@ st.markdown("---")
 st.markdown("### Processing Pipeline")
 
 st.markdown("""
-Each village — treated and, identically, the 735-village non-VVP control group — is
+Each village — treated and, identically, the 732-village non-VVP control group — is
 buffered (500m primary, with 250m and 1km run as a robustness check) and used as the
 region for `reduceRegion` over cloud-masked Sentinel-2 composites (QA60 bitmask) and
 VIIRS monthly composites, for both a full-year window and a season-matched (Jun–Sep)
@@ -133,21 +133,23 @@ with st.expander("**Composite Window Trade-Off — Snow vs. Monsoon Cloud**"):
     other tests, that instability continues to be reported as a finding in itself.
     """)
 
-with st.expander("**Control-Group Baseline Imbalance — Level-Balance, Not a Confirmed Pre-Trend**"):
+with st.expander("**Control-Group Baseline Imbalance — Resolved, and Why It Mattered**"):
     st.markdown("""
     On the complete data (Development Log Entry 22), only one of the four outcome/window
-    combinations still shows treated villages starting from a significantly different mean
-    2021 baseline than the 735-village control group: night-lights, full-year — which is
-    also the one control-group DiD result still significant under any specification, and
-    the one combination where the two DiD specifications disagree on significance. The
-    summer window's baseline imbalance, previously present for both NDBI and night-lights,
-    is now resolved once the extraction is complete. A genuine parallel-pre-trends placebo
-    test still could not be run either way, because the control group's satellite
-    extraction covers only the same single before/after pair as the treated sample, not a
-    multi-year pre-treatment panel. The reported baseline check is a level-balance check,
-    not a confirmed shared pre-trend — district fixed effects address baseline differences
-    between districts, not village-level selection into the treated group itself, so the
-    one remaining significant DiD result should be read with this in mind.
+    combinations still showed treated villages starting from a significantly different mean
+    2021 baseline than the 732-village control group: night-lights, full-year — which was
+    also, at the time, the one control-group DiD result still significant under any
+    specification, and the one combination where the two DiD specifications disagreed on
+    significance. That imbalance is now resolved too: once the control group's own
+    contamination was found (Development Log Entry 23 — 20 exact-coordinate duplicates of
+    treated villages plus 3 official-name matches, together implicating 23 control-group
+    rows) and actually fixed against live data (Entry 25), the full-year night-lights
+    baseline is no longer significantly imbalanced, and neither is any other combination.
+    All four outcome/window baseline checks are now statistically balanced. A genuine
+    parallel-pre-trends placebo test still could not be run either way, because the control
+    group's satellite extraction covers only the same single before/after pair as the
+    treated sample, not a multi-year pre-treatment panel — so this remains a level-balance
+    check, not a confirmed shared pre-trend, even though it is now a cleaner one.
     """)
 
 with st.expander("**Multi-Year Trend Is Not Monotonic (and Nets Out to a Null, Like the Two-Point Comparison)**"):

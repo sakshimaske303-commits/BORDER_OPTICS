@@ -18,33 +18,40 @@ abstract: >-
   across 2,967 villages in five Himalayan border states/union territories.
   Using Sentinel-2 built-up-index (NDBI) and VIIRS night-lights data at 258
   individually geocoded villages against a district-restricted non-VVP
-  control group of 735 villages in the same 14 districts, this study tests
+  control group of 732 villages in the same 14 districts, this study tests
   whether VVP-I's priority villages show measurable physical development
   since programme sanction, under two independent compositing windows
   (full-year and summer-matched) as an explicit robustness check rather than
-  trusting a single satellite comparison. An earlier version of this study
-  found a significant summer-window built-up-area increase that survived
-  every robustness check run against it; that result depended on an
-  incomplete satellite extraction that had returned zero usable imagery for
-  all 31 of Sikkim's villages, an archive-timing artifact rather than a
-  permanent gap. Once a complete re-extraction was pulled the same day as the
-  control group's own data, the result reversed to a clean null and stayed
-  null against the control group, under leave-one-district-out and
-  randomization-inference checks, and across a 250m/500m/1km buffer-radius
-  sweep. Night-lights show no absolute before/after increase of their own in
-  either window; against the control group, one fragile result survives — a
-  full-year positive gap that holds under district fixed effects but not
-  under an HC3 no-fixed-effects specification, rests on this study's worst
-  treated-vs-control baseline imbalance, and holds in only 10 of 14
-  leave-one-district-out reruns. A new, unstressed finding takes the old
-  result's place: on the complete data, summer-window built-up change
-  correlates with distance to the border/LAC (ρ = 0.291, p = 0.0000026) —
-  opposite to the direction predicted by securitization theory, and flagged
-  as open pending the same robustness checks already run on the retired
-  result. The reversal itself, and the incomplete-extraction mechanism behind
-  it, are reported as the central methodological finding, addressing a
-  parliamentary record showing no independent impact assessment has ever been
-  carried out for VVP-I.
+  trusting a single satellite comparison. Two earlier versions of this study
+  each found a significant result that turned out, on inspection, to be a
+  data artifact rather than a real effect. The first was a summer-window
+  built-up-area increase that survived every robustness check run against
+  it; that result depended on an incomplete satellite extraction that had
+  returned zero usable imagery for all 31 of Sikkim's villages, an
+  archive-timing artifact rather than a permanent gap. Once a complete
+  re-extraction was pulled the same day as the control group's own data, the
+  result reversed to a clean null and stayed null against the control group,
+  under leave-one-district-out and randomization-inference checks, and
+  across a 250m/500m/1km buffer-radius sweep. The second was a full-year
+  night-lights control-group gap that then took the first result's place as
+  this study's one remaining significant finding; it turned out to depend on
+  a contaminated control group (23 of 735 control villages were physically
+  or nominally duplicates of treated villages), and once that contamination
+  was actually removed and the control list regenerated to 732 villages
+  (independently verified at zero overlap), the gap went null under every
+  specification that had previously found it significant, including
+  leave-one-district-out and randomization inference. Night-lights show no
+  absolute before/after increase of their own in either window, and no
+  control-group gap in either window either, once the data is complete and
+  decontaminated. A new, unstressed finding takes both retired results'
+  place: on the complete data, summer-window built-up change correlates with
+  distance to the border/LAC (ρ = 0.291, p = 0.0000026) — opposite to the
+  direction predicted by securitization theory, and flagged as open pending
+  the same robustness checks already run on the two retired results. Both
+  reversals, and the incomplete-extraction and control-group-contamination
+  mechanisms behind them, are reported as the central methodological
+  finding, addressing a parliamentary record showing no independent impact
+  assessment has ever been carried out for VVP-I.
 keywords:
   - Vibrant Villages Programme
   - border development

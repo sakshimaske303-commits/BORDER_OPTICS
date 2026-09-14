@@ -132,7 +132,7 @@ with col_left:
 
     This project fills that gap: applying **Sentinel-2 built-up-area indices (NDBI)** and
     **VIIRS night-lights** data to 258 individually geocoded villages, benchmarked against
-    a district-restricted non-VVP control group of 735 villages in the same districts, testing whether
+    a district-restricted non-VVP control group of 732 villages in the same districts, testing whether
     measurable change occurred between 2021 and 2025, whether it is attributable to VVP-I
     specifically, whether it correlates with state-wise budget allocation, and whether
     proximity to the border/LAC itself predicts the pace of development — with every data
@@ -152,10 +152,14 @@ with col_right:
             control-group comparison, leave-one-district-out reruns, randomization inference,
             a buffer-radius sweep, and multiple-testing correction. That result depended on an
             incomplete extraction missing an entire state's villages; once completed, both
-            windows agree on a null, and every one of those same checks now agrees too. The
-            one control-group result still significant under any specification — night-lights,
-            full-year — is also this study's most fragile, resting on its worst baseline
-            imbalance. See Statistical Validation for the full breakdown.
+            windows agree on a null, and every one of those same checks now agrees too. A
+            second result — night-lights, full-year, against the control group — then took
+            its place as this study's one remaining significant finding, until the control
+            group itself was found to be contaminated with 23 villages that were physically or
+            nominally duplicates of treated villages. With that fixed and the control list
+            regenerated, that result is null too: no control-group DiD result, for either
+            outcome or window, clears significance under any specification any more. See
+            Statistical Validation for the full breakdown.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -172,7 +176,7 @@ with m1:
         <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Satellite Verification</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
             Sentinel-2 NDBI and VIIRS night-lights extracted at 258 treated village points
-            plus 735 district-restricted control villages, across paired 2021/2025 composites (plus
+            plus 732 district-restricted control villages, across paired 2021/2025 composites (plus
             2023) under both full-year and season-matched windows, at 250m/500m/1km
             buffers.
         </p>

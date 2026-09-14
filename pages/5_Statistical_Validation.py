@@ -21,7 +21,7 @@ _checks = [
     (PALETTE['accent'], "✓", "Dual Compositing-Window Test"),
     (PALETTE['accent'], "✓", "Two Independent Metrics (NDBI + VIIRS)"),
     (PALETTE['accent'], "✓", "Wilcoxon Signed-Rank Tests"),
-    (PALETTE['accent'], "✓", "District-Restricted Non-VVP Control Group (735 villages, DiD)"),
+    (PALETTE['accent'], "✓", "District-Restricted Non-VVP Control Group (732 villages, DiD)"),
     (PALETTE['accent'], "✓", "Control-Group DiD Checked Further (Leave-One-District-Out + Randomization Inference)"),
     (PALETTE['accent'], "✓", "Three-Point Multi-Year Trend (2021/2023/2025)"),
     (PALETTE['accent'], "✓", "Buffer-Radius Sweep (250m / 500m / 1km)"),
@@ -159,12 +159,15 @@ st.markdown("### H4 — Control-Group Difference-in-Differences")
 st.markdown(
     "A treated-only before/after comparison can't tell VVP-I's own effect apart from a "
     "regional trend every village in these districts shares. This benchmarks the treated "
-    "core sample against 735 district-restricted non-VVP villages in the same 14 districts — district "
+    "core sample against 732 district-restricted non-VVP villages in the same 14 districts — district "
     "fixed effects, standard errors clustered by district. Checked further by dropping each "
     "district one at a time and by randomization inference that doesn't lean on cluster "
     "asymptotics — see the cards below for each window's own leave-one-out and randomization "
     "results, and the Research Paper's Section 4.6 for the full breakdown, including why the "
-    "summer-window checks (which used to hold 14/14 and p = 0.0005) no longer do."
+    "summer-window checks (which used to hold 14/14 and p = 0.0005) no longer do, and why the "
+    "full-year night-lights check, which briefly held after that (10/14, p = 0.0155), also no "
+    "longer does once the control group's own contamination was found and fixed (Development "
+    "Log Entries 23-25)."
 )
 
 _loo = expanded["robustness_extended"]["leave_one_district_out"]
@@ -207,7 +210,7 @@ for col, window_key, window_label, border in [
     else:
         _fy_loo = _fy_lights_robust["leave_one_out"]
         _fy_rand = _fy_lights_robust["randomization"]
-        loo_text = f"The one control-group result still significant here — leave-one-district-out: {_fy_loo['n_significant_of_14']}/14 significant · Randomization p = {_fy_rand['p_randomization']:.4f}"
+        loo_text = f"Previously this study's one surviving control-group result (contaminated control list) — now null on the corrected data: leave-one-district-out {_fy_loo['n_significant_of_14']}/14 significant · Randomization p = {_fy_rand['p_randomization']:.4f}"
     card_html = (
         '<div class="recon-card" style="border-left: 4px solid ' + border + '; min-height: 190px;">'
         + '<p style="color: ' + border + '; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">' + window_label + ' — Night-Lights DiD</p>'
@@ -220,11 +223,13 @@ for col, window_key, window_label, border in [
     with col:
         st.markdown(card_html, unsafe_allow_html=True)
 st.caption(
-    "Night-lights' DiD gap is not an absolute rise in treated villages — their own before/after "
-    "night-lights change is a clean null (see H1 below) — it reflects control villages declining "
-    "over the same period while treated villages held flat. The full-year figure above is significant "
-    "under district fixed effects but not under the no-fixed-effects comparison; see Methodology & "
-    "Limitations for why."
+    "Night-lights' own before/after change is a clean null in both windows (see H1 below). Against "
+    "the control group, the full-year gap had briefly looked significant under district fixed effects "
+    "(but not the no-fixed-effects comparison) — until the control group itself was found to contain "
+    "23 villages that were physically or nominally duplicate of treated villages (Development Log "
+    "Entry 23). With that fixed and the control list regenerated (Entry 25), the figure above reflects "
+    "the corrected, decontaminated data and is null on every specification; see Methodology & "
+    "Limitations for the full account."
 )
 
 st.image(
@@ -233,12 +238,11 @@ st.image(
     use_container_width=True,
 )
 st.caption(
-    "Baseline (2021) balance check: on the complete data, only one of the four outcome/window "
-    "combinations still shows a significantly different mean between treated and control villages — "
-    "night-lights, full-year (the same combination that is the one control-group result still "
-    "significant above). The summer window's baseline imbalance, previously flagged for both NDBI "
-    "and night-lights, is now resolved. This is a level-balance check, not a confirmed shared "
-    "pre-trend, either way (see Methodology & Limitations)."
+    "Baseline (2021) balance check: on the complete, decontaminated data, all four outcome/window "
+    "combinations are now statistically balanced between treated and control villages — including "
+    "night-lights, full-year, this study's single worst imbalance before the control-group "
+    "contamination fix (Development Log Entry 25). This is a level-balance check, not a confirmed "
+    "shared pre-trend, either way (see Methodology & Limitations)."
 )
 
 st.markdown("---")
@@ -321,15 +325,20 @@ verdict_html = (
     'sign and significance across both windows is treated as the more trustworthy finding. '
     'A result that flips \u2014 in direction, significance, or both \u2014 is reported as evidence '
     'of methodological instability rather than silently resolved by preferring one window. '
-    'An earlier version of this analysis found the summer-matched NDBI result clearing every '
-    'check run against it \u2014 a control-group comparison, leave-one-district-out reruns, '
-    'randomization inference, a buffer-radius sweep, and Holm-Bonferroni correction. That result '
-    'depended on an incomplete extraction missing an entire state\u2019s villages; once completed, '
-    'it failed every one of those same checks (see the cards and figures above). The one '
-    'control-group result still significant under any specification \u2014 night-lights, full-year \u2014 '
-    'is also the one resting on this study\u2019s worst baseline imbalance and the weakest leave-one-'
-    'out result, so it is reported as a fragile candidate, not a confirmed one. This reversal, not '
-    'either individual result, is the core honesty check of the entire analysis.'
+    'This study has, in turn, found two of its own results clearing every check run against them, '
+    'only to fail once the underlying data problem behind each was actually fixed. First: the '
+    'summer-matched NDBI result cleared a control-group comparison, leave-one-district-out reruns, '
+    'randomization inference, a buffer-radius sweep, and Holm-Bonferroni correction \u2014 but that '
+    'result depended on an incomplete extraction missing an entire state\u2019s villages, and once '
+    'completed, it failed every one of those same checks. Second: the full-year night-lights '
+    'control-group gap then took that result\u2019s place as this study\u2019s one remaining significant '
+    'finding \u2014 until the control group itself was found to contain 23 villages that were '
+    'physically or nominally duplicates of treated villages (Development Log Entry 23), and once '
+    'that contamination was actually removed and the control list regenerated (732 villages, '
+    'independently verified at zero overlap \u2014 Entry 25), that gap failed every specification that '
+    'had previously found it significant too (see the cards and figures above). No control-group '
+    'result, for either outcome or window, clears significance under any specification any more. '
+    'Both reversals, not either individual result, are the core honesty check of the entire analysis.'
     '</p></div>'
 )
 st.markdown(verdict_html, unsafe_allow_html=True)
