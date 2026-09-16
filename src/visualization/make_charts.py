@@ -35,10 +35,13 @@ plt.close(fig)
 
 # --- Figure 2: State-level mean NDBI change vs sanctioned budget ---
 # has to be summer-matched, full-year gives a contradictory pattern here.
-# Sikkim's out too, no valid summer villages for it.
+# Sikkim recovered (31 valid summer villages) as of the Entry 24/25 control-list fix --
+# all three core states (Arunachal Pradesh, Sikkim, Uttarakhand) are included below,
+# matching analyze_results.py's budget_data and the current 251-village core sample.
 budget_data = {
     "Arunachal Pradesh": {"projects": 2082, "budget_cr": 2749.74},
     "Uttarakhand":        {"projects": 200,  "budget_cr": 270.58},
+    "Sikkim":             {"projects": 63,   "budget_cr": 188.90},
 }
 summer_valid = summer_core.dropna(subset=["ndbi_change"])
 state_summary = summer_valid[summer_valid["state"].isin(budget_data.keys())].groupby("state")["ndbi_change"].mean().reset_index()

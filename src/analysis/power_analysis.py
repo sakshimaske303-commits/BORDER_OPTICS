@@ -13,7 +13,8 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-ALPHA = 0.05          # two-sided
+ALPHA = 0.05          # nominal alpha; sidedness is set per-test below to match the
+                      # actual inferential test each MDE is calibrated against
 POWER = 0.80
 N_DISTRICTS = 14
 
@@ -28,15 +29,21 @@ DID_SUMMARY_PATHS = {
 OUT_PATH = "data/processed/border_optics_power_analysis.json"
 
 
-def mde_multiplier(df):
-    # standard MDE formula, using t-quantiles instead of z since df is thin here
-    t_alpha = stats.t.ppf(1 - ALPHA / 2, df)
+def mde_multiplier(df, alternative="two-sided"):
+    # standard MDE formula, using t-quantiles instead of z since df is thin here.
+    # alternative="two-sided" matches H4's cluster-robust DiD test (did_model.py uses
+    # statsmodels' default two-sided p-values). alternative="one-sided" matches H1's
+    # actual test (analyze_results.py / did_model.py call stats.wilcoxon(...,
+    # alternative="greater")) -- using two-sided alpha there would understate power
+    # relative to the test actually run.
+    t_alpha = stats.t.ppf(1 - ALPHA / 2, df) if alternative == "two-sided" else stats.t.ppf(1 - ALPHA, df)
     t_power = stats.t.ppf(POWER, df)
     return t_alpha + t_power
 
 
 def h1_mde(window):
-    """Primary estimand: paired treated-only before/after MDE, core sample."""
+    """Primary estimand: paired treated-only before/after MDE, core sample.
+    One-sided, matching the actual H1 test (alternative='greater')."""
     df = pd.read_csv(TREATED_PATHS[window])
     core = df[df["is_core_sample"] == True]
     baseline_lights = core["lights_before"].mean()
@@ -46,7 +53,7 @@ def h1_mde(window):
         n = len(s)
         sd = s.std()
         dof = n - 1
-        mult = mde_multiplier(dof)
+        mult = mde_multiplier(dof, alternative="one-sided")
         mde = mult * sd / np.sqrt(n)
         row = {
             "test": "H1_treated_only", "window": window,
@@ -61,11 +68,13 @@ def h1_mde(window):
 
 
 def h4_mde(window):
-    """Control-group DiD MDE, from the already-fitted cluster-robust SE."""
+    """Control-group DiD MDE, from the already-fitted cluster-robust SE.
+    Two-sided, matching the actual H4 test (did_model.py's cluster-robust OLS p-values
+    and the two-sided Mann-Whitney check)."""
     with open(DID_SUMMARY_PATHS[window]) as f:
         summ = json.load(f)
     dof = N_DISTRICTS - 1
-    mult = mde_multiplier(dof)
+    mult = mde_multiplier(dof, alternative="two-sided")
     rows = []
     for r in summ["did"]:
         se = r["did_se"]
@@ -86,7 +95,8 @@ def main():
         all_rows.extend(h1_mde(window))
         all_rows.extend(h4_mde(window))
 
-    print(f"\nMinimum Detectable Effect -- alpha={ALPHA} (two-sided), power={POWER}\n")
+    print(f"\nMinimum Detectable Effect -- alpha={ALPHA}, power={POWER}")
+    print("(H1 one-sided, matching alternative='greater'; H4 two-sided, matching the cluster-robust DiD test)\n")
     for r in all_rows:
         if r["test"] == "H1_treated_only":
             extra = f"  ({r['mde_pct_of_baseline']:.1f}% of baseline)" if "mde_pct_of_baseline" in r else ""

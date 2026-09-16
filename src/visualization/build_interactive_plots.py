@@ -120,13 +120,13 @@ def build_buffer_sensitivity():
     fig = go.Figure()
     fig.add_trace(go.Bar(
         x=labels, y=[max(as_extracted[b], 1e-7) for b in buffers],
-        name="As extracted (varying n, archive-timing confounded)", marker_color="#B0B0B0",
+        name="As extracted (same-day pull, n=251 at every radius)", marker_color="#B0B0B0",
         marker_line=dict(color="black", width=1),
         hovertemplate="%{x}<br>p = %{y:.5g}<extra>As extracted</extra>",
     ))
     fig.add_trace(go.Bar(
         x=labels, y=[max(matched[b], 1e-7) for b in buffers],
-        name="Matched subsample (n=154, buffer radius isolated)", marker_color=GREEN,
+        name="Matched subsample (n=251, valid at all three radii)", marker_color=GREEN,
         marker_line=dict(color="black", width=1),
         hovertemplate="%{x}<br>p = %{y:.5g}<extra>Matched subsample</extra>",
     ))

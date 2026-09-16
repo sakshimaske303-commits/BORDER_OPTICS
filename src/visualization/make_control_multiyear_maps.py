@@ -183,8 +183,10 @@ def make_coverage_gap_map():
     m.get_root().html.add_child(folium.Element(legend_html))
     folium.LayerControl(collapsed=False).add_to(m)
     m.get_root().html.add_child(folium.Element(title_html(
-        "BORDER OPTICS — 500m Coverage Gap",
-        "Villages null at 500m but valid at 250m/1km — Sentinel-2 archive backfill, not a buffer-radius effect",
+        "BORDER OPTICS — 500m Coverage Check (historical diagnostic, now resolved)",
+        "Originally built to flag villages null at 500m but valid at 250m/1km (a Sentinel-2 archive-backfill "
+        "gap, not a buffer-radius effect). After the same-day re-extraction, all 251 core villages are valid "
+        "at every radius — this map is kept as a record of that check, not a current coverage problem.",
     )))
     out_path = "outputs/interactive_maps/maps/village_coverage_gap_map.html"
     m.save(out_path)

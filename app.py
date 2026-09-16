@@ -73,11 +73,14 @@ st.markdown(
 
 st.markdown("---")
 
-valid_ndbi = summer.dropna(subset=["ndbi_change"])
+summer_core = summer[summer["is_core_sample"] == True] if "is_core_sample" in summer.columns else summer
+valid_ndbi = summer_core.dropna(subset=["ndbi_change"])
 peak_row = valid_ndbi.loc[valid_ndbi["ndbi_change"].idxmax()] if len(valid_ndbi) else None
-paired = summer.dropna(subset=["ndbi_before", "ndbi_after"])
+paired = summer_core.dropna(subset=["ndbi_before", "ndbi_after"])
 if len(paired) >= 2:
-    _, p_val = stats.wilcoxon(paired["ndbi_before"], paired["ndbi_after"])
+    # Matches the formal H1 test in analyze_results.py / did_model.py: one-sided,
+    # testing whether "after" is significantly higher than "before" (not two-sided).
+    _, p_val = stats.wilcoxon(paired["ndbi_after"], paired["ndbi_before"], alternative="greater")
 else:
     p_val = float("nan")
 

@@ -16,9 +16,11 @@ st.markdown(
 st.markdown("---")
 
 st.markdown("""
-NDBI (Normalized Difference Built-up Index) measures the physical footprint of
-construction using Sentinel-2 SWIR1/NIR reflectance. A positive change indicates new
-built-up area; a negative change indicates a reduction.
+NDBI (Normalized Difference Built-up Index) is a spectral proxy for built-up surface,
+computed from Sentinel-2 SWIR1/NIR reflectance — it is not a direct, cadastral measurement
+of construction. A positive change is consistent with new built-up area; a negative change
+with a reduction. (See the ground-truth case studies under Statistical Validation for where
+this proxy and confirmed real construction disagree.)
 """)
 
 st.markdown("---")
@@ -28,7 +30,10 @@ st.markdown("---")
 # ============================================================
 window = st.radio("Composite window", ["Summer-Matched (Jun–Sep)", "Full-Year"], horizontal=True)
 df = summer if window.startswith("Summer") else full_year
-valid = df.dropna(subset=["ndbi_change"])
+core_df = df[df["is_core_sample"] == True] if "is_core_sample" in df.columns else df
+valid = core_df.dropna(subset=["ndbi_change"])
+st.caption(f"Core statistical sample (n={len(valid)}) — matches the formal H1 test in the Research Paper. "
+           "Illustrative Himachal villages are excluded here; see Methodology & Limitations.")
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Mean NDBI Change", f"{valid['ndbi_change'].mean():.4f}")
@@ -44,7 +49,7 @@ st.markdown("---")
 st.markdown("### Distribution of Change")
 st.image(
     "outputs/figures/01_ndbi_change_distribution.png",
-    caption="Distribution of NDBI change across all geocoded villages",
+    caption="Distribution of NDBI change across the 251-village core statistical sample",
     use_container_width=True,
 )
 
@@ -55,8 +60,10 @@ st.markdown("---")
 # ============================================================
 st.markdown("### Robustness Check — Composite Window Comparison")
 
-fy_valid = full_year.dropna(subset=["ndbi_change"])
-sm_valid = summer.dropna(subset=["ndbi_change"])
+fy_core = full_year[full_year["is_core_sample"] == True] if "is_core_sample" in full_year.columns else full_year
+sm_core = summer[summer["is_core_sample"] == True] if "is_core_sample" in summer.columns else summer
+fy_valid = fy_core.dropna(subset=["ndbi_change"])
+sm_valid = sm_core.dropna(subset=["ndbi_change"])
 
 comparison = pd.DataFrame({
     "Metric": ["Mean NDBI Change", "Median NDBI Change", "% Increased", "n (valid observations)"],

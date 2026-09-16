@@ -177,9 +177,9 @@ with st.expander("**Buffer-Radius Comparison — An Archive-Timing Confound, Pre
     fresh, complete 500m re-extraction). The buffer-radius conclusion is unaffected either
     way — all three radii are null on the summer NDBI test, whether compared as-extracted
     or restricted to villages valid at every radius (now the full core sample at every
-    radius) — but a same-day re-pull of all three radii together was not done for this
-    entry, given the time cost of a full re-extraction at each radius and the fact that
-    the conclusion is already consistent across all three as extracted.
+    radius). A same-day re-pull of all three radii together has since been done (see
+    Research Paper §4.8): all three now stand at n=251, pulled the same day, closing the
+    archive-timing gap this section originally flagged.
     """)
 
 with st.expander("**H3 Border-Proximity — Stress-Tested, and Surviving**"):

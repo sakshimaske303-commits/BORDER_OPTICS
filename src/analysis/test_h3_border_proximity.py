@@ -39,6 +39,8 @@ for label, path in RESULT_FILES.items():
             print(f"{metric}: too few valid rows ({len(valid)}) to test")
             continue
         rho, p = stats.spearmanr(valid["distance_to_border_km"], valid[metric])
+        direction = "closer to border -> more change" if rho < 0 else "farther from border -> more change"
         print(f"{metric}: n={len(valid)}, Spearman rho={rho:.3f}, p={p:.4f}  "
-              f"(negative rho = closer to border -> more change, supporting H3)")
+              f"({direction}; see Research Paper for which direction this study's H3 "
+              f"discussion actually predicted -- a positive rho here runs opposite to it)")
     print()

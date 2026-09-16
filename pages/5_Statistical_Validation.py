@@ -165,7 +165,7 @@ st.caption(
 
 st.image(
     "outputs/figures/03_h3_border_distance_vs_lights.png",
-    caption="Static export: distance-to-border vs. NDBI change and lights change, both composite windows",
+    caption="Static export: distance-to-border vs. night-lights change, both composite windows",
     use_container_width=True,
 )
 

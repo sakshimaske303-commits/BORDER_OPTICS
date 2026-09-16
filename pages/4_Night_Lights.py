@@ -33,7 +33,9 @@ window = st.radio(
     horizontal=True, key="lights_window",
 )
 df = summer if window.startswith("Summer") else full_year
-valid = df.dropna(subset=["lights_change"])
+core_df = df[df["is_core_sample"] == True] if "is_core_sample" in df.columns else df
+valid = core_df.dropna(subset=["lights_change"])
+st.caption(f"Core statistical sample (n={len(valid)}) — matches the formal H1 test in the Research Paper.")
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Mean Lights Change", f"{valid['lights_change'].mean():.4f}")

@@ -95,7 +95,8 @@ def extract_window(window_key, checkpoint_every=10):
     print(f"{len(villages)} villages to process")
 
     for i, row in villages.iterrows():
-        already_done = all(pd.notna(row.get(f"ndbi_{y}")) for y in YEARS)
+        already_done = all(pd.notna(row.get(f"ndbi_{y}")) for y in YEARS) and \
+            all(pd.notna(row.get(f"lights_{y}")) for y in YEARS)
         if already_done:
             continue
 

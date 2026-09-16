@@ -238,15 +238,11 @@ make_map(
 )
 
 # 3: Night-lights change map (summer-matched dataset)
-make_metric_map(
-    summer,
-    metric_col="lights_change",
-    colors=["#FFFFFF", "#FFD700", "#FF3B30"],
-    caption="VIIRS Night-Lights Change",
-    title="BORDER OPTICS — Night-Lights Change",
-    subtitle="Radiance change, 2021 vs 2025 (summer-matched composite)",
-    out_path="outputs/interactive_maps/maps/village_lights_change_map.html",
-)
+# NOTE: this output is superseded by src/visualization/fix_lights_map.py, which is the
+# canonical generator for outputs/interactive_maps/maps/village_lights_change_map.html
+# (it adds dark/satellite basemap layers and a core-sample popup badge that this generic
+# call does not). Run fix_lights_map.py after this script if regenerating that map, or
+# it will be silently overwritten back to this simpler version.
 
 # 4: Border-distance map (uses master villages file directly)
 make_metric_map(

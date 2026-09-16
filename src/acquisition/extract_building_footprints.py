@@ -43,6 +43,13 @@ def init_ee():
 
 
 def buildings_for_buffer(buffered_geom):
+    # NOTE: filterBounds selects any building polygon that INTERSECTS the buffer, but
+    # `area_in_meters` is that polygon's precomputed full area, not clipped to the buffer.
+    # A building straddling the buffer edge therefore contributes its whole footprint area
+    # to `total_area`, not just the portion inside the 500m region. `building_count` is
+    # unaffected by this (it's a count of intersecting polygons, used for the published
+    # correlations), but `building_total_area_m2` should be treated as an upper bound, not
+    # an exact buffer-clipped area, until this is fixed with a `.intersection()`/clip step.
     fc = (
         ee.FeatureCollection(OPEN_BUILDINGS_COLLECTION)
         .filterBounds(buffered_geom)

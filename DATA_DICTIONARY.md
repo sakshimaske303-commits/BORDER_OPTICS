@@ -15,7 +15,7 @@ One row per successfully geocoded village (258 rows).
 | `state` | string | One of Arunachal Pradesh, Sikkim, Uttarakhand, Himachal Pradesh. |
 | `is_core_sample` | bool | `True` for Arunachal Pradesh / Sikkim / Uttarakhand (the 251-village core statistical sample); `False` for Himachal Pradesh (7-village illustrative case study, excluded from formal hypothesis tests). |
 | `latitude`, `longitude` | float | WGS84 (EPSG:4326) coordinates from the geocoding pipeline (Nominatim primary, Bhuvan fallback). |
-| `distance_to_border_km` | float | Distance to the nearest India-relevant Natural Earth Admin-0 boundary segment, computed geodesically (WGS84 ellipsoid, via `pyproj.Geod`) rather than by reprojecting into a single UTM zone -- the study area spans roughly 20 degrees of longitude, so a single-zone projection (the original method, before Development Log Entry 18) is only accurate near its own central meridian. Added by `compute_border_distance.py`. Present only in the `_with_distance` version, along with `nearest_border_country` (which country's segment was actually nearest -- not always China; see Entry 18). |
+| `distance_to_border_km` | float | Distance to the nearest India-relevant Natural Earth Admin-0 boundary segment. The nearest point on the boundary is first located with a planar (lon/lat) nearest-point search (`shapely.ops.nearest_points`), then the distance to that point is measured geodesically (WGS84 ellipsoid, via `pyproj.Geod`) rather than by reprojecting into a single UTM zone -- the study area spans roughly 20 degrees of longitude, so a single-zone projection (the original method, before Development Log Entry 18) is only accurate near its own central meridian. Note this means the *distance measurement* is geodesic but the *nearest-point selection* is not a true ellipsoidal-minimum search; the two only diverge meaningfully for points very close to the antimeridian or poles, neither of which applies here. Added by `compute_border_distance.py`. Present only in the `_with_distance` version, along with `nearest_border_country` (which country's segment was actually nearest -- not always China; see Entry 18). |
 
 ## `border_optics_village_results.csv` / `_analyzed.csv` (full-year window) and `_summer.csv` / `_summer_analyzed.csv` (summer-matched window)
 
@@ -164,7 +164,7 @@ Independent, non-satellite-index building counts from Google's Open Buildings da
 | Column | Type | Description |
 |---|---|---|
 | `building_count` | int | Number of high-confidence building footprint polygons intersecting the 500m buffer. |
-| `building_total_area_m2` | float | Summed footprint area (m²) of those polygons. |
+| `building_total_area_m2` | float | Summed full footprint area (m²) of those polygons — **not clipped to the 500m buffer**: a polygon that straddles the buffer edge contributes its whole area, not just the part inside the buffer, so this is an upper bound rather than an exact in-buffer area. `building_count` is unaffected and is the field used in the published building-count correlations. |
 | `building_mean_confidence` | float | Mean detection confidence across the polygons counted (null if `building_count` is 0). |
 
 ## `outputs/triangulation_results.json`
