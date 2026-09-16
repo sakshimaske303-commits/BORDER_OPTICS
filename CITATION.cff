@@ -43,11 +43,14 @@ abstract: >-
   full-year night-lights, p = 0.0295 summer NDBI) — a real secondary finding,
   running opposite to the direction predicted by securitization theory. Most
   significantly, triangulating the primary NDBI/night-lights design against
-  two independent satellite proxies — Sentinel-1 SAR backscatter and Dynamic
-  World's machine-learned built-up probability — did not simply confirm the
-  null: SAR agrees (null in both windows), but Dynamic World's control-group
-  DiD is significant in both windows (p = 0.0117 full-year, p = 0.0013
-  summer), and Dynamic World independently validates far more strongly
+  two secondary satellite proxies of different kinds — Sentinel-1 SAR
+  backscatter (a genuinely different sensor, radar not optical) and Dynamic
+  World's machine-learned built-up probability (a different algorithm, but
+  still derived from the same Sentinel-2 imagery as NDBI, so
+  algorithm-independent rather than sensor-independent) — did not simply
+  confirm the null: SAR agrees (null in both windows), but Dynamic World's
+  control-group DiD is significant in both windows (p = 0.0117 full-year,
+  p = 0.0013 summer), and Dynamic World validates far more strongly
   against real, non-satellite ground truth (Google Open Buildings footprint
   counts, ρ = 0.808 vs. NDBI's ρ = 0.399) than the primary measure does. At
   three villages with independently confirmed real construction, Dynamic

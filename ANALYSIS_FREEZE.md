@@ -53,9 +53,9 @@ Control-group DiD (H4), buffer-radius sweep (250/500/1000m), leave-one-district-
 
 Night-lights change, border-proximity correlation (H3), three-point multi-year trend (2021/2023/2025), budget-vs-outcome descriptive comparison (RQ2).
 
-## Exploratory, unstressed finding
+## Exploratory finding, now stress-tested (see item 5 below)
 
-Summer-window H3 NDBI-border-proximity correlation (ρ = 0.291, p = 0.0000026), which emerged only after the Entry 22 data correction. Not yet leave-one-out or randomization-inference checked. Does not feed back into the primary estimand's conclusion.
+Summer-window H3 NDBI-border-proximity correlation (ρ = 0.291, p = 0.0000026), which emerged only after the Entry 22 data correction. As of Development Log Entry 32 this has been leave-one-out and randomization-inference checked (and spatially-corrected — item 7 below) and survives all three; it is no longer "unstressed," though it still does not feed back into the primary estimand's conclusion.
 
 ## Multiple-testing family
 
