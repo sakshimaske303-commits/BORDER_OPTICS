@@ -1,5 +1,40 @@
 """Re-runs the summer-window NDBI/VIIRS extraction at 250m and 1km buffers
 to check the 500m radius isn't driving the result alone.
+
+Same-day resume hazard (Section 6.9 / ANALYSIS_FREEZE.md item 3 -- still
+open as of this note). This script's own checkpoint-resume logic will
+silently do nothing useful if run again as-is: `border_optics_buffer250_summer.csv`
+and `border_optics_buffer1000_summer.csv` are both already checkpointed at
+251/251 villages complete (dated August 21, per Section 4.8), so a bare
+re-run skips every row as "already extracted" and exits immediately without
+pulling anything new -- it will NOT give you a fresh, same-day pull just
+because you ran it again. The 500m primary extraction
+(`extract_satellite_data.py --window summer`) has the identical problem: its
+own checkpoint is complete too. Sentinel-2's archive keeps backfilling
+scenes for past fixed date ranges, so any two extractions of the same
+2021/2025 summer dates, run on different days, can disagree on scene counts
+and composite values without either being wrong about buffer radius --
+that's the actual §6.9 gap: this script's 250m/1km numbers and the primary
+500m numbers were never pulled on the same day.
+
+To actually close this gap, move all three existing checkpoints aside first
+so every radius is forced to re-extract fresh, then run all three back-to-
+back on the same day (same pattern Development Log Entry 22 used for its
+own same-day treated/control re-pull):
+
+    mv data/processed/border_optics_village_results_summer.csv data/processed/border_optics_village_results_summer_PRE_SAMEDAY_BUFFER_CHECK.csv
+    mv data/processed/border_optics_buffer250_summer.csv data/processed/border_optics_buffer250_summer_PRE_SAMEDAY_BUFFER_CHECK.csv
+    mv data/processed/border_optics_buffer1000_summer.csv data/processed/border_optics_buffer1000_summer_PRE_SAMEDAY_BUFFER_CHECK.csv
+    python3 src/acquisition/extract_satellite_data.py --window summer
+    python3 src/acquisition/extract_buffer_sensitivity_data.py --buffer 250
+    python3 src/acquisition/extract_buffer_sensitivity_data.py --buffer 1000
+
+Each full run takes over an hour for the 258-village sample (per Development
+Log Entry 22's own timing note), so budget roughly 3+ hours run back-to-back,
+not spread across days, or the same archive-timing gap this is meant to
+close will just reopen. Low priority: every radius is already null on its
+own (Section 4.8), so this closes a documentation/consistency gap, not an
+open question about the conclusion itself.
 """
 
 import argparse

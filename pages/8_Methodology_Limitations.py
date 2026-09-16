@@ -27,6 +27,8 @@ with col1:
 with col2:
     st.markdown("""
     - **Night-Lights** — VIIRS DNB monthly composites, Google Earth Engine
+    - **Triangulation proxies** — Sentinel-1 SAR backscatter, Dynamic World built-up probability (Google Earth Engine)
+    - **Ground-truth validation** — Google Open Buildings v3 footprint counts, Google Earth Engine
     - **Border/LAC Geometry** — Natural Earth 10m Admin-0 Boundary Lines
     - **Budget Figures** — Independently compiled from parliamentary records
     """)
@@ -146,10 +148,10 @@ with st.expander("**Control-Group Baseline Imbalance — Resolved, and Why It Ma
     rows) and actually fixed against live data (Entry 25), the full-year night-lights
     baseline is no longer significantly imbalanced, and neither is any other combination.
     All four outcome/window baseline checks are now statistically balanced. A genuine
-    parallel-pre-trends placebo test still could not be run either way, because the control
-    group's satellite extraction covers only the same single before/after pair as the
-    treated sample, not a multi-year pre-treatment panel — so this remains a level-balance
-    check, not a confirmed shared pre-trend, even though it is now a cleaner one.
+    parallel-pre-trends placebo test *has* since been run (Development Log Entry 30) — see
+    the "Parallel Pre-Trends Placebo Test" expander below — by pulling a second, earlier
+    pre-treatment year (2019) for both groups, closing the gap this section used to describe
+    as unclosable with the existing single-pre-period extraction.
     """)
 
 with st.expander("**Multi-Year Trend Is Not Monotonic (and Nets Out to a Null, Like the Two-Point Comparison)**"):
@@ -178,6 +180,152 @@ with st.expander("**Buffer-Radius Comparison — An Archive-Timing Confound, Pre
     radius) — but a same-day re-pull of all three radii together was not done for this
     entry, given the time cost of a full re-extraction at each radius and the fact that
     the conclusion is already consistent across all three as extracted.
+    """)
+
+with st.expander("**H3 Border-Proximity — Stress-Tested, and Surviving**"):
+    st.markdown("""
+    Two H3 border-proximity correlations survive the paper-wise Holm-Bonferroni
+    correction: summer NDBI (ρ = +0.291) and full-year night-lights (ρ = -0.252).
+    Both have now been put through the same leave-one-district-out and
+    randomization-inference checks that this study's own now-null results (the
+    summer NDBI-change test, the full-year lights DiD) were checked with before
+    failing — `src/analysis/h3_border_proximity_robustness.py`. Both survive:
+    14 of 14 district-dropped reruns stay significant with the same sign, and
+    2,000-permutation randomization inference gives p<0.001 for each. The
+    full-year lights result had previously been described as robust only
+    because it stayed significant across several data re-extractions — a
+    weaker claim than actually being checked this way, which it now has been.
+
+    One more check has since been added, and it's a more conservative one than
+    either of the above: these 251 villages are not spatially independent
+    observations, so an ordinary p-value can overstate significance if nearby
+    villages' values are correlated with each other for reasons that have
+    nothing to do with border distance. `src/analysis/spatial_moran_and_h3_correction.py`
+    first confirms both outcomes ARE spatially autocorrelated (Moran's I = 0.346,
+    p = 0.001 for summer NDBI change; I = 0.076, p = 0.003 for full-year lights
+    change — reproducing this study's own already-published values as an internal
+    check), then calibrates a spatial autoregressive model to match that same
+    autocorrelation and re-derives significance from 2,000 spatially-structured
+    synthetic fields rather than treating villages as independent. Both H3
+    findings survive this stricter test too: spatially-corrected p = 0.0295 for
+    summer NDBI (naive p = 0.0000026) and p = 0.0035 for full-year lights (naive
+    p = 0.0000547) — weaker than the naive p-values, as expected once spatial
+    clustering is accounted for, but still comfortably below 0.05.
+
+    Two checks from the original plan remain open: whether either correlation
+    is linear across the full distance range or concentrated at one end, and a
+    cross-check against the three-point 2021/2023/2025 extraction.
+    """)
+
+with st.expander("**Parallel Pre-Trends Placebo Test — Now Run, Mostly Clean**"):
+    st.markdown("""
+    The baseline-imbalance section above used to note that a genuine
+    parallel-pre-trends placebo test could not be run, because the control
+    group's satellite extraction only ever had one pre-treatment point (2021)
+    to work with — a level-balance check, not a trend check. That gap is now
+    closed (Development Log Entry 30): a second, earlier pre-treatment year
+    (2019) was extracted for both treated and control villages, both windows,
+    via `src/acquisition/extract_pretreatment_baseline.py`, and a placebo DiD
+    comparing the 2019-to-2021 change was run via
+    `src/analysis/pretreatment_placebo_test.py` — a period during which VVP-I
+    could not possibly have had an effect, since the programme wasn't
+    sanctioned until February 2023.
+
+    Three of the four resulting checks are clean: full-year NDBI (placebo
+    coefficient +0.00196, p = 0.864), full-year lights (-0.00665, p = 0.755),
+    and summer lights (+0.00047, p = 0.968) all show no significant
+    pre-treatment divergence between treated and control villages — direct
+    evidence *for* this study's DiD design, not merely an unexamined
+    assumption behind it. The fourth is a genuine, flagged exception: summer
+    NDBI's placebo coefficient is +0.01287, p = 0.064 — not significant at the
+    conventional threshold under the district-fixed-effects specification, but
+    close to it, and the unadjusted raw comparison for the same combination is
+    sharply significant (p = 0.00001). This is reported as a borderline
+    result, not rounded up to a clean pass. It's also worth noting this
+    borderline pre-period effect runs in the *opposite* direction from the
+    real, already-null summer NDBI DiD (-0.00357) — so it does not look like a
+    pre-existing trend that mechanically continues into and explains away the
+    main result.
+    """)
+
+with st.expander("**14 District Clusters — An Exact Wild Cluster Bootstrap, Not Just Asymptotics**"):
+    st.markdown("""
+    The district fixed-effects DiD's cluster-robust standard errors rely on
+    having enough clusters (usually 30-40+ recommended) for their own
+    asymptotic theory to be trustworthy — this study has only 14. Rather than
+    take that on faith, `src/analysis/wild_cluster_bootstrap.py` re-derives
+    significance for all four outcome/window DiD estimates using an exact
+    wild cluster bootstrap (Cameron, Gelbach & Miller 2008, restricted
+    variant): full enumeration of all 2^14 = 16,384 possible Rademacher
+    (+1/-1) sign-flip combinations across the 14 district clusters, refitting
+    the model under each one to build an exact bootstrap null distribution for
+    the test statistic, rather than an approximation. All four remain
+    non-significant under this stricter test — full-year NDBI p = 0.349,
+    full-year lights p = 0.324, summer NDBI p = 0.495, summer lights p = 0.465
+    — meaning the small cluster count is not itself manufacturing a false
+    null; the primary result's non-significance holds up under a test
+    specifically designed to be robust to too few clusters.
+
+    (This script's own manual OLS and cluster-robust standard-error
+    implementation was validated by reproducing `did_model.py`'s already-
+    published coefficient and standard error to roughly 10 significant figures
+    before being trusted for the bootstrap itself.)
+    """)
+
+with st.expander("**Triangulation Against Independent Proxies — An Open Tension, Not a Confirmation**"):
+    st.markdown("""
+    The primary design uses NDBI and night-lights. As a further check, the
+    same control-group DiD was run on two fully independent satellite
+    proxies — Sentinel-1 SAR backscatter (VV and VH, immune to the
+    cloud-masking concerns that affect optical imagery) and Dynamic World, a
+    machine-learned per-pixel built-up probability — via
+    `src/analysis/triangulation_analysis.py`. This was meant to be an ordinary
+    robustness check. For SAR, that's what it was: null in both windows, both
+    polarizations, agreeing with NDBI. For Dynamic World, it wasn't: its
+    control-group DiD is significant in **both** windows (full-year coefficient
+    +0.0031, p = 0.0117; summer +0.0074, p = 0.0013).
+
+    That disagreement is hard to dismiss as one stray significant test among
+    many, for two reasons. First, `src/analysis/building_footprint_validation.py`
+    checked all three proxies against an independent, non-satellite ground
+    truth — actual building counts from Google's Open Buildings dataset — and
+    Dynamic World tracks real building counts far more closely (Spearman
+    ρ = 0.808) than NDBI (ρ = 0.399) or night-lights (ρ = 0.478) do. Second, at
+    three villages this project separately confirmed underwent real
+    construction (Kaho — a hostel, Walong — a border-terminal building, Musai —
+    solar streetlighting), Dynamic World and night-lights both correctly
+    registered a before-to-after increase at all three, while NDBI moved in
+    the *wrong* direction at all three.
+
+    A village-level cross-check (`src/analysis/dw_sar_ndbi_village_level_check.py`)
+    found the three proxies agreeing on the direction of change in only about a
+    third to two-thirds of individual villages, depending on the proxy pair
+    and window — close to chance. This is reported as this study's single most
+    important open question, not resolved in either direction: it could mean
+    the primary 500m-buffer NDBI measure is not sensitive enough to detect a
+    real, modest VVP-I effect that Dynamic World is picking up, or it could
+    mean Dynamic World's significant DiD is itself a different kind of false
+    positive. Night-lights detecting the three ground-truth cases correctly
+    while its own aggregate control-group DiD stays null shows these two things
+    ("detects the case-study villages" and "produces a significant aggregate
+    result") don't automatically travel together — a reason for caution before
+    reading too much into either proxy's result on its own.
+    """)
+
+with st.expander("**Statistical Power — What This Design Could (and Couldn't) Detect**"):
+    st.markdown("""
+    A null result says a test wasn't significant — on its own, it doesn't say
+    whether the design could have detected a real effect if one existed.
+    `src/analysis/power_analysis.py` computes the Minimum Detectable Effect
+    (MDE) for the primary H1 (treated-only) and H4 (control-group DiD) tests
+    at 80% power, α=0.05, using t-quantiles at this study's own degrees of
+    freedom rather than a large-sample z approximation. H1's MDE, as Cohen's
+    d, is 0.178 across every outcome/window — just under Cohen's own "small
+    effect" threshold of 0.2 — meaning this design was sensitive enough to
+    catch a small-to-moderate real effect had one existed; H1's null is
+    substantive, not a power artifact. H4's cluster-based design is less
+    sensitive, as expected, but every observed H4 coefficient still sits at
+    only 24-34% of its own detection threshold — a clear gap, not a near-miss.
     """)
 
 st.markdown("---")

@@ -1,0 +1,46 @@
+{
+  "building_count_vs_ndbi_after": {
+    "n": 251,
+    "rho": 0.3989782472058567,
+    "p": 5.236522846243902e-11
+  },
+  "building_count_vs_lights_after": {
+    "n": 251,
+    "rho": 0.47810312910822844,
+    "p": 9.677435398286444e-16
+  },
+  "building_count_vs_built_after": {
+    "n": 249,
+    "rho": 0.8080176259572701,
+    "p": 1.1069167627631085e-58
+  },
+  "case_study_villages": [
+    {
+      "village_id": 16,
+      "village": "Kaho",
+      "building_count": 78,
+      "building_total_area_m2": 6041.947845458984,
+      "ndbi_after": -0.0869845404179616,
+      "lights_after": 0.9338159155765364,
+      "built_after": 0.1175205749296765
+    },
+    {
+      "village_id": 21,
+      "village": "Musai",
+      "building_count": 108,
+      "building_total_area_m2": 6579.348556518555,
+      "ndbi_after": 0.0016734961058979,
+      "lights_after": 0.328359152198629,
+      "built_after": 0.1209519600424141
+    },
+    {
+      "village_id": 24,
+      "village": "Walong",
+      "building_count": 524,
+      "building_total_area_m2": 119778.84995246888,
+      "ndbi_after": -0.022571121563394,
+      "lights_after": 1.8005391933544888,
+      "built_after": 0.2305926556064831
+    }
+  ]
+}

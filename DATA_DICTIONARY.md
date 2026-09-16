@@ -123,6 +123,99 @@ The core-sample villages re-extracted at 250m and 1km buffer radii (summer-match
 
 Top-level keys: `as_extracted` (Wilcoxon results at each radius using all villages with valid data at that radius), `coverage_note` (the archive-timing/Sentinel-2 backfill explanation for why the three extraction dates can disagree on scene counts even for identical query parameters — see Development Log Entry 22 for the current direction of that gap), and `matched_subsample` (the same test restricted to villages with valid data at all three radii — as of Entry 22's complete 500m re-extraction, this is the full 251-village core sample at all three radii, not a smaller subset; the version reported as the robustness result in Section 4.8, now null at all three radii).
 
+## `border_optics_treated_dynamicworld_fullyear.csv` / `_summer.csv` and `border_optics_control_dynamicworld_fullyear.csv` / `_summer.csv`
+
+Dynamic World "built" probability, extracted per village/period as one of the three independent-proxy triangulation checks added in Development Log Entries 26-27 (Section 4.10). Produced by `src/acquisition/extract_dynamicworld_built.py`. GHSL was considered and explicitly rejected as an alternative before this dataset was chosen, because GHSL's future epochs are modelled rather than observed — see that script's own docstring.
+
+| Column | Type | Description |
+|---|---|---|
+| `village_id`, `village`, `district`, `block`, `state`, `is_core_sample`, `latitude`, `longitude` | — | Carried through from the source village table (master for treated, control-villages for control). |
+| `built_before`, `built_after` | float | Mean Dynamic World "built" class probability (0-1) over the same 500m buffer and before/after windows as every other extraction in this study. |
+| `built_before_image_count`, `built_after_image_count` | int | Number of Dynamic World images behind each period's composite — same missing-data convention as `ndbi_before`/`ndbi_after`. |
+| `distance_to_border_km`, `village_source`, `district_verified` | — | Control-file-only columns, same meaning as in `border_optics_control_villages.csv`. |
+
+## `border_optics_treated_sar_fullyear.csv` / `_summer.csv` and `border_optics_control_sar_fullyear.csv` / `_summer.csv`
+
+Sentinel-1 SAR backscatter (VV and VH polarizations), the second independent-proxy triangulation check (Section 4.10) — SAR is not an optical index, so it is immune to the cloud-masking and cirrus-contamination concerns that motivated the SCL-vs-QA60 comparison for NDBI. Produced by `src/acquisition/extract_sar_backscatter.py`.
+
+| Column | Type | Description |
+|---|---|---|
+| `vv_before`, `vv_after` | float | Mean VV-polarization backscatter (dB) over the 500m buffer, before/after periods. |
+| `vh_before`, `vh_after` | float | Mean VH-polarization backscatter (dB), same periods. |
+| `sar_before_image_count`, `sar_after_image_count` | int | Number of Sentinel-1 scenes behind each period's composite. |
+
+Both SAR polarizations are null at the control-group DiD stage in every window (Section 4.10, Figure 11) — the triangulation exercise's main negative result, contrasted against Dynamic World's positive one.
+
+## `border_optics_treated_pretreatment_fullyear.csv` / `_summer.csv` and `border_optics_control_pretreatment_fullyear.csv` / `_summer.csv`
+
+A single extra pre-treatment year (2019) pulled for both treated and control villages, both windows, so that a genuine parallel-pre-trends placebo test (2019→2021 change, comparing treated vs. control) could be run — the study's existing control-group design otherwise had only one pre-period (2021) and so could only support a baseline-*level* check (Section 6.7), not a pre-*trend* check. Produced by `src/acquisition/extract_pretreatment_baseline.py`; the placebo DiD itself is run by `src/analysis/pretreatment_placebo_test.py` and reported in Section 7.5 (Development Log Entry 30).
+
+| Column | Type | Description |
+|---|---|---|
+| `ndbi_2019`, `lights_2019` | float | Mean NDBI / VIIRS radiance over the same 500m buffer, 2019-01-01 to 2020-01-01 (full-year) or 2019-06-01 to 2019-10-01 (summer). |
+| `ndbi_2019_image_count`, `lights_2019_image_count` | int | Image counts behind the 2019 composite. |
+
+`pretreatment_placebo_test.py` merges these against each group's existing `ndbi_before`/`lights_before` (i.e. the 2021 values already on disk) to construct the 2019→2021 placebo change, rather than storing that change in these files directly.
+
+## `border_optics_treated_building_footprints.csv` / `border_optics_control_building_footprints.csv`
+
+Independent, non-satellite-index building counts from Google's Open Buildings dataset (`GOOGLE/Research/open-buildings/v3/polygons`, confidence ≥ 0.75), used to validate each proxy's *current* (roughly 2025-era) built-up reading (Section 7.2) and to check whether the Section 7.3 ground-truth villages' real additions show up as detected structures. Produced by `src/acquisition/extract_building_footprints.py`. Single-vintage only — Open Buildings has no historical epoch to difference, unlike every before/after extraction elsewhere in this study; this was discovered and documented in the script rather than assumed to exist.
+
+| Column | Type | Description |
+|---|---|---|
+| `building_count` | int | Number of high-confidence building footprint polygons intersecting the 500m buffer. |
+| `building_total_area_m2` | float | Summed footprint area (m²) of those polygons. |
+| `building_mean_confidence` | float | Mean detection confidence across the polygons counted (null if `building_count` is 0). |
+
+## `outputs/triangulation_results.json`
+
+Per-proxy (SAR VV, SAR VH, Dynamic World "built") replication of the study's own two core tests — the treated-only before/after Wilcoxon (`h1_treated_only`) and the control-group DiD (`h4_control_group_did`) — run on each proxy exactly as `did_model.py` runs them on NDBI, so the four proxies are apples-to-apples comparable at the test-design level (not at the coefficient-magnitude level — each proxy has its own units/scale, which is why Figure 11 gives each proxy its own x-axis). Produced by `src/analysis/triangulation_analysis.py`. Top-level keys are `{proxy}_{window}` (e.g. `dynamicworld_built_summer`, `sar_vv_full_year`). The headline finding (Section 4.10): Dynamic World's control-group DiD is significant in both windows (p=0.0117 full-year, p=0.0013 summer) while NDBI and both SAR polarizations are null in every window — one proxy corroborates the primary NDBI-null result's own DiD design finding *something*, while two others corroborate the null itself.
+
+## `outputs/building_footprint_validation.json`
+
+Top-level keys `building_count_vs_ndbi_after`, `building_count_vs_lights_after`, `building_count_vs_built_after` — Spearman correlation (`rho`, `p`, `n`) between each proxy's 2025-era ("after") level and the independent Open Buildings count, i.e. Panel A of Figure 12. Dynamic World correlates far more strongly with actual building counts (ρ=0.808) than NDBI (ρ=0.399) or night-lights (ρ=0.478) do. `case_study_villages` is a 3-entry list (Kaho, Walong, Musai — the Section 7.3 ground-truth villages) with `building_count`, `building_total_area_m2`, and each proxy's `_after` level; Figure 12 Panel B instead plots each proxy's actual full-year before→after *change* for these three villages (computed separately from the paper's own Section 7.3 numbers, not stored in this JSON) to show which proxies detect the confirmed real construction as an increase — Dynamic World and night-lights do at all three villages, NDBI does not at any of them.
+
+## `outputs/h3_robustness_results.json`
+
+The H3 (border-proximity) stress test (Section 6.4/6.10, Development Log Entry 26/31) applied to all four outcome/window combinations, not just the summer-NDBI result the main text originally flagged as open. Produced by `src/analysis/h3_border_proximity_robustness.py`. Top-level keys are `summer_ndbi_change`, `full_year_lights_change` (the two significant H3 results), and `full_year_ndbi_change`, `summer_lights_change` (the two already-null ones, checked anyway for completeness). Each key holds `full_sample` (the headline rho/p/n), `leave_one_district_out` (14 refits, each dropping one district, with `n_significant_of_14` and `n_same_sign_of_14` summary counts), and `randomization_inference` (2,000-permutation null distribution of rho, giving `p_randomization`). Both significant H3 results survive all 14 leave-one-out refits and randomization inference; the summer-NDBI result's leave-one-out rho range is 0.183-0.337.
+
+## `outputs/spatial_moran_h3_correction_results.json`
+
+Two top-level keys. `moran_reproduction` reproduces Section 6.11's own published Moran's I values (k=8 nearest-neighbor haversine weights, 999-permutation significance) as an internal-consistency check before trusting the same weight matrix for the spatial correction below — both reproduced values matched the published claim to 3 decimal places. `h3_spatial_correction` (one entry per significant H3 result) reports the SAR(1)-calibrated spatial-permutation-null p-value: `calibrated_sar_phi` is the autoregressive parameter chosen so simulated spatial fields' mean Moran's I matches the real outcome's; `spatially_corrected_p` is the fraction of 2,000 such simulated fields whose correlation with the (fixed, real) distance-to-border values is at least as extreme as the observed one. Both H3 findings survive: summer-NDBI naive p=2.6e-06 → spatially-corrected p=0.0295; full-year-lights naive p=5.5e-05 → spatially-corrected p=0.0035. Produced by `src/analysis/spatial_moran_and_h3_correction.py`.
+
+## `outputs/wild_cluster_bootstrap_results.json`
+
+A 4-row list (one row per outcome × window), addressing the "only 14 district clusters" limitation flagged in Section 6.10/ANALYSIS_FREEZE.md — with only 14 clusters, asymptotic cluster-robust SEs are below the usual 30-40+ recommended minimum, so this re-derives significance via full enumeration of all 2^14=16,384 Rademacher sign-flip combinations (Cameron, Gelbach & Miller 2008 restricted/WCR variant) rather than relying on the asymptotic approximation. Produced by `src/analysis/wild_cluster_bootstrap.py` (manual numpy OLS + cluster-robust SE, validated against `did_model.py`'s own published coefficients to ~10 significant figures before being trusted here, since `statsmodels` could not be installed in the sandbox that built this script). Columns: `real_did_coef`/`real_cluster_se`/`real_t` (the original estimate), `n_bootstrap_draws`/`n_combinations_total` (always 16384, exact enumeration not Monte Carlo), `wild_cluster_bootstrap_p` (the result), `boot_t_mean`/`boot_t_sd` (bootstrap null-distribution diagnostics). All four DiD coefficients remain non-significant under this stricter test (p=0.349 to p=0.495) — consistent with, not contradicting, the asymptotic cluster-robust result already reported in Section 4.6.
+
+## `outputs/dw_sar_ndbi_village_level_results.json`
+
+Village-level (not aggregate-significance) Spearman cross-checks between the three built-up proxies' before→after *changes*, addressing whether NDBI, SAR, and Dynamic World agree in *direction* at the individual-village level, independent of whether any of them clears significance in aggregate (Section 4.10). Produced by `src/analysis/dw_sar_ndbi_village_level_check.py`. Top-level keys `full_year`/`summer`, each with four pairwise comparisons (`built_change_vs_vv_change`, `built_change_vs_vh_change`, `built_change_vs_ndbi_change`, `vv_change_vs_ndbi_change`) giving `rho`, `p`, `n`, and `same_sign_pct` (the percentage of villages where the two proxies' changes share a sign), plus `built_change_by_state` (mean Dynamic World change per state). Same-sign agreement across proxy pairs sits mostly in the 32-63% range — near chance for a binary sign match — sharpening rather than resolving the underlying disagreement between proxies that Section 4.10's aggregate-level triangulation result raises.
+
+## `outputs/pretreatment_placebo_summary_fullyear.json` / `_summer.json`
+
+The 2019→2021 placebo DiD results (Section 7.5, Development Log Entry 30) — same district-fixed-effects, cluster-robust-SE specification as `did_model.py`'s real 2021→2025 DiD, run instead on the genuinely pre-treatment 2019-to-2021 change. Produced by `src/analysis/pretreatment_placebo_test.py`. Three of four outcome/window combinations are clean nulls (full-year NDBI p=0.864, full-year lights p=0.755, summer lights p=0.968); summer NDBI is the flagged exception (placebo coefficient +0.01287, p=0.064 — borderline, and reported as such rather than rounded up to "passes," with the raw unadjusted Mann-Whitney comparison for the same combination sharply significant at p=0.00001).
+
+## `outputs/robustness_extended_results.json`
+
+Two additional robustness checks beyond the ones with their own dedicated files above. `leave_one_district_out` re-fits the *real* 2021→2025 DiD (not the H3 proximity test) dropping one district at a time, for both NDBI and lights — `n_significant_of_14: 0` for both, i.e. the real DiD result stays null under every leave-one-out refit, consistent with (not contradicted by) it already being null in the full sample. `randomization_inference` reruns the real DiD's treatment assignment as a 2,000-permutation randomization-inference null (`p_randomization`) as a non-parametric cross-check on the cluster-robust asymptotic p-value. A third key, `log_viirs`, checks whether a log1p transform of the VIIRS radiance outcome changes any significance verdict (it does not). Produced by `src/analysis/extended_robustness_checks.py`.
+
+## `outputs/leave_one_district_out_results.csv` / `outputs/holm_correction_results.csv`
+
+Tabular (CSV) companions to two of the JSON robustness outputs above, in the flat per-row format used by the dashboard's Statistical Validation page: `leave_one_district_out_results.csv` is the row-per-dropped-district version of `robustness_extended_results.json`'s `leave_one_district_out` key; `holm_correction_results.csv` is the Holm-Bonferroni multiple-comparisons correction (`src/analysis/holm_correction.py`) applied across every hypothesis test this study reports, so that a reader can see which individually-significant results also survive family-wise error correction.
+
+## `border_optics_village_results_summer_sclmask.csv`
+
+Summer-window NDBI, treated core sample only, re-extracted with an SCL (Scene Classification Layer) per-pixel cloud mask (clear classes 2/4/5/6/11 — dark area, vegetation, bare soils, water, snow) in place of the primary pipeline's QA60 bitmask, as a cross-check on cloud-masking sensitivity (Section 6.12, Development Log Entry 33). Produced by `src/acquisition/extract_scl_cloud_mask_ndbi.py`.
+
+| Column | Type | Description |
+|---|---|---|
+| `ndbi_scl_before`, `ndbi_scl_after` | float | Mean NDBI over the same 500m buffer and before/after periods as the primary extraction, but built from an SCL-masked composite. Null if SCL's stricter classification left zero clear images for that village/period — this mask returns valid data for only 200/258 villages, vs. QA60's 251, and the 51 dropped villages are concentrated in Uttarakhand and Sikkim (the SCL-valid sample is 93% Arunachal Pradesh). |
+| `ndbi_scl_before_image_count`, `ndbi_scl_after_image_count` | int | Number of images behind each period's SCL-masked composite. |
+
+## `outputs/scl_vs_qa60_comparison.json`
+
+The result of comparing the file above against the primary QA60-masked summer NDBI extraction (`border_optics_village_results_summer_analyzed.csv`), via `src/analysis/scl_vs_qa60_comparison.py`. Reports `n_qa60_valid`/`qa60_mean_change` (the primary, full n=251 result), `n_scl_valid`/`scl_mean_change`/`scl_wilcoxon_p` (the SCL-masked result on its own 200 valid villages), and — the decisive comparison — `qa60_matched_subsample_n`/`qa60_matched_subsample_mean_change`/`qa60_matched_subsample_wilcoxon_p` (the QA60 result recomputed on the *identical* 200 SCL-valid villages, to isolate the mask choice from the SCL sample's skewed state composition). `village_level_agreement_rho`/`_p` is the Spearman correlation between the two masks' NDBI-change values on the 200 villages valid under both. The headline: QA60 stays null on the matched 200 (p=0.449) while SCL is sharply significant and positive on those same 200 (p=0.0000045) — a genuine cloud-masking-choice effect, not a sample-composition artifact, and reported as an unresolved instability rather than a third "found the bug and fixed it" reversal, since neither mask has been shown to be wrong.
+
 ## Statuses used in the geocoding pipeline (`data/processed/<state>_geocoded.csv`)
 
 | `geocode_status` value | Meaning |

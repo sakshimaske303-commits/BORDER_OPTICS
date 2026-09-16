@@ -24,34 +24,48 @@ abstract: >-
   (full-year and summer-matched) as an explicit robustness check rather than
   trusting a single satellite comparison. Two earlier versions of this study
   each found a significant result that turned out, on inspection, to be a
-  data artifact rather than a real effect. The first was a summer-window
-  built-up-area increase that survived every robustness check run against
-  it; that result depended on an incomplete satellite extraction that had
-  returned zero usable imagery for all 31 of Sikkim's villages, an
-  archive-timing artifact rather than a permanent gap. Once a complete
-  re-extraction was pulled the same day as the control group's own data, the
-  result reversed to a clean null and stayed null against the control group,
-  under leave-one-district-out and randomization-inference checks, and
-  across a 250m/500m/1km buffer-radius sweep. The second was a full-year
-  night-lights control-group gap that then took the first result's place as
-  this study's one remaining significant finding; it turned out to depend on
-  a contaminated control group (23 of 735 control villages were physically
-  or nominally duplicates of treated villages), and once that contamination
-  was actually removed and the control list regenerated to 732 villages
-  (independently verified at zero overlap), the gap went null under every
-  specification that had previously found it significant, including
-  leave-one-district-out and randomization inference. Night-lights show no
-  absolute before/after increase of their own in either window, and no
-  control-group gap in either window either, once the data is complete and
-  decontaminated. A new, unstressed finding takes both retired results'
-  place: on the complete data, summer-window built-up change correlates with
-  distance to the border/LAC (ρ = 0.291, p = 0.0000026) — opposite to the
-  direction predicted by securitization theory, and flagged as open pending
-  the same robustness checks already run on the two retired results. Both
-  reversals, and the incomplete-extraction and control-group-contamination
-  mechanisms behind them, are reported as the central methodological
-  finding, addressing a parliamentary record showing no independent impact
-  assessment has ever been carried out for VVP-I.
+  data artifact rather than a real effect (an incomplete satellite extraction,
+  then a contaminated control group); once both were fixed, the primary
+  NDBI/night-lights control-group DiD result was a clean null in both
+  windows, at all three tested buffer radii (250m/500m/1km), under
+  leave-one-district-out and randomization-inference checks. This version
+  subjects that null to two further tests it had not yet faced: an exact
+  wild cluster bootstrap (16,384 sign-flip combinations) addressing the
+  design's reliance on only 14 district clusters, and a genuine
+  parallel-pre-trends placebo test using a second pre-treatment year (2019)
+  for both treated and control villages. Both confirm the null (wild-cluster
+  p = 0.32-0.50 across all four outcome/window combinations; 3 of 4 placebo
+  comparisons clean, the fourth borderline and reported as such). A
+  border-proximity correlation flagged in the previous release as new and
+  unchecked has since been run through the same leave-one-district-out,
+  randomization-inference, and a further spatial-autocorrelation-calibrated
+  permutation test, and survives all three (spatially-corrected p = 0.0035
+  full-year night-lights, p = 0.0295 summer NDBI) — a real secondary finding,
+  running opposite to the direction predicted by securitization theory. Most
+  significantly, triangulating the primary NDBI/night-lights design against
+  two independent satellite proxies — Sentinel-1 SAR backscatter and Dynamic
+  World's machine-learned built-up probability — did not simply confirm the
+  null: SAR agrees (null in both windows), but Dynamic World's control-group
+  DiD is significant in both windows (p = 0.0117 full-year, p = 0.0013
+  summer), and Dynamic World independently validates far more strongly
+  against real, non-satellite ground truth (Google Open Buildings footprint
+  counts, ρ = 0.808 vs. NDBI's ρ = 0.399) than the primary measure does. At
+  three villages with independently confirmed real construction, Dynamic
+  World and night-lights both correctly detected the increase while NDBI
+  moved in the wrong direction at all three. This tension between proxies is
+  reported openly as an unresolved question — whether NDBI under-detects a
+  real, modest effect or Dynamic World's result is itself a different kind
+  of false positive — rather than smoothed into either a confirmed null or a
+  confirmed effect. A second, unrelated sensitivity was found while finalizing
+  this release: cross-checking the QA60 cloud mask used throughout against an
+  alternative SCL-band mask, holding the village sample fixed at the 200
+  villages both masks can produce a valid summer composite for, flips the
+  primary NDBI result from null (QA60, p = 0.449) to significant and positive
+  (SCL, p = 0.0000045) — not explained by sample composition, since that is
+  identical on both sides of the comparison, and reported as a second
+  unresolved instability in the primary measurement rather than folded into
+  either conclusion. This study addresses a parliamentary record showing no
+  independent impact assessment has ever been carried out for VVP-I.
 keywords:
   - Vibrant Villages Programme
   - border development
@@ -59,11 +73,17 @@ keywords:
   - satellite verification
   - NDBI
   - VIIRS night-lights
+  - SAR backscatter
+  - Dynamic World
+  - building footprint validation
   - remote sensing
   - robustness testing
+  - wild cluster bootstrap
+  - spatial autocorrelation
+  - cloud masking sensitivity
   - difference-in-differences
   - India
   - geospatial analysis
 license: CC-BY-4.0
-version: 1.3.0
-date-released: "2026-09-12"
+version: 1.4.0
+date-released: "2026-09-16"

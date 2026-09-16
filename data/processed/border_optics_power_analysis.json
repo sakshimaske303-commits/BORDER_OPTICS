@@ -1,0 +1,92 @@
+[
+  {
+    "test": "H1_treated_only",
+    "window": "full_year",
+    "outcome": "ndbi",
+    "n": 251,
+    "sd_of_change": 0.05092986016687611,
+    "df": 250,
+    "mde": 0.00904143534553577,
+    "mde_as_cohens_d": 0.17752719752048646
+  },
+  {
+    "test": "H1_treated_only",
+    "window": "full_year",
+    "outcome": "lights",
+    "n": 251,
+    "sd_of_change": 0.5771502863804541,
+    "df": 250,
+    "mde": 0.1024598728892682,
+    "mde_as_cohens_d": 0.17752719752048646,
+    "mde_pct_of_baseline": 23.927254536612494
+  },
+  {
+    "test": "H4_control_group_DiD",
+    "window": "full_year",
+    "outcome": "ndbi",
+    "n_obs": 1966,
+    "se": 0.006571794042983452,
+    "df": 13,
+    "mde": 0.019915954534615293,
+    "observed_coef": 0.006672373342425696,
+    "observed_p": 0.30996060736636655,
+    "observed_as_fraction_of_mde": 0.3350265401956333
+  },
+  {
+    "test": "H4_control_group_DiD",
+    "window": "full_year",
+    "outcome": "lights",
+    "n_obs": 1966,
+    "se": 0.04964447964860773,
+    "df": 13,
+    "mde": 0.15044859791854487,
+    "observed_coef": 0.05045691631813651,
+    "observed_p": 0.3094555604838931,
+    "observed_as_fraction_of_mde": 0.3353764476120584
+  },
+  {
+    "test": "H1_treated_only",
+    "window": "summer",
+    "outcome": "ndbi",
+    "n": 251,
+    "sd_of_change": 0.033717054720690386,
+    "df": 250,
+    "mde": 0.0059856942332090525,
+    "mde_as_cohens_d": 0.17752719752048646
+  },
+  {
+    "test": "H1_treated_only",
+    "window": "summer",
+    "outcome": "lights",
+    "n": 251,
+    "sd_of_change": 0.4507026947973223,
+    "df": 250,
+    "mde": 0.08001198632229975,
+    "mde_as_cohens_d": 0.17752719752048643,
+    "mde_pct_of_baseline": 19.91898333296378
+  },
+  {
+    "test": "H4_control_group_DiD",
+    "window": "summer",
+    "outcome": "ndbi",
+    "n_obs": 1966,
+    "se": 0.004967228711153009,
+    "df": 13,
+    "mde": 0.015053286899637574,
+    "observed_coef": -0.003565294655762773,
+    "observed_p": 0.47290322285632846,
+    "observed_as_fraction_of_mde": 0.2368449282560749
+  },
+  {
+    "test": "H4_control_group_DiD",
+    "window": "summer",
+    "outcome": "lights",
+    "n_obs": 1966,
+    "se": 0.04295284090460184,
+    "df": 13,
+    "mde": 0.1301694515977649,
+    "observed_coef": 0.03243532769890894,
+    "observed_p": 0.4501661103685969,
+    "observed_as_fraction_of_mde": 0.24917772411868924
+  }
+]

@@ -1,0 +1,122 @@
+{
+  "dynamicworld_built_full_year": {
+    "h1_treated_only": {
+      "n": 249,
+      "mean_before": 0.06662803927017243,
+      "mean_after": 0.07336292047465753,
+      "mean_change": 0.006734881204485079,
+      "wilcoxon_stat": 25811.0,
+      "wilcoxon_p": 1.0457269759898903e-19
+    },
+    "h4_control_group_did": {
+      "n_obs": 1940,
+      "n_treated": 249,
+      "n_control": 721,
+      "did_coef": 0.0030988615687238806,
+      "did_se": 0.0012288263486092883,
+      "did_p": 0.011675410303384145,
+      "did_ci_lo": 0.0006904061821958146,
+      "did_ci_hi": 0.005507316955251947
+    }
+  },
+  "dynamicworld_built_summer": {
+    "h1_treated_only": {
+      "n": 169,
+      "mean_before": 0.05739785193826882,
+      "mean_after": 0.06450292224302241,
+      "mean_change": 0.007105070304753594,
+      "wilcoxon_stat": 11223.0,
+      "wilcoxon_p": 1.1289461160553037e-10
+    },
+    "h4_control_group_did": {
+      "n_obs": 1428,
+      "n_treated": 169,
+      "n_control": 545,
+      "did_coef": 0.007357941868403935,
+      "did_se": 0.002293087892403982,
+      "did_p": 0.001333141439747095,
+      "did_ci_lo": 0.002863572185907272,
+      "did_ci_hi": 0.011852311550900598
+    }
+  },
+  "sar_vv_full_year": {
+    "h1_treated_only": {
+      "n": 251,
+      "mean_before": -7.5866361045170105,
+      "mean_after": -7.685425664491748,
+      "mean_change": -0.09878955997473847,
+      "wilcoxon_stat": 5969.0,
+      "wilcoxon_p": 1.0
+    },
+    "h4_control_group_did": {
+      "n_obs": 1966,
+      "n_treated": 251,
+      "n_control": 732,
+      "did_coef": -0.008373918113684306,
+      "did_se": 0.031623501025795364,
+      "did_p": 0.7911631704466382,
+      "did_ci_lo": -0.07035484118930868,
+      "did_ci_hi": 0.05360700496194006
+    }
+  },
+  "sar_vv_summer": {
+    "h1_treated_only": {
+      "n": 251,
+      "mean_before": -6.999489683770316,
+      "mean_after": -7.1768308666019855,
+      "mean_change": -0.17734118283166903,
+      "wilcoxon_stat": 3735.0,
+      "wilcoxon_p": 1.0
+    },
+    "h4_control_group_did": {
+      "n_obs": 1966,
+      "n_treated": 251,
+      "n_control": 732,
+      "did_coef": 0.011506742503807347,
+      "did_se": 0.031746229590260654,
+      "did_p": 0.7170082124731556,
+      "did_ci_lo": -0.05071472413804329,
+      "did_ci_hi": 0.07372820914565799
+    }
+  },
+  "sar_vh_full_year": {
+    "h1_treated_only": {
+      "n": 251,
+      "mean_before": -14.348515800860532,
+      "mean_after": -14.447242985778002,
+      "mean_change": -0.09872718491746807,
+      "wilcoxon_stat": 6497.0,
+      "wilcoxon_p": 0.9999999999999997
+    },
+    "h4_control_group_did": {
+      "n_obs": 1966,
+      "n_treated": 251,
+      "n_control": 732,
+      "did_coef": -0.008486044028583647,
+      "did_se": 0.02951242590196615,
+      "did_p": 0.7736978130834704,
+      "did_ci_lo": -0.06632933589284432,
+      "did_ci_hi": 0.04935724783567703
+    }
+  },
+  "sar_vh_summer": {
+    "h1_treated_only": {
+      "n": 251,
+      "mean_before": -13.811728837966493,
+      "mean_after": -13.96526025502682,
+      "mean_change": -0.1535314170603258,
+      "wilcoxon_stat": 5247.0,
+      "wilcoxon_p": 1.0
+    },
+    "h4_control_group_did": {
+      "n_obs": 1966,
+      "n_treated": 251,
+      "n_control": 732,
+      "did_coef": -0.002384888258318091,
+      "did_se": 0.040183652171375366,
+      "did_p": 0.9526735649327372,
+      "did_ci_lo": -0.08114339928149855,
+      "did_ci_hi": 0.07637362276486237
+    }
+  }
+}

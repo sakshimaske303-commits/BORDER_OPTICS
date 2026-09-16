@@ -33,8 +33,11 @@ Government sources (VVP-I portals, Rajya Sabha/Lok Sabha Q&A) + OSM/Bhuvan
 Village compilation & geocoding (src/acquisition/) ──► Non-VVP control villages
         │                                              via Overpass API, same
         ▼                                              14 districts
-Google Earth Engine extraction — NDBI + VIIRS, two compositing windows,
-three time points (2021/2023/2025), three buffer radii (250m/500m/1km)
+Google Earth Engine extraction — primary: NDBI + VIIRS, two compositing windows,
+three time points (2021/2023/2025), three buffer radii (250m/500m/1km);
+triangulation: Sentinel-1 SAR VV/VH backscatter, Dynamic World built-up
+probability; ground truth: Google Open Buildings footprint counts; a second
+pre-treatment (2019) pull for a genuine placebo test
 (src/acquisition/extract_*.py)
         │
         ▼
@@ -42,13 +45,15 @@ Border-distance computation (src/analysis/compute_border_distance.py)
         │
         ▼
 Statistical testing — Wilcoxon, Spearman, district-FE DiD, multi-year trend,
-buffer sensitivity (src/analysis/)
+buffer sensitivity, exact wild cluster bootstrap, spatial-autocorrelation-
+corrected permutation test, pre-trends placebo DiD, cross-proxy triangulation,
+building-footprint validation (src/analysis/)
         │
         ▼
 Static figures + interactive maps (src/visualization/) ──► BO_Research_Paper.md
         │
         ▼
-Streamlit dashboard (app.py + 7 pages)
+Streamlit dashboard (app.py + 8 pages)
 ```
 
 ---
@@ -62,7 +67,11 @@ Streamlit dashboard (app.py + 7 pages)
 - Tests if proximity to the border/Line of Actual Control is correlated to the pace of development, which is within the prediction of securitization theory of borders where proximity to the border – not developmental need – drives priority
 - Explicitly tests the robustness of "compositing-window sensitive" (full-year vs. summer matched) as its own robustness test, instead of relying on a single satellite comparison
 - To separate out a programme-attributable effect from the region's own trend, a change in the change that took place among treated villages was compared against a district-restricted non-VVP control group of 732 villages, also in the 14 districts, using a difference in differences model with a district fixed-effect model.
-- Adds a three-point 2021-vs-2023-vs-2025 comparison to the core trend, and compares the fixed 500m trend extraction buffer with 250m and 1km buffers to see if the results of another extreme year or buffer size preference are skewing the results
+- Adds a three-point 2021-vs-2023-vs-2025 comparison to the core trend, and compares the fixed 500m trend extraction buffer with 250m and 1km buffers, all pulled the same day, to see if the results of another extreme year, buffer size, or archive-timing preference are skewing the results
+- Re-checks the district fixed-effects DiD's reliance on only 14 clusters with an exact wild cluster bootstrap (16,384 sign-flip combinations) rather than trusting the standard cluster-robust asymptotics alone
+- Stress-tests the border-proximity correlation once flagged as a fresh, unchecked finding — leave-one-district-out, randomization inference, and a spatial-autocorrelation-calibrated permutation test, since the 251 sample villages are not independent observations for ordinary significance purposes
+- Extracts a genuine second pre-treatment year (2019) for both treated and control villages so a real parallel-pre-trends placebo test can be run, not just a same-year baseline-level check
+- Triangulates the primary NDBI/night-lights design against two fully independent proxies — Sentinel-1 SAR backscatter and Dynamic World's machine-learned built-up probability — and validates all of them against an independent, non-satellite ground truth: Google Open Buildings footprint counts, plus three specific villages with confirmed real construction
 - Presents all information on a multi-page interactive Streamlit dashboard via live recalculating statistical tests, embedded Folium (interactive) maps and Plotly (interactive) plots
 
 ## Interactive Maps & Plots
@@ -73,13 +82,21 @@ Each map and the three statistical charts at the head of the dashboard are not f
 
 An earlier version of this project reported built-up area change as compositing-window sensitive: no significant change in a full-year composite (Wilcoxon signed-rank, p = 1.000), but a highly significant increase in the same villages recomposited to summer months (June–September, p < 0.000001). That summer result depended on an incomplete extraction — at the time it was run, all 31 Sikkim villages returned zero usable summer imagery, a gap since traced to the Sentinel-2 archive still backfilling scenes for those exact dates, not to any real absence of change (full account in `BO_Development_Log.md`, Entries 21–22). Once the extraction was completed — pulled the same day as the control group's own data — the summer result reversed to a null (p = 0.436), matching the full-year window. **Both compositing windows now agree: no significant built-up-area change either way.**
 
-Against a district-restricted non-VVP control group of 732 villages across the same region, the same reversal holds: the summer-window NDBI gap that was once significant (district-fixed-effects DiD, p = 0.00033) is now null (p = 0.473, coefficient sign flipped), matching the full-year window's own null result (p = 0.310). Every check built around the old result was rerun on the complete data and agrees — the buffer-radius sweep at 250m/500m/1km is now null at all three (was significant at all three), the result no longer holds under leave-one-district-out (0 of 14 reruns, was 14 of 14), and randomization inference agrees (p = 0.154, was p = 0.0005). Night-lights follows the same pattern for its summer-window control-group gap (now p = 0.450, was p = 0.0044). Its full-year gap had, for a while, been the one control-group result in this study still significant under any specification (p = 0.036 under fixed effects) — but that estimate turned out to rest on a contaminated control group: 20 of the previous 735 control villages were physically the same settlements as treated villages under a different name spelling or script, and 3 more were officially-listed VVP-I villages under their own real, ungeocoded names (`BO_Development_Log.md`, Entry 23). Once that contamination was actually removed and the control list regenerated to 732 villages — independently verified at zero coordinate overlap and zero name matches — that gap went null too: p = 0.309 (was p = 0.036), 0 of 14 leave-one-district-out reruns significant (was 10 of 14), randomization-inference p = 0.130 (was p = 0.0155) (Entry 25). One new finding appeared in the same complete summer data: built-up change now correlates with distance to the border/LAC, in the opposite direction from what the securitization hypothesis predicted — flagged as an open question, not yet stress-tested, rather than folded into the headline.
+Against a district-restricted non-VVP control group of 732 villages across the same region, the same reversal holds: the summer-window NDBI gap that was once significant (district-fixed-effects DiD, p = 0.00033) is now null (p = 0.473, coefficient sign flipped), matching the full-year window's own null result (p = 0.310). Every check built around the old result was rerun on the complete data and agrees — the buffer-radius sweep at 250m/500m/1km, all pulled the same day, is null at all three, the result does not hold under leave-one-district-out (0 of 14 reruns), and randomization inference agrees. Night-lights follows the same pattern for its summer-window control-group gap (p = 0.450). Its full-year gap had, for a while, been the one control-group result in this study still significant under any specification — but that estimate turned out to rest on a contaminated control group, and once the contamination was removed and the control list regenerated to 732 villages, that gap went null too (`BO_Development_Log.md`, Entries 23–25).
 
-As a general trend the change is not consistent either way: the three-point 2021/2023/2025 extension shows a decline from 2021 to 2023 followed by a recovery from 2023 to 2025 that nets out to a non-significant overall trend — consistent with, not contradicting, the now-null two-point comparison.
+This round added a stricter test the earlier robustness checks didn't cover: with only 14 district clusters — below the 30–40+ usually recommended for cluster-robust standard errors' own asymptotics to be trustworthy — an exact wild cluster bootstrap (16,384 sign-flip combinations, not an approximation) was run on all four outcome/window DiD estimates. All four remain non-significant (p = 0.32–0.50), meaning the small-cluster count is not itself manufacturing a false null. A genuine parallel-pre-trends placebo test was also added: a second pre-treatment year (2019) was pulled for both treated and control villages, since the original design's single pre-period (2021) could only support a same-year baseline-*level* check, not a pre-*trend* one. Three of the four resulting placebo comparisons are clean (full-year NDBI p=0.864, full-year lights p=0.755, summer lights p=0.968); the fourth (summer NDBI, p=0.064) is borderline and reported as borderline, not rounded up to a pass, alongside the raw unadjusted comparison for that same combination being sharply significant (p=0.00001).
 
-Budget still doesn't track measured outcome: with all three core states now having valid summer data (previously two, before Sikkim's was recovered), Arunachal Pradesh's roughly tenfold larger sanctioned budget (₹2,749.74 crore vs. Uttarakhand's ₹270.58 crore) corresponds to a smaller mean NDBI change, and Sikkim's smallest budget of the three corresponds to a negative one — descriptive only at n=3, and the correlation's direction itself flips between compositing windows at this sample size.
+Two findings from this round are not restatements of the null. First, the border-proximity correlation flagged in an earlier version of this project as new and unchecked has now been run through leave-one-district-out (14 of 14 significant, both directions found), randomization inference (p≈0.0005), and — the more conservative test, since the 251 sample villages are not spatially independent observations — a spatial-autocorrelation-calibrated permutation test (p=0.0295 summer-NDBI, p=0.0035 full-year-lights). It survives all three and is now a real secondary finding, still correlational, running opposite to what a securitization account of border development would predict.
 
-The honest headline, once the extraction is complete: no satellite-detectable effect of VVP-I survives being checked two ways, across two proxies, against a control group, and at three buffer radii — a real answer to a question Parliament's own record says was never asked, and a reminder that a result surviving every robustness check still isn't confirmed if the underlying extraction wasn't complete. Full account of what changed and why is in `BO_Development_Log.md` (Entries 21–22).
+Second, triangulating the primary NDBI/lights design against two independent satellite proxies did not simply confirm the null. Sentinel-1 SAR backscatter agrees — null in both windows, both polarizations. Dynamic World's machine-learned built-up probability does not: its control-group DiD is significant in both windows (full-year p=0.0117, summer p=0.0013). That disagreement is not easily dismissed, because Dynamic World also validates far more strongly against an independent, non-satellite ground truth — Google Open Buildings footprint counts (Spearman ρ=0.808, vs. NDBI's ρ=0.399 and lights' ρ=0.478) — and because at three specific villages this project separately confirmed underwent real construction (Kaho, Walong, Musai), Dynamic World and night-lights both correctly registered an increase at all three while NDBI moved in the wrong direction at all three. A village-level check found the three proxies agreeing on direction of change in only about a third to two-thirds of individual villages, depending on the pair and window — near chance. Whether this means NDBI under-detects a real, modest effect, or Dynamic World's DiD is itself a different kind of false positive, is reported here as an open question rather than resolved in either direction — see `BO_Development_Log.md` (Entries 26–32) and `BO_Research_Paper.md` Section 4.10/7.2/7.3 for the full account.
+
+Third, and unrelated to proxy choice: cross-checking the QA60 cloud mask used throughout against an alternative SCL-band mask surfaced a genuine, unresolved instability in the primary NDBI measure itself. On the identical 200 villages both masks can produce a valid summer composite for, QA60 gives a null (p=0.449) and SCL gives a significant, positive result (p=0.0000045) — holding the village sample fixed, so this is not a sample-composition artifact of the kind this project has already caught twice. Neither mask has been shown to be the wrong one; this is reported as an open sensitivity in this study's own measurement approach, not resolved toward either conclusion (`BO_Development_Log.md`, Entry 33; `BO_Research_Paper.md` Section 6.12).
+
+As a general trend the primary NDBI/lights measure is not consistent either way: the three-point 2021/2023/2025 extension shows a decline from 2021 to 2023 followed by a recovery from 2023 to 2025 that nets out to a non-significant overall trend — consistent with, not contradicting, the now-null two-point comparison.
+
+Budget still doesn't track measured outcome: Arunachal Pradesh's roughly tenfold larger sanctioned budget (₹2,749.74 crore vs. Uttarakhand's ₹270.58 crore) corresponds to a smaller mean NDBI change, and Sikkim's smallest budget of the three corresponds to a negative one — descriptive only at n=3, and the correlation's direction itself flips between compositing windows at this sample size.
+
+The honest headline: on its primary measure, under its original cloud-masking convention, no satellite-detectable effect of VVP-I survives being checked two ways, across two compositing windows, against a control group, at three buffer radii, under a small-cluster-robust bootstrap, or under a genuine pre-treatment placebo test — a real answer to a question Parliament's own record says was never asked. But two further checks complicated that null rather than confirming it: triangulating against an independent, ground-truth-validated proxy surfaced a genuine tension this project has not resolved, and cross-checking the cloud-masking method itself, holding the village sample fixed, flipped the same primary result from null to significant. A border-proximity pattern once flagged as unchecked has, by contrast, since survived every stress test applied to it. Full account of what changed and why is in `BO_Development_Log.md` (Entries 21–33).
 
 The full methodological approach, including all of the hypotheses tested as well as the "robustness" check of the compositing window and the control group/multi-year/buffer-radius checks taken throughout, can be found on the Methodology & Limitations page of the dashboard.
 
@@ -100,17 +117,24 @@ BORDER_OPTICS/
 │   └── processed/                  # Geocoded villages, GEE satellite exports, analyzed results
 ├── src/
 │   ├── acquisition/                # Geocoding, GEE extraction (treated + control group,
-│   │                                #   multi-year, buffer-radius sweep)
+│   │                                #   multi-year, buffer-radius sweep, SAR, Dynamic World,
+│   │                                #   building footprints, pre-treatment baseline, SCL mask)
 │   ├── analysis/                   # Statistical testing, border-distance computation,
-│   │                                #   DiD model, multi-year trend, buffer sensitivity
+│   │                                #   DiD model, multi-year trend, buffer sensitivity,
+│   │                                #   wild cluster bootstrap, spatial/Moran's I correction,
+│   │                                #   triangulation, building-footprint validation,
+│   │                                #   pre-trends placebo test, extended robustness checks
 │   └── visualization/              # Static chart + interactive map/plot generation
 ├── outputs/
-│   ├── figures/                    # Static PNG charts
+│   ├── figures/                    # Static PNG charts (incl. triangulation & footprint validation)
+│   ├── *.json / *.csv               # Robustness, triangulation, and validation results
 │   └── interactive_maps/
 │       ├── maps/                   # Folium interactive HTML maps
 │       └── plots/                  # Plotly interactive HTML charts
 ├── BO_Research_Paper.md
 ├── BO_Development_Log.md
+├── DATA_DICTIONARY.md
+├── ANALYSIS_FREEZE.md
 └── requirements.txt
 ```
 
@@ -127,6 +151,9 @@ Python · Pandas · GeoPandas · SciPy · Folium · Plotly · Streamlit · Googl
 | Non-VVP Control Villages | OpenStreetMap Overpass API, district-matched |
 | Built-Up Index (NDBI) | Sentinel-2 SR Harmonized (Google Earth Engine) |
 | Night-Lights | VIIRS DNB monthly composites (Google Earth Engine) |
+| SAR Backscatter (triangulation) | Sentinel-1 GRD (Google Earth Engine) |
+| Built-up probability (triangulation) | Dynamic World V1 (Google Earth Engine) |
+| Building footprint ground truth | Google Open Buildings v3 (Google Earth Engine) |
 | Border/LAC Geometry | Natural Earth 10m Admin-0 Boundary Lines |
 | Budget / Project Counts | Parliamentary record (Rajya Sabha / Lok Sabha Q&A) |
 

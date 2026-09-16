@@ -4,10 +4,10 @@
       "buffer_m": 250,
       "n_core": 251,
       "ndbi_n_valid": 251,
-      "ndbi_mean_change": 0.001742272474250527,
+      "ndbi_mean_change": 0.0017457345834550767,
       "ndbi_median_change": 0.001840874096021794,
-      "ndbi_wilcoxon_stat": 17131.0,
-      "ndbi_wilcoxon_p": 0.12616215590187885,
+      "ndbi_wilcoxon_stat": 17158.0,
+      "ndbi_wilcoxon_p": 0.12136862433989387,
       "lights_n_valid": 251,
       "lights_mean_change": 0.02300350474989289,
       "lights_median_change": -0.060453545269185394,
@@ -32,10 +32,10 @@
       "buffer_m": 1000,
       "n_core": 251,
       "ndbi_n_valid": 251,
-      "ndbi_mean_change": -0.002920205439941458,
-      "ndbi_median_change": -0.0016189457476411817,
-      "ndbi_wilcoxon_stat": 14342.0,
-      "ndbi_wilcoxon_p": 0.8993060003087094,
+      "ndbi_mean_change": -0.002928156727045179,
+      "ndbi_median_change": -0.0016020773097100982,
+      "ndbi_wilcoxon_stat": 14353.0,
+      "ndbi_wilcoxon_p": 0.8976105350470116,
       "lights_n_valid": 251,
       "lights_mean_change": 0.0020673432665735273,
       "lights_median_change": -0.06089619881249447,
@@ -54,8 +54,8 @@
       "buffer_m": 250,
       "outcome": "ndbi",
       "n": 251,
-      "mean_change": 0.001742272474250527,
-      "wilcoxon_p": 0.12616215590187885
+      "mean_change": 0.0017457345834550767,
+      "wilcoxon_p": 0.12136862433989387
     },
     {
       "buffer_m": 500,
@@ -68,8 +68,8 @@
       "buffer_m": 1000,
       "outcome": "ndbi",
       "n": 251,
-      "mean_change": -0.002920205439941458,
-      "wilcoxon_p": 0.8993060003087094
+      "mean_change": -0.002928156727045179,
+      "wilcoxon_p": 0.8976105350470116
     }
   ]
 }

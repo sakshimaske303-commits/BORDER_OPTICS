@@ -1,0 +1,85 @@
+{
+  "full_year": {
+    "n_total_core": 251,
+    "built_change_vs_vv_change": {
+      "n": 249,
+      "rho": 0.06337172312555847,
+      "p": 0.31927020897173686,
+      "same_sign_pct": 41.365461847389554
+    },
+    "built_change_vs_vh_change": {
+      "n": 249,
+      "rho": 0.07730802221381872,
+      "p": 0.22414425204765356,
+      "same_sign_pct": 36.94779116465863
+    },
+    "built_change_vs_ndbi_change": {
+      "n": 249,
+      "rho": 0.10187862928503888,
+      "p": 0.10877932223425729,
+      "same_sign_pct": 36.54618473895582
+    },
+    "vv_change_vs_ndbi_change": {
+      "n": 251,
+      "rho": 0.03471342932802326,
+      "p": 0.5841149451340071,
+      "same_sign_pct": 62.94820717131474
+    },
+    "built_change_by_state": [
+      {
+        "state": "Arunachal Pradesh",
+        "mean": 0.007508530774315363,
+        "count": 184
+      },
+      {
+        "state": "Sikkim",
+        "mean": 0.0009816920244954423,
+        "count": 31
+      },
+      {
+        "state": "Uttarakhand",
+        "mean": 0.007793626608335269,
+        "count": 34
+      }
+    ]
+  },
+  "summer": {
+    "n_total_core": 251,
+    "built_change_vs_vv_change": {
+      "n": 169,
+      "rho": -0.07737728965050002,
+      "p": 0.31733990124331707,
+      "same_sign_pct": 31.360946745562128
+    },
+    "built_change_vs_vh_change": {
+      "n": 169,
+      "rho": -0.12828258342812032,
+      "p": 0.0964784137464259,
+      "same_sign_pct": 32.544378698224854
+    },
+    "built_change_vs_ndbi_change": {
+      "n": 169,
+      "rho": 0.150914617091499,
+      "p": 0.050164149960021144,
+      "same_sign_pct": 63.31360946745562
+    },
+    "vv_change_vs_ndbi_change": {
+      "n": 251,
+      "rho": -0.08342613696943987,
+      "p": 0.1876982499318753,
+      "same_sign_pct": 45.41832669322709
+    },
+    "built_change_by_state": [
+      {
+        "state": "Arunachal Pradesh",
+        "mean": 0.006494534193878473,
+        "count": 136
+      },
+      {
+        "state": "Uttarakhand",
+        "mean": 0.009621219125329844,
+        "count": 33
+      }
+    ]
+  }
+}

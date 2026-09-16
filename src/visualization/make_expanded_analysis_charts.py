@@ -95,21 +95,30 @@ print("Saved outputs/figures/09_multiyear_trend.png")
 
 # ============================================================
 # FIGURE 10 — Buffer-radius sensitivity (250m / 500m / 1km), summer window
+#
+# All three radii are now pulled the same day (Development Log Entry 31),
+# closing the archive-timing gap an earlier version of this figure showed as
+# two separate bars ("as extracted" vs. a 154-village "matched subsample")
+# because the 250m/1km legs used to be pulled on a different day than the
+# 500m primary run. Coverage is now identical (n=251) at every radius, so
+# those two series are no longer different from each other -- this version
+# plots one bar per radius instead of a now-redundant pair.
 # ============================================================
 with open("data/processed/border_optics_buffer_sensitivity_summary.json") as f:
     buf = json.load(f)
 
-as_extracted = {r["buffer_m"]: r["ndbi_wilcoxon_p"] for r in buf["as_extracted"]}
-matched = {r["buffer_m"]: r["wilcoxon_p"] for r in buf["matched_subsample"]}
+ndbi_p = {r["buffer_m"]: r["ndbi_wilcoxon_p"] for r in buf["as_extracted"]}
+ndbi_mean_change = {r["buffer_m"]: r["ndbi_mean_change"] for r in buf["as_extracted"]}
 buffers = [250, 500, 1000]
 
 fig, ax = plt.subplots(figsize=(8, 4.5))
 x = np.arange(len(buffers))
-width = 0.35
-bars1 = ax.bar(x - width / 2, [max(as_extracted[b], 1e-7) for b in buffers], width,
-               label="As extracted (varying n, archive-timing confounded)", color="#B0B0B0", edgecolor="black")
-bars2 = ax.bar(x + width / 2, [max(matched[b], 1e-7) for b in buffers], width,
-               label="Matched subsample (n=154, buffer radius isolated)", color=GREEN, edgecolor="black")
+bar_colors = [BLUE if ndbi_mean_change[b] >= 0 else ORANGE for b in buffers]
+bars = ax.bar(x, [max(ndbi_p[b], 1e-7) for b in buffers], width=0.5,
+              color=bar_colors, edgecolor="black")
+for xi, b in zip(x, buffers):
+    ax.text(xi, max(ndbi_p[b], 1e-7) * 1.15, f"p={ndbi_p[b]:.4f}\n(mean chg {ndbi_mean_change[b]:+.5f})",
+            ha="center", va="bottom", fontsize=8)
 ax.set_yscale("log")
 ax.axhline(0.05, color=RED, linewidth=1.2, linestyle="-")
 ax.text(len(buffers) - 0.5, 0.05, " p = 0.05", color=RED, fontsize=9, va="bottom")
@@ -117,8 +126,9 @@ ax.set_xticks(list(x))
 ax.set_xticklabels([f"{b}m" for b in buffers])
 ax.set_xlabel("Buffer radius")
 ax.set_ylabel("NDBI Wilcoxon p-value (log scale)")
-ax.set_title("Figure 9 — Buffer-Radius Sensitivity: NDBI Significance, Summer Window", fontsize=12, fontweight="bold")
-ax.legend(loc="upper left", fontsize=8.5, frameon=True)
+ax.set_ylim(top=3)
+ax.set_title("Figure 9 — Buffer-Radius Sensitivity: NDBI Significance, Summer Window\n"
+             "(all three radii pulled the same day, n=251 at every radius)", fontsize=11, fontweight="bold")
 fig.tight_layout()
 fig.savefig("outputs/figures/10_buffer_sensitivity.png", bbox_inches="tight")
 plt.close(fig)

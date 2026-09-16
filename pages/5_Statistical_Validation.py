@@ -28,7 +28,10 @@ _checks = [
     (PALETTE['accent'], "✓", "Cross-Checked Against Sanctioned Budget"),
     (PALETTE['accent'], "✓", "Every Data Gap Disclosed"),
     (PALETTE['accent'], "✓", "Original Summer NDBI Signal Re-Checked Once Extraction Was Completed — Did Not Survive"),
-    (PALETTE['warning'], "!", "New Summer Border-Proximity Correlation (H3) — Open, Not Yet Stress-Tested"),
+    (PALETTE['accent'], "✓", "Border-Proximity Correlation (H3) — Stress-Tested (Leave-One-Out, Randomization, Spatial Correction) — Survives"),
+    (PALETTE['accent'], "✓", "Exact Wild Cluster Bootstrap (16,384 Sign-Flip Combinations) — DiD Null Confirmed"),
+    (PALETTE['accent'], "✓", "Genuine Pre-Treatment (2019) Placebo Test — Mostly Clean, One Borderline Result Flagged"),
+    (PALETTE['warning'], "!", "Triangulation vs. SAR + Dynamic World — Open Tension, Not a Confirmation (see Methodology & Limitations)"),
 ]
 _badges = "".join(
     f"""<span style="display:inline-flex; align-items:center; gap:6px; background:rgba(167,225,193,0.08);
@@ -106,6 +109,14 @@ with col1:
 with col2:
     result_card("Summer-Matched", sm_w, sm_p, sm_n, PALETTE["border_up"])
 
+st.caption(
+    "Both figures above use the primary QA60 cloud mask. A cross-check against an alternative SCL-band "
+    "mask, holding the village sample fixed at the 200 villages both masks can produce a valid summer "
+    "composite for, flips this summer result from null (QA60, p=0.449) to significant and positive "
+    "(SCL, p=0.0000045) — a genuine, unresolved sensitivity in this measure, not a sample-composition "
+    "artifact. See Methodology & Limitations for the full account."
+)
+
 st.markdown("---")
 
 # ============================================================
@@ -142,7 +153,15 @@ h3_table = pd.DataFrame({
     "Summer (p)": [f"{sm_p_n:.4f}" if sm_p_n is not None else "—", f"{sm_p_l:.4f}" if sm_p_l is not None else "—"],
 })
 st.dataframe(h3_table, use_container_width=True, hide_index=True)
-st.caption("Exploratory — treat with caution given sample size and border-geometry caveats (see Methodology & Limitations).")
+st.caption(
+    "The two Holm-significant correlations here (summer NDBI ρ=+0.291, full-year lights ρ=-0.252) have "
+    "since been stress-tested: 14/14 leave-one-district-out reruns significant with the same sign, "
+    "randomization-inference p<0.001 for both, and — the more conservative test, since these villages are "
+    "not spatially independent — a spatial-autocorrelation-calibrated permutation test still gives "
+    "p=0.0295 (summer NDBI) and p=0.0035 (full-year lights). Both survive, though the summer NDBI result "
+    "is the more fragile of the two on every check run against it. Still exploratory given the "
+    "border-geometry caveats (see Methodology & Limitations) — a correlation, not a causal claim."
+)
 
 st.image(
     "outputs/figures/03_h3_border_distance_vs_lights.png",

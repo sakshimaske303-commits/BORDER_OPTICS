@@ -1,0 +1,46 @@
+{
+  "moran_reproduction": {
+    "summer_ndbi_change": {
+      "reproduced_I": 0.3462277772820725,
+      "reproduced_p": 0.001,
+      "published_claim": "\u00a76.11 claims I=0.346, p=0.001"
+    },
+    "full_year_lights_change": {
+      "reproduced_I": 0.07563448495903197,
+      "reproduced_p": 0.003,
+      "published_claim": "\u00a76.11 claims I=0.076, p=0.004"
+    }
+  },
+  "h3_spatial_correction": {
+    "summer_ndbi_change": {
+      "window": "summer",
+      "metric": "ndbi_change",
+      "n": 251,
+      "moran_i_observed": 0.3462277772820725,
+      "moran_i_permutation_p": 0.001,
+      "moran_i_permutation_null_mean": -0.0042095442977823265,
+      "moran_i_permutation_null_sd": 0.028126739050335112,
+      "spearman_rho": 0.2914449023389552,
+      "naive_p": 2.6444246260587754e-06,
+      "calibrated_sar_phi": 0.639587459564209,
+      "calibrated_sim_mean_moran_i": 0.3524331041763208,
+      "spatially_corrected_p": 0.02948525737131434,
+      "n_sim": 2000
+    },
+    "full_year_lights_change": {
+      "window": "full_year",
+      "metric": "lights_change",
+      "n": 251,
+      "moran_i_observed": 0.07563448495903197,
+      "moran_i_permutation_p": 0.003,
+      "moran_i_permutation_null_mean": -0.004360089362938118,
+      "moran_i_permutation_null_sd": 0.018275010241895182,
+      "spearman_rho": -0.25178477043953446,
+      "naive_p": 5.4766554230050705e-05,
+      "calibrated_sar_phi": 0.27583745956420896,
+      "calibrated_sim_mean_moran_i": 0.07551447340769553,
+      "spatially_corrected_p": 0.0034982508745627187,
+      "n_sim": 2000
+    }
+  }
+}

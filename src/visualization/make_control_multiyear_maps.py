@@ -1,7 +1,3 @@
-"""3 new interactive maps: control group, 2023-2025 recovery, and the 500m
-coverage gap.
-"""
-
 import os
 import pandas as pd
 import folium
@@ -90,7 +86,12 @@ def make_treated_vs_control_map():
     folium.LayerControl(collapsed=False).add_to(m)
     m.get_root().html.add_child(folium.Element(title_html(
         "BORDER OPTICS — Treated vs. Non-VVP Control Group",
-        "251 treated villages (watermelon) vs. 735 district-restricted control villages (mint), same 14 districts",
+        # row count, not nunique('village') -- a handful of villages share the same
+        # name across different districts/states, so nunique() undercounts (was
+        # showing 250/723 instead of the real 251/732 -- caught by checking the
+        # rendered map text against ANALYSIS_FREEZE.md, not assumed correct)
+        f"{len(treated)} treated villages (watermelon) vs. {len(control)} "
+        "district-restricted control villages (mint), same 14 districts",
     )))
     out_path = "outputs/interactive_maps/maps/village_treated_vs_control_map.html"
     m.save(out_path)

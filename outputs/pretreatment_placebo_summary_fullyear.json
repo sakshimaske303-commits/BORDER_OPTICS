@@ -1,0 +1,24 @@
+{
+  "ndbi": {
+    "n_obs": 983,
+    "n_treated": 251,
+    "n_control": 732,
+    "placebo_did_coef": 0.001958015913681279,
+    "placebo_did_se": 0.011433011796333476,
+    "placebo_did_p": 0.8640194471020068,
+    "placebo_did_ci_lo": -0.020450275441953922,
+    "placebo_did_ci_hi": 0.024366307269316483,
+    "mann_whitney_p": 0.5477164502264975
+  },
+  "lights": {
+    "n_obs": 983,
+    "n_treated": 251,
+    "n_control": 732,
+    "placebo_did_coef": -0.006648960895223395,
+    "placebo_did_se": 0.0213141602391039,
+    "placebo_did_p": 0.7550782156676767,
+    "placebo_did_ci_lo": -0.04842394732458267,
+    "placebo_did_ci_hi": 0.03512602553413587,
+    "mann_whitney_p": 0.2867937333913707
+  }
+}
