@@ -37,9 +37,8 @@ def test_buffer(buffer_m, path):
 
 
 def matched_subsample_test(common_ids, outcome="ndbi"):
-    # 250m/1km ran later than 500m, and the Sentinel-2 archive kept
-    # backfilling in between -> more usable imagery, not a buffer effect.
-    # Restrict to villages valid at all three radii so the comparison is fair.
+    # 250m/1km ran later than 500m and the archive backfilled in between,
+    # so restrict to villages valid at all three radii for a fair comparison
     print(f"\n=== Matched-subsample check ({outcome.upper()}, n={len(common_ids)} villages "
           f"valid at all three buffer radii) ===")
     results = []
@@ -76,7 +75,6 @@ def main():
         print(f"{r['buffer_m']:>7d}m  {r['ndbi_wilcoxon_p']:>12.6f}  {r['ndbi_mean_change']:>+14.5f}  "
               f"{r['lights_wilcoxon_p']:>12.6f}  {r['lights_mean_change']:>+16.5f}")
 
-    # find villages valid at every radius vs. only some, re-run on the common set
     dfs = {b: pd.read_csv(p) for b, p in BUFFERS.items()}
     valid_sets = {}
     for b, df in dfs.items():

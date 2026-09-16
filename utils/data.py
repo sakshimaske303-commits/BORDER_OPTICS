@@ -9,11 +9,8 @@ def load_data():
     full_year = pd.read_csv("data/processed/border_optics_village_results_analyzed.csv")
     summer = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
 
-    # full_year's own extraction doesn't carry lat/lon, so it needs the full merge.
-    # summer's fresh extraction (post Development Log Entry 22) already carries its
-    # own latitude/longitude columns -- merging those in again from villages would
-    # collide and get silently renamed to latitude_x/latitude_y by pandas, dropping
-    # the plain column names. summer only needs distance_to_border_km from villages.
+    # full_year needs the full merge, summer already has its own lat/lon so it
+    # only needs distance_to_border_km -- else pandas renames lat/lon to _x/_y
     merge_cols = ["village_id", "latitude", "longitude", "distance_to_border_km"]
     full_year = full_year.merge(villages[merge_cols], on="village_id", how="left")
     summer = summer.merge(villages[["village_id", "distance_to_border_km"]], on="village_id", how="left")
@@ -23,10 +20,7 @@ def load_data():
 
 @st.cache_data
 def load_expanded_results():
-    """Control-group DiD, multi-year trend, and buffer-sensitivity summaries -
-    the three robustness checks that stress-test the summer-matched NDBI
-    result against a district-restricted control group, a three-point trend, and a
-    buffer-radius sweep (Research Paper Sections 3.7-3.9 / 4.6-4.8)."""
+    """did, multi-year trend, buffer sensitivity -- the robustness check summaries."""
     with open("data/processed/border_optics_did_summary_fullyear.json") as f:
         did_fullyear = json.load(f)
     with open("data/processed/border_optics_did_summary_summer.json") as f:

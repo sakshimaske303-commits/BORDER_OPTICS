@@ -34,10 +34,7 @@ def year_range(window_key, year):
 
 
 def init_ee():
-    # Recent earthengine-api versions require a Cloud project attached to
-    # Initialize() — a bare browser authentication no longer implies one.
-    # Set EE_PROJECT in .env (see .env.example) to your Earth Engine-enabled
-    # Google Cloud project ID.
+    # need EE_PROJECT set in .env or Initialize() fails
     project = os.environ.get("EE_PROJECT")
     try:
         ee.Initialize(project=project)

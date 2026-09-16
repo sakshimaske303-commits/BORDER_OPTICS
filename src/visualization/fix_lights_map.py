@@ -4,18 +4,15 @@ import branca.colormap as cm
 
 GOLD = "#D4AF37"
 
-# --- reload data (same as main file) ---
 villages = pd.read_csv("data/processed/border_optics_master_villages_with_distance.csv")
 summer = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
 
-# summer's fresh extraction already carries its own latitude/longitude -- only
-# pull distance_to_border_km from villages, or the merge silently renames the
-# plain lat/lon columns to latitude_x/latitude_y (see utils/data.py).
+# only grab distance_to_border_km here -- else merge renames lat/lon to _x/_y
 summer = summer.merge(villages[["village_id", "distance_to_border_km"]], on="village_id", how="left")
 
 valid = summer.dropna(subset=["lights_change", "latitude", "longitude"]).copy()
 
-# --- FIXED colors: white -> gold -> red (no more dark/black dots) ---
+# white -> gold -> red, no dark/black dots this time
 vmin, vmax = valid["lights_change"].min(), valid["lights_change"].max()
 colormap = cm.LinearColormap(
     colors=["#FFFFFF", "#FFD700", "#FF3B30"],

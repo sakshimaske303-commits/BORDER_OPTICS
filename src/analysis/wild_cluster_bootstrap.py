@@ -1,30 +1,9 @@
-"""Wild cluster bootstrap (Cameron, Gelbach & Miller 2008, restricted/WCR
-variant) for the H4 control-group DiD, addressing the one gap the paper's own
-Section 6.10 threats table names for the "few (14) district clusters" row:
-"a wild-cluster bootstrap was not run."
-
-Implemented with plain numpy rather than statsmodels (not installable in
-this environment -- PyPI is policy-blocked here), matching this study's own
-precedent of a manual, from-scratch statistical implementation when a
-package isn't available (test_harness.py). The manual OLS + cluster-robust
-sandwich estimator below (Liang-Zeger CR1 with the standard Stata-style small-
-sample correction (G/(G-1))*((N-1)/(N-K))) is verified, before this script is
-trusted for anything, to reproduce did_model.py's own already-published
-coefficients and standard errors to at least 10 significant figures (see the
-Development Log entry this script is described in for that check).
-
-Method: fit the model with did_term restricted to zero (the null), take its
-residuals, then for every one of the 2**14=16384 possible ways to flip a
-+1/-1 Rademacher sign per district (full enumeration -- exact, not Monte
-Carlo, since 16384 is small enough to do exhaustively), construct a
-bootstrap outcome y* = fitted_restricted + sign(district) * residual, refit
-the FULL model (with did_term) on y* with the same district fixed effects
-and the same cluster-robust covariance formula as the real fit, and record
-the did_term t-statistic. The wild-cluster-bootstrap p-value is the share of
-the 16384 bootstrap t-statistics at least as extreme as the one actually
-observed in the real (unbootstrapped) fit -- this replaces the usual
-t-distribution reference entirely with an empirical bootstrap distribution,
-which is the whole point of the exercise when there are only 14 clusters.
+"""
+Wild cluster bootstrap for the H4 DiD results (14 clusters is too few for
+normal asymptotics). Did OLS + cluster-robust SE by hand since statsmodels
+wouldn't install here - checked it matches did_model.py's numbers first.
+Full enumeration of all 2**14=16384 sign flips (exact, not Monte Carlo,
+since that's small enough to just do directly).
 """
 
 import itertools

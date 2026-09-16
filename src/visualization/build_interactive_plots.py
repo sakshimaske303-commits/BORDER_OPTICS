@@ -1,6 +1,4 @@
-"""Interactive Plotly versions of the three headline BORDER OPTICS statistical
-figures. Same underlying processed CSVs/JSON as the static figures (08/09/10) -
-just Plotly instead of matplotlib, so every point gets a hover tooltip."""
+"""same data as static figs 08/09/10, just plotly so points get hover tooltips."""
 
 import json
 import os

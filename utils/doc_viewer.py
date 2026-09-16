@@ -1,16 +1,8 @@
 """
-Reusable no-download document viewer for Streamlit apps.
-Renders a row of "View" buttons; clicking one opens a modal with the PDF
-embedded via an iframe (served from Streamlit's static file server) and a
-close (X) button -- no download prompt, no new tab.
-
-Technical note: st.components.v1.html() content lives inside its own small
-iframe, sandboxed to that iframe's own box -- a CSS position:fixed overlay
-built *inside* it would only cover that tiny box, not the real page. To get
-a true full-viewport modal, the JS below reaches into window.parent.document
-(same-origin srcdoc iframe, so this is allowed) and injects the modal
-directly into the actual Streamlit page's <body>. Only the small button row
-stays inside the component's own iframe.
+no-download doc viewer -- View buttons open a PDF in a modal iframe, no new tab.
+gotcha: this component runs in its own sandboxed iframe, so a normal
+position:fixed overlay would only cover that tiny box. that's why the JS
+reaches into window.parent.document to inject the modal into the real page.
 """
 import streamlit.components.v1 as components
 import json
@@ -18,10 +10,8 @@ import json
 
 def render_doc_viewer(docs, colors, height=70):
     """
-    docs: list of {"label": str, "filename": str} -- filename must be the
-          exact name of a file placed in the app's static/ folder.
-    colors: dict with keys navy_dark, navy_med, magenta, teal, text_light
-    height: px height of the button row component.
+    docs: list of {"label", "filename"} -- filename must exist in app's static/ folder
+    colors: dict with navy_dark, navy_med, magenta, teal, text_light
     """
     docs_json = json.dumps(docs)
     colors_json = json.dumps(colors)

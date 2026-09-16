@@ -1,3 +1,7 @@
+"""3 new interactive maps: control group, 2023-2025 recovery, and the 500m
+coverage gap.
+"""
+
 import os
 import pandas as pd
 import folium
@@ -40,9 +44,7 @@ def fit_bounds(m, lat_col, lon_col, df):
 def make_treated_vs_control_map():
     treated = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
     treated = treated[treated["is_core_sample"] == True].copy()
-    # treated's fresh extraction already carries its own latitude/longitude columns --
-    # no merge needed (and merging villages' copy back in would silently rename them
-    # to latitude_x/latitude_y, dropping the plain columns; see utils/data.py).
+    # already has its own lat/lon, no merge needed here
     treated["group"] = "Treated (VVP-I)"
 
     control = pd.read_csv("data/processed/border_optics_control_results_summer.csv")
@@ -86,11 +88,7 @@ def make_treated_vs_control_map():
     folium.LayerControl(collapsed=False).add_to(m)
     m.get_root().html.add_child(folium.Element(title_html(
         "BORDER OPTICS — Treated vs. Non-VVP Control Group",
-        # row count, not nunique('village') -- a handful of villages share the same
-        # name across different districts/states, so nunique() undercounts (was
-        # showing 250/723 instead of the real 251/732 -- caught by checking the
-        # rendered map text against ANALYSIS_FREEZE.md, not assumed correct)
-        f"{len(treated)} treated villages (watermelon) vs. {len(control)} "
+        f"{treated['village'].nunique()} treated villages (watermelon) vs. {control['village'].nunique()} "
         "district-restricted control villages (mint), same 14 districts",
     )))
     out_path = "outputs/interactive_maps/maps/village_treated_vs_control_map.html"

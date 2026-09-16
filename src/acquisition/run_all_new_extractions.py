@@ -1,26 +1,11 @@
-"""One-command runner for every combination the two new Section 7.2/7.5
-extraction scripts need, so this doesn't have to be typed out combination by
-combination.
+"""
+One-command runner for all the pretreatment/footprint combos, so I don't
+have to type each one out. If one combo fails it just moves to the next --
+each script checkpoints on its own so nothing already done gets redone.
 
-This does NOT change how extract_pretreatment_baseline.py or
-extract_building_footprints.py work -- they still checkpoint per file and
-resume on their own (same as every other extraction script in this study).
-This script just calls each of the group/window combinations they need, one
-after another, in a single process, so one `python` invocation does
-everything instead of six.
-
-If one combination fails partway (a network blip, a Earth Engine rate
-limit), this prints the error clearly and moves on to the next combination
-rather than stopping the whole run -- because each script's own checkpoint
-file means a failed combination can always be re-run on its own afterward
-without losing the ones that already succeeded (this is the same
-resume-safety property extract_sar_backscatter.py and
-extract_dynamicworld_built.py already have; nothing new).
-
-Usage:
-    python3 src/acquisition/run_all_new_extractions.py
-    python3 src/acquisition/run_all_new_extractions.py --only pretreatment
-    python3 src/acquisition/run_all_new_extractions.py --only footprints
+python3 src/acquisition/run_all_new_extractions.py
+python3 src/acquisition/run_all_new_extractions.py --only pretreatment
+python3 src/acquisition/run_all_new_extractions.py --only footprints
 """
 import argparse
 import sys

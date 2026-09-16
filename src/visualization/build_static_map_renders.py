@@ -1,7 +1,4 @@
-"""
-Matplotlib scatter-plot counterparts of the five interactive Folium maps
-(which can't be captured in a static PDF) — for build_maps_plots_pdf.py.
-"""
+"""static png versions of the 5 folium maps since those can't go in a pdf. build_maps_plots_pdf.py needs these."""
 
 import os
 import pandas as pd
@@ -57,9 +54,8 @@ def main():
     full_year = pd.read_csv("data/processed/border_optics_village_results_analyzed.csv")
     summer = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
 
-    # summer's fresh extraction already carries its own latitude/longitude -- only
-    # pull distance_to_border_km from villages for it, or the merge silently renames
-    # the plain lat/lon columns to latitude_x/latitude_y (see utils/data.py).
+    # summer already has its own lat/lon -- only grab distance_to_border_km here,
+    # else the merge renames lat/lon to _x/_y (see utils/data.py)
     merge_cols = ["village_id", "latitude", "longitude", "distance_to_border_km"]
     full_year = full_year.merge(villages[merge_cols], on="village_id", how="left")
     summer = summer.merge(villages[["village_id", "distance_to_border_km"]], on="village_id", how="left")

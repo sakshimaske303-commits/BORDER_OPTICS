@@ -1,25 +1,9 @@
-"""Section 6.10 cloud-contamination row: this study's primary NDBI pipeline
-masks clouds using the QA60 bitmask (bit 10 opaque cloud, bit 11 cirrus).
-QA60 is Sentinel-2's older, coarser cloud flag and is deprecated in newer
-processing baselines in favor of the Scene Classification Layer (SCL) band,
-a per-pixel land-cover/cloud classification that is generally considered
-more accurate, especially for thin cirrus and cloud shadow that QA60 tends
-to miss. This script re-extracts summer-window NDBI for the treated core
-sample using an SCL-based mask instead, so the two masks' results can be
-compared directly on the same villages, same buffer, same dates -- the
-cross-check the paper's own Section 6.10 threats table names as "not
-cross-checked against an SCL- or Cloud-Score+-based mask."
+"""
+SCL-mask cross-check for Section 6.10 -- redo summer NDBI (treated core sample
+only) with the newer SCL band instead of QA60, see if the numbers hold up.
+Needs live GEE, run on my machine.
 
-Only the summer window and only the treated group are re-extracted here:
-summer is the window this study's own cloud/snow-contamination bugs (Entries
-21-22) actually occurred in, and this is a mask cross-check on the primary
-group, not a new control-group or full-year exercise. Requires live Earth
-Engine access -- run this on the researcher's own machine, the same way
-every other extraction script in this study is run, not in a sandbox
-without GEE credentials.
-
-Usage:
-    python3 src/acquisition/extract_scl_cloud_mask_ndbi.py
+python3 src/acquisition/extract_scl_cloud_mask_ndbi.py
 """
 
 import os
@@ -39,14 +23,8 @@ BEFORE = ("2021-06-01", "2021-10-01")
 AFTER = ("2025-06-01", "2025-10-01")
 OUT_PATH = "data/processed/border_optics_village_results_summer_sclmask.csv"
 
-# SCL classes treated as "clear" (kept): 2 dark area, 4 vegetation,
-# 5 bare soils, 6 water, 7 unclassified is EXCLUDED (ambiguous), 11 snow
-# (kept -- the summer window's own date range is chosen so high-altitude
-# snow should mostly be absent already; keeping it here isolates the
-# cloud-detection difference between QA60 and SCL rather than introducing a
-# second, unrelated masking change). Excluded (treated as cloud/invalid):
-# 0 no data, 1 saturated/defective, 3 cloud shadow, 7 unclassified,
-# 8 cloud medium probability, 9 cloud high probability, 10 thin cirrus.
+# kept as "clear": 2 dark area, 4 vegetation, 5 bare soil, 6 water, 11 snow
+# everything else (cloud/shadow/cirrus/unclassified) counts as invalid
 SCL_CLEAR_CLASSES = [2, 4, 5, 6, 11]
 
 

@@ -1,49 +1,16 @@
-"""Builds the non-VVP control group for the DiD design: matched on district
-(verified against the district's real Nominatim boundary polygon, not just
-the Overpass search bbox), soft filter at 1.5x treated max border-distance,
-capped at 3x treated count per district.
+"""
+Builds the non-VVP control group: matched on district (verified against the
+real Nominatim boundary, not just the Overpass bbox), soft filter at 1.5x
+treated max border-distance, capped at 3x treated count per district.
 
-Development Log Entry 23 found two ways a control "village" could actually
-be a treated village in disguise, both fixed here:
+Fixed two ways a "control" could secretly be a treated village: (1) distance
+filter now uses the same geodesic method as compute_border_distance.py
+instead of a distorted single UTM zone, (2) exclusion now also catches
+same-village-different-script duplicates (coord proximity check) and official
+VVP-I villages that never got geocoded, not just exact name matches.
 
-1. Distance-metric mismatch: this script used to reproject into a single
-   UTM zone (44N) for the border-distance filter, while
-   compute_border_distance.py (which produces the treated-village distances
-   this script's filter is compared against) had since moved to true
-   geodesic distance (WGS84 ellipsoid, via pyproj.Geod) -- see that script's
-   docstring for why a single UTM zone distorts distance across this
-   study's ~20-degree longitude span. Both now use the same geodesic method.
-
-2. Exact-name-only exclusion: candidates were only dropped if their OSM name
-   normalized (NFKD-ASCII-fold) to match a name already in the 251
-   successfully-geocoded core-sample treated villages. This missed (a) the
-   same physical settlement recorded under a different transliteration,
-   punctuation, or script (Chinese/Devanagari alt-name OSM tags) -- 20 such
-   coordinate-identical duplicates were found, implicating 21 treated
-   villages -- and (b) an officially-listed VVP-I priority village that
-   never got successfully geocoded into the treated list at all but is
-   still, by definition, not a valid control (3 such name matches were
-   found). Both are now excluded: (a) via a geodesic coordinate-proximity
-   check against every treated village's coordinates, not just this
-   district's, and (b) via the full official priority-village name list in
-   data/raw/*_vvp_villages.csv, not just the subset that happened to
-   geocode successfully.
-
-IMPORTANT — this fix changes what counts as "verified" for a district that
-was already saved by the OLD version of this script: those old rows were
-verified against the old (buggy) exclusion rules, not these new ones, so the
-resume logic below would otherwise treat them as done and never re-check
-them. Delete or rename the existing data/processed/border_optics_control_villages.csv
-before running this script after this fix, so every district is rebuilt
-fresh under the corrected logic rather than silently resuming on
-contaminated data.
-
-Development Log Entry 25: this fix was actually run against live
-Overpass/Nominatim access (not just verified in code) -- the regenerated
-list has 732 villages (down from 735), independently confirmed at zero
-exact-coordinate overlap with the treated sample and zero official-name
-matches. Both counts were previously "known ceilings" (20 and 3
-respectively) in tests/test_data_integrity.py; both are now tightened to 0.
+Delete data/processed/border_optics_control_villages.csv before rerunning
+after this fix, or resume logic thinks old (contaminated) rows are still good.
 """
 
 import time
@@ -61,20 +28,14 @@ TREATED_PATH = "data/processed/border_optics_master_villages_with_distance.csv"
 BOUNDARY_PATH = "data/raw/ne_10m_admin_0_boundary_lines_land/ne_10m_admin_0_boundary_lines_land.shp"
 OUT_PATH = "data/processed/border_optics_control_villages.csv"
 
-# Raw official VVP-I priority-village lists -- the full universe of villages
-# that are NOT valid controls by definition, regardless of whether they were
-# successfully geocoded into the treated master list. Only core-sample
-# states are checked (Himachal Pradesh villages are illustrative-only and no
-# control group is built against them).
+# full official VVP-I lists, not just what got geocoded -- Himachal skipped, illustrative-only
 OFFICIAL_PRIORITY_VILLAGE_PATHS = {
     "Arunachal Pradesh": "data/raw/arunachal_pradesh_vvp_villages.csv",
     "Sikkim": "data/raw/sikkim_vvp_villages.csv",
     "Uttarakhand": "data/raw/uttarakhand_vvp_villages.csv",
 }
 
-# A candidate within this distance of ANY treated village's coordinates is
-# treated as the same physical settlement recorded twice, not an
-# independent control -- see point (2)(a) above.
+# within this distance of a treated village = same settlement, not a real control
 COORD_DUPLICATE_THRESHOLD_M = 50
 
 GEOD = Geod(ellps="WGS84")
@@ -106,9 +67,6 @@ def normalize_name(name):
 
 
 def load_official_priority_village_names():
-    """Full official VVP-I priority-village name universe per state, from the
-    raw habitation lists -- not just the subset that geocoded successfully
-    into the treated master file. See module docstring point (2)(b)."""
     names_by_state = {}
     for state, path in OFFICIAL_PRIORITY_VILLAGE_PATHS.items():
         try:
@@ -121,9 +79,6 @@ def load_official_priority_village_names():
 
 
 def nearest_treated_distance_m(lat, lon, treated_lats, treated_lons):
-    """Geodesic distance (WGS84 ellipsoid) from (lat, lon) to the closest of
-    the given treated-village coordinates. Vectorized over the treated array
-    since this runs once per OSM candidate."""
     n = len(treated_lats)
     if n == 0:
         return float("inf")
@@ -134,12 +89,7 @@ def nearest_treated_distance_m(lat, lon, treated_lats, treated_lons):
 
 
 def overpass_query_for_bbox(south, west, north, east):
-    """All named place=village/hamlet nodes within a bounding box.
-
-    Retries on 429 (rate-limited) and 502/503/504 (gateway/server errors
-    on the shared public instance) with escalating backoff, honoring the
-    server's own Retry-After header when it sends one.
-    """
+    # retries on 429/502/503/504 with backoff, honors Retry-After if server sends it
     query = f"""
     [out:json][timeout:{OVERPASS_TIMEOUT_S}];
     (
@@ -182,21 +132,8 @@ def overpass_query_for_bbox(south, west, north, east):
 
 
 def fetch_district_polygon(district, state):
-    """Looks up the district's real administrative boundary via Nominatim
-    (polygon_geojson=1).
-
-    The candidate search below queries Overpass for a rectangular bounding
-    box around the treated villages and then labeled every result found in
-    that box as belonging to the treated district — a village just across
-    the district line, still inside the bbox margin, got assigned the
-    treated district's name with nothing checking it was actually inside
-    that district's boundary. This fetches the real polygon so candidates
-    can be tested for actual membership instead.
-
-    Returns a shapely (Multi)Polygon, or None if Nominatim didn't resolve a
-    usable boundary for this name (caller falls back to bbox-only matching
-    and marks those rows as unverified rather than guessing).
-    """
+    # real boundary via Nominatim, so a village just across the district line
+    # (still inside our search bbox) doesn't get wrongly counted as in-district
     params = {"q": f"{district}, {state}, India", "format": "json", "polygon_geojson": 1, "limit": 1}
     try:
         resp = requests.get(NOMINATIM_URL, params=params, headers=HEADERS, timeout=30)
@@ -215,11 +152,7 @@ def fetch_district_polygon(district, state):
 
 
 def load_border_union():
-    """Returns the India boundary union in unprojected EPSG:4326 -- adequate
-    for identifying *which* point is nearest at these scales. The actual
-    reported distance is computed geodesically below (GEOD.inv), matching
-    compute_border_distance.py, rather than by reprojecting into a single
-    UTM zone that distorts distance far from its own central meridian."""
+    # unprojected is fine for finding the nearest point; actual distance is geodesic (GEOD.inv) below
     boundary = gpd.read_file(BOUNDARY_PATH)
     if "ADM0_A3_1" in boundary.columns:
         india_segments = boundary[(boundary["ADM0_A3_1"] == "IND") | (boundary["ADM0_A3_2"] == "IND")]
@@ -237,34 +170,17 @@ def distance_to_border_km(lat, lon, border_union_4326):
 
 def main():
     treated = pd.read_csv(TREATED_PATH)
-    # Core-sample states only — Himachal Pradesh stays illustrative-only (see merge_geocoded.py)
-    treated = treated[treated["is_core_sample"] == True].copy()
+    treated = treated[treated["is_core_sample"] == True].copy()  # Himachal stays illustrative-only
     treated["village_norm"] = treated["village"].apply(normalize_name)
 
-    # Full treated coordinate set (ALL districts/states, not just the one
-    # currently being processed) -- a physical duplicate is excluded no
-    # matter which district's search bbox happens to surface it.
+    # full treated set across all districts, so a dupe gets caught no matter which district surfaces it
     treated_lats_all = treated["latitude"].to_numpy()
     treated_lons_all = treated["longitude"].to_numpy()
 
-    # Full official priority-village name universe per state -- catches a
-    # village that is officially VVP-I but never got successfully geocoded
-    # into the treated list, so its name never appeared in treated_names.
     official_priority_names_by_state = load_official_priority_village_names()
 
-    # Resume support: skip districts already saved from an earlier run.
-    #
-    # This used to add EVERY (state, district) already present in the output
-    # file to completed_districts and skip it unconditionally on resume —
-    # including districts saved before the polygon-membership check existed,
-    # whose rows are now marked district_verified=False specifically so they
-    # get looked at again. That flag was being set and then completely
-    # ignored: a resume run always skipped every already-present district
-    # regardless of whether it had ever actually been polygon-verified, so
-    # the boundary check below could never fix a district that already had
-    # (unverified, bbox-only) rows in the file. Now a district is only
-    # treated as "done" if ALL of its existing rows are verified; anything
-    # else gets its old rows dropped and rebuilt fresh this run.
+    # resume support: a district only counts as done if ALL its rows are verified,
+    # otherwise drop its old (possibly unverified/bbox-only) rows and rebuild fresh
     existing_rows = []
     completed_districts = set()
     try:
@@ -296,10 +212,8 @@ def main():
     border_union = load_border_union()
 
     all_control_rows = list(existing_rows)
-    # Coordinates already claimed by a kept (verified) row, anywhere — used below
-    # to stop the SAME physical OSM point being re-added under a different
-    # district just because it also fell inside that district's search bbox
-    # (adjacent districts' 0.6°-margin bboxes overlap by design).
+    # stops the same OSM point getting claimed twice under different districts
+    # (adjacent districts' 0.6° bboxes overlap on purpose)
     claimed_coords = {(round(r["latitude"], 6), round(r["longitude"], 6)) for r in existing_rows}
 
     for (state, district), group in treated.groupby(["state", "district"]):
@@ -334,10 +248,7 @@ def main():
                 continue
             name_norm = normalize_name(name)
             if name_norm in treated_names or name_norm in official_names:
-                # Either an exact match to an already-geocoded treated village,
-                # or an official-but-ungeocoded VVP-I priority village -- both
-                # disqualify this candidate as a control regardless of
-                # coordinates (module docstring point 2b).
+                # matches a treated village name, or an official VVP-I village that never got geocoded
                 name_excluded += 1
                 continue
             lat, lon = el.get("lat"), el.get("lon")
@@ -366,10 +277,6 @@ def main():
         for c in candidates:
             coord_key = (round(c["latitude"], 6), round(c["longitude"], 6))
             if coord_key in claimed_coords:
-                # Same physical OSM point already claimed by another district this
-                # run (or a verified earlier run) — adjacent districts' bboxes
-                # overlap, so the same village can otherwise be pulled in twice
-                # under two different district labels.
                 dupe_skipped += 1
                 continue
 
@@ -377,10 +284,7 @@ def main():
                 c["latitude"], c["longitude"], treated_lats_all, treated_lons_all,
             )
             if nearest_treated_m <= COORD_DUPLICATE_THRESHOLD_M:
-                # Same physical settlement as a treated village, just recorded
-                # under a different name spelling/script in OSM (module
-                # docstring point 2a) — a village cannot be its own
-                # counterfactual.
+                # same physical village as a treated one, just a different name/script in OSM
                 contamination_skipped += 1
                 continue
 
@@ -396,17 +300,11 @@ def main():
             c["distance_to_border_km"] = d
             c["_coord_key"] = coord_key
             kept.append(c)
-            # NOT claiming coord_key here — this candidate might still get cut by
-            # the per-district cap below, and a coordinate that never actually
-            # makes it into the saved dataset must not block a legitimate
-            # candidate at the same physical point in a later district.
+            # don't claim yet -- might still get cut by the cap below
 
         cap = len(group) * MAX_CANDIDATES_PER_DISTRICT_MULTIPLIER
         kept = sorted(kept, key=lambda c: c["distance_to_border_km"])[:cap]
-        # Only coordinates that survive the cap and are actually kept this run
-        # get claimed — claiming earlier (before the cap) let a coordinate the
-        # cap discarded still block the same physical village from being picked
-        # up by a later, legitimately-matching district.
+        # only claim what actually survives the cap
         for c in kept:
             claimed_coords.add(c.pop("_coord_key"))
         print(f"  {len(kept)} candidates kept after distance filter (<= {max_dist * MAX_DISTANCE_MULTIPLIER:.1f} km), "

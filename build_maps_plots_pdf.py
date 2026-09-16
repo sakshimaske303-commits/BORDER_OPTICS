@@ -1,7 +1,6 @@
 """
-Combines figures/*.png + static Folium map renders into one PDF, one image
-per page, cover page with contents. Maps stay interactive on the dashboard —
-this is just the print/offline copy.
+puts all the figures + static map renders into one PDF, with a cover page.
+dashboard maps stay interactive, this is just the print copy.
 """
 
 import os
@@ -15,11 +14,7 @@ BG = (10, 10, 10)
 ACCENT = (215, 165, 60)
 TEXT = (240, 240, 235)
 
-# NOTE: mapping here MUST match Research_Paper.md's actual (renumbered)
-# figure sequence, not the source PNG filename numbers — the filenames were
-# assigned in generation order (BO_Development_Log.md, Entries 5 and 7), which
-# is not the same as the paper's reading-order sequence. Cross-checked
-# against every "Figure N." caption in Research_Paper.md before finalizing.
+# heads up: figure numbers here follow Research_Paper.md's order, NOT the PNG filename numbers (those are just generation order)
 ITEMS = [
     ("outputs/figures/01_ndbi_change_distribution.png",
      "Figure 1 — NDBI Change Distribution",

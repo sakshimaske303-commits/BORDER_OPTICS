@@ -1,3 +1,14 @@
+"""
+Third-ish triangulation check, this time actually sensor-independent (Sentinel-1
+radar, not just a different algorithm on the same S2 imagery like Dynamic World).
+Also cloud-proof, which matters given the archive-timing bugs I've hit before.
+Reporting raw VV/VH, not a derived index -- no standard "SAR built-up index" exists.
+
+python3 src/acquisition/extract_sar_backscatter.py --group treated --window full_year
+python3 src/acquisition/extract_sar_backscatter.py --group treated --window summer
+python3 src/acquisition/extract_sar_backscatter.py --group control --window full_year
+python3 src/acquisition/extract_sar_backscatter.py --group control --window summer
+"""
 import argparse
 import os
 import time
@@ -46,10 +57,7 @@ def init_ee():
 
 
 def sar_for_period(buffered_geom, start, end):
-    """Mean VV and VH (dB) over the period, IW mode, one fixed orbit pass
-    direction (ascending/descending backscatter geometry isn't directly
-    comparable, so mixing them would add noise unrelated to any real
-    change)."""
+    # fixed orbit pass -- mixing ascending/descending adds noise, geometry isn't comparable
     collection = (
         ee.ImageCollection(S1_COLLECTION)
         .filterBounds(buffered_geom)
@@ -67,7 +75,7 @@ def sar_for_period(buffered_geom, start, end):
     stats = composite.reduceRegion(
         reducer=ee.Reducer.mean(),
         geometry=buffered_geom,
-        scale=20,  # per-field IW footprint is coarser than 10m -- see gee_extract_sar.js note
+        scale=20,  # IW footprint is coarser than 10m
         maxPixels=1e9,
     ).getInfo()
     return stats.get("VV"), stats.get("VH"), count
@@ -103,7 +111,7 @@ def extract(group, window_key, checkpoint_every=10):
 
     for i, row in villages.iterrows():
         if all(pd.notna(row.get(c)) for c in outcome_cols):
-            continue  # already extracted (resume support)
+            continue
 
         point = ee.Geometry.Point([row["longitude"], row["latitude"]])
         buffered_geom = point.buffer(BUFFER_RADIUS_M)
@@ -122,7 +130,7 @@ def extract(group, window_key, checkpoint_every=10):
             villages.to_csv(out_path, index=False)
             print(f"  {i + 1}/{len(villages)} villages processed...")
 
-        time.sleep(0.2)  # be polite to the Earth Engine API
+        time.sleep(0.2)
 
     villages.to_csv(out_path, index=False)
     n_valid = villages.dropna(subset=["vv_before", "vv_after"]).shape[0]

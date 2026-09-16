@@ -1,15 +1,7 @@
-"""Section 4.10 follow-through: Section 4.10 leaves the SAR/Dynamic World
-disagreement as two competing, unresolved speculative explanations (an
-atmospheric-correction/imagery-tier difference between Dynamic World's L1C
-pull and NDBI's SR-Harmonized pull, versus a deep-learning classifier simply
-being more sensitive to a small real change than a two-band index or SAR's
-coarser effective resolution). This does not resolve that question -- doing
-so properly would need a same-tier Dynamic World re-extraction, which needs
-live Earth Engine access this sandbox does not have -- but it adds one piece
-of evidence current data can actually answer: at the individual-village
-level, does Dynamic World's "built" change at least point the same direction
-as SAR and NDBI's own changes, or is the aggregate DiD disagreement also a
-village-level disagreement?
+"""
+Follow-up to Section 4.10's SAR vs Dynamic World disagreement: checks
+whether Dynamic World's "built" change at least points the same direction
+as SAR/NDBI at the village level, or if they disagree there too.
 """
 
 import json

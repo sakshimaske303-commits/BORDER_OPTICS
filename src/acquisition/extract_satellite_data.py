@@ -34,10 +34,7 @@ WINDOWS = {
 
 
 def init_ee():
-    # Recent earthengine-api versions require a Cloud project attached to
-    # Initialize() — a bare browser authentication no longer implies one.
-    # Set EE_PROJECT in .env (see .env.example) to your Earth Engine-enabled
-    # Google Cloud project ID.
+    # need EE_PROJECT set in .env or Initialize() fails
     project = os.environ.get("EE_PROJECT")
     try:
         ee.Initialize(project=project)
@@ -47,7 +44,7 @@ def init_ee():
 
 
 def mask_s2_clouds(image):
-    """QA60 bitmask: bit 10 = opaque clouds, bit 11 = cirrus."""
+    # QA60 bitmask: bit 10 = opaque clouds, bit 11 = cirrus
     qa = image.select("QA60")
     cloud_bit_mask = 1 << 10
     cirrus_bit_mask = 1 << 11
@@ -56,7 +53,6 @@ def mask_s2_clouds(image):
 
 
 def ndbi_for_period(buffered_geom, start, end):
-    """Returns (mean_ndbi_or_None, image_count) for one village/period."""
     collection = (
         ee.ImageCollection(S2_COLLECTION)
         .filterBounds(buffered_geom)
@@ -70,7 +66,7 @@ def ndbi_for_period(buffered_geom, start, end):
     composite = collection.median()
     ndbi_image = composite.normalizedDifference(["B11", "B8"]).rename("NDBI")
 
-    # reduceRegion needs an ee.Geometry, not ee.Feature — call .geometry() first if buffering a Feature
+    # needs ee.Geometry not ee.Feature -- call .geometry() first if buffering a Feature
     stats = ndbi_image.reduceRegion(
         reducer=ee.Reducer.mean(),
         geometry=buffered_geom,
@@ -82,7 +78,6 @@ def ndbi_for_period(buffered_geom, start, end):
 
 
 def lights_for_period(buffered_geom, start, end):
-    """Returns (mean_radiance_or_None, image_count) for one village/period."""
     collection = ee.ImageCollection(VIIRS_COLLECTION).filterBounds(buffered_geom).filterDate(start, end)
     count = collection.size().getInfo()
     if count == 0:
@@ -110,22 +105,12 @@ def extract_window(window_key, checkpoint_every=10):
         "lights_before", "lights_after", "lights_before_image_count", "lights_after_image_count",
     ]
 
-    # Resume from the checkpointed output, not the original master list — this used
-    # to always re-read VILLAGES_PATH (which never carries these columns at all), so
-    # "resume support" silently reprocessed every village from scratch on every run.
+    # resume from checkpoint csv, not the master list, or we lose all progress
     if os.path.exists(out_path):
         villages = pd.read_csv(out_path)
         print(f"Resuming from existing checkpoint: {out_path}")
         if "latitude" not in villages.columns or "longitude" not in villages.columns:
-            # The committed checkpoint files predate this per-row-loop script (they
-            # still carry system:index/.geo, artifacts of an earlier GEE
-            # Export.table-based version of this pipeline) and never had
-            # latitude/longitude columns at all — only VILLAGES_PATH does. Without
-            # this, a resume run has no coordinates to build ee.Geometry.Point from
-            # for any row that still needs (re-)extracting, and crashes with
-            # KeyError: 'longitude' the moment it reaches one. Pull coordinates back
-            # in from the master village list, joined on village_id (the stable
-            # join key across every processed file — see DATA_DICTIONARY.md).
+            # old checkpoints don't have lat/lon at all -- pull them back in via village_id
             coords = pd.read_csv(VILLAGES_PATH)[["village_id", "latitude", "longitude"]]
             villages = villages.merge(coords, on="village_id", how="left")
             missing_coords = villages["latitude"].isna().sum()
@@ -143,13 +128,9 @@ def extract_window(window_key, checkpoint_every=10):
     print(f"Before: {before_start} to {before_end}  |  After: {after_start} to {after_end}")
 
     for i, row in villages.iterrows():
-        # Skip only if ALL outcome AND image-count columns are already present —
-        # checking just the four value columns meant a row that was checkpointed
-        # mid-write (or from before the image-count columns existed at all) with
-        # valid ndbi/lights values but null image counts would be silently
-        # skipped forever, leaving those counts permanently unpopulated.
+        # only skip once every outcome + image-count col is filled in
         if all(pd.notna(row.get(c)) for c in outcome_cols):
-            continue  # already extracted (resume support)
+            continue
 
         point = ee.Geometry.Point([row["longitude"], row["latitude"]])
         buffered_geom = point.buffer(BUFFER_RADIUS_M)
@@ -172,7 +153,7 @@ def extract_window(window_key, checkpoint_every=10):
             villages.to_csv(out_path, index=False)
             print(f"  {i + 1}/{len(villages)} villages processed...")
 
-        time.sleep(0.2)  # be polite to the Earth Engine API
+        time.sleep(0.2)
 
     villages.to_csv(out_path, index=False)
 

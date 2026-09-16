@@ -1,3 +1,14 @@
+"""
+Checks NDBI/lights/Dynamic World against Open Buildings footprint count/area
+(Section 7.2). Only one snapshot of Open Buildings exists so this is a
+cross-sectional correlation, not before/after. Also checks Walong/Kaho/Musai
+(confirmed new construction) against the rest.
+
+Needs extract_building_footprints.py run for the treated group first.
+
+Usage:
+    python3 src/analysis/building_footprint_validation.py
+"""
 import json
 
 import pandas as pd
@@ -36,7 +47,6 @@ def case_study_check(merged):
     sub = merged[merged["village"].isin(CASE_STUDY_VILLAGES)]
     print(sub[["village", "building_count", "building_total_area_m2", "ndbi_after", "lights_after", "built_after"]].to_string(index=False))
 
-    # comparison group: villages of similar building_count rank, same district, not case-study villages
     comparison = merged[~merged["village"].isin(CASE_STUDY_VILLAGES)]
     print(f"\nSample-wide median building_count: {comparison['building_count'].median()}")
     return sub

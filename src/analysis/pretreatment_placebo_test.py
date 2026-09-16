@@ -1,3 +1,15 @@
+"""
+Parallel-pre-trends placebo test (Section 7.5): checks 2019-to-2021 change,
+treated vs control, both pre-treatment (VVP-I wasn't sanctioned till Feb 2023).
+Want this to come back null - that's what supports the real DiD's pre-trends
+assumption. Same spec as did_model.py's H4 (district FE, cluster-robust SE).
+
+Needs extract_pretreatment_baseline.py run for both groups/windows first.
+
+Usage:
+    python3 src/analysis/pretreatment_placebo_test.py --window full_year
+    python3 src/analysis/pretreatment_placebo_test.py --window summer
+"""
 import argparse
 import json
 
@@ -43,12 +55,8 @@ def build_group(group, window):
 
 
 def placebo_did(panel, outcome_col):
-    """Same specification as did_model.py's H4: outcome ~ treatment, district
-    fixed effects, cluster-robust SE by district. Here 'outcome' is already
-    the 2019-to-2021 CHANGE (not a before/after long panel), since both
-    periods are pre-treatment there is no 'post' term to speak of -- this is
-    a single cross-sectional comparison of one pre-treatment trend between
-    two groups, which is what a parallel-pre-trends placebo actually is."""
+    # same spec as did_model.py's H4, but outcome is already the 2019-2021
+    # change so there's no 'post' term - just treated vs control on that change
     d = panel.dropna(subset=[outcome_col]).copy()
     model = smf.ols(f"{outcome_col} ~ treatment + C(district)", data=d).fit(
         cov_type="cluster", cov_kwds={"groups": d["district"]}

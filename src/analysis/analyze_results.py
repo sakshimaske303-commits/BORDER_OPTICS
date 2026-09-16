@@ -1,6 +1,5 @@
 """
-BORDER OPTICS — Core Statistical Analysis
-RQ1 (built-up change significance) + RQ2 (state-level budget correlation)
+Core stats for RQ1 (built-up change) and RQ2 (state budget correlation), summer window.
 """
 
 import pandas as pd

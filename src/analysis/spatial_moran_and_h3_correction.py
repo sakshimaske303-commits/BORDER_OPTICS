@@ -1,25 +1,11 @@
-"""Section 6.11 follow-through: (1) reproduce this study's own already-published
-Moran's I values as an integrity check before building anything new on top of
-them, then (2) compute the spatially-corrected significance for H3 that
-Section 6.11 explicitly flagged as not yet done ("computing that corrected
-version... is the natural next step and has not been done in this entry").
-
-Method for (2), stated plainly rather than implied: this is the "spatial
-permutation null that respects the observed clustering structure" option
-Section 6.11 itself named as an alternative to the closed-form Dutilleul
-(1993) effective-sample-size formula, not a literal implementation of that
-formula. Concretely: fit a simultaneous-autoregressive (SAR) parameter phi on
-the same k=8 nearest-neighbor weight matrix used for Moran's I, calibrated so
-that simulated fields reproduce the *observed* Moran's I of the real
-ndbi_change data; then draw many such spatially-autocorrelated synthetic
-ndbi_change fields (independent of border distance by construction) and see
-how often a field with only spatial structure, and no real relationship to
-border distance, produces a Spearman correlation with the REAL
-distance_to_border_km at least as extreme as the one actually observed. This
-holds the covariate (distance-to-border) fixed and randomizes only the
-outcome's spatial structure -- a standard simplification of the Clifford et
-al. (1989) / Dutilleul (1993) approach, not a joint two-sided correction, and
-is reported as such rather than claimed to be the closed-form formula itself.
+"""
+Section 6.11 follow-through: reproduces the published Moran's I values as a
+sanity check, then computes the spatially-corrected significance for H3
+that was flagged as not done yet. Approach: calibrate a SAR(1) field to
+match the observed Moran's I (k=8 NN weights), simulate a bunch of those,
+and see how often a purely-spatial field correlates with border distance
+as strongly as the real data does. Simplified version of Clifford et al./
+Dutilleul's correction, not the closed-form formula itself.
 """
 
 import json
@@ -91,8 +77,7 @@ def morans_i_permutation_p(x, W, n_perm=N_PERM_MORAN, seed=RNG_SEED):
 
 
 def calibrate_sar_phi(target_I, W, n, seed=RNG_SEED, draws_per_eval=60):
-    """Bisection on phi in [0, 0.98] so that E[Moran's I] of a simulated
-    SAR(1) field on this exact W matches the observed target_I."""
+    # bisect on phi so simulated SAR(1) field's Moran's I matches target_I
     rng = np.random.RandomState(seed)
     I_n = np.eye(n)
 

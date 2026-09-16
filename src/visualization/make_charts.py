@@ -1,8 +1,4 @@
-"""
-BORDER OPTICS — Core result charts
-Generates the key figures for RQ1, RQ2, and H3, matching both the
-full-year and summer-matched robustness-check results.
-"""
+"""core figures for RQ1, RQ2, H3 -- full-year and summer-matched versions."""
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -38,8 +34,8 @@ fig.savefig("outputs/figures/01_ndbi_change_distribution.png", bbox_inches="tigh
 plt.close(fig)
 
 # --- Figure 2: State-level mean NDBI change vs sanctioned budget ---
-# Must use summer-matched window, not full-year — full-year gives a
-# contradictory pattern. Sikkim excluded (zero valid summer villages).
+# has to be summer-matched, full-year gives a contradictory pattern here.
+# Sikkim's out too, no valid summer villages for it.
 budget_data = {
     "Arunachal Pradesh": {"projects": 2082, "budget_cr": 2749.74},
     "Uttarakhand":        {"projects": 200,  "budget_cr": 270.58},

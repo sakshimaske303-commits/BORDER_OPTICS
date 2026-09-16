@@ -9,10 +9,10 @@ import branca.colormap as cm
 GOLD = "#D4AF37"
 
 STATE_COLORS = {
-    "Arunachal Pradesh": "#D4AF37",   # gold
-    "Sikkim": "#4CAF50",              # green
-    "Uttarakhand": "#2196F3",         # blue
-    "Himachal Pradesh": "#E63946",    # red
+    "Arunachal Pradesh": "#D4AF37",
+    "Sikkim": "#4CAF50",
+    "Uttarakhand": "#2196F3",
+    "Himachal Pradesh": "#E63946",
 }
 
 LEGEND_REPOSITION_CSS = """
@@ -28,16 +28,15 @@ LEGEND_REPOSITION_CSS = """
 
 # ---------------------------------------------------------
 # LOAD + MERGE DATA
-# (GEE exports don't carry latitude/longitude/distance -> pull from master file)
+# GEE exports don't carry lat/lon/distance, pull those from the master file
 # ---------------------------------------------------------
 villages = pd.read_csv("data/processed/border_optics_master_villages_with_distance.csv")
 
 full_year = pd.read_csv("data/processed/border_optics_village_results_analyzed.csv")
 summer = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
 
-# summer's fresh extraction already carries its own latitude/longitude -- only
-# pull distance_to_border_km from villages for it, or the merge silently renames
-# the plain lat/lon columns to latitude_x/latitude_y (see utils/data.py).
+# summer already has its own lat/lon -- only grab distance_to_border_km for it,
+# else merge renames lat/lon to _x/_y (see utils/data.py)
 merge_cols = ["village_id", "latitude", "longitude", "distance_to_border_km"]
 
 full_year = full_year.merge(villages[merge_cols], on="village_id", how="left")
@@ -186,7 +185,7 @@ def make_metric_map(df, metric_col, colors, caption, title, subtitle, out_path, 
         colormap.add_to(m)
         m.get_root().html.add_child(folium.Element(LEGEND_REPOSITION_CSS))
     else:
-        # discrete legend for state-overview map (already positioned bottom-left, no clash)
+        # discrete legend, state overview map only
         legend_items = "".join(
             f'<div style="margin-top:4px;"><span style="display:inline-block;width:12px;height:12px;'
             f'background:{color};border-radius:50%;margin-right:6px;"></span>{state}</div>'

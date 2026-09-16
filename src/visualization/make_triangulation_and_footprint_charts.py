@@ -1,10 +1,6 @@
-"""Figures 11-12 (reading-order numbering, matching the convention
-make_expanded_analysis_charts.py already uses): the SAR/Dynamic World
-triangulation (Section 4.10) and the building-footprint validation
-(Section 7.2), added in Development Log Entry 32/33 -- these findings
-existed in the paper's prose since Entries 26 and 30 but never had a figure.
-Run triangulation_analysis.py and building_footprint_validation.py first
-(their JSON outputs are read here, not recomputed).
+"""
+Figures 11-12: SAR/Dynamic World triangulation + building-footprint validation.
+Run triangulation_analysis.py and building_footprint_validation.py first, this just reads their JSON.
 """
 
 import json
@@ -52,8 +48,7 @@ rows = [
                                            ("did_coef", "did_ci_lo", "did_ci_hi", "did_p")]),
 ]
 
-# each proxy has its own scale (NDBI ~ +/-0.01, SAR in dB ~ +/-0.1, DW probability ~ +/-0.01)
-# -- plot as separate panels sharing only the "null line at 0" and significance color, not a shared x-axis
+# each proxy's on a totally different scale so separate panels, not a shared x-axis
 fig, axes = plt.subplots(1, 4, figsize=(13, 4), sharey=True)
 proxies = ["NDBI (primary)", "SAR VV", "SAR VH", "Dynamic World 'built'"]
 for ax, proxy in zip(axes, proxies):
@@ -108,10 +103,9 @@ ax_a.set_ylabel("Spearman ρ vs. building-footprint count")
 ax_a.set_ylim(0, 1)
 ax_a.set_title("A. Correlation with\nGoogle Open Buildings\ncount (n=249-251)", fontsize=9.5)
 
-# Panel B: case-study villages -- REAL before/after CHANGE per proxy (not the absolute
-# 2025-era level, which would show baseline differences between villages rather than
-# whether each proxy detected the confirmed construction). Full-year window, matching
-# the numbers actually reported in Section 7.3's prose.
+# Panel B: before->after CHANGE per proxy, not absolute level -- level would just
+# show baseline differences between villages, not whether the proxy caught the
+# construction. full-year window to match Section 7.3's numbers.
 case_changes = {
     "NDBI": {"Kaho": -0.0566174381424472, "Musai": -0.0643190391281804, "Walong": -0.0378806202748026},
     "Night-lights": {"Kaho": 0.4196043552372992, "Musai": 0.010865608312651, "Walong": 0.9085219773018396},

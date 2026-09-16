@@ -151,7 +151,7 @@ st.markdown("---")
 
 st.markdown("### Methodology at a Glance")
 
-# Proof-of-work popovers — pulsing button next to each methodology step, click to reveal screenshot
+# pulsing button next to each step, click to see the proof screenshot
 st.markdown(f"""
 <style>
     div[data-testid="stPopover"] button {{

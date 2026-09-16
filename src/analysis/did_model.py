@@ -1,9 +1,6 @@
-"""DiD model: 251-village treated sample vs. 732-village district-restricted
-non-VVP control group (deduped by geodesic coordinate proximity and the full
-official priority-village name list, district-boundary-verified — see
-select_control_villages.py; count was 735 before the Entry 24/25 contamination
-fix was applied to live data), district fixed effects, SEs clustered by
-district.
+"""
+DiD: 251 treated villages vs 732 district-restricted non-VVP control villages
+(dedup logic is in select_control_villages.py). District FE, SEs clustered by district.
 """
 
 import argparse

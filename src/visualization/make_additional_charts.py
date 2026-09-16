@@ -3,9 +3,6 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import numpy as np
 
-# ============================================================
-# BORDER OPTICS — Additional Static Charts (Smoky Vintage / Tech-Noir Theme)
-# ============================================================
 BG = "#100E0C"
 CARD = "#1B1713"
 TEXT = "#EDE6DA"
@@ -28,9 +25,6 @@ plt.rcParams.update({
     "grid.alpha": 0.4,
 })
 
-# ============================================================
-# LOAD DATA
-# ============================================================
 villages = pd.read_csv("data/processed/border_optics_master_villages_with_distance.csv")
 summer = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
 

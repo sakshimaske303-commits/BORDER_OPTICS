@@ -1,6 +1,5 @@
 """
-Core stats (RQ1 + RQ2), full-year window. Mirrors analyze_results.py
-(summer window) for the two-window robustness comparison.
+Same as analyze_results.py but full-year window, for the robustness comparison.
 """
 
 import pandas as pd

@@ -36,13 +36,8 @@ def main():
     n_qa60_valid = qa60["ndbi_change"].notna().sum()
     n_scl_valid = len(scl_valid)
 
-    # IMPORTANT: SCL-valid coverage is not a random subset (93% Arunachal Pradesh,
-    # nearly all Uttarakhand and most Sikkim dropped) -- same category of coverage
-    # confound as the archive-timing gap this study already caught once (Development
-    # Log Entries 21-22). So a naive QA60-full-251 vs SCL-200 comparison conflates
-    # "different mask" with "different, non-random sample." The decisive check is
-    # QA60's OWN result restricted to the identical 200 SCL-valid villages -- that
-    # isolates the mask choice from the sample-composition confound.
+    # SCL-valid coverage isn't a random subset (mostly Arunachal), so compare
+    # QA60 on the same restricted set of villages to isolate mask vs sample effect
     common_ids = set(scl_valid["village_id"])
     qa60_matched = qa60[qa60["village_id"].isin(common_ids)].dropna(subset=["ndbi_change"])
     w_stat_qa60_matched, w_p_qa60_matched = stats.wilcoxon(

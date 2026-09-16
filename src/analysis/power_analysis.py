@@ -1,3 +1,12 @@
+"""
+Minimum Detectable Effect for H1 and H4, since both came back null and I
+want to report "no effect bigger than X is detectable" not just "p>0.05".
+H1 uses paired-design MDE (df=n-1), H4 uses the cluster-robust SE from
+did_model.py with df = 14 districts - 1 (Cameron & Miller 2015 for thin clusters).
+
+Usage:
+    python3 src/analysis/power_analysis.py
+"""
 import json
 
 import numpy as np
@@ -20,11 +29,7 @@ OUT_PATH = "data/processed/border_optics_power_analysis.json"
 
 
 def mde_multiplier(df):
-    """(t-crit for alpha/2) + (t-crit for power), at the given degrees of
-    freedom -- the standard textbook MDE formula (e.g. Duflo, Glennerster &
-    Kremer 2007, "Using Randomization in Development Economics Research"),
-    with the usual normal-quantile shortcut replaced by t-quantiles at this
-    study's own (thin) df rather than assumed-large-sample z values."""
+    # standard MDE formula, using t-quantiles instead of z since df is thin here
     t_alpha = stats.t.ppf(1 - ALPHA / 2, df)
     t_power = stats.t.ppf(POWER, df)
     return t_alpha + t_power

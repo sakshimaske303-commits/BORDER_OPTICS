@@ -1,7 +1,5 @@
 """
-BORDER OPTICS — Figures 7-9 (reading-order numbering; source PNGs keep their
-generation-order filenames 08/09/10): control-group DiD, multi-year trend,
-buffer sensitivity. Matches the light academic style of Figures 1/3/10.
+Figures 7-9 (paper calls them 7/8/9, files are named 08/09/10 -- don't get confused).
 Run did_model.py, multiyear_trend.py, buffer_sensitivity.py first.
 """
 
@@ -95,14 +93,8 @@ print("Saved outputs/figures/09_multiyear_trend.png")
 
 # ============================================================
 # FIGURE 10 — Buffer-radius sensitivity (250m / 500m / 1km), summer window
-#
-# All three radii are now pulled the same day (Development Log Entry 31),
-# closing the archive-timing gap an earlier version of this figure showed as
-# two separate bars ("as extracted" vs. a 154-village "matched subsample")
-# because the 250m/1km legs used to be pulled on a different day than the
-# 500m primary run. Coverage is now identical (n=251) at every radius, so
-# those two series are no longer different from each other -- this version
-# plots one bar per radius instead of a now-redundant pair.
+# all radii pulled same day now (n=251 everywhere) so it's one bar per
+# radius, not the old as-extracted/matched-subsample pair
 # ============================================================
 with open("data/processed/border_optics_buffer_sensitivity_summary.json") as f:
     buf = json.load(f)

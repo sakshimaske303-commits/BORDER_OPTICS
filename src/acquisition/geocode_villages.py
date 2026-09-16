@@ -41,18 +41,8 @@ def _normalize_state(name):
 
 
 def geocode_query(query, expected_state):
-    """Returns (lat, lon, ok, network_failed, state_verified).
-
-    Used to blindly accept whatever Nominatim's top hit (limit=1) was, with
-    no check that it was even in the right state — a village name that
-    exists in more than one state (not rare among small habitations) could
-    silently geocode to the wrong one with nothing to catch it. This pulls a
-    few candidates with addressdetails and prefers the first whose returned
-    address.state matches expected_state; if none match, it still returns
-    the top hit (better than nothing) but flags state_verified=False so the
-    caller can mark the row for manual review instead of treating it as a
-    clean match.
-    """
+    # pulls a few candidates and prefers one whose state matches expected_state --
+    # some village names exist in more than one state, don't want a silent wrong match
     params = {"q": query, "format": "json", "limit": 5, "addressdetails": 1}
     for attempt in range(1, MAX_RETRIES + 1):
         try:

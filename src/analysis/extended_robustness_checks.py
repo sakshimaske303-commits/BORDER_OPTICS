@@ -1,37 +1,13 @@
 """
-Extended inference and measurement robustness checks, added after the main
-DiD/Holm/buffer/multi-year pipeline was already complete and audited. These
-answer four specific defensibility questions that a strict reviewer would
-raise about the summer-window NDBI/lights control-group DiD (Section 4.6):
+Extra robustness checks for the summer-window control-group DiD (Section 4.6):
+1. leave-one-district-out, 2. randomization inference (shuffle treatment
+within district), 3. log1p VIIRS sensitivity, 4. summer-window missingness
+mechanism.
 
-1. Leave-one-district-out: is the DiD result being driven by a single one
-   of the 14 clusters, given the standard 30-40+ cluster guideline for
-   asymptotic cluster-robust inference isn't met?
-2. Randomization inference: since treated villages weren't randomly
-   assigned (VVP-I selected them administratively), how extreme is the
-   observed DiD coefficient against a null distribution built by shuffling
-   the treatment label within district many times, holding each district's
-   treated/control counts fixed?
-3. Log-transformed VIIRS: does the night-lights DiD depend on a few
-   high-radiance villages dominating the mean, or does it survive on the
-   log(1+radiance) scale?
-4. Summer-window missingness mechanism: are the 97 core-sample villages
-   that drop out of the summer composite (Section 4.2) missing at random,
-   or do they differ systematically (state, baseline NDBI) from the 154
-   that stay in?
+statsmodels wouldn't install here so did OLS + cluster-robust/HC3 by hand
+with numpy - checked it reproduces did_model.py's numbers to 5 sig figs first.
 
-Implementation note: this environment could not install `statsmodels`
-(package fetch failed), so the DiD OLS + cluster-robust/HC3 covariance is
-implemented directly with `numpy` (closed-form OLS, sandwich covariance
-formulas) rather than `statsmodels.formula.api`. Before trusting this for
-anything new, it was checked against `did_model.py`'s own committed output
-by re-deriving all four existing headline DiD results (full-year/summer,
-NDBI/lights) from the same panel CSVs `did_model.py` already produces --
-every coefficient, SE, and p-value reproduced to at least 5 significant
-figures. That verification is not re-run here to keep this script focused,
-but see Development Log for the record of it.
-
-Run from the repo root: python src/analysis/extended_robustness_checks.py
+Run from repo root: python src/analysis/extended_robustness_checks.py
 """
 
 import json
@@ -55,9 +31,7 @@ RNG_SEED = 42
 
 
 # ---------------------------------------------------------------------------
-# Manual OLS + cluster-robust / HC3 sandwich covariance (statsmodels-free,
-# verified against did_model.py's own statsmodels-based output -- see
-# module docstring).
+# manual OLS + cluster-robust/HC3 sandwich covariance (no statsmodels)
 # ---------------------------------------------------------------------------
 
 def _ols_fit(X, y):
@@ -96,8 +70,7 @@ def _build_design(df, fe=True):
 
 
 def run_did(df, outcome, cluster_col="district"):
-    """District-FE DiD with cluster-robust SE, matching did_model.py's
-    primary specification exactly (verified -- see module docstring)."""
+    """District-FE DiD with cluster-robust SE, matches did_model.py's spec."""
     valid = df.dropna(subset=[outcome]).copy()
     y = valid[outcome].values.astype(float)
     X, names = _build_design(valid, fe=True)
@@ -166,9 +139,7 @@ def randomization_inference():
         observed = run_did(df, outcome)
         obs_coef = observed["coef"]
 
-        # unique (treatment, village_id) key -- village_id is reused 1..N
-        # separately within the treated and control groups by build_panel(),
-        # so village_id alone is not a unique village identifier here.
+        # village_id repeats across treated/control so need treatment in the key too
         df["_key"] = df["treatment"].astype(str) + "_" + df["village_id"].astype(str)
         villages = df.drop_duplicates(subset=["_key"])[["_key", "district", "treatment"]]
 
@@ -247,11 +218,8 @@ def summer_missingness():
     print(f"  n core = {len(core)}, summer-valid = {n_valid}, summer-invalid = {n_invalid}")
 
     if n_invalid == 0:
-        # As of Development Log Entry 22, the summer window's extraction is
-        # complete (251/251 core-sample villages valid) -- the missingness
-        # this check was built to quantify (Entry 20) no longer exists. Left
-        # in place rather than deleted, so the "before" state stays
-        # reproducible, but there is no second group left to compare against.
+        # extraction's complete now (251/251) so nothing to compare against -
+        # keeping this check around anyway so the old result stays reproducible
         print("  No summer-invalid villages remain (fresh, complete extraction -- see Entry 22).")
         print("  This check is now moot: nothing left to compare against. Historical result")
         print("  (154 valid / 97 invalid, chi2=71.42 p~3.1e-16, baseline NDBI Mann-Whitney p=0.00063)")
@@ -287,13 +255,8 @@ def summer_missingness():
 
 
 # ---------------------------------------------------------------------------
-# 5. Leave-one-district-out + randomization inference on the full-year
-# night-lights DiD -- added in Entry 22, once the summer-window DiD (which
-# checks 1-2 above were originally built to stress-test) stopped being
-# significant on the fresh, complete data. The full-year lights gap is now
-# the only control-group DiD result still significant at all, so it gets the
-# same stress test the summer result got in Entry 20 -- not assumed solid
-# just because it's the one left standing.
+# 5. same leave-one-out + randomization stress test, but for full-year lights
+# DiD - the only control-group result still significant after Entry 22
 # ---------------------------------------------------------------------------
 
 def fullyear_lights_robustness():

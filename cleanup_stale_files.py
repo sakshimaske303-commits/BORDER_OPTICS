@@ -1,7 +1,7 @@
 """
-Removes two stale leftovers: the empty dashboard/ folder (dashboard is
-actually app.py + pages/) and the old duplicate "border optics maps.pdf".
-Run: python cleanup_stale_files.py
+clears out the leftover empty dashboard/ folder (real dashboard is app.py + pages/)
+and the old duplicate "border optics maps.pdf".
+run: python cleanup_stale_files.py
 """
 
 import os

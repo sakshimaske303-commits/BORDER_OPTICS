@@ -1,26 +1,9 @@
-"""Re-runs the summer-window NDBI/VIIRS extraction at 250m and 1km buffers
-to check the 500m radius isn't driving the result alone.
+"""
+Re-run summer NDBI/VIIRS at 250m and 1km buffers to check 500m isn't driving the result alone.
 
-Same-day resume hazard (Section 6.9 / ANALYSIS_FREEZE.md item 3 -- still
-open as of this note). This script's own checkpoint-resume logic will
-silently do nothing useful if run again as-is: `border_optics_buffer250_summer.csv`
-and `border_optics_buffer1000_summer.csv` are both already checkpointed at
-251/251 villages complete (dated August 21, per Section 4.8), so a bare
-re-run skips every row as "already extracted" and exits immediately without
-pulling anything new -- it will NOT give you a fresh, same-day pull just
-because you ran it again. The 500m primary extraction
-(`extract_satellite_data.py --window summer`) has the identical problem: its
-own checkpoint is complete too. Sentinel-2's archive keeps backfilling
-scenes for past fixed date ranges, so any two extractions of the same
-2021/2025 summer dates, run on different days, can disagree on scene counts
-and composite values without either being wrong about buffer radius --
-that's the actual §6.9 gap: this script's 250m/1km numbers and the primary
-500m numbers were never pulled on the same day.
-
-To actually close this gap, move all three existing checkpoints aside first
-so every radius is forced to re-extract fresh, then run all three back-to-
-back on the same day (same pattern Development Log Entry 22 used for its
-own same-day treated/control re-pull):
+Checkpoints are already at 251/251 so a plain re-run won't pull anything new. To get
+a real same-day comparison, move all three checkpoints aside first then run all three
+back to back same day (S2 archive backfills, so different-day pulls aren't comparable):
 
     mv data/processed/border_optics_village_results_summer.csv data/processed/border_optics_village_results_summer_PRE_SAMEDAY_BUFFER_CHECK.csv
     mv data/processed/border_optics_buffer250_summer.csv data/processed/border_optics_buffer250_summer_PRE_SAMEDAY_BUFFER_CHECK.csv
@@ -29,12 +12,7 @@ own same-day treated/control re-pull):
     python3 src/acquisition/extract_buffer_sensitivity_data.py --buffer 250
     python3 src/acquisition/extract_buffer_sensitivity_data.py --buffer 1000
 
-Each full run takes over an hour for the 258-village sample (per Development
-Log Entry 22's own timing note), so budget roughly 3+ hours run back-to-back,
-not spread across days, or the same archive-timing gap this is meant to
-close will just reopen. Low priority: every radius is already null on its
-own (Section 4.8), so this closes a documentation/consistency gap, not an
-open question about the conclusion itself.
+Takes over an hour per run, budget ~3hrs straight through. Low priority for now.
 """
 
 import argparse
@@ -52,16 +30,13 @@ VILLAGES_PATH = "data/processed/border_optics_master_villages.csv"
 S2_COLLECTION = "COPERNICUS/S2_SR_HARMONIZED"
 VIIRS_COLLECTION = "NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG"
 
-# Same summer window used throughout the rest of this study
+# same summer window as everywhere else
 BEFORE = ("2021-06-01", "2021-10-01")
 AFTER = ("2025-06-01", "2025-10-01")
 
 
 def init_ee():
-    # Recent earthengine-api versions require a Cloud project attached to
-    # Initialize() — a bare browser authentication no longer implies one.
-    # Set EE_PROJECT in .env (see .env.example) to your Earth Engine-enabled
-    # Google Cloud project ID.
+    # need EE_PROJECT set in .env or Initialize() fails
     project = os.environ.get("EE_PROJECT")
     try:
         ee.Initialize(project=project)
@@ -116,9 +91,7 @@ def extract_buffer(buffer_m, checkpoint_every=10):
         "lights_before", "lights_after", "lights_before_image_count", "lights_after_image_count",
     ]
 
-    # Resume from the checkpointed output, not the original master list — this used
-    # to always re-read VILLAGES_PATH (which never carries these columns at all), so
-    # "resume support" silently reprocessed every village from scratch on every run.
+    # resume from the checkpoint csv, not the master list, or we lose all progress
     if os.path.exists(out_path):
         villages = pd.read_csv(out_path)
         print(f"Resuming from existing checkpoint: {out_path}")
@@ -133,11 +106,9 @@ def extract_buffer(buffer_m, checkpoint_every=10):
     print(f"{len(villages)} villages to process")
 
     for i, row in villages.iterrows():
-        # Skip only if ALL outcome AND image-count columns are already present —
-        # checking just the four value columns would leave a row's image-count
-        # columns permanently unpopulated if they were ever null on a checkpoint.
+        # only skip once every outcome + image-count col is filled in
         if all(pd.notna(row.get(c)) for c in outcome_cols):
-            continue  # already extracted (resume support)
+            continue
 
         point = ee.Geometry.Point([row["longitude"], row["latitude"]])
         buffered_geom = point.buffer(buffer_m)

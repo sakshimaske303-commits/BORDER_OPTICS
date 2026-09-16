@@ -51,14 +51,9 @@ def leave_one_district_out(window, metric, full_rho):
 
 
 def randomization_inference(window, metric, full_rho):
-    """Standard permutation test for a correlation: shuffle one variable
-    against the other and see how extreme the observed rho is against that
-    null. (Unlike H1/H4's randomization inference, there's no treatment
-    label to reassign here -- distance-to-border isn't something villages
-    were randomly given -- so this tests the weaker, more basic question of
-    whether the observed monotonic association could plausibly arise from
-    an unstructured shuffle, not whether it survives a specific assignment
-    mechanism.)"""
+    # permutation test on the correlation - shuffle one var, see how extreme
+    # observed rho is. No treatment label here to reassign like H1/H4, so
+    # this is just "could this rho happen from an unstructured shuffle."
     df = load_merged(window).dropna(subset=[metric, "distance_to_border_km"])
     x = df["distance_to_border_km"].values
     y = df[metric].values

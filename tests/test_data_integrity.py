@@ -1,3 +1,12 @@
+"""
+sanity checks on the processed data before I trust any headline number.
+run me before, not just after, generating results.
+
+run from repo root:
+    python tests/test_data_integrity.py
+or with pytest:
+    pytest tests/test_data_integrity.py -v
+"""
 
 import os
 import sys
@@ -18,7 +27,7 @@ DID_PANEL_FULLYEAR_PATH = os.path.join(DATA, "border_optics_did_panel_fullyear.c
 
 EXPECTED_CORE_TREATED = 251
 EXPECTED_TOTAL_TREATED = 258
-EXPECTED_CONTROL = 732  # was 735 pre-Entry-24-fix; dropped to 732 once the 50m coordinate-proximity dedup + full official-name exclusion removed the contaminated rows (Entry 25)
+EXPECTED_CONTROL = 732  # was 735 before the dedup fix (Entry 25)
 EXPECTED_DISTRICTS = 14
 EXPECTED_STATE_COUNTS = {
     "Arunachal Pradesh": 186,
@@ -78,17 +87,7 @@ def test_control_group_no_duplicate_coordinates():
 
 
 def test_no_treated_control_coordinate_overlap():
-    """RESOLVED as of Development Log Entry 25. Originally found in Entry 23: 20 control
-    villages sat at the exact same coordinates as 21 treated villages -- the same physical
-    settlement entered twice under a different name spelling or OSM-tag script (e.g.
-    Sibia/Sebia, Gunji/गूंजी, Chate/赛探). That was a direct consequence of the exclusion
-    filter relying on exact ASCII name matching rather than coordinate proximity. Entry 24
-    fixed select_control_villages.py to add a 50m coordinate-proximity dedup on top of the
-    name-based exclusion; Entry 25 confirms that on the regenerated 732-village control
-    list, the overlap count is genuinely 0 -- ceiling tightened from 20 to 0. If this ever
-    fails again, something new broke; do not loosen this back up without a Development Log
-    entry explaining why.
-    """
+    """fixed in Entry 25 (was 20 dupes from name-spelling mismatches, see Entry 23/24). ceiling is 0 now -- don't raise it back up without a log entry saying why."""
     KNOWN_OVERLAP_CEILING = 0
 
     treated = pd.read_csv(MASTER_PATH)
@@ -117,17 +116,7 @@ def test_village_ids_unique():
 
 
 def test_control_name_not_official_priority_village():
-    """RESOLVED as of Development Log Entry 25. Originally found in Entry 23: the
-    control-list exclusion filter only checked candidate names against the 251
-    SUCCESSFULLY GEOCODED treated village names, not the full official priority-village
-    universe recorded in data/raw/*_vvp_villages.csv -- letting 3 ungeocoded-but-official
-    VVP priority villages (all Arunachal Pradesh) leak into the control group. Entry 24
-    fixed select_control_villages.py to exclude against the full official name list, not
-    just the geocoded subset; Entry 25 confirms that on the regenerated 732-village
-    control list, this match count is genuinely 0 -- ceiling tightened from 3 to 0. If
-    this ever fails again, something new broke; do not loosen this back up without a
-    Development Log entry explaining why.
-    """
+    """fixed in Entry 25 (was 3 ungeocoded-but-official villages leaking into control, see Entry 23/24). ceiling is 0 now -- don't raise it back up without a log entry saying why."""
     KNOWN_CONTAMINATION_CEILING = 0
 
     raw_files = {
@@ -211,9 +200,7 @@ def test_did_panel_no_duplicate_village_period_rows():
     for path, label in [(DID_PANEL_SUMMER_PATH, "summer"), (DID_PANEL_FULLYEAR_PATH, "full-year")]:
         df = pd.read_csv(path)
         dupes = df.duplicated(subset=["village_id", "treatment", "post"], keep=False)
-        # village_id is only unique WITHIN treated or WITHIN control (both start at 1), so
-        # also key on treatment to avoid a false positive between e.g. treated village_id=1
-        # and control village_id=1.
+        # village_id resets at 1 for both treated and control, so key on treatment too
         assert dupes.sum() == 0, (
             f"{label} DiD panel has {dupes.sum()} duplicated (village_id, treatment, post) row(s)."
         )

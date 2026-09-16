@@ -1,15 +1,5 @@
 """
-Figure 10 — horizontal dot-and-line chart, one row per test, one point per
-compositing window, p-value on a log x-axis with the p=0.05 line. Points on
-opposite sides of the line = not robust.
-
-NOTE: this is numbered Figure 10, not Figure 7, even though its source PNG
-is named 07_robustness_summary.png — the filename reflects generation order
-(Entries 5/7 of the Development Log), while the in-image title and every
-other reference to this chart use the paper's reading-order sequence, where
-this chart is the last figure (Section 4.9), after the control-group DiD,
-multi-year trend, and buffer-sensitivity figures (Sections 4.6-4.8). See
-Development Log for the prior renumbering this follows the same convention as.
+this is Figure 10 in the paper but the file's named 07_robustness_summary.png -- don't renumber it.
 """
 
 import pandas as pd
@@ -64,7 +54,7 @@ p, n = spearman_p(summer_core, "distance_to_border_km", "lights_change")
 tests.append(("H3 — Border Proximity\nvs. Lights Change (Spearman)", "Summer-Matched", p, n))
 
 df = pd.DataFrame(tests, columns=["test", "window", "p_value", "n"])
-df["p_plot"] = df["p_value"].clip(lower=1e-7)  # avoid log(0) for p ~ 0
+df["p_plot"] = df["p_value"].clip(lower=1e-7)  # clip so log scale doesn't choke on p~0
 
 test_labels = df["test"].unique().tolist()
 y_pos = {label: i for i, label in enumerate(test_labels)}
@@ -79,7 +69,7 @@ for window in ["Full-Year", "Summer-Matched"]:
     ys = [y_pos[t] + offsets[window] for t in sub["test"]]
     ax.scatter(sub["p_plot"], ys, s=90, color=colors[window], label=window, zorder=3, edgecolor="white", linewidth=0.8)
 
-# connecting lines between the two windows per test
+# line connecting the two windows for each test
 for t in test_labels:
     sub = df[df["test"] == t]
     fy_p = sub[sub["window"] == "Full-Year"]["p_plot"].values[0]

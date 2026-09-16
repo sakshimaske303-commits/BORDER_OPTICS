@@ -1,18 +1,18 @@
 import streamlit as st
 
-# Watermelon & Mint theme — flat cards, solid-color headers, matches GREEN_ALIBI's style pattern
+# watermelon & mint theme
 PALETTE = {
     "bg_main": "#1C1C1C",
     "bg_card": "#262626",
     "bg_sidebar": "#141414",
-    "border_up": "#A7E1C1",      # mint — growth / increase
-    "border_down": "#FF7CAC",    # watermelon — decrease
-    "lights": "#FF7CAC",         # watermelon — night-lights theme
-    "warning": "#E8709D",        # deeper watermelon — warnings
-    "text_primary": "#F2F2F0",   # warm off-white
-    "text_secondary": "#9A9A98", # muted gray
-    "accent": "#A7E1C1",         # mint — primary highlight
-    "accent_vintage": "#FF7CAC", # watermelon — secondary highlight
+    "border_up": "#A7E1C1",
+    "border_down": "#FF7CAC",
+    "lights": "#FF7CAC",
+    "warning": "#E8709D",
+    "text_primary": "#F2F2F0",
+    "text_secondary": "#9A9A98",
+    "accent": "#A7E1C1",
+    "accent_vintage": "#FF7CAC",
 }
 
 # Backward-compatible aliases (used by some pages)
@@ -42,8 +42,7 @@ def inject_theme():
             padding-bottom: 2rem !important;
         }}
 
-        /* ---- Keep header visible (needed for the sidebar
-        open/close button) but hide only the Deploy button ---- */
+        /* ---- keep header (need it for sidebar toggle), just hide Deploy ---- */
         [data-testid="stHeader"] {{
             background-color: {p['bg_main']} !important;
             height: 3rem !important;
@@ -58,10 +57,8 @@ def inject_theme():
             visibility: hidden !important;
         }}
 
-        /* ---- Sidebar collapse/expand button — safety net
-        covering every naming variant Streamlit has used
-        across versions, since it's invisible-by-default on
-        a dark theme and hard to see on mobile otherwise ---- */
+        /* ---- sidebar toggle: covering every testid streamlit's used over the
+        versions since it's basically invisible on dark theme otherwise ---- */
         [data-testid="collapsedControl"],
         [data-testid="stSidebarCollapsedControl"],
         [data-testid="stSidebarCollapseButton"],
@@ -95,8 +92,7 @@ def inject_theme():
             opacity: 1 !important;
         }}
 
-        /* ---- Sidebar — same dark-gradient nav-pill language used
-        across the whole portfolio (matched to Double Jeopardy) ---- */
+        /* ---- Sidebar ---- */
         section[data-testid="stSidebar"] {{
             background: linear-gradient(180deg, {p['bg_sidebar']} 0%, {p['bg_main']} 100%);
             border-right: 1px solid rgba(167, 225, 193, 0.2);

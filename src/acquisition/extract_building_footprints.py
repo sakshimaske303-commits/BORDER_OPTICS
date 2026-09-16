@@ -1,3 +1,13 @@
+"""
+Building-footprint check (Section 7.2). Open Buildings is single-vintage, no
+2021 vs 2025 to diff like NDBI, so this is just a current-state validation
+check -- mainly for the Walong/Kaho/Musai ground-truth question.
+
+Needs live GEE, run on my machine.
+
+python3 src/acquisition/extract_building_footprints.py --group treated
+python3 src/acquisition/extract_building_footprints.py --group control
+"""
 import argparse
 import os
 import time
@@ -9,8 +19,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 OPEN_BUILDINGS_COLLECTION = "GOOGLE/Research/open-buildings/v3/polygons"
-BUFFER_RADIUS_M = 500  # same as every other extraction in this study
-CONFIDENCE_THRESHOLD = 0.75  # Open Buildings' own recommended default for "high confidence"
+BUFFER_RADIUS_M = 500  # same buffer as everywhere else
+CONFIDENCE_THRESHOLD = 0.75  # Open Buildings' default "high confidence" cutoff
 
 VILLAGE_PATHS = {
     "treated": "data/processed/border_optics_master_villages.csv",
@@ -41,7 +51,6 @@ def buildings_for_buffer(buffered_geom):
     count = fc.size().getInfo()
     if count == 0:
         return 0, 0.0, None
-    # area_in_meters is a pre-computed property on each Open Buildings polygon
     stats = fc.aggregate_stats("area_in_meters").getInfo()
     conf_mean = fc.aggregate_mean("confidence").getInfo()
     total_area = stats.get("sum", 0.0) if stats else 0.0
@@ -64,11 +73,11 @@ def extract(group, checkpoint_every=10):
     print(f"--- Extracting Open Buildings footprint count/area, group='{group}' ---")
     print(f"Confidence threshold: >= {CONFIDENCE_THRESHOLD}")
     print(f"{len(villages)} villages to process")
-    print("Note: this is a SINGLE current-vintage snapshot, not a before/after pair -- see module docstring.")
+    print("Note: single current-vintage snapshot, not before/after.")
 
     for i, row in villages.iterrows():
         if all(pd.notna(row.get(c)) for c in OUTCOME_COLS):
-            continue  # already extracted (resume support)
+            continue
 
         point = ee.Geometry.Point([row["longitude"], row["latitude"]])
         buffered_geom = point.buffer(BUFFER_RADIUS_M)
@@ -83,7 +92,7 @@ def extract(group, checkpoint_every=10):
             villages.to_csv(out_path, index=False)
             print(f"  {i + 1}/{len(villages)} villages processed...")
 
-        time.sleep(0.2)  # be polite to the Earth Engine API
+        time.sleep(0.2)
 
     villages.to_csv(out_path, index=False)
     n_valid = villages.dropna(subset=["building_count"]).shape[0]

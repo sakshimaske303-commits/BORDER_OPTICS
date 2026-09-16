@@ -1,23 +1,9 @@
 """
-Paper-wise Holm-Bonferroni correction across the study's eight headline
-p-values (4 core tests x 2 compositing windows), referenced in Research
-Paper Section 4.9. This script didn't exist before — the paper cited
-Holm-adjusted numbers without a reproducible script behind them, and
-those cited numbers turned out to be the raw p-values relabeled, not
-actually Holm-adjusted. This recomputes it properly from the same
-result files the rest of the pipeline already produces.
+Holm-Bonferroni correction across the 8 headline p-values (Section 4.9).
+Note: the lights before/after Wilcoxon test is labeled H1 here, not H3 -
+it's the same design as H1's NDBI test, no border distance involved.
 
-Fix: the plain treated-only before/after Wilcoxon test on night-lights was
-previously mislabeled "H3_lights_change" -- same test design as H1's NDBI
-before/after comparison (no border distance involved at all), so it belongs
-under H1, not H3. The actual H3 (border-proximity) tests are the two
-"H3_border_proximity_*" rows below, which were always labeled correctly.
-This mislabeling never affected any p-value or Holm-adjusted value, only
-the test's name in this script's output CSV -- Research_Paper.md's own
-Section 4.9 already described this test as "H1 lights-change," so the code
-is being brought in line with what the paper always meant.
-
-Run from the repo root: python src/analysis/holm_correction.py
+Run from repo root: python src/analysis/holm_correction.py
 """
 
 import pandas as pd

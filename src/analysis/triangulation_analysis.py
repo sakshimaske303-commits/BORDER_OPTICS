@@ -1,3 +1,13 @@
+"""
+Triangulation checks for H1/H4 using Dynamic World "built" probability and
+Sentinel-1 SAR VV/VH backscatter - independent of NDBI's model/sensor.
+Runs the same H1 (Wilcoxon, paired) and H4 (district-FE DiD) tests as the
+main pipeline, so comparisons are apples-to-apples. Uses statsmodels since
+this runs in the same env as did_model.py (unlike extended_robustness_checks.py).
+
+Usage:
+    python3 src/analysis/triangulation_analysis.py
+"""
 import json
 
 import pandas as pd
@@ -5,11 +15,7 @@ import statsmodels.formula.api as smf
 from scipy import stats
 
 WINDOWS = ["full_year", "summer"]
-# extract_dynamicworld_built.py / extract_sar_backscatter.py write "fullyear"
-# (no underscore) in filenames, matching border_optics_did_summary_fullyear.json's
-# own convention elsewhere in this repo -- this maps the internal window key to
-# that filename spelling. Caught by actually running this against the real
-# extraction outputs before delivering it, not assumed to match.
+# these extraction scripts write "fullyear" (no underscore) in filenames
 WINDOW_FILE_SUFFIX = {"full_year": "fullyear", "summer": "summer"}
 
 # (source_label, before_col, after_col, treated_path_template, control_path_template)

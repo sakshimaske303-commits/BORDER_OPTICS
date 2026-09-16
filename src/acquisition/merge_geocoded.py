@@ -23,8 +23,7 @@ for state, path in FILES.items():
     df = pd.read_csv(path)
     matched = df[df["geocode_status"].isin(MATCHED_STATUSES)].copy()
     matched["state"] = state
-    # is_illustrative_only marks Himachal Pradesh as the small case-study
-    # subset, per the scope decision — keeps it visually separate downstream
+    # Himachal is just the small illustrative case study, not core sample
     matched["is_core_sample"] = state != "Himachal Pradesh"
     rows.append(matched[["Habitation", "District", "Block", "state", "latitude", "longitude", "is_core_sample"]])
 

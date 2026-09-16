@@ -50,12 +50,8 @@ def district_matches(returned_dist, expected_dist):
 
 
 def state_matches(returned_state, expected_state):
-    """Bhuvan's response carries state_name on every candidate, but it was
-    fetched and printed without ever being checked — only district was
-    validated. A same-named district in a different state (or a Bhuvan
-    mismatch) could pass the district check alone. Same fuzzy substring
-    comparison as district_matches, for consistency.
-    """
+    # same fuzzy check as district_matches -- need this too or a same-named
+    # district in a different state could sneak past
     if not returned_state or not expected_state:
         return False
     r = str(returned_state).strip().lower()
