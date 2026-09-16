@@ -78,8 +78,9 @@ valid_ndbi = summer_core.dropna(subset=["ndbi_change"])
 peak_row = valid_ndbi.loc[valid_ndbi["ndbi_change"].idxmax()] if len(valid_ndbi) else None
 paired = summer_core.dropna(subset=["ndbi_before", "ndbi_after"])
 if len(paired) >= 2:
-    # Matches the formal H1 test in analyze_results.py / did_model.py: one-sided,
-    # testing whether "after" is significantly higher than "before" (not two-sided).
+    # Matches the formal H1 test in analyze_results.py: one-sided, testing whether
+    # "after" is significantly higher than "before" (not two-sided). did_model.py is
+    # the separate H4 control-group DiD model, not this treated-only Wilcoxon test.
     _, p_val = stats.wilcoxon(paired["ndbi_after"], paired["ndbi_before"], alternative="greater")
 else:
     p_val = float("nan")

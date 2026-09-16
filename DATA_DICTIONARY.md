@@ -201,7 +201,7 @@ Two additional robustness checks beyond the ones with their own dedicated files 
 
 ## `outputs/leave_one_district_out_results.csv` / `outputs/holm_correction_results.csv`
 
-Tabular (CSV) companions to two of the JSON robustness outputs above, in the flat per-row format used by the dashboard's Statistical Validation page: `leave_one_district_out_results.csv` is the row-per-dropped-district version of `robustness_extended_results.json`'s `leave_one_district_out` key; `holm_correction_results.csv` is the Holm-Bonferroni multiple-comparisons correction (`src/analysis/holm_correction.py`) applied across every hypothesis test this study reports, so that a reader can see which individually-significant results also survive family-wise error correction.
+Tabular (CSV) companions to two of the JSON robustness outputs above, in the flat per-row format used by the dashboard's Statistical Validation page: `leave_one_district_out_results.csv` is the row-per-dropped-district version of `robustness_extended_results.json`'s `leave_one_district_out` key; `holm_correction_results.csv` is the Holm-Bonferroni multiple-comparisons correction (`src/analysis/holm_correction.py`) applied specifically across the 8 pre-specified H1/H3 headline p-values (NDBI and lights, full-year and summer, treated-only and border-proximity) — see `ANALYSIS_FREEZE.md`'s "Multiple-testing family" section for the exact list. It is NOT applied across every test this study reports: the control-group DiD (H4), buffer-radius sweep, leave-one-district-out, randomization inference, and multi-year checks are robustness checks on those 8 headline results, not additional members of the corrected family.
 
 ## `border_optics_village_results_summer_sclmask.csv` (superseded, kept for the record only)
 
