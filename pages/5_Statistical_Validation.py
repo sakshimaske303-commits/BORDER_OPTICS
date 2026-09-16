@@ -111,10 +111,10 @@ with col2:
 
 st.caption(
     "Both figures above use the primary QA60 cloud mask. A cross-check against an alternative SCL-band "
-    "mask, holding the village sample fixed at the 200 villages both masks can produce a valid summer "
-    "composite for, flips this summer result from null (QA60, p=0.449) to significant and positive "
-    "(SCL, p=0.0000045) — a genuine, unresolved sensitivity in this measure, not a sample-composition "
-    "artifact. See Methodology & Limitations for the full account."
+    "mask first looked like it flipped this summer result from null to significant -- turned out to be "
+    "a bug (the SCL mask was letting snow pixels through as clear), caught by external review, fixed, "
+    "and rerun: the two masks now agree, both null (QA60 p=0.436, SCL p=0.288, n=251 both). "
+    "See Methodology & Limitations for the full account."
 )
 
 st.markdown("---")

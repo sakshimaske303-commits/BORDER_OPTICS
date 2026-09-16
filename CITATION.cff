@@ -59,16 +59,23 @@ abstract: >-
   reported openly as an unresolved question — whether NDBI under-detects a
   real, modest effect or Dynamic World's result is itself a different kind
   of false positive — rather than smoothed into either a confirmed null or a
-  confirmed effect. A second, unrelated sensitivity was found while finalizing
-  this release: cross-checking the QA60 cloud mask used throughout against an
+  confirmed effect. A second thing initially looked like a second, unrelated
+  sensitivity: cross-checking the QA60 cloud mask used throughout against an
   alternative SCL-band mask, holding the village sample fixed at the 200
-  villages both masks can produce a valid summer composite for, flips the
-  primary NDBI result from null (QA60, p = 0.449) to significant and positive
-  (SCL, p = 0.0000045) — not explained by sample composition, since that is
-  identical on both sides of the comparison, and reported as a second
-  unresolved instability in the primary measurement rather than folded into
-  either conclusion. This study addresses a parliamentary record showing no
-  independent impact assessment has ever been carried out for VVP-I.
+  villages both masks could then produce a valid summer composite for,
+  flipped the primary NDBI result from null (QA60, p = 0.449) to significant
+  and positive (SCL, p = 0.0000045). It turned out to be a bug, caught by
+  external review rather than this project's own checks: the SCL mask's
+  "clear" class list was letting snow pixels through as clear ground, a real
+  risk for June-September composites over Himalayan villages. Fixed and
+  rerun against live Earth Engine, SCL coverage rose to 251 of 258 villages
+  (matching QA60's own coverage) and the result is no longer significant
+  (mean change +0.00112, p = 0.288), agreeing with QA60's own null on the
+  same 251 villages (p = 0.436) — reported as a bug this project's external
+  review caught and this project then fixed and re-verified, not as a second
+  unresolved measurement tension. This study addresses a parliamentary
+  record showing no independent impact assessment has ever been carried out
+  for VVP-I.
 keywords:
   - Vibrant Villages Programme
   - border development
@@ -88,5 +95,5 @@ keywords:
   - India
   - geospatial analysis
 license: CC-BY-4.0
-version: 1.4.0
+version: 1.5.0
 date-released: "2026-09-16"

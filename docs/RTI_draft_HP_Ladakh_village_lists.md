@@ -1,10 +1,17 @@
 # Draft RTI Application — VVP-I Village-Wise Lists for Himachal Pradesh and Ladakh
 
-Drafted for Sakshi D. Maske, in support of Section 7.4 of `BO_Research_Paper.md`
-("RTI Follow-Through for Himachal Pradesh and Ladakh"). This is a draft only —
-filing it is a real-world action only Sakshi can take. Two versions are given
-below: one combined application (simpler, one fee, one application number),
-and a note on when to split it into two instead.
+**Not filed, and not planned to be.** This was drafted in support of Section 7.4
+of `BO_Research_Paper.md`, but Sakshi has decided not to file it — the cost and
+multi-month reply timeline aren't justified for this project's scope. Kept here
+only as a transparency record of what was considered, not as an open task.
+Confirmed (September 2026) that no public source substitutes for it either:
+PIB releases, MHA's own parliamentary replies, and Ladakh's district
+administration all give only aggregate project counts and budgets, never
+village names, for either jurisdiction. This study's core sample is scoped to
+Arunachal Pradesh, Sikkim, and Uttarakhand accordingly — see
+`ANALYSIS_FREEZE.md` item 11.
+
+Original draft below, unfiled:
 
 Read before filing:
 - File under the **Right to Information Act, 2005**.

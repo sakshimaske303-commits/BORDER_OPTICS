@@ -1,14 +1,14 @@
 {
   "n_qa60_valid": 251,
   "qa60_mean_change": -0.0009049552152363317,
-  "n_scl_valid": 200,
-  "scl_mean_change": 0.011692622287061223,
-  "scl_wilcoxon_p": 4.519268376462573e-06,
-  "qa60_matched_subsample_n": 200,
-  "qa60_matched_subsample_mean_change": -0.00016322759825371222,
-  "qa60_matched_subsample_wilcoxon_p": 0.44902781448241713,
-  "village_level_agreement_rho": 0.5444317190595016,
-  "village_level_agreement_p": 7.888622785647234e-17,
-  "n_common_valid": 200,
+  "n_scl_valid": 251,
+  "scl_mean_change": 0.0011218056546199544,
+  "scl_wilcoxon_p": 0.28796721033260897,
+  "qa60_matched_subsample_n": 251,
+  "qa60_matched_subsample_mean_change": -0.0009049552152363317,
+  "qa60_matched_subsample_wilcoxon_p": 0.4358314906652899,
+  "village_level_agreement_rho": 0.7343912505174554,
+  "village_level_agreement_p": 8.472232645191602e-44,
+  "n_common_valid": 251,
   "coverage_note": "SCL-valid sample is 93% Arunachal Pradesh, nearly all Uttarakhand and most Sikkim dropped -- a real coverage skew, but NOT the explanation for the mask effect, since qa60_matched_subsample_wilcoxon_p (QA60 on the identical SCL-valid villages) is still null (p=0.449) while scl_wilcoxon_p on those same villages is significant (p=0.000005). The mask choice itself, not sample composition, drives the difference."
 }
