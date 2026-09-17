@@ -30,8 +30,7 @@ One row per village per compositing window, produced by `extract_satellite_data.
 | `ndbi_change` | float | `ndbi_after - ndbi_before`. Added during analysis, not part of the raw GEE export. |
 | `lights_before`, `lights_after` | float | Mean VIIRS DNB monthly radiance (`avg_rad`) over the same buffer/periods. |
 | `lights_change` | float | `lights_after - lights_before`. |
-| `before_image_count`, `after_image_count` | int | Number of Sentinel-2 images in the filtered collection that went into each period's composite — present only in the summer-matched treated-village files, since this is what originally surfaced Sikkim's complete data loss in that window (BO_Development_Log.md, Entry 5). That data loss was later found to be an archive-timing artifact rather than a permanent gap, and is resolved as of the complete re-extraction in Entry 22 — all core-sample villages, Sikkim included, now carry non-zero counts. Not present in the full-year treated files; a null `ndbi_before`/`ndbi_after` is the only signal of a missing full-year composite. |
-| `ndbi_before_image_count`, `ndbi_after_image_count`, `lights_before_image_count`, `lights_after_image_count` | int | Per-metric image counts, present alongside the generic pair above in the summer-matched treated-village files as of the Entry 22 re-extraction (the extraction script now reports NDBI and VIIRS counts separately, since they draw from different collections with different revisit cadences). Same per-metric columns as described for the control-results files below, but here also present in the summer-matched treated file specifically, not only in the control files. |
+| `ndbi_before_image_count`, `ndbi_after_image_count`, `lights_before_image_count`, `lights_after_image_count` | int | Per-metric counts of the Sentinel-2 (NDBI) or VIIRS (lights) images that went into each period's composite, present only in the summer-matched treated-village files as of the Entry 22 re-extraction (the extraction script reports NDBI and VIIRS counts separately, since they draw from different collections with different revisit cadences). This is what originally surfaced Sikkim's complete summer-window data loss (BO_Development_Log.md, Entry 5) — later found to be an archive-timing artifact rather than a permanent gap, and resolved as of the complete re-extraction in Entry 22, when all core-sample villages, Sikkim included, started carrying non-zero counts. Not present in the full-year treated files; a null `ndbi_before`/`ndbi_after` is the only signal of a missing full-year composite. There is no separate generic `before_image_count`/`after_image_count` pair anywhere in this file — only these four per-metric columns. |
 | `system:index`, `.geo` | — | Google Earth Engine export artifacts (feature index and geometry, GeoJSON-encoded). Not used downstream; harmless to ignore. |
 
 ## Compositing windows, defined precisely
@@ -45,12 +44,13 @@ See `src/acquisition/extract_satellite_data.py` for the exact implementation.
 
 ## `border_optics_control_villages.csv`
 
-One row per non-VVP control village (732 rows — deduped by geodesic coordinate proximity (50m) and by the full official priority-village name list, and district-boundary-verified; see `BO_Development_Log.md` Entries 14-15, 23-25), assembled via the OpenStreetMap Overpass API from the same 14 districts as the treated core sample, excluding any village on a VVP-I priority list. Produced by `select_control_villages.py`.
+One row per non-VVP control village (732 rows — deduped by geodesic coordinate proximity (50m) and by the full official priority-village name list; see `BO_Development_Log.md` Entries 14-15, 23-25), assembled via the OpenStreetMap Overpass API from the same 14 districts as the treated core sample, excluding any village on a VVP-I priority list. Produced by `select_control_villages.py`. District membership is checked against a real Nominatim boundary polygon where that lookup succeeds; where it doesn't, the candidate is kept on a rougher bounding-box match instead (see `district_verified` below) — **as of the current committed file, that lookup did not succeed for 219 of the 732 rows (all in Tawang/Arunachal Pradesh, North district/Sikkim, and Pithoragarh/Uttarakhand)**, so those three districts' fixed effects and cluster assignment rest on an unverified district label for a portion of their control villages. The underlying retry/lookup logic was hardened after this was found, but the already-committed 732-row file itself has not yet been regenerated against it.
 
 | Column | Type | Description |
 |---|---|---|
 | `village_id` | int | Control-group-specific integer ID (not comparable to the treated `village_id` values — the two ID spaces are separate). |
 | `village`, `district`, `block`, `state`, `is_core_sample`, `latitude`, `longitude`, `distance_to_border_km` | — | Same meaning as in the master village table. |
+| `district_verified` | bool | `True` if this candidate's district membership was confirmed against a real Nominatim administrative-boundary polygon; `False` if that lookup failed and the row was kept purely because it fell inside the ~65km search bounding box around the district's treated villages instead. Currently `False` for 219 of 732 rows — see the file-level note above. |
 | `village_source` | string | Always `control (non-VVP)` in this file — retained so control and treated rows can be safely concatenated for the DiD panel without losing group identity. |
 
 ## `border_optics_control_results.csv` (full-year) / `border_optics_control_results_summer.csv` (summer-matched)
@@ -59,7 +59,7 @@ Control-group villages run through the identical extraction pipeline (same 500m 
 
 | Column | Type | Description |
 |---|---|---|
-| `ndbi_before`, `ndbi_after`, `ndbi_before_image_count`, `ndbi_after_image_count` | float / int | Same NDBI meaning as the treated village-results files, extracted for control villages — the per-metric image-count columns here (`ndbi_*_image_count`) are present in BOTH the full-year and summer-matched control files. The treated files additionally carry a generic `before_image_count`/`after_image_count` pair in the summer-matched file only, described above — as of Entry 22, the summer-matched treated file has both the generic pair and the per-metric columns; the full-year treated file has neither. |
+| `ndbi_before`, `ndbi_after`, `ndbi_before_image_count`, `ndbi_after_image_count` | float / int | Same NDBI meaning as the treated village-results files, extracted for control villages — the per-metric image-count columns here (`ndbi_*_image_count`) are present in BOTH the full-year and summer-matched control files, matching the treated files (which carry these same four per-metric columns in the summer-matched file only; see above). |
 | `lights_before`, `lights_after`, `lights_before_image_count`, `lights_after_image_count` | float / int | VIIRS radiance equivalents, same per-metric/both-windows image-count columns as the NDBI ones above. |
 
 ## `border_optics_did_panel_fullyear.csv` / `border_optics_did_panel_summer.csv`
@@ -69,6 +69,7 @@ The treated and control villages reshaped into a two-period panel with a treatme
 | Column | Type | Description |
 |---|---|---|
 | `village_id` | int | Join key (separate ID spaces for treated vs. control, as above). |
+| `district`, `state` | — | Same meaning as in the master village table — carried through so the district fixed effects and cluster-robust standard errors can be fit directly off this panel. |
 | `treatment` | int | `1` for a treated (VVP-I priority) village, `0` for a district-restricted non-VVP control village. |
 | `ndbi`, `lights` | float | The outcome value for this village-period row (one row per village per period, not a before/after delta). |
 | `post` | int | `0` for the "before" period, `1` for the "after" period. |
@@ -76,7 +77,7 @@ The treated and control villages reshaped into a two-period panel with a treatme
 
 ## `border_optics_did_by_district_fullyear.csv` / `border_optics_did_by_district_summer.csv`
 
-Per-district breakdown of the treated-vs-control gap, used for the "8 of 10 districts show a positive gap" robustness check (Section 4.6 of `BO_Research_Paper.md`).
+Per-district breakdown of the treated-vs-control gap (treated change, control change, and the difference, for each of the 14 districts), produced by `did_model.py` alongside the pooled DiD estimate in Section 4.6 of `BO_Research_Paper.md`, to see whether the pooled gap is spread evenly across districts or concentrated in a few.
 
 | Column | Type | Description |
 |---|---|---|
@@ -93,7 +94,7 @@ Top-level keys: `did` (the DiD regression coefficients, confidence intervals, an
 
 ## `border_optics_multiyear_fullyear.csv` / `border_optics_multiyear_summer.csv`
 
-One row per core-sample village with NDBI and VIIRS values extracted at all three time points (2021, 2023, 2025), used for the three-point trend extension (Section 4.7). Produced by `extract_multiyear_satellite_data.py`.
+258 rows — one per geocoded treated village across all four states (the 251-village core sample plus Himachal Pradesh's 7 illustrative villages), each with NDBI and VIIRS values extracted at all three time points (2021, 2023, 2025), used for the three-point trend extension (Section 4.7). Produced by `extract_multiyear_satellite_data.py`.
 
 | Column | Type | Description |
 |---|---|---|
@@ -104,7 +105,7 @@ One row per core-sample village with NDBI and VIIRS values extracted at all thre
 
 ## `border_optics_multiyear_slopes_fullyear.csv` / `border_optics_multiyear_slopes_summer.csv`
 
-Same rows as the multiyear files above, with a per-village linear trend fit across all three years added by `multiyear_trend.py`.
+251 rows — the core-sample subset of the multiyear files above (Himachal Pradesh's 7 non-core villages are dropped here), with a per-village linear trend fit across all three years added by `multiyear_trend.py`.
 
 | Column | Type | Description |
 |---|---|---|
@@ -117,7 +118,7 @@ A list of summary statistics for the multi-year trend test — the aggregate Wil
 
 ## `border_optics_buffer250_summer.csv` / `border_optics_buffer1000_summer.csv`
 
-The core-sample villages re-extracted at 250m and 1km buffer radii (summer-matched window only), for the buffer-radius robustness sweep (Section 4.8). Same columns as `border_optics_village_results_summer_analyzed.csv` (which serves as the 500m case in this comparison). Produced by `extract_buffer_sensitivity_data.py`.
+The core-sample villages re-extracted at 250m and 1km buffer radii (summer-matched window only), for the buffer-radius robustness sweep (Section 4.8). Same raw extraction columns as `border_optics_village_results_summer_analyzed.csv` (which serves as the 500m case in this comparison) — `ndbi_before`/`ndbi_after`, `lights_before`/`lights_after`, and the four per-metric image-count columns — but without that file's derived `ndbi_change`/`lights_change` columns, which get computed separately during the buffer-sensitivity analysis rather than stored here. Produced by `extract_buffer_sensitivity_data.py`.
 
 ## `border_optics_buffer_sensitivity_summary.json`
 

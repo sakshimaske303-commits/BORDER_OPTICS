@@ -58,30 +58,44 @@ ax1.set_ylabel("Mean NDBI change")
 ax2.set_ylabel("Sanctioned budget (₹ crore)")
 ax1.axhline(0, color="black", linewidth=0.8)
 fig.legend(loc="upper right", bbox_to_anchor=(0.9, 0.9))
-ax1.set_title("Figure 2 — State-Level Built-up Change vs Sanctioned VVP-I Budget")
+ax1.set_title("Figure 5 — State-Level Built-up Change vs Sanctioned VVP-I Budget")
 fig.tight_layout()
 fig.savefig("outputs/figures/02_state_change_vs_budget.png", bbox_inches="tight")
 plt.close(fig)
 
-# --- Figure 3: Distance to border vs night-light change (H3), both windows ---
+# --- Figure 3: Distance to border vs NDBI change AND night-light change (H3), both windows ---
+# 2x2 grid: rows = metric (NDBI, lights), cols = window (full-year, summer-matched).
+# Earlier version of this figure only plotted lights, though the paper's caption and
+# text (Section 4.5) describe H3 results for both NDBI and lights in both windows --
+# this now actually renders all four combinations to match what's reported.
 merged_fy = full_year.merge(distances[["village_id", "distance_to_border_km"]], on="village_id", how="inner")
 merged_fy = merged_fy[merged_fy["is_core_sample"] == True]
 merged_sm = summer.merge(distances[["village_id", "distance_to_border_km"]], on="village_id", how="inner")
 merged_sm = merged_sm[merged_sm["is_core_sample"] == True]
 
-fig, axes = plt.subplots(1, 2, figsize=(11, 4.5), sharey=True)
-axes[0].scatter(merged_fy["distance_to_border_km"], merged_fy["lights_change"], alpha=0.5, s=18, color="#4C72B0")
-axes[0].set_title("Full-year composite")
-axes[0].set_xlabel("Distance to border (km)")
-axes[0].set_ylabel("Night-light change")
-axes[0].axhline(0, color="black", linewidth=0.8)
+fig, axes = plt.subplots(2, 2, figsize=(11, 8.5))
 
-axes[1].scatter(merged_sm["distance_to_border_km"], merged_sm["lights_change"], alpha=0.5, s=18, color="#DD8452")
-axes[1].set_title("Summer-matched composite")
-axes[1].set_xlabel("Distance to border (km)")
-axes[1].axhline(0, color="black", linewidth=0.8)
+axes[0, 0].scatter(merged_fy["distance_to_border_km"], merged_fy["ndbi_change"], alpha=0.5, s=18, color="#4C72B0")
+axes[0, 0].set_title("NDBI change — Full-year composite")
+axes[0, 0].set_ylabel("NDBI change")
+axes[0, 0].axhline(0, color="black", linewidth=0.8)
 
-fig.suptitle("Figure 3 — H3: Border Distance vs Night-Light Change (Full-Year vs Summer-Matched)", y=1.03)
+axes[0, 1].scatter(merged_sm["distance_to_border_km"], merged_sm["ndbi_change"], alpha=0.5, s=18, color="#DD8452")
+axes[0, 1].set_title("NDBI change — Summer-matched composite")
+axes[0, 1].axhline(0, color="black", linewidth=0.8)
+
+axes[1, 0].scatter(merged_fy["distance_to_border_km"], merged_fy["lights_change"], alpha=0.5, s=18, color="#4C72B0")
+axes[1, 0].set_title("Night-light change — Full-year composite")
+axes[1, 0].set_xlabel("Distance to border (km)")
+axes[1, 0].set_ylabel("Night-light change")
+axes[1, 0].axhline(0, color="black", linewidth=0.8)
+
+axes[1, 1].scatter(merged_sm["distance_to_border_km"], merged_sm["lights_change"], alpha=0.5, s=18, color="#DD8452")
+axes[1, 1].set_title("Night-light change — Summer-matched composite")
+axes[1, 1].set_xlabel("Distance to border (km)")
+axes[1, 1].axhline(0, color="black", linewidth=0.8)
+
+fig.suptitle("Figure 6 — H3: Border Distance vs NDBI Change and Night-Light Change (Both Compositing Windows)", y=1.01)
 fig.tight_layout()
 fig.savefig("outputs/figures/03_h3_border_distance_vs_lights.png", bbox_inches="tight")
 plt.close(fig)

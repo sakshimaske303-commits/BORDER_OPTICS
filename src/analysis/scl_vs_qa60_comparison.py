@@ -76,8 +76,8 @@ def main():
           f"Spearman rho={rho:+.4f}, p={p_corr:.4g}")
 
     coverage_diff = n_scl_valid - n_qa60_valid
-    print(f"\nCoverage: SCL mask returns valid data for {n_scl_valid}/258 villages vs "
-          f"QA60's {n_qa60_valid}/258 ({'+' if coverage_diff >= 0 else ''}{coverage_diff}). "
+    print(f"\nCoverage: SCL mask returns valid data for {n_scl_valid}/251 core-sample villages vs "
+          f"QA60's {n_qa60_valid}/251 ({'+' if coverage_diff >= 0 else ''}{coverage_diff}). "
           f"If this gap is large, check state composition separately -- don't assume it's the "
           f"same skew an earlier run had; that's exactly the kind of assumption that goes stale.")
 

@@ -75,12 +75,14 @@ st.markdown("### Why This Is the Physical Root of a Documented Trade-Off")
 st.markdown("""
 This is not an abstract concern — it is the physical mechanism behind a trade-off BORDER OPTICS
 already discloses on its Methodology & Limitations page: full-year composites risk snow-cover
-contamination at high altitude, while summer-matched composites avoid snow but are more exposed
-to monsoon cloud, which eliminated nearly all valid observations for Sikkim in that window. Both
-failure modes trace back to the same underlying cause mapped in the diagram above — Himalayan
-relief drives both the imaging-geometry distortion and the altitude-driven seasonal masking that
-together produce an unstable, composite-window-dependent change estimate for the highest-altitude
-villages in the sample.
+contamination at high altitude, while summer-matched composites are more exposed to monsoon
+cloud. Summer-matched Sikkim once returned zero cloud-free imagery for all of its villages under
+this exposure — but that turned out to be an archive-timing snapshot, not a permanent data gap,
+and is resolved as of a complete re-extraction (Development Log Entries 21-22): both compositing
+windows now agree that built-up change is not significant, including for Sikkim specifically. Both
+failure modes still trace back to the same underlying cause mapped in the diagram above — Himalayan
+relief drives both the imaging-geometry distortion and the altitude-driven seasonal cloud/snow
+exposure that this study's dual-window design exists specifically to check for.
 """)
 
 st.markdown("---")

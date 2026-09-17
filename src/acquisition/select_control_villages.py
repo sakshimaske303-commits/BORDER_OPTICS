@@ -131,24 +131,76 @@ def overpass_query_for_bbox(south, west, north, east):
     raise last_err
 
 
+def _query_nominatim_once(query_str):
+    params = {"q": query_str, "format": "json", "polygon_geojson": 1, "limit": 1}
+    resp = requests.get(NOMINATIM_URL, params=params, headers=HEADERS, timeout=30)
+    resp.raise_for_status()
+    return resp.json()
+
+
 def fetch_district_polygon(district, state):
     # real boundary via Nominatim, so a village just across the district line
-    # (still inside our search bbox) doesn't get wrongly counted as in-district
-    params = {"q": f"{district}, {state}, India", "format": "json", "polygon_geojson": 1, "limit": 1}
-    try:
-        resp = requests.get(NOMINATIM_URL, params=params, headers=HEADERS, timeout=30)
-        resp.raise_for_status()
-        results = resp.json()
-    except requests.exceptions.RequestException as e:
-        print(f"  Nominatim boundary lookup failed for {district}, {state}: {e}")
-        return None
+    # (still inside our search bbox) doesn't get wrongly counted as in-district.
+    # Retries on the same retryable statuses/network errors as the Overpass fetch
+    # (a bare single-shot request here used to silently fall back to bbox-only
+    # matching on any transient hiccup, not just a genuine "no such place" result --
+    # that's what left ~30% of the committed control list with district_verified=False,
+    # concentrated in exactly the districts below rather than spread evenly).
+    # Also tries a "<district> district, <state>, India" phrasing as a second candidate
+    # query: some district names in the source village lists are ambiguous on their own
+    # (e.g. Sikkim's "North" district), and appending "district" disambiguates them the
+    # way an official gazette reference would.
+    query_variants = [f"{district}, {state}, India", f"{district} district, {state}, India"]
 
-    if not results or "geojson" not in results[0]:
-        return None
-    geom = results[0]["geojson"]
-    if geom.get("type") not in ("Polygon", "MultiPolygon"):
-        return None
-    return shape(geom)
+    for query_str in query_variants:
+        last_err = None
+        for attempt in range(1, MAX_RETRIES + 1):
+            try:
+                results = _query_nominatim_once(query_str)
+                last_err = None
+                break
+            except requests.exceptions.HTTPError as e:
+                last_err = e
+                status = e.response.status_code if e.response is not None else None
+                if status in RETRYABLE_STATUS_CODES and attempt < MAX_RETRIES:
+                    wait = RETRY_WAIT_SECONDS * (2 ** (attempt - 1))
+                    retry_after = e.response.headers.get("Retry-After") if e.response is not None else None
+                    if retry_after:
+                        try:
+                            wait = max(wait, float(retry_after))
+                        except ValueError:
+                            pass
+                    print(f"    {status} error on Nominatim query '{query_str}', attempt "
+                          f"{attempt}/{MAX_RETRIES} — waiting {wait:.0f}s before retry...")
+                    time.sleep(wait)
+                    continue
+                results = None
+                break
+            except requests.exceptions.RequestException as e:
+                last_err = e
+                if attempt < MAX_RETRIES:
+                    wait = RETRY_WAIT_SECONDS * (2 ** (attempt - 1))
+                    print(f"    network error on Nominatim query '{query_str}' ({e}), attempt "
+                          f"{attempt}/{MAX_RETRIES} — waiting {wait:.0f}s before retry...")
+                    time.sleep(wait)
+                    continue
+                results = None
+                break
+
+        if last_err is not None:
+            print(f"  Nominatim boundary lookup failed for query '{query_str}' after "
+                  f"{MAX_RETRIES} attempts: {last_err}")
+            continue
+        if not results or "geojson" not in results[0]:
+            continue
+        geom = results[0]["geojson"]
+        if geom.get("type") not in ("Polygon", "MultiPolygon"):
+            continue
+        return shape(geom)
+
+    print(f"  Nominatim boundary lookup found no usable polygon for {district}, {state} "
+          f"after trying {len(query_variants)} query phrasing(s).")
+    return None
 
 
 def load_border_union():

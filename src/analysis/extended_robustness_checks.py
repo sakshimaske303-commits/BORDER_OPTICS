@@ -256,13 +256,16 @@ def summer_missingness():
 
 # ---------------------------------------------------------------------------
 # 5. same leave-one-out + randomization stress test, but for full-year lights
-# DiD - the only control-group result still significant after Entry 22
+# DiD - this was the last still-significant control-group DiD result after
+# Entry 22, but the control-list contamination fix in Entry 24/25 sent it to
+# null too (see BO_Development_Log.md Entry 25). Kept here as a completed
+# check on a now-null result, not as a check on something still significant.
 # ---------------------------------------------------------------------------
 
 def fullyear_lights_robustness():
     print("=" * 70)
     print("5. LEAVE-ONE-OUT + RANDOMIZATION INFERENCE, FULL-YEAR LIGHTS DiD")
-    print("   (the last still-significant control-group DiD result, post-Entry-22)")
+    print("   (significant post-Entry-22; went null post-Entry-25 control-list fix -- checked here anyway)")
     print("=" * 70)
     df = pd.read_csv(PANEL_PATHS["full_year"])
     districts = sorted(df["district"].unique())

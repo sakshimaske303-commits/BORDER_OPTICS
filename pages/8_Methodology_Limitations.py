@@ -212,9 +212,23 @@ with st.expander("**H3 Border-Proximity — Stress-Tested, and Surviving**"):
     p = 0.0000547) — weaker than the naive p-values, as expected once spatial
     clustering is accounted for, but still comfortably below 0.05.
 
-    Two checks from the original plan remain open: whether either correlation
-    is linear across the full distance range or concentrated at one end, and a
-    cross-check against the three-point 2021/2023/2025 extraction.
+    The two remaining checks from the original plan are done now too
+    (Development Log Entry 27). On linearity: summer NDBI's correlation with
+    distance is close to a straight line across all five distance quintiles
+    (quadratic term not significant, F=0.89, p=0.347); full-year lights'
+    quintile pattern isn't monotonic (rising, falling twice, then jumping back
+    up), though a formal quadratic test still doesn't flag it as curved
+    (F=0.69, p=0.406) — the simplest read is that this one looks more like a
+    handful of districts sitting at particular distances than a smooth
+    proximity effect. On the three-point 2021/2023/2025 cross-check: both
+    correlations reproduce closely over the full period (summer NDBI
+    rho=+0.293 vs. the two-point extraction's +0.291; full-year lights
+    rho=-0.252, exactly matching), but neither is stable across sub-periods —
+    summer NDBI's relationship flips sign between 2021-2023 and 2023-2025, and
+    full-year lights weakens substantially in the second half. Neither of
+    these newer findings overturns either H3 result, but "stress-tested and
+    surviving" needs the more precise description above rather than a blanket
+    "stable and linear" claim.
     """)
 
 with st.expander("**Parallel Pre-Trends Placebo Test — Now Run, Mostly Clean**"):
@@ -292,8 +306,9 @@ with st.expander("**Triangulation Against Independent Proxies — An Open Tensio
     Dynamic World tracks real building counts far more closely (Spearman
     ρ = 0.808) than NDBI (ρ = 0.399) or night-lights (ρ = 0.478) do. Second, at
     three villages this project separately confirmed underwent real
-    construction (Kaho — a hostel, Walong — a border-terminal building, Musai —
-    solar streetlighting), Dynamic World and night-lights both correctly
+    construction (Walong — a border-terminal building and a hostel, Kaho — a
+    basketball court and solar streetlighting, Musai — solar streetlighting),
+    Dynamic World and night-lights both correctly
     registered a before-to-after increase at all three, while NDBI moved in
     the *wrong* direction at all three.
 
