@@ -16,8 +16,13 @@ ORANGE = "#DD8452"
 villages = pd.read_csv("data/processed/border_optics_master_villages_with_distance.csv")
 summer = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
 
-merge_cols = ["village_id", "latitude", "longitude", "distance_to_border_km"]
+merge_cols = ["village_id", "latitude", "longitude", "distance_to_border_km", "is_core_sample"]
 summer = summer.merge(villages[merge_cols], on="village_id", how="left")
+
+# Core statistical sample only (251 villages) -- matches the filter pages/6_Explore_Trends.py
+# already applies. Without this, the 7 illustrative Himachal villages can leak into these
+# static state-wise figures even though the dashboard's own state comparison excludes them.
+summer = summer[summer["is_core_sample"] == True]
 
 valid = summer.dropna(subset=["ndbi_change"])
 

@@ -1,19 +1,4 @@
-"""
-Re-run summer NDBI/VIIRS at 250m and 1km buffers to check 500m isn't driving the result alone.
 
-Checkpoints are already at 251/251 so a plain re-run won't pull anything new. To get
-a real same-day comparison, move all three checkpoints aside first then run all three
-back to back same day (S2 archive backfills, so different-day pulls aren't comparable):
-
-    mv data/processed/border_optics_village_results_summer.csv data/processed/border_optics_village_results_summer_PRE_SAMEDAY_BUFFER_CHECK.csv
-    mv data/processed/border_optics_buffer250_summer.csv data/processed/border_optics_buffer250_summer_PRE_SAMEDAY_BUFFER_CHECK.csv
-    mv data/processed/border_optics_buffer1000_summer.csv data/processed/border_optics_buffer1000_summer_PRE_SAMEDAY_BUFFER_CHECK.csv
-    python3 src/acquisition/extract_satellite_data.py --window summer
-    python3 src/acquisition/extract_buffer_sensitivity_data.py --buffer 250
-    python3 src/acquisition/extract_buffer_sensitivity_data.py --buffer 1000
-
-Takes over an hour per run, budget ~3hrs straight through. Low priority for now.
-"""
 
 import argparse
 import os
