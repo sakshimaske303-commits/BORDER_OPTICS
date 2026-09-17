@@ -19,7 +19,7 @@ One row per successfully geocoded village (258 rows).
 
 ## `border_optics_village_results.csv` / `_analyzed.csv` (full-year window) and `_summer.csv` / `_summer_analyzed.csv` (summer-matched window)
 
-One row per village per compositing window, produced by `extract_satellite_data.py` and enriched by `analyze_results.py` / `analyze_results_fullyear.py`.
+One row per village per compositing window, produced by `extract_satellite_data.py` and enriched by `analyze_results.py --window summer` / `analyze_results.py --window full_year` (one consolidated, window-parameterized script as of 2026-09-17; see `archive/README.md`).
 
 | Column | Type | Description |
 |---|---|---|

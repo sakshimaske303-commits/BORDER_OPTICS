@@ -22,6 +22,8 @@ Established as an independent research project, BORDER OPTICS is a verification 
 
 This project exists to fill that exact gap: responding to Parliament's direct enquiry into whether VVP's effect had ever been assessed, the Ministry of Home Affairs replied: *"No impact assessment has been carried out"* (Lok Sabha Unstarred Question No. 508, 3 February 2026). Each of the hypotheses presented here has been tested thoroughly, and any result that could be defended by one of two possible measurements is presented both ways — no claimed result is hidden in the "don't know/other" bucket.
 
+**Coverage note:** VVP-I spans five Himalayan states/UTs, but this study's core statistical sample (251 villages) is limited to the three states with officially confirmed, name-level village lists — Arunachal Pradesh, Sikkim, and Uttarakhand. Himachal Pradesh contributes a separate 7-village illustrative case study (not part of the core sample, since only aggregate priority-village counts, not names, are on parliamentary record for it). Ladakh has zero village-level representation here — its 35 sanctioned villages are officially confirmed in aggregate but no publicly indexed source names them, and closing that gap would require an RTI request this project deliberately chose not to pursue (see `BO_Research_Paper.md` §3, §6.1, and §7.4 for the full reasoning).
+
 ---
 
 ## Architecture
@@ -165,6 +167,8 @@ cd BORDER_OPTICS
 pip install -r requirements.txt
 streamlit run app.py
 ```
+
+`requirements.txt` pins the direct dependencies this project imports. For an exact, full-transitive-closure environment (every sub-dependency pinned too), use `pip install -r requirements-lock.txt` instead. The satellite-extraction scripts under `src/acquisition/` additionally need a Google Earth Engine account with API access enabled and an authenticated session (`earthengine authenticate`, or a service-account key referenced via `.env` / `python-dotenv`) — the Streamlit dashboard itself does not require this, since it reads from the already-extracted CSVs in `data/processed/`.
 
 ## Author
 
