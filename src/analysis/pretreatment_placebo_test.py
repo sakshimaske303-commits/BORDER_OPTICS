@@ -38,16 +38,38 @@ SUMMARY_OUT = {
 def build_group(group, window):
     """Returns one row per village: village_id, district, treatment,
     ndbi_2019, ndbi_2021, ndbi_placebo_change (=2021-2019), same for lights."""
-    baseline = pd.read_csv(PRETREATMENT_PATHS[(group, window)])[
-        ["village_id", "ndbi_2019", "lights_2019"]
-    ]
+    baseline = pd.read_csv(PRETREATMENT_PATHS[(group, window)])
     existing = pd.read_csv(EXISTING_2021_PATHS[(group, window)])
     if group == "treated":
         existing = existing[existing["is_core_sample"] == True]
-    existing = existing[["village_id", "district", "ndbi_before", "lights_before"]].rename(
-        columns={"ndbi_before": "ndbi_2021", "lights_before": "lights_2021"}
-    )
-    merged = existing.merge(baseline, on="village_id", how="inner")
+        # treated village_id is stable across runs, safe to join on
+        baseline = baseline[["village_id", "ndbi_2019", "lights_2019"]]
+        existing = existing[["village_id", "district", "ndbi_before", "lights_before"]].rename(
+            columns={"ndbi_before": "ndbi_2021", "lights_before": "lights_2021"}
+        )
+        merged = existing.merge(baseline, on="village_id", how="inner")
+    else:
+        # control village_id gets reassigned fresh every time
+        # select_control_villages.py regenerates the list, so it is NOT a safe
+        # join key here -- two different control-list vintages (this baseline's
+        # vs. the current EXISTING_2021_PATHS file) can each have a row with
+        # village_id=5 that refers to a completely different physical village.
+        # Join on rounded coordinates instead, which are stable per village.
+        baseline = baseline.copy()
+        existing = existing.copy()
+        baseline["_coord_key"] = list(zip(baseline["latitude"].round(6), baseline["longitude"].round(6)))
+        existing["_coord_key"] = list(zip(existing["latitude"].round(6), existing["longitude"].round(6)))
+        baseline = baseline[["_coord_key", "ndbi_2019", "lights_2019"]]
+        existing = existing[["_coord_key", "village_id", "district", "ndbi_before", "lights_before"]].rename(
+            columns={"ndbi_before": "ndbi_2021", "lights_before": "lights_2021"}
+        )
+        merged = existing.merge(baseline, on="_coord_key", how="inner").drop(columns="_coord_key")
+        n_dropped = len(existing) - len(merged)
+        if n_dropped:
+            print(f"  NOTE: {n_dropped} control village(s) in {EXISTING_2021_PATHS[(group, window)]} "
+                  f"have no matching coordinate in {PRETREATMENT_PATHS[(group, window)]} -- the 2019 "
+                  f"baseline is for a different control-list vintage and should be re-extracted "
+                  f"(extract_pretreatment_baseline.py --group control) before trusting this result.")
     merged["treatment"] = 1 if group == "treated" else 0
     merged["ndbi_placebo_change"] = merged["ndbi_2021"] - merged["ndbi_2019"]
     merged["lights_placebo_change"] = merged["lights_2021"] - merged["lights_2019"]

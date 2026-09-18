@@ -158,6 +158,17 @@ A single extra pre-treatment year (2019) pulled for both treated and control vil
 
 `pretreatment_placebo_test.py` merges these against each group's existing `ndbi_before`/`lights_before` (i.e. the 2021 values already on disk) to construct the 2019→2021 placebo change, rather than storing that change in these files directly.
 
+## `border_optics_treated_dw_pretreatment_fullyear.csv` / `_summer.csv` and `border_optics_control_dw_pretreatment_fullyear.csv` / `_summer.csv`
+
+The Dynamic World analogue of the pretreatment-baseline files above, added because Section 4.10's triangulation shows Dynamic World disagreeing with NDBI on the control-group DiD (DW: small but significant; NDBI: null) — this asks whether that DW gap was already present before treatment could apply, not just after. Produced by `src/acquisition/extract_dw_pretreatment_baseline.py`. Requires live GEE; not run in the sandbox that added this script.
+
+| Column | Type | Description |
+|---|---|---|
+| `built_2019` | float | Mean Dynamic World "built" class probability (0-1) over the same 500m buffer, 2019-01-01 to 2020-01-01 (full-year) or 2019-06-01 to 2019-10-01 (summer). |
+| `built_2019_image_count` | int | Number of Dynamic World images behind the 2019 composite. |
+
+`src/analysis/dw_pretreatment_placebo_test.py` merges these against each group's existing `built_before` (the 2021 value already in `border_optics_{treated,control}_dynamicworld_{fullyear,summer}.csv`) to construct the 2019→2021 DW placebo change.
+
 ## `border_optics_treated_building_footprints.csv` / `border_optics_control_building_footprints.csv`
 
 Independent, non-satellite-index building counts from Google's Open Buildings dataset (`GOOGLE/Research/open-buildings/v3/polygons`, confidence ≥ 0.75), used to validate each proxy's *current* (roughly 2025-era) built-up reading (Section 7.2) and to check whether the Section 7.3 ground-truth villages' real additions show up as detected structures. Produced by `src/acquisition/extract_building_footprints.py`. Single-vintage only — Open Buildings has no historical epoch to difference, unlike every before/after extraction elsewhere in this study; this was discovered and documented in the script rather than assumed to exist.
@@ -195,6 +206,10 @@ Village-level (not aggregate-significance) Spearman cross-checks between the thr
 ## `outputs/pretreatment_placebo_summary_fullyear.json` / `_summer.json`
 
 The 2019→2021 placebo DiD results (Section 7.5, Development Log Entry 30) — same district-fixed-effects, cluster-robust-SE specification as `did_model.py`'s real 2021→2025 DiD, run instead on the genuinely pre-treatment 2019-to-2021 change. Produced by `src/analysis/pretreatment_placebo_test.py`. Three of four outcome/window combinations are clean nulls (full-year NDBI p=0.864, full-year lights p=0.755, summer lights p=0.968); summer NDBI is the flagged exception (placebo coefficient +0.01287, p=0.064 — borderline, and reported as such rather than rounded up to "passes," with the raw unadjusted Mann-Whitney comparison for the same combination sharply significant at p=0.00001).
+
+## `outputs/dw_pretreatment_placebo_summary_fullyear.json` / `_summer.json`
+
+The Dynamic World analogue of `outputs/pretreatment_placebo_summary_*.json` — same district-fixed-effects, cluster-robust-SE placebo-DiD specification, run on the 2019→2021 change in DW "built" probability instead of NDBI/lights. Produced by `src/analysis/dw_pretreatment_placebo_test.py`. Single top-level key `built` (one outcome, since Dynamic World has only the one band), with the same fields as `pretreatment_placebo_test.py`'s per-outcome result (`placebo_did_coef`, `placebo_did_se`, `placebo_did_p`, confidence interval, Mann-Whitney p). Not yet run as of this script's addition — requires live GEE for the 2019 DW extraction first.
 
 ## `outputs/robustness_extended_results.json`
 

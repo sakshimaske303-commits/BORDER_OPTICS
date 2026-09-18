@@ -92,15 +92,42 @@ def extract(group, window_key, checkpoint_every=10):
         "sar_before_image_count", "sar_after_image_count",
     ]
 
-    if os.path.exists(out_path):
-        villages = pd.read_csv(out_path)
-        print(f"Resuming from existing checkpoint: {out_path}")
-    else:
-        villages = pd.read_csv(VILLAGE_PATHS[group])
-
+    # village list is the source of truth (the control list can get regenerated
+    # by select_control_villages.py), so always read it fresh and only pull
+    # prior values from a checkpoint when its rows match by coordinate --
+    # otherwise a stale checkpoint silently overrides an updated village list.
+    # Same convention as extract_control_satellite_data.py; this script used to
+    # just load the checkpoint outright with no mismatch check, which is what
+    # let a post-district-verification-rerun run silently reuse the old
+    # 732-village control checkpoint instead of the corrected 721-village list.
+    villages = pd.read_csv(VILLAGE_PATHS[group])
     for col in outcome_cols:
         if col not in villages.columns:
             villages[col] = None
+
+    if os.path.exists(out_path):
+        existing = pd.read_csv(out_path)
+        current_coords = set(zip(villages["latitude"].round(6), villages["longitude"].round(6)))
+        existing_coords = (
+            set(zip(existing["latitude"].round(6), existing["longitude"].round(6)))
+            if {"latitude", "longitude"}.issubset(existing.columns) else set()
+        )
+        if existing_coords and existing_coords == current_coords:
+            lookup = existing.copy()
+            lookup["_coord_key"] = list(zip(lookup["latitude"].round(6), lookup["longitude"].round(6)))
+            lookup_dict = lookup.set_index("_coord_key")[
+                [c for c in outcome_cols if c in lookup.columns]
+            ].to_dict("index")
+            villages_keys = list(zip(villages["latitude"].round(6), villages["longitude"].round(6)))
+            for i, key in zip(villages.index, villages_keys):
+                values = lookup_dict.get(key)
+                if values:
+                    for col in outcome_cols:
+                        if col in values:
+                            villages.at[i, col] = values[col]
+            print(f"Resuming from existing checkpoint: {out_path} (matched by coordinate, {len(existing)} rows)")
+        else:
+            print(f"  Checkpoint at {out_path} doesn't match current village list -- starting fresh.")
 
     print(f"--- Extracting Sentinel-1 SAR (VV/VH), group='{group}', window='{window_key}', "
           f"orbit_pass='{ORBIT_PASS}' ---")

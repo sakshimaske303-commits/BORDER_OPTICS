@@ -27,7 +27,7 @@ DID_PANEL_FULLYEAR_PATH = os.path.join(DATA, "border_optics_did_panel_fullyear.c
 
 EXPECTED_CORE_TREATED = 251
 EXPECTED_TOTAL_TREATED = 258
-EXPECTED_CONTROL = 732  # was 735 before the dedup fix (Entry 25)
+EXPECTED_CONTROL = 721  # was 735 before the dedup fix (Entry 25), 732 before the district-verification fix (Entry 37)
 EXPECTED_DISTRICTS = 14
 EXPECTED_STATE_COUNTS = {
     "Arunachal Pradesh": 186,
