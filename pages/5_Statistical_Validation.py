@@ -10,6 +10,16 @@ inject_theme()
 villages, full_year, summer = load_data()
 expanded = load_expanded_results()
 
+# H1 (Wilcoxon) and H3 (Spearman) below must run on the core statistical sample only
+# (251 villages) to match the formal tests reported in the Research Paper / dashboard
+# home page -- the 7 illustrative Himachal Pradesh villages are not part of the core
+# sample and must not leak into these hypothesis tests. (Fixed 2026-09-18: this page
+# was previously running these tests on the full 258-village set, which flipped the
+# full-year night-lights H1 result from p=0.050 (not significant, matching the paper)
+# to p=0.014 (significant) -- a page-only artifact, not a real result.)
+full_year = full_year[full_year["is_core_sample"] == True] if "is_core_sample" in full_year.columns else full_year
+summer = summer[summer["is_core_sample"] == True] if "is_core_sample" in summer.columns else summer
+
 st.markdown("<h1>📊 STATISTICAL VALIDATION</h1>", unsafe_allow_html=True)
 st.markdown(
     "<h3 style='text-align: center; font-weight: 700;'>Hypothesis Testing, Robustness, and Honest Limitations</h3>",
