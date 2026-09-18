@@ -304,10 +304,13 @@ with st.expander("**14 District Clusters — An Exact Wild Cluster Bootstrap, No
 with st.expander("**Triangulation Against Independent Proxies — An Open Tension, Not a Confirmation**"):
     st.markdown("""
     The primary design uses NDBI and night-lights. As a further check, the
-    same control-group DiD was run on two fully independent satellite
-    proxies — Sentinel-1 SAR backscatter (VV and VH, immune to the
-    cloud-masking concerns that affect optical imagery) and Dynamic World, a
-    machine-learned per-pixel built-up probability — via
+    same control-group DiD was run on two independent proxies of different
+    kinds — Sentinel-1 SAR backscatter (VV and VH, a genuinely different
+    sensor, radar rather than optical, immune to the cloud-masking concerns
+    that affect optical imagery) and Dynamic World, a machine-learned
+    per-pixel built-up probability that is algorithm-independent of NDBI but
+    not sensor-independent, since it is itself derived from the same
+    Sentinel-2 imagery — via
     `src/analysis/triangulation_analysis.py`. This was meant to be an ordinary
     robustness check. For SAR, that's what it was: null in both windows, both
     polarizations, agreeing with NDBI. For Dynamic World, it wasn't: its
@@ -350,12 +353,13 @@ with st.expander("**Statistical Power — What This Design Could (and Couldn't) 
     (MDE) for the primary H1 (treated-only) and H4 (control-group DiD) tests
     at 80% power, α=0.05, using t-quantiles at this study's own degrees of
     freedom rather than a large-sample z approximation. H1's MDE, as Cohen's
-    d, is 0.178 across every outcome/window — just under Cohen's own "small
-    effect" threshold of 0.2 — meaning this design was sensitive enough to
-    catch a small-to-moderate real effect had one existed; H1's null is
-    substantive, not a power artifact. H4's cluster-based design is less
-    sensitive, as expected, but every observed H4 coefficient still sits at
-    only 24-34% of its own detection threshold — a clear gap, not a near-miss.
+    d, is 0.157 across every outcome/window — comfortably under Cohen's own
+    "small effect" threshold of 0.2 — meaning this design was sensitive
+    enough to catch a small-to-moderate real effect had one existed; H1's
+    null is substantive, not a power artifact. H4's cluster-based design is
+    less sensitive, as expected, but every observed H4 coefficient still
+    sits at only 15-35% of its own detection threshold — a clear gap, not a
+    near-miss.
     """)
 
 st.markdown("---")

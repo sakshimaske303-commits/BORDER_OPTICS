@@ -72,16 +72,16 @@ Added after this freeze, to answer a question a clean null result doesn't answer
 
 | Test | Window | Outcome | MDE | Context |
 |---|---|---|---|---|
-| H1 (treated-only, paired) | Full-year | NDBI | 0.00904 | Cohen's d = 0.178 (below Cohen's own "small effect" threshold of 0.2) |
-| H1 (treated-only, paired) | Full-year | Lights | 0.10246 | Cohen's d = 0.178; 23.9% of baseline mean lights |
-| H1 (treated-only, paired) | Summer | NDBI | 0.00599 | Cohen's d = 0.178 |
-| H1 (treated-only, paired) | Summer | Lights | 0.08001 | Cohen's d = 0.178; 19.9% of baseline mean lights |
-| H4 (control-group DiD) | Full-year | NDBI | 0.01992 | Observed coefficient (+0.00667) is 34% of this threshold |
-| H4 (control-group DiD) | Full-year | Lights | 0.15045 | Observed coefficient (+0.05046) is 34% of this threshold |
-| H4 (control-group DiD) | Summer | NDBI | 0.01505 | Observed coefficient (-0.00357) is 24% of this threshold |
-| H4 (control-group DiD) | Summer | Lights | 0.13017 | Observed coefficient (+0.03244) is 25% of this threshold |
+| H1 (treated-only, paired) | Full-year | NDBI | 0.00802 | Cohen's d = 0.157 (below Cohen's own "small effect" threshold of 0.2) |
+| H1 (treated-only, paired) | Full-year | Lights | 0.09086 | Cohen's d = 0.157; 21.2% of baseline mean lights |
+| H1 (treated-only, paired) | Summer | NDBI | 0.00531 | Cohen's d = 0.157 |
+| H1 (treated-only, paired) | Summer | Lights | 0.07095 | Cohen's d = 0.157; 17.7% of baseline mean lights |
+| H4 (control-group DiD) | Full-year | NDBI | 0.01918 | Observed coefficient (+0.00668) is 35% of this threshold |
+| H4 (control-group DiD) | Full-year | Lights | 0.13983 | Observed coefficient (+0.03460) is 25% of this threshold |
+| H4 (control-group DiD) | Summer | NDBI | 0.01331 | Observed coefficient (-0.00275) is 21% of this threshold |
+| H4 (control-group DiD) | Summer | Lights | 0.11792 | Observed coefficient (+0.01798) is 15% of this threshold |
 
-Reading: the primary H1 design's own Cohen's-d MDE (0.178) is essentially constant across outcome/window because it depends only on n and df, not on the outcome's scale — and it sits just under the conventional "small effect" line, so H1's null is not an underpowering artifact; a real small-to-moderate effect would very likely have been caught. H4's design is less sensitive (as expected for a between-group DiD versus a paired within-village design), but every observed H4 coefficient is well below even that higher threshold (24-34% of it), so H4's null isn't a borderline "just missed it" result either.
+Reading: the primary H1 design's own Cohen's-d MDE (0.157) is essentially constant across outcome/window because it depends only on n and df, not on the outcome's scale — and it sits comfortably under the conventional "small effect" line, so H1's null is not an underpowering artifact; a real small-to-moderate effect would very likely have been caught. H4's design is less sensitive (as expected for a between-group DiD versus a paired within-village design), but every observed H4 coefficient is well below even that higher threshold (15-35% of it), so H4's null isn't a borderline "just missed it" result either. (These are the district-verification-corrected, 721-village figures, `data/processed/border_optics_power_analysis.json` re-run against Development Log Entry 37's control list, Entry 39; the immediately preceding 732-village version had H1's Cohen's d at 0.178 and H4's observed coefficients at 24-34% of a slightly different MDE — same conclusion either way.)
 
 ## Software
 
