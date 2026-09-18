@@ -289,8 +289,8 @@ with st.expander("**14 District Clusters — An Exact Wild Cluster Bootstrap, No
     (+1/-1) sign-flip combinations across the 14 district clusters, refitting
     the model under each one to build an exact bootstrap null distribution for
     the test statistic, rather than an approximation. All four remain
-    non-significant under this stricter test — full-year NDBI p = 0.349,
-    full-year lights p = 0.324, summer NDBI p = 0.495, summer lights p = 0.465
+    non-significant under this stricter test — full-year NDBI p = 0.354,
+    full-year lights p = 0.505, summer NDBI p = 0.585, summer lights p = 0.680
     — meaning the small cluster count is not itself manufacturing a false
     null; the primary result's non-significance holds up under a test
     specifically designed to be robust to too few clusters.
@@ -312,7 +312,7 @@ with st.expander("**Triangulation Against Independent Proxies — An Open Tensio
     robustness check. For SAR, that's what it was: null in both windows, both
     polarizations, agreeing with NDBI. For Dynamic World, it wasn't: its
     control-group DiD is significant in **both** windows (full-year coefficient
-    +0.0031, p = 0.0117; summer +0.0074, p = 0.0013).
+    +0.0026, p = 0.0159; summer +0.0059, p = 0.0006).
 
     That disagreement is hard to dismiss as one stray significant test among
     many, for two reasons. First, `src/analysis/building_footprint_validation.py`

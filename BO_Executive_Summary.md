@@ -27,16 +27,18 @@ Third: a cloud-masking cross-check that initially looked like a second open sens
 
 | Test | Full-Year Window | Summer-Matched Window |
 |---|---|---|
-| NDBI change (Wilcoxon, control-group DiD) | p = 0.310 — not significant | p = 0.473 — not significant |
-| NDBI DiD, exact wild cluster bootstrap (14 clusters, 16,384 draws) | p = 0.349 — not significant | p = 0.495 — not significant |
-| Night-lights DiD, exact wild cluster bootstrap | p = 0.324 — not significant | p = 0.465 — not significant |
+| NDBI control-group DiD | p = 0.291 — not significant | p = 0.531 — not significant |
+| NDBI DiD, exact wild cluster bootstrap (14 clusters, 16,384 draws) | p = 0.354 — not significant | p = 0.585 — not significant |
+| Night-lights DiD, exact wild cluster bootstrap | p = 0.505 — not significant | p = 0.680 — not significant |
 | Buffer-radius sweep (250m/500m/1km), same-day pull | all three null, n=251 at every radius | all three null, n=251 at every radius |
-| Pre-treatment (2019→2021) placebo DiD | NDBI p=0.864, lights p=0.755 — clean | NDBI p=0.064 — borderline, flagged; lights p=0.968 — clean |
+| Pre-treatment (2019→2021) placebo DiD¹ | NDBI p=0.864, lights p=0.755 — clean | NDBI p=0.064 — borderline, flagged; lights p=0.968 — clean |
 | Border-proximity correlation (H3), spatially corrected | lights: naive p=5.5×10⁻⁵ → spatially-corrected p=0.0035 | NDBI: naive p=2.6×10⁻⁶ → spatially-corrected p=0.0295 |
-| SAR backscatter, control-group DiD (triangulation) | VV p=0.791, VH p=0.774 — null, agrees with NDBI | VV p=0.717, VH p=0.953 — null, agrees with NDBI |
-| Dynamic World "built," control-group DiD (triangulation) | coef +0.0031, p=0.0117 — significant, disagrees with NDBI | coef +0.0074, p=0.0013 — significant, disagrees with NDBI |
+| SAR backscatter, control-group DiD (triangulation) | VV p=0.826, VH p=0.892 — null, agrees with NDBI | VV p=0.508, VH p=0.998 — null, agrees with NDBI |
+| Dynamic World "built," control-group DiD (triangulation) | coef +0.0026, p=0.0159 — significant, disagrees with NDBI | coef +0.0059, p=0.0006 — significant, disagrees with NDBI |
 | Ground-truth check, 3 confirmed-construction villages | NDBI: wrong direction at all 3 · Lights & Dynamic World: correct direction at all 3 | — |
 | Cloud-mask cross-check (QA60 vs. SCL, corrected), same 251 villages, summer NDBI | — | QA60: null (p=0.436) · SCL: null (p=0.288) — agree, once a snow-masking bug was fixed |
+
+¹ Runs on the control list as it stood before the Development Log Entry 37 district-verification fix (732 villages, not the current 721) — not yet re-extracted against the corrected list.
 
 ## Validation & Robustness Checklist
 
