@@ -37,10 +37,10 @@ abstract: >-
   parallel-pre-trends placebo test using a second pre-treatment year (2019)
   for both treated and control villages. Both confirm the null (wild-cluster
   p = 0.35-0.68 across all four outcome/window combinations; 3 of 4 placebo
-  comparisons clean, the fourth borderline and reported as such — the
-  placebo test itself still runs on the control list as it stood before the
-  district-verification fix described below, and has not yet been re-run
-  against the corrected list). A
+  comparisons clean, the fourth borderline and reported as such, now
+  re-extracted against the district-verification-corrected 721-village
+  control list with no change in conclusion from the preceding 732-village
+  version). A
   border-proximity correlation flagged in the previous release as new and
   unchecked has since been run through the same leave-one-district-out,
   randomization-inference, and a further spatial-autocorrelation-calibrated
@@ -60,7 +60,11 @@ abstract: >-
   counts, ρ = 0.808 vs. NDBI's ρ = 0.399) than the primary measure does. At
   three villages with independently confirmed real construction, Dynamic
   World and night-lights both correctly detected the increase while NDBI
-  moved in the wrong direction at all three. This tension between proxies is
+  moved in the wrong direction at all three. A Dynamic World analogue of the
+  NDBI/lights pre-trends placebo test was also run: clean in both windows
+  (p = 0.934 full-year, p = 0.179 summer), ruling out a pre-existing trend as
+  the explanation for Dynamic World's significant real-period result, though
+  not resolving the disagreement itself. This tension between proxies is
   reported openly as an unresolved question — whether NDBI under-detects a
   real, modest effect or Dynamic World's result is itself a different kind
   of false positive — rather than smoothed into either a confirmed null or a
@@ -81,12 +85,11 @@ abstract: >-
   unresolved measurement tension. One further correction: a district-
   verification rerun closed the control list's remaining data-quality gap
   for two of its three affected districts, taking the list from 732 to 721
-  villages; every DiD, baseline-balance, and triangulation number in this
-  study reflects that corrected list (the 2019 pre-treatment placebo test
-  above is the one check still pending re-extraction against it), and none
-  change conclusion, except that the full-year night-lights baseline
-  balance check is newly imbalanced (p = 0.036) where it previously was not
-  (p = 0.090) — disclosed as a genuine finding rather than smoothed over.
+  villages; every DiD, baseline-balance, triangulation, and placebo number
+  in this study reflects that corrected list, and none change conclusion,
+  except that the full-year night-lights baseline balance check is newly
+  imbalanced (p = 0.036) where it previously was not (p = 0.090) —
+  disclosed as a genuine finding rather than smoothed over.
   This study addresses a parliamentary
   record showing no independent impact assessment has ever been carried out
   for VVP-I.

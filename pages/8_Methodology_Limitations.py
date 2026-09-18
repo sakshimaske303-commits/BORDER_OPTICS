@@ -261,20 +261,28 @@ with st.expander("**Parallel Pre-Trends Placebo Test — Now Run, Mostly Clean**
     sanctioned until February 2023.
 
     Three of the four resulting checks are clean: full-year NDBI (placebo
-    coefficient +0.00196, p = 0.864), full-year lights (-0.00665, p = 0.755),
-    and summer lights (+0.00047, p = 0.968) all show no significant
-    pre-treatment divergence between treated and control villages — direct
-    evidence *for* this study's DiD design, not merely an unexamined
-    assumption behind it. The fourth is a genuine, flagged exception: summer
-    NDBI's placebo coefficient is +0.01287, p = 0.064 — not significant at the
-    conventional threshold under the district-fixed-effects specification, but
-    close to it, and the unadjusted raw comparison for the same combination is
-    sharply significant (p = 0.00001). This is reported as a borderline
-    result, not rounded up to a clean pass. It's also worth noting this
-    borderline pre-period effect runs in the *opposite* direction from the
-    real, already-null summer NDBI DiD (-0.00357) — so it does not look like a
+    coefficient +0.00398, p = 0.73497), full-year lights (-0.00647,
+    p = 0.75898), and summer lights (+0.00632, p = 0.52021) all show no
+    significant pre-treatment divergence between treated and control
+    villages — direct evidence *for* this study's DiD design, not merely an
+    unexamined assumption behind it. The fourth is a genuine, flagged
+    exception: summer NDBI's placebo coefficient is +0.01173, p = 0.07421 —
+    not significant at the conventional threshold under the
+    district-fixed-effects specification, but close to it, and the
+    unadjusted raw comparison for the same combination is sharply
+    significant (p = 0.00003). This is reported as a borderline result, not
+    rounded up to a clean pass. It's also worth noting this borderline
+    pre-period effect runs in the *opposite* direction from the real,
+    already-null summer NDBI DiD (-0.00275) — so it does not look like a
     pre-existing trend that mechanically continues into and explains away the
     main result.
+
+    These are the district-verification-corrected, 721-village figures
+    (Development Log Entry 41): re-run against the corrected control list,
+    closing the vintage gap this section previously flagged. The immediately
+    preceding 732-village version had full-year NDBI p=0.864, full-year
+    lights p=0.755, summer lights p=0.968, and summer NDBI p=0.064 (raw
+    p=0.00001) — the same borderline pattern, no reversal.
     """)
 
 with st.expander("**14 District Clusters — An Exact Wild Cluster Bootstrap, Not Just Asymptotics**"):
