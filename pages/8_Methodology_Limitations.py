@@ -351,6 +351,21 @@ with st.expander("**Triangulation Against Independent Proxies — An Open Tensio
     ("detects the case-study villages" and "produces a significant aggregate
     result") don't automatically travel together — a reason for caution before
     reading too much into either proxy's result on its own.
+
+    One more check closes out what could be tested without a further live
+    re-extraction (Development Log Entry 43): a Dynamic World analogue of the
+    NDBI/lights pre-treatment placebo test above — a genuine second
+    pre-treatment year (2019), both groups, both windows, comparing the
+    2019-to-2021 change in DW "built" probability, a period VVP-I could not
+    possibly have affected since it wasn't sanctioned until February 2023.
+    Both windows come back clean (full-year p = 0.93406, summer p = 0.17869)
+    — no pre-existing divergence between treated and control villages in
+    either window. This doesn't resolve the disagreement above: whether
+    Dynamic World's significant control-group DiD reflects a real, small
+    effect the other two proxies are missing, or a different kind of false
+    positive, is still an open question. But it does rule out one specific
+    candidate explanation: it isn't a continuation of a pre-existing trend
+    that was already there before VVP-I existed.
     """)
 
 with st.expander("**Statistical Power — What This Design Could (and Couldn't) Detect**"):
