@@ -18,7 +18,9 @@ abstract: >-
   across 2,967 villages in five Himalayan border states/union territories.
   Using Sentinel-2 built-up-index (NDBI) and VIIRS night-lights data at 258
   individually geocoded villages against a district-restricted non-VVP
-  control group of 732 villages in the same 14 districts, this study tests
+  control group of 721 villages in the same 14 districts (district
+  membership independently verified against real administrative boundaries
+  for all but one district), this study tests
   whether VVP-I's priority villages show measurable physical development
   since programme sanction, under two independent compositing windows
   (full-year and summer-matched) as an explicit robustness check rather than
@@ -73,7 +75,14 @@ abstract: >-
   (mean change +0.00112, p = 0.288), agreeing with QA60's own null on the
   same 251 villages (p = 0.436) — reported as a bug this project's external
   review caught and this project then fixed and re-verified, not as a second
-  unresolved measurement tension. This study addresses a parliamentary
+  unresolved measurement tension. One further correction: a district-
+  verification rerun closed the control list's remaining data-quality gap
+  for two of its three affected districts, taking the list from 732 to 721
+  villages; every number in this study reflects that corrected list, and
+  none change conclusion, except that the full-year night-lights baseline
+  balance check is newly imbalanced (p = 0.036) where it previously was not
+  (p = 0.090) — disclosed as a genuine finding rather than smoothed over.
+  This study addresses a parliamentary
   record showing no independent impact assessment has ever been carried out
   for VVP-I.
 keywords:
@@ -95,5 +104,5 @@ keywords:
   - India
   - geospatial analysis
 license: CC-BY-4.0
-version: 1.5.0
-date-released: "2026-09-16"
+version: 1.6.0
+date-released: "2026-09-18"

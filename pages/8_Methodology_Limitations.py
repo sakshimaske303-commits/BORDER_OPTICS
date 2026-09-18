@@ -38,7 +38,7 @@ st.markdown("---")
 st.markdown("### Processing Pipeline")
 
 st.markdown("""
-Each village — treated and, identically, the 732-village non-VVP control group — is
+Each village — treated and, identically, the 721-village non-VVP control group — is
 buffered (500m primary, with 250m and 1km run as a robustness check) and used as the
 region for `reduceRegion` over cloud-masked Sentinel-2 composites (QA60 bitmask) and
 VIIRS monthly composites, for both a full-year window and a season-matched (Jun–Sep)
@@ -135,23 +135,38 @@ with st.expander("**Composite Window Trade-Off — Snow vs. Monsoon Cloud**"):
     other tests, that instability continues to be reported as a finding in itself.
     """)
 
-with st.expander("**Control-Group Baseline Imbalance — Resolved, and Why It Mattered**"):
+with st.expander("**Control-Group Baseline Imbalance — Resolved, Then Reopened by a Later Fix**"):
     st.markdown("""
     On the complete data (Development Log Entry 22), only one of the four outcome/window
     combinations still showed treated villages starting from a significantly different mean
-    2021 baseline than the 732-village control group: night-lights, full-year — which was
+    2021 baseline than the control group: night-lights, full-year — which was
     also, at the time, the one control-group DiD result still significant under any
     specification, and the one combination where the two DiD specifications disagreed on
-    significance. That imbalance is now resolved too: once the control group's own
+    significance. That imbalance looked resolved for a while: once the control group's own
     contamination was found (Development Log Entry 23 — 20 exact-coordinate duplicates of
     treated villages plus 3 official-name matches, together implicating 23 control-group
     rows) and actually fixed against live data (Entry 25), the full-year night-lights
-    baseline is no longer significantly imbalanced, and neither is any other combination.
-    All four outcome/window baseline checks are now statistically balanced. A genuine
-    parallel-pre-trends placebo test *has* since been run (Development Log Entry 30) — see
-    the "Parallel Pre-Trends Placebo Test" expander below — by pulling a second, earlier
-    pre-treatment year (2019) for both groups, closing the gap this section used to describe
-    as unclosable with the existing single-pre-period extraction.
+    baseline was no longer significantly imbalanced on that 732-village control list
+    (p = 0.090), and neither was any other combination.
+
+    That picture changed again with the Development Log Entry 37 district-verification fix
+    (the control list going from 732 to 721 villages, Tawang and Pithoragarh now
+    boundary-verified rather than bbox-matched) — and not in the direction of "more
+    resolved." The full-year night-lights baseline is imbalanced again on the corrected
+    721-village list: treated mean 0.42821 vs. control 0.43493, n = 251/721,
+    **p = 0.03558**. The other three combinations stay balanced (full-year NDBI p = 0.181,
+    summer NDBI p = 0.461, summer night-lights p = 0.088). This is disclosed rather than
+    smoothed over: fixing a real, independently-verified data-quality problem (unverified
+    district labels) surfaced a baseline imbalance that a previous, less-correct version of
+    the control list happened not to show. The full-year night-lights DiD result itself
+    stays null on the corrected list (p = 0.45334, see H4 above) — but that null can no
+    longer be read as sitting on a well-matched baseline for this one outcome/window
+    combination, the way it briefly could between Entries 25 and 37 (see Research Paper
+    §6.7 for the full account). A genuine parallel-pre-trends placebo test *has* since been
+    run (Development Log Entry 30) — see the "Parallel Pre-Trends Placebo Test" expander
+    below — by pulling a second, earlier pre-treatment year (2019) for both groups, closing
+    the gap this section used to describe as unclosable with the existing single-pre-period
+    extraction.
     """)
 
 with st.expander("**Multi-Year Trend Is Not Monotonic (and Nets Out to a Null, Like the Two-Point Comparison)**"):

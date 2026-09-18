@@ -1,6 +1,6 @@
 """
-DiD: 251 treated villages vs 732 district-restricted non-VVP control villages
-(dedup logic is in select_control_villages.py). District FE, SEs clustered by district.
+DiD: 251 treated villages vs 721 district-restricted non-VVP control villages
+(dedup + district-boundary verification logic is in select_control_villages.py). District FE, SEs clustered by district.
 """
 
 import argparse

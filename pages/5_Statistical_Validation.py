@@ -21,7 +21,7 @@ _checks = [
     (PALETTE['accent'], "✓", "Dual Compositing-Window Test"),
     (PALETTE['accent'], "✓", "Two Independent Metrics (NDBI + VIIRS)"),
     (PALETTE['accent'], "✓", "Wilcoxon Signed-Rank Tests"),
-    (PALETTE['accent'], "✓", "District-Restricted Non-VVP Control Group (732 villages, DiD)"),
+    (PALETTE['accent'], "✓", "District-Restricted Non-VVP Control Group (721 villages, DiD)"),
     (PALETTE['accent'], "✓", "Control-Group DiD Checked Further (Leave-One-District-Out + Randomization Inference)"),
     (PALETTE['accent'], "✓", "Three-Point Multi-Year Trend (2021/2023/2025)"),
     (PALETTE['accent'], "✓", "Buffer-Radius Sweep (250m / 500m / 1km)"),
@@ -178,7 +178,7 @@ st.markdown("### H4 — Control-Group Difference-in-Differences")
 st.markdown(
     "A treated-only before/after comparison can't tell VVP-I's own effect apart from a "
     "regional trend every village in these districts shares. This benchmarks the treated "
-    "core sample against 732 district-restricted non-VVP villages in the same 14 districts — district "
+    "core sample against 721 district-restricted non-VVP villages in the same 14 districts — district "
     "fixed effects, standard errors clustered by district. Checked further by dropping each "
     "district one at a time and by randomization inference that doesn't lean on cluster "
     "asymptotics — see the cards below for each window's own leave-one-out and randomization "
