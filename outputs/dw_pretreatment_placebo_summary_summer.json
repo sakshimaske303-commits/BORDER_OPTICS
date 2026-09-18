@@ -1,0 +1,13 @@
+{
+  "built": {
+    "n_obs": 652,
+    "n_treated": 161,
+    "n_control": 491,
+    "placebo_did_coef": 0.0020686428617228084,
+    "placebo_did_se": 0.0015382386165789402,
+    "placebo_did_p": 0.17868572068681277,
+    "placebo_did_ci_lo": -0.0009462494264006315,
+    "placebo_did_ci_hi": 0.005083535149846248,
+    "mann_whitney_p": 0.10256301804528693
+  }
+}

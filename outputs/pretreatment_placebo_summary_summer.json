@@ -1,24 +1,24 @@
 {
   "ndbi": {
-    "n_obs": 983,
+    "n_obs": 972,
     "n_treated": 251,
-    "n_control": 732,
-    "placebo_did_coef": 0.012865923224475174,
-    "placebo_did_se": 0.006954067709471621,
-    "placebo_did_p": 0.06429494068804188,
-    "placebo_did_ci_lo": -0.0007637990321421508,
-    "placebo_did_ci_hi": 0.026495645481092497,
-    "mann_whitney_p": 5.69803388782429e-06
+    "n_control": 721,
+    "placebo_did_coef": 0.011730238021036742,
+    "placebo_did_se": 0.00657048523209346,
+    "placebo_did_p": 0.07421388439003065,
+    "placebo_did_ci_lo": -0.001147676394818737,
+    "placebo_did_ci_hi": 0.02460815243689222,
+    "mann_whitney_p": 2.6344333727775775e-05
   },
   "lights": {
-    "n_obs": 983,
+    "n_obs": 972,
     "n_treated": 251,
-    "n_control": 732,
-    "placebo_did_coef": 0.00047072064553152455,
-    "placebo_did_se": 0.011691600808268308,
-    "placebo_did_p": 0.9678846979129414,
-    "placebo_did_ci_lo": -0.022444395860293745,
-    "placebo_did_ci_hi": 0.023385837151356795,
-    "mann_whitney_p": 0.5615270033090956
+    "n_control": 721,
+    "placebo_did_coef": 0.00632491924959459,
+    "placebo_did_se": 0.00983632246711021,
+    "placebo_did_p": 0.5202132877048146,
+    "placebo_did_ci_lo": -0.01295391852626359,
+    "placebo_did_ci_hi": 0.02560375702545277,
+    "mann_whitney_p": 0.6626766840305486
   }
 }

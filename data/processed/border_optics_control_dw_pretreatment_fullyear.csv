@@ -1,0 +1,722 @@
+village_id,village,district,block,state,is_core_sample,latitude,longitude,distance_to_border_km,village_source,district_verified,built_2019,built_2019_image_count
+1,Upper Traflagam 266829,Anjaw,Unknown,Arunachal Pradesh,True,28.3500638,96.6336613,10.208156031306832,control (non-VVP),True,0.031335619214790895,15
+2,Tarampa,Anjaw,Unknown,Arunachal Pradesh,True,28.3416126,96.6186283,11.259931743843367,control (non-VVP),True,0.03508227673967712,15
+3,Matkrong,Anjaw,Unknown,Arunachal Pradesh,True,27.8559038,96.9824133,12.21174958433055,control (non-VVP),True,0.03764308568704396,51
+4,Abochagan,Anjaw,Unknown,Arunachal Pradesh,True,28.3136489,96.6140466,14.385494242096671,control (non-VVP),True,0.04527490570557152,15
+5,Khalega,Anjaw,Unknown,Arunachal Pradesh,True,28.2806477,96.5718641,17.389387120162088,control (non-VVP),True,0.03650820324409533,15
+6,Shirong,Anjaw,Unknown,Arunachal Pradesh,True,27.903587,96.9409105,18.879751233480885,control (non-VVP),True,0.03862522057689223,28
+7,Khampti Pani,Anjaw,Unknown,Arunachal Pradesh,True,27.9282865,96.9573301,20.07481274759241,control (non-VVP),True,0.06229879957258938,43
+8,Xiao Madengliang,Anjaw,Unknown,Arunachal Pradesh,True,28.2208547,96.5152684,20.66721205919266,control (non-VVP),True,0.06694270823553228,15
+9,Tilam,Anjaw,Unknown,Arunachal Pradesh,True,28.1432798,97.0060273,21.122207787766506,control (non-VVP),True,0.037786901547111215,21
+10,Minjong,Anjaw,Unknown,Arunachal Pradesh,True,27.9447015,96.9531849,21.775446122663485,control (non-VVP),True,0.03395126200525765,43
+11,Jiliang,Anjaw,Unknown,Arunachal Pradesh,True,28.2187403,96.536865,21.785872271677064,control (non-VVP),True,0.060066923636689244,15
+12,Walang,Anjaw,Unknown,Arunachal Pradesh,True,27.882509,96.8550641,21.853357578949343,control (non-VVP),True,0.03717406605855823,28
+13,Tinai,Anjaw,Unknown,Arunachal Pradesh,True,28.1383669,97.0271327,22.12939324344721,control (non-VVP),True,0.06587378412053643,21
+14,Kalin,Anjaw,Unknown,Arunachal Pradesh,True,27.9654847,96.9709934,22.15837709115443,control (non-VVP),True,0.033794057406883835,72
+15,Halla,Anjaw,Unknown,Arunachal Pradesh,True,27.9655372,96.962708,22.66191626116016,control (non-VVP),True,0.042631525650860334,43
+16,Yashong Camp,Anjaw,Unknown,Arunachal Pradesh,True,27.9752592,96.9686698,23.166499666887443,control (non-VVP),True,0.0470214234074091,72
+17,Kaladun,Anjaw,Unknown,Arunachal Pradesh,True,27.9839219,96.9737606,23.672719201131454,control (non-VVP),True,0.03693042273549906,72
+18,Menilkrai,Anjaw,Unknown,Arunachal Pradesh,True,28.1024223,97.0047561,25.56053181319565,control (non-VVP),True,0.057422237761764854,21
+19,Sarti,Anjaw,Unknown,Arunachal Pradesh,True,28.0081411,96.9619129,26.55964309895621,control (non-VVP),True,0.06264552571900334,43
+20,Tarafliang,Anjaw,Unknown,Arunachal Pradesh,True,28.1541848,96.5174198,27.7622677852453,control (non-VVP),True,0.06604230236170665,15
+21,Chinagam,Anjaw,Unknown,Arunachal Pradesh,True,28.1625933,96.5530756,28.042568905542584,control (non-VVP),True,0.03049326642477114,15
+22,Nilang,Anjaw,Unknown,Arunachal Pradesh,True,28.1764497,96.6564414,28.486893314419977,control (non-VVP),True,0.036198264022708225,15
+23,Chipru,Anjaw,Unknown,Arunachal Pradesh,True,28.1503735,96.5374173,28.7529084694698,control (non-VVP),True,0.06338688874950142,15
+24,Jiongming,Anjaw,Unknown,Arunachal Pradesh,True,28.0367462,96.9717952,28.828837329459443,control (non-VVP),True,0.0411086969946517,21
+25,Warti,Anjaw,Unknown,Arunachal Pradesh,True,28.0392081,96.9729224,29.015113460311976,control (non-VVP),True,0.03956776835865994,21
+26,Chareimna,Anjaw,Unknown,Arunachal Pradesh,True,28.1695789,96.6589609,29.05506117418188,control (non-VVP),True,0.03484004979097976,15
+27,Bringkong,Anjaw,Unknown,Arunachal Pradesh,True,28.1715853,96.6504862,29.235932788914383,control (non-VVP),True,0.03280011242153144,15
+28,Baligam,Anjaw,Unknown,Arunachal Pradesh,True,28.1433091,96.5356291,29.43782006027962,control (non-VVP),True,0.034096694830174336,15
+29,Sethi,Anjaw,Unknown,Arunachal Pradesh,True,28.055845,96.9797354,30.465233345920453,control (non-VVP),True,0.03817102487212247,21
+30,Challang,Anjaw,Unknown,Arunachal Pradesh,True,28.1551886,96.6522501,30.782237092846348,control (non-VVP),True,0.033898326762221064,15
+31,Matiliang 266674,Anjaw,Unknown,Arunachal Pradesh,True,28.1076072,96.445203,30.920931427207496,control (non-VVP),True,0.047848441150655965,15
+32,Tololiang,Anjaw,Unknown,Arunachal Pradesh,True,28.1256641,96.547808,31.674637251537064,control (non-VVP),True,0.030950525302448774,15
+33,Chamemla,Anjaw,Unknown,Arunachal Pradesh,True,28.1286743,96.5620271,31.85281522562808,control (non-VVP),True,0.03230985742840504,15
+34,Bulimina,Anjaw,Unknown,Arunachal Pradesh,True,28.1406221,96.6583188,31.954247870225128,control (non-VVP),True,0.04767459604410816,15
+35,Hoiliang 266714,Anjaw,Unknown,Arunachal Pradesh,True,28.0981287,96.4478867,32.0053640309043,control (non-VVP),True,0.04323836467294357,15
+36,Tuboka,Anjaw,Unknown,Arunachal Pradesh,True,28.1222299,96.5542939,32.24772241518634,control (non-VVP),True,0.03310039690158783,15
+37,Tikromna,Anjaw,Unknown,Arunachal Pradesh,True,28.1182382,96.5447809,32.358005180805385,control (non-VVP),True,0.03815834818303615,15
+38,Adomla,Anjaw,Unknown,Arunachal Pradesh,True,28.1135364,96.5375112,32.63931418458326,control (non-VVP),True,0.04298772463446526,15
+39,Tafraliang,Anjaw,Unknown,Arunachal Pradesh,True,28.0886403,96.4529695,33.153023601738646,control (non-VVP),True,0.055435712425414965,15
+40,Paluliang,Anjaw,Unknown,Arunachal Pradesh,True,28.1167741,96.5706359,33.39289000170816,control (non-VVP),True,0.042430570671179134,15
+41,Tikromla,Anjaw,Unknown,Arunachal Pradesh,True,28.0971168,96.5348369,34.31385251032624,control (non-VVP),True,0.0430318051238559,15
+42,Champhai,Anjaw,Unknown,Arunachal Pradesh,True,28.1085212,96.57408,34.3674923444699,control (non-VVP),True,0.036275316638923964,15
+43,Chirang 266667,Anjaw,Unknown,Arunachal Pradesh,True,28.0684239,96.4069505,34.51581155631747,control (non-VVP),True,0.03250136162571859,15
+44,Barafu,Anjaw,Unknown,Arunachal Pradesh,True,28.1017011,96.558488,34.52797727422521,control (non-VVP),True,0.05118207538655829,15
+45,Langum,Anjaw,Unknown,Arunachal Pradesh,True,28.1218659,96.6112899,34.76622900601115,control (non-VVP),True,0.03311467653241493,15
+46,Khupa Village 266673,Anjaw,Unknown,Arunachal Pradesh,True,28.0771387,96.4736667,34.92083910596573,control (non-VVP),True,0.09037117013134857,15
+47,Hayugam,Anjaw,Unknown,Arunachal Pradesh,True,28.0893566,96.5438268,35.3843601683056,control (non-VVP),True,0.03599243402440561,15
+48,Kalamdia,Anjaw,Unknown,Arunachal Pradesh,True,28.0994655,96.5765815,35.38966199183561,control (non-VVP),True,0.05426647078163917,15
+49,Khugam,Anjaw,Unknown,Arunachal Pradesh,True,28.0970181,96.5765587,35.64039244454056,control (non-VVP),True,0.05348774476207422,15
+50,Swami Camp,Anjaw,Unknown,Arunachal Pradesh,True,28.0761921,96.5004673,35.71663701514807,control (non-VVP),True,0.19645063970958723,15
+51,Chameliang,Anjaw,Unknown,Arunachal Pradesh,True,28.081538,96.5395274,36.10070905223501,control (non-VVP),True,0.07058473722406554,15
+52,Nenuliang,Anjaw,Unknown,Arunachal Pradesh,True,28.0695914,96.5025516,36.47740878026867,control (non-VVP),True,0.05789130350831664,15
+53,Khupa Township,Anjaw,Unknown,Arunachal Pradesh,True,28.0654038,96.4926664,36.669653927690405,control (non-VVP),True,0.2254256493303009,15
+54,Amliang,Anjaw,Unknown,Arunachal Pradesh,True,28.0586788,96.4688356,36.772239821896335,control (non-VVP),True,0.0820846854371424,15
+55,Mompani,Anjaw,Unknown,Arunachal Pradesh,True,28.0513007,96.4415599,36.90022530314944,control (non-VVP),True,0.04438050802755753,15
+56,Langjon,Anjaw,Unknown,Arunachal Pradesh,True,28.053427,96.4586965,37.07185575220221,control (non-VVP),True,0.03809674162522876,15
+57,Thamptong 266699,Anjaw,Unknown,Arunachal Pradesh,True,28.0678982,96.519264,37.09174843787751,control (non-VVP),True,0.031195924959872782,15
+58,Talang,Anjaw,Unknown,Arunachal Pradesh,True,28.0840788,96.5820921,37.17372787408739,control (non-VVP),True,0.031403963412052004,15
+59,Mahikong,Anjaw,Unknown,Arunachal Pradesh,True,28.0544424,96.4828253,37.58834433224498,control (non-VVP),True,0.034902421297695746,15
+60,Tepang,Anjaw,Unknown,Arunachal Pradesh,True,27.9688421,96.7188848,37.9259149195321,control (non-VVP),True,0.0440382973923642,43
+61,Blom,Anjaw,Unknown,Arunachal Pradesh,True,28.0783604,96.5876028,37.96428159431192,control (non-VVP),True,0.030890126741101802,15
+62,布拉母哈岗,Anjaw,Unknown,Arunachal Pradesh,True,28.0669816,96.5559722,38.103619818542384,control (non-VVP),True,0.0999859069605315,15
+63,Kamba,Anjaw,Unknown,Arunachal Pradesh,True,28.0665856,96.5608784,38.29061279666109,control (non-VVP),True,0.06148689520409856,15
+64,Chillang,Anjaw,Unknown,Arunachal Pradesh,True,28.0356469,96.4227016,38.30913224271945,control (non-VVP),True,0.03540129748997652,15
+65,Chingraliang 266703,Anjaw,Unknown,Arunachal Pradesh,True,28.0460551,96.4835718,38.5057562974661,control (non-VVP),True,0.03130734765386062,15
+66,Mele 266697,Anjaw,Unknown,Arunachal Pradesh,True,28.0533163,96.5470204,39.31156367802646,control (non-VVP),True,0.03145893132966942,15
+67,Karangliang,Anjaw,Unknown,Arunachal Pradesh,True,28.0328845,96.4619146,39.35483127096242,control (non-VVP),True,0.03108268198559094,15
+68,Naraliang,Anjaw,Unknown,Arunachal Pradesh,True,28.0272329,96.4412739,39.516581462951535,control (non-VVP),True,0.03822033816749342,15
+69,Takaliang,Anjaw,Unknown,Arunachal Pradesh,True,28.0190688,96.4160791,40.05087119190448,control (non-VVP),True,0.032889041199872966,15
+70,Chiphugam 266713,Anjaw,Unknown,Arunachal Pradesh,True,28.0127703,96.4014324,40.608662519250345,control (non-VVP),True,0.03478549312585595,15
+71,Khorlang,Anjaw,Unknown,Arunachal Pradesh,True,28.0257952,96.487329,40.77244573605165,control (non-VVP),True,0.031143367429795763,15
+72,Tummla,Anjaw,Unknown,Arunachal Pradesh,True,28.0474659,96.582792,40.9916149981248,control (non-VVP),True,0.0767267012876857,15
+73,Matong,Anjaw,Unknown,Arunachal Pradesh,True,28.0593901,96.6181031,41.1988576731284,control (non-VVP),True,0.03226694756460492,15
+74,Paya,Anjaw,Unknown,Arunachal Pradesh,True,28.0083682,96.4228615,41.3081896196448,control (non-VVP),True,0.043137860958687546,15
+75,Supnung,Anjaw,Unknown,Arunachal Pradesh,True,28.0571961,96.6182474,41.42029518150113,control (non-VVP),True,0.03367088571955545,15
+76,Bruini,Dibang Valley,Unknown,Arunachal Pradesh,True,29.1545325,96.1488625,4.739801400488968,control (non-VVP),True,0.03588435650201861,29
+77,Andrala Omkar,Dibang Valley,Unknown,Arunachal Pradesh,True,29.0623725,95.6169709,12.5097504539976,control (non-VVP),True,0.03948170030009732,22
+78,阿进,Dibang Valley,Unknown,Arunachal Pradesh,True,29.0685,96.0265797,14.471694450516267,control (non-VVP),True,0.03481636422628556,28
+79,Mawu,Dibang Valley,Unknown,Arunachal Pradesh,True,29.0571162,96.0144078,15.67462930303044,control (non-VVP),True,0.03458243222680609,28
+80,阿普衣,Dibang Valley,Unknown,Arunachal Pradesh,True,29.0043871,95.9701987,20.09789314478475,control (non-VVP),True,0.03727008203873259,28
+81,Dambuen,Dibang Valley,Unknown,Arunachal Pradesh,True,28.931081,95.9752764,21.21593602485472,control (non-VVP),True,0.05288939567066775,28
+82,Basam,Dibang Valley,Unknown,Arunachal Pradesh,True,29.0406371,95.8135986,21.81207441458054,control (non-VVP),True,0.04227317067133494,22
+83,Rilley,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8599437,95.9809166,22.764206356793835,control (non-VVP),True,0.03450552906534558,101
+84,dian,Dibang Valley,Unknown,Arunachal Pradesh,True,28.9488654,95.6849583,23.39036782499988,control (non-VVP),True,0.032167626861500195,22
+85,埃巴尼,Dibang Valley,Unknown,Arunachal Pradesh,True,29.0173756,95.8081057,23.9627626264192,control (non-VVP),True,0.03840423128495081,22
+86,Atalin,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8368966,95.9659782,25.176539267310137,control (non-VVP),True,0.06631324760819986,101
+87,Ahunli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8345474,95.9597204,25.83864178208416,control (non-VVP),True,0.10160849823845,101
+88,Abali,Dibang Valley,Unknown,Arunachal Pradesh,True,28.99724,95.8076255,26.034179785880767,control (non-VVP),True,0.03307970530523652,22
+89,Beyanli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.9959135,95.8079275,26.18250955105191,control (non-VVP),True,0.033106014756578137,22
+90,Awalin,Dibang Valley,Unknown,Arunachal Pradesh,True,28.7056681,96.1699665,26.211338075489483,control (non-VVP),True,0.035943437400004774,73
+91,Singo,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8257925,95.9457494,27.496207989464107,control (non-VVP),True,0.04580903175981652,101
+92,Mihundo,Dibang Valley,Unknown,Arunachal Pradesh,True,28.829056,95.9393137,27.89030060387755,control (non-VVP),True,0.0470194301344358,101
+93,Akolin,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8236778,95.9416852,27.95640540054999,control (non-VVP),True,0.06872020919582882,101
+94,Ayongo,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8230669,95.9418373,27.97493894289717,control (non-VVP),True,0.06865080078985804,101
+95,Ahunli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8140704,95.9419262,28.44828524069856,control (non-VVP),True,0.03558861682028876,101
+96,Angulin,Dibang Valley,Unknown,Arunachal Pradesh,True,28.9748478,95.8112262,28.49318519693004,control (non-VVP),True,0.03377699974081355,22
+97,Makuni,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8221427,95.9310087,28.9594463116276,control (non-VVP),True,0.03536322239563032,101
+98,Etabe,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8079186,95.9351971,29.358010050916832,control (non-VVP),True,0.053984626850099235,101
+99,Baro,Dibang Valley,Unknown,Arunachal Pradesh,True,28.7934003,95.9284162,30.75864356991968,control (non-VVP),True,0.03234076579037142,73
+100,Apanli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.6700204,96.1056557,31.29422934107572,control (non-VVP),True,0.03502602255320153,73
+101,Larango,Dibang Valley,Unknown,Arunachal Pradesh,True,28.7880718,95.918821,31.86607740091618,control (non-VVP),True,0.03411603866133683,41
+102,Amuli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.7875753,95.9141519,32.28166853802251,control (non-VVP),True,0.039172970735028644,41
+103,Brango,Dibang Valley,Unknown,Arunachal Pradesh,True,28.9405604,95.8173923,32.29183869008044,control (non-VVP),True,0.04877830157973049,22
+104,Akunli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8111887,95.8962517,32.5355921450053,control (non-VVP),True,0.05296546117093178,63
+105,Karu,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8049354,95.8992688,32.587821958149284,control (non-VVP),True,0.06493965357009095,41
+106,Tanga II,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8136293,95.893295,32.67631994699575,control (non-VVP),True,0.049521031291770407,63
+107,Akhunli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.6685127,96.059513,32.993165287526374,control (non-VVP),True,0.035145501332774234,73
+108,Maro,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8314281,95.8735957,33.65500502664909,control (non-VVP),True,0.03126025325634925,63
+109,Tapo,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8150846,95.8784431,33.92158477451002,control (non-VVP),True,0.03238476216703108,63
+110,Amboli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.7782095,95.9006268,33.951810510469485,control (non-VVP),True,0.03876562633068627,41
+111,Charkilo,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8156575,95.8773093,33.996313730005284,control (non-VVP),True,0.03234141327606132,63
+112,Maroli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8551403,95.8604802,34.02008814842359,control (non-VVP),True,0.040737944700395254,63
+113,Angulin,Dibang Valley,Unknown,Arunachal Pradesh,True,28.7972034,95.8857247,34.1570920023645,control (non-VVP),True,0.061723583265433285,41
+114,Athunli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.6575175,96.0218393,35.703524383599735,control (non-VVP),True,0.0472153653121645,73
+115,Anose,Dibang Valley,Unknown,Arunachal Pradesh,True,28.6322763,96.0147489,35.94683270524162,control (non-VVP),True,0.032387697694267144,73
+116,恰帕,Dibang Valley,Unknown,Arunachal Pradesh,True,28.6587596,96.0107761,36.10892685686056,control (non-VVP),True,0.03390214467174499,73
+117,Ilupu,Dibang Valley,Unknown,Arunachal Pradesh,True,28.7766747,95.8707591,36.53752328568139,control (non-VVP),True,0.0617116423213674,41
+118,Alombro,Dibang Valley,Unknown,Arunachal Pradesh,True,28.8912928,95.8139536,37.44827678081757,control (non-VVP),True,0.03180434177413816,63
+119,岷东,Dibang Valley,Unknown,Arunachal Pradesh,True,28.7733786,95.8573956,37.85177130688197,control (non-VVP),True,0.03369015233614211,41
+120,昂里,Dibang Valley,Unknown,Arunachal Pradesh,True,28.6444365,95.9929441,38.360632618269065,control (non-VVP),True,0.03607274680199484,73
+121,Aruko,Dibang Valley,Unknown,Arunachal Pradesh,True,28.6365123,96.0073067,38.42709422070483,control (non-VVP),True,0.03288715740989833,73
+122,阿米里,Dibang Valley,Unknown,Arunachal Pradesh,True,28.3999197,95.9040857,39.043917134710846,control (non-VVP),True,0.0993343039142157,41
+123,Ashambra,Dibang Valley,Unknown,Arunachal Pradesh,True,28.4083935,95.8960457,39.78552162439113,control (non-VVP),True,0.04501695731355288,41
+124,Immli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.7250516,95.8683257,39.89816301809222,control (non-VVP),True,0.03532448571764672,41
+125,Koronli,Dibang Valley,Unknown,Arunachal Pradesh,True,28.4146922,95.8929454,40.07023852433401,control (non-VVP),True,0.039095895135979226,41
+126,柯委,Dibang Valley,Unknown,Arunachal Pradesh,True,28.7183921,95.8681743,40.35795197178727,control (non-VVP),True,0.037902200892759356,41
+127,鲁波,Dibang Valley,Unknown,Arunachal Pradesh,True,28.4499048,95.8843525,41.02762145083768,control (non-VVP),True,0.033995886664784605,41
+128,Ichigo,Dibang Valley,Unknown,Arunachal Pradesh,True,28.5155155,95.8937841,41.32167078574314,control (non-VVP),True,0.034941425714971996,41
+129,Arope,Dibang Valley,Unknown,Arunachal Pradesh,True,28.6313227,95.9389968,42.48747530154613,control (non-VVP),True,0.040379753382789416,73
+130,Waing,East Kameng,Unknown,Arunachal Pradesh,True,27.7737215,92.9303658,28.808420130737865,control (non-VVP),True,0.0318192297723165,27
+131,Saria Takhong,East Kameng,Unknown,Arunachal Pradesh,True,27.7461293,92.9324466,30.596867243551923,control (non-VVP),True,0.031942700595060824,27
+132,Takung Sullung,East Kameng,Unknown,Arunachal Pradesh,True,27.737803,92.9545701,32.951598760424496,control (non-VVP),True,0.03172539828512212,27
+133,Weigung Sullung,East Kameng,Unknown,Arunachal Pradesh,True,27.7282868,92.9780365,35.489345723754084,control (non-VVP),True,0.032950729377047114,27
+134,Mechar,East Kameng,Unknown,Arunachal Pradesh,True,27.7792152,93.0216134,36.19220014344069,control (non-VVP),True,0.0395030341668571,62
+135,Mechi,East Kameng,Unknown,Arunachal Pradesh,True,27.7740086,93.0208212,36.435710208882135,control (non-VVP),True,0.04255952545736236,62
+136,Yakli,East Kameng,Unknown,Arunachal Pradesh,True,27.7643991,93.0211222,37.03298419591293,control (non-VVP),True,0.04243296026085319,62
+137,Venia,East Kameng,Unknown,Arunachal Pradesh,True,27.7340861,93.0020799,37.180052358596086,control (non-VVP),True,0.03986598097128667,62
+138,Veo,East Kameng,Unknown,Arunachal Pradesh,True,27.7219814,93.017386,39.18026752602492,control (non-VVP),True,0.032800721283617565,62
+139,Kapa,East Kameng,Unknown,Arunachal Pradesh,True,27.6655139,92.9735655,39.40773498381321,control (non-VVP),True,0.038294377229196645,27
+140,Chaling,East Kameng,Unknown,Arunachal Pradesh,True,27.66365,92.9723051,39.46081918358346,control (non-VVP),True,0.03984984546560252,27
+141,Lamniya,East Kameng,Unknown,Arunachal Pradesh,True,27.7095829,93.0130663,39.54090859836912,control (non-VVP),True,0.03908659165958343,62
+142,Parte,East Kameng,Unknown,Arunachal Pradesh,True,27.689839,93.0024418,39.80447048442179,control (non-VVP),True,0.033887513489946064,62
+143,Tabey,East Kameng,Unknown,Arunachal Pradesh,True,27.6122188,92.9122259,39.99774466973592,control (non-VVP),True,0.03875482825996693,27
+144,Yacho,East Kameng,Unknown,Arunachal Pradesh,True,27.6396662,92.9601837,40.53666042307762,control (non-VVP),True,0.033526169385607874,27
+145,Wagyang,East Kameng,Unknown,Arunachal Pradesh,True,27.6713461,93.0008935,40.980446902147314,control (non-VVP),True,0.031556083599301725,62
+146,Nampe,East Kameng,Unknown,Arunachal Pradesh,True,27.6900524,93.018259,41.12206662038251,control (non-VVP),True,0.0335040435905884,62
+147,Jomoh,East Kameng,Unknown,Arunachal Pradesh,True,27.6573981,92.9985809,41.82844426537984,control (non-VVP),True,0.051889002165298084,62
+148,Hanche,East Kameng,Unknown,Arunachal Pradesh,True,27.7421636,93.0637776,41.93292929038523,control (non-VVP),True,0.031924739522298795,62
+149,Byale,East Kameng,Unknown,Arunachal Pradesh,True,27.7356495,93.0675738,42.63914939786015,control (non-VVP),True,0.03165907151251286,62
+150,Waii,East Kameng,Unknown,Arunachal Pradesh,True,27.5965694,92.9464187,43.36805820629529,control (non-VVP),True,0.05834553424128329,27
+151,Namta Yangfo,East Kameng,Unknown,Arunachal Pradesh,True,27.7018661,93.0532147,43.38193597017538,control (non-VVP),True,0.03203550137969659,62
+152,Lapung,East Kameng,Unknown,Arunachal Pradesh,True,27.5627371,92.8898001,43.56340878215714,control (non-VVP),True,0.03605987346477529,27
+153,Bodo,East Kameng,Unknown,Arunachal Pradesh,True,27.680324,93.0406964,43.58582808883735,control (non-VVP),True,0.032865780475875774,62
+154,Jokhio,East Kameng,Unknown,Arunachal Pradesh,True,27.6531478,93.0282798,44.345881287237766,control (non-VVP),True,0.04543092308073187,62
+155,Sawa,East Kameng,Unknown,Arunachal Pradesh,True,27.6833826,93.0522114,44.37900635323837,control (non-VVP),True,0.07624258731515797,62
+156,Tungi,East Kameng,Unknown,Arunachal Pradesh,True,27.674452,93.0461713,44.39177806986576,control (non-VVP),True,0.03496750558347737,62
+157,Bengde,East Kameng,Unknown,Arunachal Pradesh,True,27.6619285,93.0379357,44.46874619346225,control (non-VVP),True,0.037127073534465226,62
+158,Pangia,East Kameng,Unknown,Arunachal Pradesh,True,27.633391,93.0158758,44.88700945558452,control (non-VVP),True,0.0381925472193172,62
+159,Kapak Leyak Docha,East Kameng,Unknown,Arunachal Pradesh,True,27.5303152,92.8464486,45.07935601529687,control (non-VVP),True,0.05439392623508027,27
+160,Jattom Sollung,East Kameng,Unknown,Arunachal Pradesh,True,27.7610472,93.1233315,45.52894522093924,control (non-VVP),True,0.032541663840134814,35
+161,Krema Pao,East Kameng,Unknown,Arunachal Pradesh,True,27.6579303,93.0508089,45.750519494240194,control (non-VVP),True,0.03654794060859823,62
+162,Khenawa,East Kameng,Unknown,Arunachal Pradesh,True,27.6180869,93.016777,46.12843128494904,control (non-VVP),True,0.059694648970625826,62
+163,Tagampu Sollung,East Kameng,Unknown,Arunachal Pradesh,True,27.7343114,93.1143115,46.50540156670997,control (non-VVP),True,0.03356248937230135,35
+164,Norang,East Kameng,Unknown,Arunachal Pradesh,True,27.5824001,92.9783276,46.53440226970117,control (non-VVP),True,0.035187708953600384,27
+165,Margingia Camp,East Kameng,Unknown,Arunachal Pradesh,True,27.631307,93.0389871,46.72768006177675,control (non-VVP),True,0.055966109668374196,62
+166,Tarawa Yangfo,East Kameng,Unknown,Arunachal Pradesh,True,27.7267073,93.1157187,47.12625814259949,control (non-VVP),True,0.03327744300303993,35
+167,Pordung,East Kameng,Unknown,Arunachal Pradesh,True,27.6065455,93.0184293,47.150571405851686,control (non-VVP),True,0.034444711285177204,62
+168,Keyang,East Kameng,Unknown,Arunachal Pradesh,True,27.7303152,93.1297477,47.99146668996831,control (non-VVP),True,0.03296903000358643,35
+169,Kamke,East Kameng,Unknown,Arunachal Pradesh,True,27.6740303,93.089903,48.10858079900222,control (non-VVP),True,0.038746025189523206,62
+170,Bameng,East Kameng,Unknown,Arunachal Pradesh,True,27.5435197,92.9483413,48.31642452509473,control (non-VVP),True,0.14380983831831565,27
+171,Killo,East Kameng,Unknown,Arunachal Pradesh,True,27.685517,93.1001025,48.35318148630564,control (non-VVP),True,0.03900317439297933,62
+172,Mangfi Mangam,East Kameng,Unknown,Arunachal Pradesh,True,27.6440742,93.0724919,48.392638431502654,control (non-VVP),True,0.060377066968369246,62
+173,Nari Camp,East Kameng,Unknown,Arunachal Pradesh,True,27.6463432,93.0774393,48.677497437885805,control (non-VVP),True,0.05930567216392799,62
+174,Yangfo,East Kameng,Unknown,Arunachal Pradesh,True,27.7351995,93.144567,48.866778809306034,control (non-VVP),True,0.0480139648967664,35
+175,Rebe,East Kameng,Unknown,Arunachal Pradesh,True,27.6978845,93.1212163,49.3862257923554,control (non-VVP),True,0.049622511780702566,35
+176,Bosu Camp,East Kameng,Unknown,Arunachal Pradesh,True,27.655767,93.0931091,49.44864618048417,control (non-VVP),True,0.03350173279635142,62
+177,Domdila Tajo,East Kameng,Unknown,Arunachal Pradesh,True,27.6694255,93.1075453,49.86757546501422,control (non-VVP),True,0.037056627496942385,35
+178,Chome,Kra daadi,Unknown,Arunachal Pradesh,True,28.1503359,93.5386063,38.70554999309764,control (non-VVP),True,0.03358670057863818,10
+179,Raha,Kra daadi,Unknown,Arunachal Pradesh,True,28.1361584,93.5375846,39.50271163222105,control (non-VVP),True,0.033921399611209914,10
+180,Nikbia,Kra daadi,Unknown,Arunachal Pradesh,True,28.1267124,93.561505,42.03044209811645,control (non-VVP),True,0.036201136420989835,10
+181,Biya,Kra daadi,Unknown,Arunachal Pradesh,True,28.1035778,93.5745502,44.55838696481046,control (non-VVP),True,0.03549804863064303,10
+182,海马西,Kra daadi,Unknown,Arunachal Pradesh,True,28.2122563,93.6474944,45.41824863990996,control (non-VVP),True,0.034300881066133604,10
+183,Neorum,Kra daadi,Unknown,Arunachal Pradesh,True,28.1946749,93.6465911,45.98565409524642,control (non-VVP),True,0.03335272714677037,10
+184,Korapu,Kra daadi,Unknown,Arunachal Pradesh,True,28.1693463,93.6556686,47.866969739768685,control (non-VVP),True,0.04968801218167327,10
+185,Dongmar Langpu,Kra daadi,Unknown,Arunachal Pradesh,True,28.1625815,93.6543169,48.049304595056384,control (non-VVP),True,0.03230400770813636,10
+186,Raba Karsang,Kra daadi,Unknown,Arunachal Pradesh,True,28.1380163,93.6578323,49.54112017283783,control (non-VVP),True,0.03514995131032729,10
+187,Pipsorang,Kra daadi,Unknown,Arunachal Pradesh,True,28.1542122,93.6754322,50.32113443595387,control (non-VVP),True,0.05688301141952909,9
+188,Samba Karsang,Kra daadi,Unknown,Arunachal Pradesh,True,28.1421137,93.6699491,50.403600823355866,control (non-VVP),True,0.032072651840996176,10
+189,Lungba,Kra daadi,Unknown,Arunachal Pradesh,True,28.0563852,93.6123875,50.68892085304349,control (non-VVP),True,0.034319138313094216,10
+190,Barbia,Kra daadi,Unknown,Arunachal Pradesh,True,28.0190623,93.587875,51.595167768399534,control (non-VVP),True,0.03385511949640325,25
+191,Sangyo,Kra daadi,Unknown,Arunachal Pradesh,True,28.0739291,93.639461,51.65878822091823,control (non-VVP),True,0.03196175286333958,10
+192,Yame,Kra daadi,Unknown,Arunachal Pradesh,True,28.0522324,93.6242896,51.89243002350344,control (non-VVP),True,0.031904621697082344,10
+193,Furak,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1295763,93.2446185,23.644251699452592,control (non-VVP),True,0.033315116296542414,10
+194,Terreline,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1411574,93.3572171,26.51802186153796,control (non-VVP),True,0.03147080043193672,10
+195,Terik,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1291371,93.339988,26.77954567696128,control (non-VVP),True,0.0341132845788701,10
+196,Tikla,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1115397,93.3098102,27.28139338097069,control (non-VVP),True,0.037814280954574585,10
+197,Nayapuk,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1297215,93.3536247,27.39755940715146,control (non-VVP),True,0.030964116597373605,10
+198,帕普,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1632499,93.405407,27.60392116681208,control (non-VVP),True,0.033081172926951036,10
+199,Sayang,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1575101,93.4060193,28.10214916095901,control (non-VVP),True,0.032036770070152286,10
+200,Hagra,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0961261,93.2908666,28.286611791674424,control (non-VVP),True,0.03281307741657913,10
+201,哈德,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1661506,93.419094,28.34298124436513,control (non-VVP),True,0.032050749390273976,10
+202,Putong,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1031564,93.3259013,28.747518787759585,control (non-VVP),True,0.03823773642660682,10
+203,Tarla,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1131762,93.3533548,28.96445497287652,control (non-VVP),True,0.033739999041522035,10
+204,Kelong,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1556657,93.4203969,29.23949044212164,control (non-VVP),True,0.031614335776102835,10
+205,Sareng,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1433941,93.4071107,29.32352059865547,control (non-VVP),True,0.033204931413047103,10
+206,Chera,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.105217,93.352456,29.69292920662148,control (non-VVP),True,0.03510655371016343,10
+207,Nayap,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1058646,93.3579216,29.890658452078466,control (non-VVP),True,0.03253199669254378,10
+208,Sitam,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0986373,93.3539313,30.40360630101741,control (non-VVP),True,0.03219745460430183,10
+209,Hiniyum,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.127374,93.403807,30.464343482992355,control (non-VVP),True,0.03414253707196341,10
+210,Cheya,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0965707,93.3537616,30.597999096369417,control (non-VVP),True,0.032176956460968686,10
+211,Lubupa,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0922288,93.3535062,31.012561168714097,control (non-VVP),True,0.03268565587565947,10
+212,Bamo,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0971546,93.3686732,31.254154202601,control (non-VVP),True,0.032041947588416574,10
+213,Dania,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1225512,93.411611,31.36375991835551,control (non-VVP),True,0.03362363991143448,10
+214,Hala,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.1166163,93.416693,32.188850811278364,control (non-VVP),True,0.03207034686278853,10
+215,Pilpu,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0798871,93.3655125,32.77271304001295,control (non-VVP),True,0.031650457313144836,10
+216,Goa,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0881033,93.3835385,32.86599086613841,control (non-VVP),True,0.03261375071281475,10
+217,Omla,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0789469,93.3730704,33.22055553315639,control (non-VVP),True,0.030856774545460455,10
+218,Meruk,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0723991,93.3604476,33.279858619395576,control (non-VVP),True,0.03146634023651878,10
+219,Nampe,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0957497,93.4106276,33.64910123388011,control (non-VVP),True,0.031160560231646293,10
+220,Dogwa,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0967706,93.4122381,33.6519244414456,control (non-VVP),True,0.03131389278676671,10
+221,Mariangha,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0768186,93.3779326,33.66090017580559,control (non-VVP),True,0.03157739591784905,10
+222,Vitalin,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8829315,93.061541,33.975486802444344,control (non-VVP),True,0.031577299164612264,62
+223,Hirik,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0857154,93.4141714,34.7540263686586,control (non-VVP),True,0.0308019012500552,10
+224,Subuk,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0825535,93.4104364,34.82883747652445,control (non-VVP),True,0.03127583214523104,10
+225,Jali,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0713102,93.3941648,34.998439529192474,control (non-VVP),True,0.03194841719925871,10
+226,Peni,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0675109,93.390127,35.154770319287536,control (non-VVP),True,0.031567239579225054,10
+227,Kodela,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0167667,93.2132294,35.25202747790925,control (non-VVP),True,0.03285714738254379,45
+228,Retung,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0126009,93.220157,35.844726407084124,control (non-VVP),True,0.03429015067615686,45
+229,Furang,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0069345,93.2141257,36.33741974223333,control (non-VVP),True,0.03332779833564024,45
+230,Taba,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0616364,93.4126933,36.876981618513945,control (non-VVP),True,0.03252830667816862,10
+231,Sejik,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0651757,93.4212354,37.01681620549449,control (non-VVP),True,0.03382257198935424,10
+232,Gone,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9567194,93.1119431,37.800271257200585,control (non-VVP),True,0.03360046538344586,45
+233,Kaney,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9880893,93.1999363,37.82599979539341,control (non-VVP),True,0.034738346159858165,45
+234,Hanglik,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0712841,93.4547212,38.44375648651784,control (non-VVP),True,0.03248431691857249,10
+235,Upper Lichila,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9798598,93.2015731,38.745249754930015,control (non-VVP),True,0.033050438674408336,45
+236,Palo,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9441662,93.1157356,39.226567277213874,control (non-VVP),True,0.031701713595681046,45
+237,Nade,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9617646,93.1869151,40.214666278583984,control (non-VVP),True,0.042655818501446056,45
+238,Lamnia,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0504537,93.4555379,40.311592515249735,control (non-VVP),True,0.033374333158910655,10
+239,Lee,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9633075,93.202655,40.5273712000208,control (non-VVP),True,0.04138915189105583,45
+240,Chotte,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0474404,93.455651,40.58526244923831,control (non-VVP),True,0.034957060319326855,10
+241,Mala,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0438593,93.4527315,40.733939823600245,control (non-VVP),True,0.0432735339859579,10
+242,Pachik,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0431644,93.4563404,41.00603214290621,control (non-VVP),True,0.04282052962936534,10
+243,Lower Lichila,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9634244,93.228221,41.34605860852293,control (non-VVP),True,0.03931852452615158,45
+244,Baribayang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9405099,93.1576514,41.57653710677136,control (non-VVP),True,0.03162951659840131,45
+245,Sipe,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9473278,93.1919733,41.89340447326483,control (non-VVP),True,0.031302833068126076,45
+246,Kodela,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9589181,93.2421602,42.11795642501733,control (non-VVP),True,0.03875450334378299,45
+247,Haleba,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9535172,93.2212596,42.28019632157901,control (non-VVP),True,0.03136112746270572,45
+248,Sewaring,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9487419,93.2097591,42.281563352875466,control (non-VVP),True,0.03139449433605656,45
+249,Kelin,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0334539,93.4679615,42.55146449585489,control (non-VVP),True,0.053843817810112694,10
+250,Tai,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9557116,93.2503551,42.63224130132467,control (non-VVP),True,0.03490594917898388,45
+251,Mangio,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0318367,93.4689617,42.75388023518099,control (non-VVP),True,0.054202487298443694,10
+252,Hashi,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.029797,93.4690502,42.94030383895248,control (non-VVP),True,0.054072229408488715,10
+253,Ruktepu,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.945805,93.2387355,43.47181854815469,control (non-VVP),True,0.0326623868658847,45
+254,Rilong,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9510659,93.2673215,43.48068010680575,control (non-VVP),True,0.033807755361506965,45
+255,Fua,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9448103,93.2637154,44.0865288735071,control (non-VVP),True,0.03164884683544613,45
+256,Dome,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9445671,93.2883561,44.5896695685161,control (non-VVP),True,0.039422441328407776,45
+257,Solung,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.016221,93.4805766,44.82397118514112,control (non-VVP),True,0.03522170543498958,25
+258,Pariuk,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9393093,93.2903924,45.19870782941564,control (non-VVP),True,0.0332791078641863,45
+259,Rakte,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.926534,93.2636139,46.06823846479028,control (non-VVP),True,0.03161773883614599,35
+260,Patuk,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0084129,93.4938419,46.299794565268975,control (non-VVP),True,0.08641084191975128,25
+261,Sebi,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9282641,93.3018993,46.61433157331805,control (non-VVP),True,0.03350170522254455,35
+262,Joku,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0070922,93.4973613,46.62628909613486,control (non-VVP),True,0.07676602939880074,25
+263,Digging,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9235664,93.283198,46.78763481249497,control (non-VVP),True,0.03175656755855219,35
+264,Mangdo,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0051556,93.4984123,46.859501027541725,control (non-VVP),True,0.05923045465546173,25
+265,Relung,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9267335,93.3063161,46.86825949798589,control (non-VVP),True,0.03350032297393668,35
+266,Lungte Tacha,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0384138,93.5537004,47.69094966353208,control (non-VVP),True,0.03469204293681819,10
+267,Toba,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9156223,93.2907437,47.78939326062448,control (non-VVP),True,0.03149583756104592,35
+268,Kanchangjana,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9125039,93.3209425,48.71997667860336,control (non-VVP),True,0.03342603886284166,35
+269,Mara,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9118254,93.3236314,48.85404267322851,control (non-VVP),True,0.033301578261874555,35
+270,Jeevandept,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9115014,93.3332283,49.11695225445854,control (non-VVP),True,0.047297418435792965,35
+271,Parsi-Parlo,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9895698,93.5138011,49.151363014137466,control (non-VVP),True,0.18667788182208592,25
+272,Nikja,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9157176,93.3536671,49.21145406736955,control (non-VVP),True,0.04636464723932157,35
+273,Tumbia,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0021269,93.5328877,49.2503520875537,control (non-VVP),True,0.035905487669696146,25
+274,Satum,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9120184,93.3437143,49.33027572220367,control (non-VVP),True,0.06429965663520064,35
+275,Labia,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9932164,93.5228247,49.38217287727649,control (non-VVP),True,0.038366398389463326,25
+276,Papin,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9124359,93.3585619,49.70071264139772,control (non-VVP),True,0.03734105965838831,35
+277,Taipa,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9074231,93.3503798,50.000254036204005,control (non-VVP),True,0.28283731384895994,35
+278,Manghe 2,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9065246,93.3469471,50.00261881257338,control (non-VVP),True,0.19728996380649486,35
+279,Chingkongne,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9172781,93.3867833,50.09319948839584,control (non-VVP),True,0.03190975375315503,35
+280,Leya,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9788093,93.5157141,50.2141330349661,control (non-VVP),True,0.03420060099421203,25
+281,Jog,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9050355,93.3500017,50.24400761445297,control (non-VVP),True,0.33904690091567363,35
+282,Furek,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9140344,93.3859036,50.39997565229497,control (non-VVP),True,0.031958397906179985,35
+283,Boa,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9822237,93.5256281,50.50814300303482,control (non-VVP),True,0.03506367564557724,25
+284,Renchiporing II,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9814404,93.5279667,50.71855795214688,control (non-VVP),True,0.036069337001268395,25
+285,Radang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9076277,93.3755482,50.7270090896494,control (non-VVP),True,0.03614182198378546,35
+286,Pinging,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8985446,93.3430694,50.75289219387971,control (non-VVP),True,0.10617790202562769,35
+287,Sangkun,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9292256,93.435367,50.76845974976534,control (non-VVP),True,0.03767226408946292,31
+288,Harrang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9315942,93.4420695,50.82750254588048,control (non-VVP),True,0.03368029986231489,23
+289,Rambo,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8974975,93.3425604,50.85186545393655,control (non-VVP),True,0.08511633014431261,35
+290,马拉,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8886329,93.2980263,50.85905616580256,control (non-VVP),True,0.03372421872474302,35
+291,Nyobia,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8863971,93.2907263,50.97484316509296,control (non-VVP),True,0.03932894565733925,35
+292,Yerik,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0082819,93.5670426,50.99247097556977,control (non-VVP),True,0.03719063693912325,25
+293,Deyang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8852661,93.2892168,51.06698450676937,control (non-VVP),True,0.039590692866193995,35
+294,Konkup,Kurung Kumey,Unknown,Arunachal Pradesh,True,28.0111367,93.5726645,51.14934662725592,control (non-VVP),True,0.034590259355331575,25
+295,Renchiporing,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9775535,93.5336956,51.4060132841194,control (non-VVP),True,0.03597151746338429,25
+296,Johak,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8807287,93.2817346,51.40770745829745,control (non-VVP),True,0.03391038387956324,35
+297,Sullung Tapin,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8941928,93.3556556,51.55323025971673,control (non-VVP),True,0.03174175419017278,35
+298,Yapak 2,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.900174,93.3802795,51.65969396405898,control (non-VVP),True,0.04853877901549906,35
+299,Tapone,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.905549,93.4006325,51.79468143929064,control (non-VVP),True,0.03514180567500933,35
+300,Sangsar,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9123798,93.4211037,51.870012288391685,control (non-VVP),True,0.032683814196295936,35
+301,Jiri,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9024698,93.394667,51.902330560889375,control (non-VVP),True,0.03451498967122622,35
+302,Rate,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9025231,93.4035863,52.21322105588406,control (non-VVP),True,0.03349911933315735,35
+303,Molo,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9634667,93.5271662,52.25035030613911,control (non-VVP),True,0.03363131991999658,25
+304,Kokpunayer,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8696105,93.2638666,52.25205034776048,control (non-VVP),True,0.03398869486972928,35
+305,Rite,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9046219,93.4117605,52.29938591724223,control (non-VVP),True,0.03343445007732308,35
+306,Yarpu,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9101363,93.4264549,52.31129939409694,control (non-VVP),True,0.03535232593781492,35
+307,Manghe 1,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8964882,93.3905192,52.38200201966226,control (non-VVP),True,0.031323534195678106,35
+308,Najibibuk,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8683639,93.2642347,52.3948285914516,control (non-VVP),True,0.033664786086269445,35
+309,Taram,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9628134,93.5366038,52.86940455626912,control (non-VVP),True,0.03164159635774909,25
+310,Tabumna,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8598023,93.2528662,53.09351796866028,control (non-VVP),True,0.03323302524227563,35
+311,Yarpu,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.894643,93.4225849,53.73157852709238,control (non-VVP),True,0.03653217172832283,35
+312,Langbang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9544909,93.540336,53.82502054267635,control (non-VVP),True,0.048570953747005395,25
+313,Made,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9780177,93.5788669,54.24125028274002,control (non-VVP),True,0.045417538885986236,25
+314,Kele,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9032308,93.4632364,54.57472977853739,control (non-VVP),True,0.0330212671048472,15
+315,Sera,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.9554003,93.5546431,54.61031844795788,control (non-VVP),True,0.038609762508496355,25
+316,Byate,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8878009,93.4444302,55.29752731979862,control (non-VVP),True,0.03501247037327695,18
+317,Keya,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8850396,93.4612545,56.28702084330097,control (non-VVP),True,0.03380987808752607,15
+318,Panyi,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8742022,93.4525059,56.99915437798174,control (non-VVP),True,0.05101890992405003,15
+319,Kush Lami,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8754594,93.4559652,57.017342103096205,control (non-VVP),True,0.05302108641283493,15
+320,Pari,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8773703,93.4806463,57.90796227435106,control (non-VVP),True,0.033636957367457754,15
+321,Nibi,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8906614,93.5152047,58.290531000282,control (non-VVP),True,0.04889021919552258,15
+322,Leba,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.889732,93.5177222,58.507068066069465,control (non-VVP),True,0.05098469622340542,15
+323,Sara,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8764655,93.5162563,59.69502349076612,control (non-VVP),True,0.04040584086664712,15
+324,Hiba,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8672206,93.4999319,59.79411601184075,control (non-VVP),True,0.04027353838772984,15
+325,Langria,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7303718,93.2723198,59.90006834905566,control (non-VVP),True,0.04203567492053116,35
+326,Dengba,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8559794,93.479899,59.98757661935535,control (non-VVP),True,0.03196620384026936,15
+327,Payu,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7289942,93.2749594,60.20162200196997,control (non-VVP),True,0.04166005198693282,35
+328,Sangme,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8554992,93.4857201,60.29218859321547,control (non-VVP),True,0.04116701291385857,15
+329,Cheki,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8689915,93.5175395,60.47393621617884,control (non-VVP),True,0.03318685268214579,15
+330,Palang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7081538,93.27106,61.00002383100187,control (non-VVP),True,0.032814897274559086,35
+331,Phassang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7243116,93.2813307,61.00114956989782,control (non-VVP),True,0.05239505019590117,35
+332,Leel,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8437826,93.4758359,61.027728437158686,control (non-VVP),True,0.05161304260745511,15
+333,Dara,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8616633,93.5158884,61.097009884854096,control (non-VVP),True,0.03669382922229485,15
+334,Sangripo,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7227416,93.282713,61.20402338700937,control (non-VVP),True,0.05087438821417527,35
+335,Sangte,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7291192,93.288153,61.34319384028954,control (non-VVP),True,0.068509705111244,35
+336,Mujariang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7257548,93.2911669,61.78015811059391,control (non-VVP),True,0.07941033714571075,35
+337,Leya,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7282734,93.2932093,61.82821044976273,control (non-VVP),True,0.07820871578274145,35
+338,Leel Camp,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8432284,93.497014,62.00909168626551,control (non-VVP),True,0.0631943281916725,15
+339,Saleriang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7854605,93.3201249,62.49683818805669,control (non-VVP),True,0.035944548872344315,35
+340,Yaki,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.836181,93.4940102,62.57138583180046,control (non-VVP),True,0.0358106247686062,15
+341,恰吐姆,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8448117,93.5145294,62.66270137690602,control (non-VVP),True,0.033611383199208235,15
+342,Tumlang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8281634,93.4904133,63.21063792357364,control (non-VVP),True,0.03619178355894493,15
+343,Tagum,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8357436,93.5079409,63.24155626114598,control (non-VVP),True,0.059265108757810055,15
+344,6 Mile Camp,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8329405,93.5083348,63.53466159203505,control (non-VVP),True,0.057251110352012025,15
+345,Kamayer,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7905642,93.3910095,63.553019802162574,control (non-VVP),True,0.032791647045482666,35
+346,Rowa,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8428454,93.5296997,63.58239405799619,control (non-VVP),True,0.037520953234757494,15
+347,Pagrang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8509062,93.5452982,63.59431330152693,control (non-VVP),True,0.10393237927619803,15
+348,Pinchi,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7735733,93.316873,63.73939593102888,control (non-VVP),True,0.07829356393212075,35
+349,Pagga,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8504991,93.5494243,63.84511944565142,control (non-VVP),True,0.052489380680878814,15
+350,Powak Korar,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8375593,93.5258798,63.90711936348984,control (non-VVP),True,0.03849663785798837,15
+351,Reyup,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8567715,93.5619177,63.9144594974527,control (non-VVP),True,0.04202790687471291,15
+352,Yarte,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.831632,93.5141164,63.928763556397165,control (non-VVP),True,0.03625216668235804,15
+353,Lengro,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8547999,93.559177,63.95219245497713,control (non-VVP),True,0.04522861650024781,15
+354,Jugriang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7707148,93.3182278,64.07412331265515,control (non-VVP),True,0.08294804069538153,35
+355,Dangu,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.835467,93.5289814,64.25878085878584,control (non-VVP),True,0.03715955130995191,15
+356,Raris,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7680851,93.3146271,64.30181164190407,control (non-VVP),True,0.07717817048293898,35
+357,Kaung,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8225472,93.5040159,64.36416345609699,control (non-VVP),True,0.0312349625159312,15
+358,Nyori,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8475995,93.5552271,64.41930892283993,control (non-VVP),True,0.049497127453115915,15
+359,Kaglang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8501585,93.5616729,64.5179983500826,control (non-VVP),True,0.03424189036462936,15
+360,Tachak,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.841908,93.5484681,64.60881049685287,control (non-VVP),True,0.03480234013465894,15
+361,Regba,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8236364,93.5159119,64.79457267348194,control (non-VVP),True,0.03724139648648453,15
+362,Miba,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.824202,93.5173691,64.80624403518753,control (non-VVP),True,0.04064518225578316,15
+363,Byasi,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8372182,93.5436135,64.80999552177649,control (non-VVP),True,0.03400206066361152,15
+364,Kamrung,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8336301,93.5467063,65.30729308696289,control (non-VVP),True,0.03276755826689967,15
+365,Dilanggang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7796166,93.41419,65.38837481129138,control (non-VVP),True,0.11578268096992093,35
+366,Lower Happa,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.825885,93.5332832,65.39224214605467,control (non-VVP),True,0.038992840697979016,15
+367,Paching,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8225097,93.5290614,65.51800095183597,control (non-VVP),True,0.03365368727372307,15
+368,Longlefoth,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.776484,93.4150439,65.74452729572074,control (non-VVP),True,0.1271345661253501,35
+369,Lumte,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7863252,93.446526,65.74813459784494,control (non-VVP),True,0.037050562814705756,17
+370,Rangdo,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7820948,93.4575729,66.57919253927102,control (non-VVP),True,0.06471730681392253,15
+371,Rayer Sollung,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7426766,93.3108399,66.98295878047651,control (non-VVP),True,0.03193066657743328,35
+372,Gangnee,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7541489,93.3737844,67.00109804923758,control (non-VVP),True,0.03678347487258589,35
+373,Dolo,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7568896,93.4009912,67.41071862560815,control (non-VVP),True,0.036031106717256914,35
+374,Hiya,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7752174,93.4614457,67.4283307908398,control (non-VVP),True,0.07962270398389874,15
+375,Pinchi Sollung,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7385004,93.3140943,67.50228529054776,control (non-VVP),True,0.03628246973747509,35
+376,Raluguha,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7354085,93.2990876,67.53347139988598,control (non-VVP),True,0.03430571572786911,35
+377,Guha,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7590364,93.4164824,67.62875159555058,control (non-VVP),True,0.03507250802099723,35
+378,Diba Koyar,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7381059,93.3187116,67.63877302643341,control (non-VVP),True,0.04530584889003399,35
+379,Sulo,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7369819,93.3154143,67.69388921371875,control (non-VVP),True,0.0424674148276443,35
+380,Delung,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7778716,93.4788091,67.80729335239351,control (non-VVP),True,0.0382066436629942,15
+381,Nyapin,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7515445,93.3946648,67.80823653295108,control (non-VVP),True,0.2320564141762763,35
+382,Sona,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.810017,93.5520226,67.8322265029122,control (non-VVP),True,0.07598256210980305,15
+383,Tumrung,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.8072923,93.5473433,67.86695827647416,control (non-VVP),True,0.043913615726755804,15
+384,Takyo,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7755045,93.474237,67.87400271627023,control (non-VVP),True,0.03579438442423737,15
+385,Kaberiang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7579212,93.4227791,67.93657565114344,control (non-VVP),True,0.04601871777845256,35
+386,Sango,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7353472,93.3216355,67.99462871072794,control (non-VVP),True,0.04261794475088729,35
+387,Pitak,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7803185,93.4909939,68.03914430272035,control (non-VVP),True,0.07283598079276607,15
+388,Kampu,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7422153,93.363991,68.06100190171477,control (non-VVP),True,0.03300749109605423,35
+389,Lower Guha,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7568463,93.4246871,68.10831490512865,control (non-VVP),True,0.04588715888726105,35
+390,Gida Lower,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.812502,93.5626447,68.12205948065873,control (non-VVP),True,0.035097998845617574,15
+391,Yorung,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7375945,93.3427203,68.12211382853434,control (non-VVP),True,0.04191430611593314,35
+392,Yuba,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7589677,93.4327095,68.13685629560878,control (non-VVP),True,0.042267464586882915,32
+393,Lower Lorio,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7523573,93.4107096,68.16634041229064,control (non-VVP),True,0.08608836622028557,35
+394,Kish,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7567747,93.4282494,68.22629173018069,control (non-VVP),True,0.04763269960859548,34
+395,Sikey,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7436405,93.3784517,68.24267311258743,control (non-VVP),True,0.06312947610019047,35
+396,Takapop,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7756383,93.4844687,68.25483530538766,control (non-VVP),True,0.0747391344027692,15
+397,Bik,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7507883,93.4085147,68.26997555031484,control (non-VVP),True,0.14329996447643756,35
+398,Kampong,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7748258,93.4827864,68.27181680211848,control (non-VVP),True,0.05148813043898351,15
+399,Naiayahutung,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7764281,93.4870179,68.27488938090762,control (non-VVP),True,0.10918214598859817,15
+400,Chebang,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7364834,93.3455625,68.29776819030579,control (non-VVP),True,0.04471706207191569,35
+401,Pagba,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7763826,93.4887431,68.34786080412654,control (non-VVP),True,0.10676765437766637,15
+402,Ralung,Kurung Kumey,Unknown,Arunachal Pradesh,True,27.7371862,93.353664,68.38401997207357,control (non-VVP),True,0.03549246193561496,35
+403,买翁里,Lower Dibang,Unknown,Arunachal Pradesh,True,28.2822374,96.0953096,25.407835270210374,control (non-VVP),True,0.03565072259370885,73
+404,Runli,Lower Dibang,Unknown,Arunachal Pradesh,True,28.2991992,96.0743049,26.056838914762896,control (non-VVP),True,0.0339543954264375,73
+405,阿蒙岗,Lower Dibang,Unknown,Arunachal Pradesh,True,28.2700017,96.0942481,26.3303897145259,control (non-VVP),True,0.03165121072792986,73
+406,西登,Upper Siang,Unknown,Arunachal Pradesh,True,29.1329116,94.9651923,2.505001083633425,control (non-VVP),True,0.03714129555843787,7
+407,Norbuling,Upper Siang,Unknown,Arunachal Pradesh,True,29.1263536,94.9733788,3.1696388194268548,control (non-VVP),True,0.04801607887668293,7
+408,Tuting Panikheti,Upper Siang,Unknown,Arunachal Pradesh,True,28.973338,94.8719848,20.82893586119011,control (non-VVP),True,0.03442289148451282,7
+409,Payendum,Upper Siang,Unknown,Arunachal Pradesh,True,28.926458,95.0315768,21.777163753897447,control (non-VVP),True,0.051023599435702345,7
+410,Nyereng,Upper Siang,Unknown,Arunachal Pradesh,True,28.9574,94.9011,22.37714039025296,control (non-VVP),True,0.031722883898803185,7
+411,Nyokong,Upper Siang,Unknown,Arunachal Pradesh,True,28.919363,95.0271109,22.65893213504973,control (non-VVP),True,0.05133517399554948,7
+412,Ninging,Upper Siang,Unknown,Arunachal Pradesh,True,28.953851,94.8333181,23.61479779607889,control (non-VVP),True,0.08123314150737161,7
+413,Devkota,Upper Siang,Unknown,Arunachal Pradesh,True,28.8829865,95.0820892,24.04487877231385,control (non-VVP),True,0.035373845674030846,49
+414,Yortung,Upper Siang,Unknown,Arunachal Pradesh,True,28.8942055,95.0642733,24.25512447047973,control (non-VVP),True,0.04578117598054379,49
+415,Silipu,Upper Siang,Unknown,Arunachal Pradesh,True,28.8527517,95.1306768,24.67380216696391,control (non-VVP),True,0.03565739034932526,49
+416,Simuge,Upper Siang,Unknown,Arunachal Pradesh,True,28.8399841,95.1568258,25.20475166338972,control (non-VVP),True,0.04014928653699657,30
+417,Singa Old,Upper Siang,Unknown,Arunachal Pradesh,True,28.8313255,95.1691884,25.85196385039524,control (non-VVP),True,0.03261364380746296,30
+418,Silage,Upper Siang,Unknown,Arunachal Pradesh,True,28.8331926,95.1580815,25.900649272498462,control (non-VVP),True,0.03180164122931422,30
+419,Tamid Arung,Upper Siang,Unknown,Arunachal Pradesh,True,28.8998406,94.5747584,26.11436496765807,control (non-VVP),True,0.037996070384615,19
+420,Angachi,Upper Siang,Unknown,Arunachal Pradesh,True,28.8255056,95.1704914,26.4572050125452,control (non-VVP),True,0.03289731244792953,30
+421,Simuling,Upper Siang,Unknown,Arunachal Pradesh,True,28.8155203,95.2010538,27.10770570136025,control (non-VVP),True,0.03638207173271332,19
+422,Singing,Upper Siang,Unknown,Arunachal Pradesh,True,28.8977681,94.7841203,29.794800301747745,control (non-VVP),True,0.03641262829100591,19
+423,Migging,Upper Siang,Unknown,Arunachal Pradesh,True,28.8529247,94.7729372,34.7789608532419,control (non-VVP),True,0.05216804105439779,19
+424,Palling,Upper Siang,Unknown,Arunachal Pradesh,True,28.836535,94.8097586,36.58065758723632,control (non-VVP),True,0.051486062107495456,19
+425,Likor,Upper Siang,Unknown,Arunachal Pradesh,True,28.8267883,94.8955464,36.85504783931048,control (non-VVP),True,0.08847021247715757,19
+426,Mosing,Upper Siang,Unknown,Arunachal Pradesh,True,28.8091508,94.7915356,39.60618311251698,control (non-VVP),True,0.044041060575879934,12
+427,Pugging,Upper Siang,Unknown,Arunachal Pradesh,True,28.7438597,94.9345829,44.02389953987662,control (non-VVP),True,0.09691518825850468,12
+428,Gujinboluo,Upper Siang,Unknown,Arunachal Pradesh,True,28.7553138,94.9111952,44.64011679191498,control (non-VVP),True,0.037056990275375574,12
+429,Gette,Upper Siang,Unknown,Arunachal Pradesh,True,28.6863056,95.0089723,46.40504836633465,control (non-VVP),True,0.075995389785979,12
+430,Dojubing,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4315441,93.1898276,0.249045833450518,control (non-VVP),True,0.03489529122812901,10
+431,Ishneya,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4397601,93.1851781,0.7217224156134714,control (non-VVP),True,0.037499476857888785,10
+432,Juga,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4467134,93.1498404,3.925174649555216,control (non-VVP),True,0.03292623350469682,10
+433,Yorlung,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.6720499,93.9704579,4.196776668375604,control (non-VVP),True,0.03926569802614414,5
+434,Gelemo,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.472442,93.4628099,18.05313388179516,control (non-VVP),True,0.033592518106256374,10
+435,Gelemo Camp,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4568913,93.4620422,18.606676953286467,control (non-VVP),True,0.11558235530614175,10
+436,Dojbung,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.3729191,93.4561501,23.285044542759053,control (non-VVP),True,0.03189935079893163,10
+437,Gelinceniak,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.3631529,93.4766991,25.48664596200368,control (non-VVP),True,0.04487099820949129,10
+438,Chingring,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4192393,93.8246305,29.258085111764327,control (non-VVP),True,0.03446088229723707,5
+439,Poba,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.414467,93.8159723,29.67407778677813,control (non-VVP),True,0.0335506234681456,5
+440,贾德普,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4082012,93.7972842,30.217130636717734,control (non-VVP),True,0.03347341355177543,5
+441,嘎如,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4068583,93.7942953,30.352527848657463,control (non-VVP),True,0.03431869587202725,5
+442,阿赖根布,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4059921,93.808704,30.537852652997465,control (non-VVP),True,0.03253207682425083,5
+443,Orak Camp,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.3665963,93.5461814,30.58926154225035,control (non-VVP),True,0.03732070627739508,10
+444,Ketha,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4307648,94.061466,30.83898483127514,control (non-VVP),True,0.033896746527061185,18
+445,Raba,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4054645,93.8353976,30.93107120811105,control (non-VVP),True,0.03342132879559189,5
+446,AkI,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4045203,93.7242887,31.0993071581252,control (non-VVP),True,0.040825000151857686,5
+447,Mojang,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4013177,93.8229042,31.20281418527646,control (non-VVP),True,0.036117602953482236,5
+448,Ngoju,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.399193,93.7068591,31.30343407328185,control (non-VVP),True,0.033960897903336236,5
+449,Keojariang,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.4009028,93.8320953,31.37704816497124,control (non-VVP),True,0.04744656903021902,5
+450,Bogun,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.3958767,93.6960267,31.409263037611804,control (non-VVP),True,0.033239682835620475,5
+451,Nava,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.3909608,93.6799521,31.63847804253896,control (non-VVP),True,0.04860386761307436,9
+452,Nilo,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.3872503,93.6546784,31.726628462853856,control (non-VVP),True,0.0329146987958872,10
+453,Myabe,Upper Subansiri,Unknown,Arunachal Pradesh,True,28.3992853,93.8502203,31.879304201323723,control (non-VVP),True,0.03450713852842336,5
+454,贡岗,West Kameng,Unknown,Arunachal Pradesh,True,26.8952222,92.1170503,4.154187721357816,control (non-VVP),True,0.1141603220401675,36
+455,Balem,West Kameng,Unknown,Arunachal Pradesh,True,26.9649897,92.1516917,7.302075731076228,control (non-VVP),True,0.06314283844161782,36
+456,Rongthangjurpam,West Kameng,Unknown,Arunachal Pradesh,True,27.0382758,92.1315055,7.891072038314255,control (non-VVP),True,0.07940985847261188,49
+457,若波朗钦,West Kameng,Unknown,Arunachal Pradesh,True,27.0752385,92.1082163,7.903609763820291,control (non-VVP),True,0.06409905137761482,49
+458,Yukmadung,West Kameng,Unknown,Arunachal Pradesh,True,27.4213253,92.1244746,8.333393795069465,control (non-VVP),True,0.1255006209410811,12
+459,Warrangpam,West Kameng,Unknown,Arunachal Pradesh,True,27.1186044,92.0745879,8.98308426545462,control (non-VVP),True,0.052499385169503546,102
+460,Ghāstoli,Chamoli,Unknown,Uttarakhand,True,30.8592089,79.4699913,11.914449524802585,control (non-VVP),True,0.06349737151998992,2
+461,Niti,Chamoli,Unknown,Uttarakhand,True,30.7776642,79.8411215,13.810147936633122,control (non-VVP),True,0.04042175987472301,2
+462,MAHAR GAON,Chamoli,Unknown,Uttarakhand,True,30.7109424,79.8743727,18.82830218116584,control (non-VVP),True,0.05098174595565823,30
+463,Pharkia,Chamoli,Unknown,Uttarakhand,True,30.7318289,79.8262831,18.89002530397776,control (non-VVP),True,0.04755456922503118,2
+464,Kurkuti,Chamoli,Unknown,Uttarakhand,True,30.7065954,79.8754333,19.257221680206065,control (non-VVP),True,0.05319685117438951,30
+465,Ryal Bagar,Chamoli,Unknown,Uttarakhand,True,30.7110763,79.8435457,19.93625372763593,control (non-VVP),True,0.03737553095714222,30
+466,Kosa,Chamoli,Unknown,Uttarakhand,True,30.67793,79.8609495,22.70652399985677,control (non-VVP),True,0.039960321621045056,30
+467,Ghangaria,Chamoli,Unknown,Uttarakhand,True,30.7014544,79.5938002,26.31062216633642,control (non-VVP),True,0.07926915239577405,30
+468,Kajila,Chamoli,Unknown,Uttarakhand,True,30.6972318,79.5898879,26.75920046410928,control (non-VVP),True,0.05087379012042042,30
+469,SINGLA,Chamoli,Unknown,Uttarakhand,True,30.6462444,79.8258027,27.175157144580066,control (non-VVP),True,0.04561642816719091,30
+470,Jelam,Chamoli,Unknown,Uttarakhand,True,30.6441526,79.8259171,27.38526145533936,control (non-VVP),True,0.04871577212899839,30
+471,Hanumanchatti,Chamoli,Unknown,Uttarakhand,True,30.6955217,79.5141532,27.604198128101256,control (non-VVP),True,0.04637962372296374,30
+472,DRONAGIRI,Chamoli,Unknown,Uttarakhand,True,30.5991704,79.8680413,27.76162744355928,control (non-VVP),True,0.03898181643734016,28
+473,Lambagad,Chamoli,Unknown,Uttarakhand,True,30.692639,79.5132394,27.935227028140023,control (non-VVP),True,0.0459294540326138,30
+474,GARPAK,Chamoli,Unknown,Uttarakhand,True,30.6269079,79.854244,28.23676669151424,control (non-VVP),True,0.032651491514342504,28
+475,Bhyudar,Chamoli,Unknown,Uttarakhand,True,30.674709,79.5913479,29.259897647969115,control (non-VVP),True,0.04333748107308273,30
+476,Khirao,Chamoli,Unknown,Uttarakhand,True,30.6849562,79.4763374,29.81393619398809,control (non-VVP),True,0.04263425020699618,30
+477,KAGA,Chamoli,Unknown,Uttarakhand,True,30.6124584,79.8238599,30.73137382810968,control (non-VVP),True,0.040922616655328446,28
+478,Jumma,Chamoli,Unknown,Uttarakhand,True,30.60791,79.80606,31.82623184079268,control (non-VVP),True,0.03770776332006013,28
+479,Sal,Chamoli,Unknown,Uttarakhand,True,30.6497801,79.5825101,31.99807128252253,control (non-VVP),True,0.040416765763083375,30
+480,Lambagarh,Chamoli,Unknown,Uttarakhand,True,30.6541078,79.5165784,32.0553341957228,control (non-VVP),True,0.07428449788554423,30
+481,Nayachutti,Chamoli,Unknown,Uttarakhand,True,30.6485378,79.5332429,32.41449625832039,control (non-VVP),True,0.04973523579811149,30
+482,Pulna,Chamoli,Unknown,Uttarakhand,True,30.6357595,79.5716275,33.554494849387154,control (non-VVP),True,0.04925565481408255,30
+483,Will Pulna,Chamoli,Unknown,Uttarakhand,True,30.635211,79.5724562,33.61399138587271,control (non-VVP),True,0.04925762390824177,30
+484,Sumla,Uttarkashi,Unknown,Uttarakhand,True,31.3643581,79.1315444,5.627779859426751,control (non-VVP),True,0.049766167875860905,3
+485,波林三多,Uttarkashi,Unknown,Uttarakhand,True,31.3063902,79.1304897,8.97346728316324,control (non-VVP),True,0.04402327441095011,3
+486,Tirpani,Uttarkashi,Unknown,Uttarakhand,True,31.2764904,79.1066801,12.781892511914991,control (non-VVP),True,0.0378149295009108,3
+487,Nilapani,Uttarkashi,Unknown,Uttarakhand,True,31.1133518,79.1553581,15.061773828748594,control (non-VVP),True,0.04733543447820931,3
+488,桑村,Uttarkashi,Unknown,Uttarakhand,True,31.1815194,79.044165,15.272434644969527,control (non-VVP),True,0.03786244120707481,3
+489,葱莎,Uttarkashi,Unknown,Uttarakhand,True,31.1126554,79.0053748,19.17764189917796,control (non-VVP),True,0.035688389134237844,14
+490,Hindoligad,Uttarkashi,Unknown,Uttarakhand,True,31.0767806,78.9614641,21.732777927080967,control (non-VVP),True,0.04719566587616002,14
+491,Karchha,Uttarkashi,Unknown,Uttarakhand,True,31.04462,78.92578,24.95764711311822,control (non-VVP),True,0.03912472610424967,14
+492,Mukhba,Uttarkashi,Unknown,Uttarakhand,True,31.0449555,78.7799246,26.980573712116133,control (non-VVP),True,0.13125861993365856,11
+493,Lanka,Uttarkashi,Unknown,Uttarakhand,True,31.0302365,78.8679805,27.02544209422259,control (non-VVP),True,0.05149064367146193,11
+494,Bhaironghati,Uttarkashi,Unknown,Uttarakhand,True,31.0267173,78.8678798,27.410613091794325,control (non-VVP),True,0.05187820913439747,11
+495,Harsil,Uttarkashi,Unknown,Uttarakhand,True,31.0369099,78.7506484,28.055064151573287,control (non-VVP),True,0.14336925837699482,11
+496,Halunga,Uttarkashi,Unknown,Uttarakhand,True,31.0334361,78.7436711,28.520791760275166,control (non-VVP),True,0.07949890858717994,11
+497,Dhakroliya,Uttarkashi,Unknown,Uttarakhand,True,31.0349208,78.7312391,28.54448149749177,control (non-VVP),True,0.05266726095070987,11
+498,Sunagar,Uttarkashi,Unknown,Uttarakhand,True,31.01578,78.71155,31.0016111786727,control (non-VVP),True,0.13173453043673963,11
+499,Suki,Uttarkashi,Unknown,Uttarakhand,True,31.0029571,78.7013016,32.61251940187505,control (non-VVP),True,0.09258136260370028,11
+500,Bhojwasa,Uttarkashi,Unknown,Uttarakhand,True,30.9504464,79.051513,33.50614382681282,control (non-VVP),True,0.04194784935127956,3
+501,Cherbasa,Uttarkashi,Unknown,Uttarakhand,True,30.9798732,79.0239489,33.59856849202152,control (non-VVP),True,0.04377124958785938,3
+502,Bhangeli,Uttarkashi,Unknown,Uttarakhand,True,30.9173929,78.6694748,42.55822493242618,control (non-VVP),True,0.051576972598060225,11
+503,Gangnani (village),Uttarkashi,Unknown,Uttarakhand,True,30.9124564,78.67581,42.93741159736116,control (non-VVP),True,0.03603440545050894,11
+504,Seema,Uttarkashi,Unknown,Uttarakhand,True,31.1170286,78.3499378,43.2062044546696,control (non-VVP),True,0.046695200414829836,9
+505,Yamunotri,Uttarkashi,Unknown,Uttarakhand,True,30.999214,78.4626951,43.56636837738584,control (non-VVP),True,0.06027955607830719,11
+506,Osla,Uttarkashi,Unknown,Uttarakhand,True,31.1188962,78.3427722,43.702470708703984,control (non-VVP),True,0.10574514600954309,9
+507,Hurri,Uttarkashi,Unknown,Uttarakhand,True,30.900444,78.694016,43.85649707889107,control (non-VVP),True,0.033252777928293134,11
+508,Gangnani,Uttarkashi,Unknown,Uttarakhand,True,30.9029774,78.6797824,43.870251674210536,control (non-VVP),True,0.06102623023530707,11
+509,Sungar,Uttarkashi,Unknown,Uttarakhand,True,30.8932364,78.6782549,44.95526774068584,control (non-VVP),True,0.03618660170986659,11
+510,Panwani,Uttarkashi,Unknown,Uttarakhand,True,31.1162624,78.3290382,44.99273687783485,control (non-VVP),True,0.04291692940632138,9
+511,Gangwar,Uttarkashi,Unknown,Uttarakhand,True,31.1081301,78.3128214,46.782319991467176,control (non-VVP),True,0.04484599747642652,9
+512,Janki Chatti,Uttarkashi,Unknown,Uttarakhand,True,30.9764513,78.4383369,46.98872281721196,control (non-VVP),True,0.2741817949471368,11
+513,Kharsālī,Uttarkashi,Unknown,Uttarakhand,True,30.9727889,78.4382202,47.31439009250329,control (non-VVP),True,0.31037770149849303,11
+514,Buri,Tawang,Unknown,Arunachal Pradesh,True,27.5138525,91.6470731,1.3784428309811594,control (non-VVP),True,0.03550635279041297,19
+515,Dudunghar,Tawang,Unknown,Arunachal Pradesh,True,27.5069344,91.6530079,1.5845961590826654,control (non-VVP),True,0.08266132558962348,19
+516,Blaiteng,Tawang,Unknown,Arunachal Pradesh,True,27.505442,91.6575862,1.9598216987706023,control (non-VVP),True,0.10952225934086199,19
+517,Dongmareng,Tawang,Unknown,Arunachal Pradesh,True,27.5064997,91.6610772,2.297958008278038,control (non-VVP),True,0.06875162943000025,19
+518,Kaben,Tawang,Unknown,Arunachal Pradesh,True,27.489457,91.7279816,3.0298278851124576,control (non-VVP),True,0.1428131000847642,19
+519,Marmey,Tawang,Unknown,Arunachal Pradesh,True,27.5382332,91.6496721,3.3525511690259813,control (non-VVP),True,0.051846770848377445,19
+520,Hatung La,Tawang,Unknown,Arunachal Pradesh,True,27.7767145,91.7101807,3.605519688388505,control (non-VVP),True,0.044350466644671266,19
+521,Chelengdung,Tawang,Unknown,Arunachal Pradesh,True,27.5402668,91.6598059,4.1381078596207095,control (non-VVP),True,0.08878471552623124,19
+522,Dungjee,Tawang,Unknown,Arunachal Pradesh,True,27.4989655,92.0097869,4.297136495986306,control (non-VVP),True,0.03229411628286137,31
+523,Benig,Tawang,Unknown,Arunachal Pradesh,True,27.499111,91.7352285,4.302094159838689,control (non-VVP),True,0.038149618567626456,19
+524,User,Tawang,Unknown,Arunachal Pradesh,True,27.5441215,91.6573264,4.332662551885869,control (non-VVP),True,0.06907077666148746,19
+525,Phomang,Tawang,Unknown,Arunachal Pradesh,True,27.5125531,91.694958,4.594783190459134,control (non-VVP),True,0.0838123453596878,19
+526,Sanghar,Tawang,Unknown,Arunachal Pradesh,True,27.5320099,91.6739901,4.655048653488116,control (non-VVP),True,0.09000291559825163,19
+527,Tsechu,Tawang,Unknown,Arunachal Pradesh,True,27.7228408,92.0148221,4.839255499380271,control (non-VVP),True,0.07361755504845603,31
+528,Dormeleng,Tawang,Unknown,Arunachal Pradesh,True,27.536051,91.6739209,4.872489192383831,control (non-VVP),True,0.11608262287068906,19
+529,Bagajang Gompa,Tawang,Unknown,Arunachal Pradesh,True,27.5002605,92.0203955,4.958258166043775,control (non-VVP),True,0.038546362290423276,31
+530,Hoongla,Tawang,Unknown,Arunachal Pradesh,True,27.5133024,91.7221181,5.219682444374062,control (non-VVP),True,0.06751972245667857,19
+531,Kharung,Tawang,Unknown,Arunachal Pradesh,True,27.5083212,91.7443344,5.472869874542752,control (non-VVP),True,0.09245859597345893,19
+532,Sazo,Tawang,Unknown,Arunachal Pradesh,True,27.5211872,91.6919115,5.481263190914099,control (non-VVP),True,0.05602794549115706,19
+533,Bulaisen,Tawang,Unknown,Arunachal Pradesh,True,27.7447203,91.6940265,5.82737530462685,control (non-VVP),True,0.039852077341440424,19
+534,Zirkhim,Tawang,Unknown,Arunachal Pradesh,True,27.759106,91.6987037,5.859782408176547,control (non-VVP),True,0.08663815401632731,19
+535,Kharteng,Tawang,Unknown,Arunachal Pradesh,True,27.5322737,91.68881,5.999022821529483,control (non-VVP),True,0.07846988519126344,19
+536,Taktsang,Tawang,Unknown,Arunachal Pradesh,True,27.7202129,91.7987847,6.611126228743398,control (non-VVP),True,0.03437899920231833,19
+537,Baghar,Tawang,Unknown,Arunachal Pradesh,True,27.5386646,91.692876,6.666281448423297,control (non-VVP),True,0.06603215009983929,19
+538,Surbin,Tawang,Unknown,Arunachal Pradesh,True,27.6044729,91.6478797,6.702895702948471,control (non-VVP),True,0.044918510188976135,19
+539,Yabab,Tawang,Unknown,Arunachal Pradesh,True,27.5495362,91.6993454,7.79234841016766,control (non-VVP),True,0.04989133515951747,19
+540,Gyandong,Tawang,Unknown,Arunachal Pradesh,True,27.5360362,91.8767708,7.960987720661884,control (non-VVP),True,0.09515146565962367,19
+541,Socktsen,Tawang,Unknown,Arunachal Pradesh,True,27.7317783,91.7136439,8.176378417682914,control (non-VVP),True,0.0706959081209565,19
+542,乃林芒,Tawang,Unknown,Arunachal Pradesh,True,27.7304581,91.7122753,8.346887659670452,control (non-VVP),True,0.06932600804842957,19
+543,Khet,Tawang,Unknown,Arunachal Pradesh,True,27.5420105,91.8651408,8.438906817105366,control (non-VVP),True,0.11981250651164525,19
+544,Mangnam,Tawang,Unknown,Arunachal Pradesh,True,27.5434452,91.7277148,8.576480853707107,control (non-VVP),True,0.12602967587879685,19
+545,Duola,Tawang,Unknown,Arunachal Pradesh,True,27.6806026,91.7051828,8.700719158387184,control (non-VVP),True,0.035397696319753064,19
+546,Thiksi,Tawang,Unknown,Arunachal Pradesh,True,27.6742312,91.7039224,8.938675902140462,control (non-VVP),True,0.03337473913537888,19
+547,Mukto,Tawang,Unknown,Arunachal Pradesh,True,27.5459298,91.925351,9.033768782544565,control (non-VVP),True,0.09592803644389822,19
+548,朗楚,Tawang,Unknown,Arunachal Pradesh,True,27.6665478,92.018261,9.170429339437083,control (non-VVP),True,0.037934455214826114,31
+549,Gispu,Tawang,Unknown,Arunachal Pradesh,True,27.5798,91.68915,9.375706517611604,control (non-VVP),True,0.10993173505251456,19
+550,Buikung,Tawang,Unknown,Arunachal Pradesh,True,27.5418739,91.7759019,9.411678782317772,control (non-VVP),True,0.08838260703421369,19
+551,Momai,Tawang,Unknown,Arunachal Pradesh,True,27.5468143,91.9076102,9.41491744136239,control (non-VVP),True,0.07893255696078731,19
+552,Khangkar,Tawang,Unknown,Arunachal Pradesh,True,27.5483269,91.8982714,9.65310951987415,control (non-VVP),True,0.07005673582151405,19
+553,Thrillam,Tawang,Unknown,Arunachal Pradesh,True,27.5444139,91.7737903,9.676984165349417,control (non-VVP),True,0.09229937842441839,19
+554,Gomkelleng,Tawang,Unknown,Arunachal Pradesh,True,27.557721,91.9476161,9.843283809332174,control (non-VVP),True,0.06730298508617219,19
+555,Nuranang,Tawang,Unknown,Arunachal Pradesh,True,27.5495863,92.0246679,9.896721816486076,control (non-VVP),True,0.04163377337491206,31
+556,Khelengteng,Tawang,Unknown,Arunachal Pradesh,True,27.700347,91.7260819,9.96298258283976,control (non-VVP),True,0.0569618896711912,19
+557,Mirba,Tawang,Unknown,Arunachal Pradesh,True,27.5628166,91.9670658,10.046901244397526,control (non-VVP),True,0.04404805051257741,19
+558,Bomja,Tawang,Unknown,Arunachal Pradesh,True,27.5628997,91.9964314,10.2441602229928,control (non-VVP),True,0.05349503038006618,31
+559,Ajidong,Tawang,Unknown,Arunachal Pradesh,True,27.5640002,91.954525,10.34812753629876,control (non-VVP),True,0.03728974477236003,19
+560,Chakzam,Tawang,Unknown,Arunachal Pradesh,True,27.557929,91.9220578,10.39932444051828,control (non-VVP),True,0.05025207585476892,19
+561,Xiongbaze,Tawang,Unknown,Arunachal Pradesh,True,27.5673678,91.9761893,10.520480542245313,control (non-VVP),True,0.039244702432538615,19
+562,Kanchi Mor,Tawang,Unknown,Arunachal Pradesh,True,27.6276338,91.9591421,10.791124997082466,control (non-VVP),True,0.042318093266774236,19
+563,Senu,Tawang,Unknown,Arunachal Pradesh,True,27.568186,91.8640359,11.32095577800408,control (non-VVP),True,0.17300996361199117,19
+564,Kharsa,Tawang,Unknown,Arunachal Pradesh,True,27.5768922,91.9742501,11.575637862711783,control (non-VVP),True,0.14366168241377153,19
+565,Tsewkhar,Tawang,Unknown,Arunachal Pradesh,True,27.5723837,91.9352289,11.769604232081706,control (non-VVP),True,0.23496424118439993,19
+566,Jamkhar,Tawang,Unknown,Arunachal Pradesh,True,27.5741023,91.8498361,11.97109277897478,control (non-VVP),True,0.05033154824371997,19
+567,Topgye,Tawang,Unknown,Arunachal Pradesh,True,27.7071071,92.2145841,12.010850218777836,control (non-VVP),True,0.04067855010946302,12
+568,Lhou,Tawang,Unknown,Arunachal Pradesh,True,27.574306,91.9287482,12.083796379688184,control (non-VVP),True,0.19699944400456468,19
+569,Bomdir,Tawang,Unknown,Arunachal Pradesh,True,27.5798,91.88004,12.800691542574553,control (non-VVP),True,0.323804001898163,19
+570,Urgeling,Tawang,Unknown,Arunachal Pradesh,True,27.5810786,91.8710988,12.806217009504952,control (non-VVP),True,0.2772011123990166,19
+571,Geibi,Tawang,Unknown,Arunachal Pradesh,True,27.579271,91.8861143,12.841084848187418,control (non-VVP),True,0.2848099401725681,19
+572,Sazhe,Tawang,Unknown,Arunachal Pradesh,True,27.5776458,91.7988206,13.004782979435044,control (non-VVP),True,0.07944125730639585,19
+573,Aodong,Tawang,Unknown,Arunachal Pradesh,True,27.5803197,91.893275,13.071617730047157,control (non-VVP),True,0.14248335951015406,19
+574,Bangde,Tawang,Unknown,Arunachal Pradesh,True,27.5840299,91.8834414,13.318371109342184,control (non-VVP),True,0.30410245573903394,19
+575,Shyo,Tawang,Unknown,Arunachal Pradesh,True,27.5891423,91.8597993,13.622892569252397,control (non-VVP),True,0.31364326138768817,19
+576,Beghar,Tawang,Unknown,Arunachal Pradesh,True,27.5889112,91.8791928,13.783557607535824,control (non-VVP),True,0.32581372165442396,19
+577,Mandreling,Tawang,Unknown,Arunachal Pradesh,True,27.5917248,91.8595869,13.908525964520482,control (non-VVP),True,0.35560496399754965,19
+578,Nyuri,Tawang,Unknown,Arunachal Pradesh,True,27.6891295,92.2040611,14.228594022329878,control (non-VVP),True,,12
+579,Tseretse,Tawang,Unknown,Arunachal Pradesh,True,27.5930753,91.8967033,14.52226112151756,control (non-VVP),True,0.18251947641168076,19
+580,楚木巴,Tawang,Unknown,Arunachal Pradesh,True,27.6549106,92.2710437,14.899982744148126,control (non-VVP),True,,12
+581,Neygang,North,Unknown,Sikkim,True,26.8222735,89.2456924,0.0354397827185006,control (non-VVP),False,0.04079060449266968,28
+582,Mangalbare,North,Unknown,Sikkim,True,26.9641686,88.0931146,0.0646404924804474,control (non-VVP),False,0.09705940313446015,138
+583,Tingtingma,North,Unknown,Sikkim,True,26.83608,89.2607505,0.1374003726741908,control (non-VVP),False,0.03783493889022464,28
+584,Tading,North,Unknown,Sikkim,True,26.842835,89.2980981,0.1836409106089793,control (non-VVP),False,0.057385109972882854,28
+585,Katao,North,Unknown,Sikkim,True,27.6714244,88.8140893,0.4093092829809311,control (non-VVP),False,,3
+586,Kupup,North,Unknown,Sikkim,True,27.35065,88.8396693,0.4220779702879976,control (non-VVP),False,0.0981158043529919,3
+587,Kumai,North,Unknown,Sikkim,True,26.9721659,88.8529694,0.4496922242930337,control (non-VVP),False,0.09705935021951086,36
+588,Sherathang,North,Unknown,Sikkim,True,27.3803999,88.8152126,0.4936963693973037,control (non-VVP),False,0.047722725381964454,3
+589,Gidaibir,North,Unknown,Sikkim,True,26.8366987,89.2715013,0.4987423550079105,control (non-VVP),False,0.05423409841974156,28
+590,Marwatraya,North,Unknown,Sikkim,True,26.8521011,89.3113536,0.537664567588106,control (non-VVP),False,0.06374468896446332,28
+591,Daduwachok,North,Unknown,Sikkim,True,27.278697,88.0127539,0.6010992404530895,control (non-VVP),False,0.041091473882832484,25
+592,Doomshinggang,North,Unknown,Sikkim,True,26.819084,89.1416207,0.6994205554095879,control (non-VVP),False,0.06020969455906635,28
+593,Nyoenpalingmaed,North,Unknown,Sikkim,True,26.8229454,89.2250516,0.7472079788470537,control (non-VVP),False,0.20769128965797587,28
+594,Shri Antu,North,Unknown,Sikkim,True,26.8809868,88.1307377,0.8495012448518934,control (non-VVP),False,0.12099883711520316,59
+595,Doleg,North,Unknown,Sikkim,True,26.819408,89.1716232,0.9051630724290842,control (non-VVP),False,0.0882578875931673,28
+596,Rongo,North,Unknown,Sikkim,True,27.0385628,88.8358784,0.9661025806763252,control (non-VVP),False,0.3592600430612388,39
+597,Todey,North,Unknown,Sikkim,True,27.1108271,88.8252278,1.0056724908623245,control (non-VVP),False,0.09561204300838559,39
+598,Dugpoling,North,Unknown,Sikkim,True,26.8538049,89.2820477,1.014366765057029,control (non-VVP),False,0.036980100446582266,28
+599,Hauri,North,Unknown,Sikkim,True,26.8351402,89.2827694,1.0515924551522455,control (non-VVP),False,0.06118229260010436,28
+600,Totopara,North,Unknown,Sikkim,True,26.8357066,89.3075323,1.1217663315424862,control (non-VVP),False,0.1027613656897282,28
+601,Gorkhe Bazar,North,Unknown,Sikkim,True,26.9554832,88.0775912,1.8877153943244096,control (non-VVP),False,0.061417104571774586,138
+602,Tumliṅ,North,Unknown,Sikkim,True,27.0312588,88.0689601,1.952452896070509,control (non-VVP),False,0.05361638162569303,163
+603,Gariabas,North,Unknown,Sikkim,True,27.024001,88.8656552,1.9886380969430395,control (non-VVP),False,0.13167847863405782,39
+604,Lachhungthang,North,Unknown,Sikkim,True,26.8295321,89.1899901,2.040227433577781,control (non-VVP),False,0.05220025546318553,28
+605,Gurãse,North,Unknown,Sikkim,True,27.027135,88.0744586,2.092496369904318,control (non-VVP),False,0.057959841566815905,138
+606,Gairibas,North,Unknown,Sikkim,True,27.0592783,88.0246254,2.0927719373359936,control (non-VVP),False,0.03420436626339288,163
+607,Dangreyboog,North,Unknown,Sikkim,True,26.9392244,89.008113,2.139504061456761,control (non-VVP),False,0.06506487966275819,36
+608,काला पोखरी,North,Unknown,Sikkim,True,27.0788791,88.0171082,2.2196151166504423,control (non-VVP),False,0.05677179434215228,163
+609,Dadheli,North,Unknown,Sikkim,True,27.0860589,87.9548391,2.2898595952271785,control (non-VVP),False,0.034468675908105685,101
+610,लुम्चोक,North,Unknown,Sikkim,True,27.0800523,87.9589886,2.3395745634031484,control (non-VVP),False,0.0322205196787391,101
+611,Kandan,North,Unknown,Sikkim,True,27.2632886,87.9854179,2.387155050260856,control (non-VVP),False,0.03219448667930764,22
+612,Magargau,North,Unknown,Sikkim,True,27.2531652,87.9799507,2.4259457880824007,control (non-VVP),False,0.03749795041607222,22
+613,Changgu,North,Unknown,Sikkim,True,27.3778843,88.7709213,2.4303020148375434,control (non-VVP),False,0.08362344541937079,3
+614,Bikeybhanjan,North,Unknown,Sikkim,True,27.0929468,88.01296,2.4946215039078736,control (non-VVP),False,0.039802313573623266,163
+615,Megma,North,Unknown,Sikkim,True,27.0239524,88.0828861,2.5710113040084863,control (non-VVP),False,0.0706129439026847,138
+616,Sandakphu,North,Unknown,Sikkim,True,27.104806,88.0015441,2.579681664896949,control (non-VVP),False,0.055413389976279134,101
+617,Katrepakha,North,Unknown,Sikkim,True,26.9903319,88.9319658,2.607344879343358,control (non-VVP),False,0.0716180768175012,36
+618,Bugkha,North,Unknown,Sikkim,True,26.869138,89.2872405,2.6784303130882674,control (non-VVP),False,0.03971044098680849,28
+619,Chamurchi,North,Unknown,Sikkim,True,26.8827274,89.0903663,2.7225711132266324,control (non-VVP),False,0.35217668473155556,64
+620,Jhalong,North,Unknown,Sikkim,True,27.0401327,88.8732963,2.7465010739437283,control (non-VVP),False,0.2666786021503247,39
+621,Khamzangling,North,Unknown,Sikkim,True,26.9747954,88.9498508,2.9095350172627934,control (non-VVP),False,0.04409977509198919,36
+622,Tharphu,North,Unknown,Sikkim,True,26.9893377,88.9368045,2.9102798377936985,control (non-VVP),False,0.03801456280672197,36
+623,Yugo,North,Unknown,Sikkim,True,26.8975661,89.0839157,2.916803936913932,control (non-VVP),False,0.1218910197535432,64
+624,Kardo,North,Unknown,Sikkim,True,26.9492965,88.9928788,2.9572807826624348,control (non-VVP),False,0.04560261264046733,36
+625,Paren,North,Unknown,Sikkim,True,27.0636736,88.8734078,2.979857761316277,control (non-VVP),False,0.23179964961567165,39
+626,Tonglu,North,Unknown,Sikkim,True,27.033721,88.0805457,3.013399463859864,control (non-VVP),False,0.04304600580023776,163
+627,Samarjun,North,Unknown,Sikkim,True,27.2603728,87.975741,3.134339894708016,control (non-VVP),False,0.041548222389246,22
+628,Chhubakha,North,Unknown,Sikkim,True,27.8241475,88.815369,3.225655994048761,control (non-VVP),False,0.04568775144446936,3
+629,Sisne,North,Unknown,Sikkim,True,27.2634845,87.9756726,3.281271091190319,control (non-VVP),False,0.0394482608895667,22
+630,Sampheling,North,Unknown,Sikkim,True,27.1213407,88.8490569,3.357082188195897,control (non-VVP),False,0.12971848755255452,3
+631,Rabi,North,Unknown,Sikkim,True,27.3014656,87.9929991,3.4248380521192847,control (non-VVP),False,0.03427639051939902,22
+632,Samphelgang,North,Unknown,Sikkim,True,27.1264595,88.8453086,3.601970449961409,control (non-VVP),False,0.17159558287909707,3
+633,Sepi,North,Unknown,Sikkim,True,27.2967297,87.9885069,3.618710893016439,control (non-VVP),False,0.04022398204806192,22
+634,Depheling,North,Unknown,Sikkim,True,26.9742504,88.9581871,3.6261462396301702,control (non-VVP),False,0.06232044538353671,36
+635,Nojangsa Nyipa,North,Unknown,Sikkim,True,26.8786124,89.3011236,3.641663302075516,control (non-VVP),False,0.05743020843291122,28
+636,Norgeygang,North,Unknown,Sikkim,True,27.1251166,88.8483354,3.649812594241609,control (non-VVP),False,0.2048357452335519,3
+637,Tsomgo,North,Unknown,Sikkim,True,27.3754372,88.7566799,3.682317154899109,control (non-VVP),False,0.03725556695172059,3
+638,Ekrate,North,Unknown,Sikkim,True,27.252172,87.9651893,3.722050764424155,control (non-VVP),False,0.034062067132927594,22
+639,Karmaling,North,Unknown,Sikkim,True,27.1204516,88.8555324,3.729363223002584,control (non-VVP),False,0.06251964500574865,3
+640,Timbure,North,Unknown,Sikkim,True,27.2927386,87.9850534,3.751930497106271,control (non-VVP),False,0.032871892159884473,22
+641,Norbuling,North,Unknown,Sikkim,True,26.8925739,89.0972757,3.822535323022741,control (non-VVP),False,0.31992341377606487,64
+642,Sugure,North,Unknown,Sikkim,True,27.2608375,87.9680869,3.850674336389128,control (non-VVP),False,0.04079224068809496,22
+643,Kuengaling,North,Unknown,Sikkim,True,27.1353079,88.8366105,3.865136594950476,control (non-VVP),False,0.05772283437395608,3
+644,Khangzhima,North,Unknown,Sikkim,True,26.9887258,88.950355,3.9124028155231376,control (non-VVP),False,0.1036077199171968,36
+645,Kharsaling,North,Unknown,Sikkim,True,26.9981042,88.9418471,3.919752320650081,control (non-VVP),False,0.06130734505757898,36
+646,Bindu,North,Unknown,Sikkim,True,27.0986121,88.8716429,3.9264302281607857,control (non-VVP),False,0.1396378063847022,39
+647,Sagadada,North,Unknown,Sikkim,True,27.2743415,87.9725518,4.055684917075906,control (non-VVP),False,0.035824141167172106,22
+648,Nagrakata,North,Unknown,Sikkim,True,26.887366,88.9115671,4.089471232915417,control (non-VVP),False,0.45071991401049394,36
+649,Beteni,North,Unknown,Sikkim,True,27.2990623,87.9842607,4.109805314172164,control (non-VVP),False,0.044117100047043604,22
+650,Samsing,North,Unknown,Sikkim,True,26.9891656,88.8036059,4.215283346249905,control (non-VVP),False,0.3619602233813892,36
+651,राम्चे (Ramche),North,Unknown,Sikkim,True,27.5940731,88.0313801,4.2397145853402165,control (non-VVP),False,,25
+652,Migphelgang,North,Unknown,Sikkim,True,27.1290662,88.8545122,4.363893173569808,control (non-VVP),False,0.06886753067671333,3
+653,Chamilindada,North,Unknown,Sikkim,True,27.2564045,87.9589886,4.476766394844066,control (non-VVP),False,0.045082563053240064,22
+654,Patshaling,North,Unknown,Sikkim,True,27.1459569,88.8314001,4.497957969345004,control (non-VVP),False,0.06857539049054755,3
+655,Sisne,North,Unknown,Sikkim,True,27.278902,87.9695767,4.532116420063161,control (non-VVP),False,0.033256237995398966,22
+656,Nojangsa Dangpa,North,Unknown,Sikkim,True,26.8871962,89.2838824,4.684382905124696,control (non-VVP),False,0.05192602194960517,28
+657,Pangpema,North,Unknown,Sikkim,True,27.7878398,88.1100906,4.6922108464505925,control (non-VVP),False,0.05043282152608244,25
+658,Simana,North,Unknown,Sikkim,True,26.9846521,88.1356918,4.755966616225002,control (non-VVP),False,0.07347264378187193,59
+659,Gashingma,North,Unknown,Sikkim,True,26.8543744,89.1888303,4.791395856513222,control (non-VVP),False,0.07505234505345587,28
+660,Perunge,North,Unknown,Sikkim,True,27.2523041,87.9531478,4.821995927290392,control (non-VVP),False,0.04037296927832092,22
+661,Joenleksa,North,Unknown,Sikkim,True,26.9988785,88.9532304,4.8527674534351,control (non-VVP),False,0.03791936326356187,36
+662,Phanchebun,North,Unknown,Sikkim,True,27.0558235,87.9505824,4.880443684657196,control (non-VVP),False,0.04599207597476496,101
+663,Dombang,North,Unknown,Sikkim,True,27.7456823,88.777401,4.952018864728949,control (non-VVP),False,,3
+664,Tserima,North,Unknown,Sikkim,True,26.8970136,89.1079938,5.0001862830661485,control (non-VVP),False,0.09123086566260402,64
+665,Baichhadrangra,North,Unknown,Sikkim,True,26.8907462,89.1119796,5.051882633741652,control (non-VVP),False,0.03668202790708565,64
+666,Gangawa,North,Unknown,Sikkim,True,27.2961738,87.9718593,5.105567853365814,control (non-VVP),False,0.03300979101045478,22
+667,Muklabu,North,Unknown,Sikkim,True,27.2868659,87.9666335,5.15947744905538,control (non-VVP),False,0.041156496712657156,22
+668,Tirsuley,North,Unknown,Sikkim,True,27.0096612,88.9474797,5.17216692808125,control (non-VVP),False,0.04730787931605146,36
+669,Serpe,North,Unknown,Sikkim,True,27.0734953,87.9288146,5.236702331017508,control (non-VVP),False,0.04229523063337645,101
+670,Chyanthapu,North,Unknown,Sikkim,True,27.2635164,87.9541546,5.237476189395344,control (non-VVP),False,0.12192278693167985,22
+671,Memekha,North,Unknown,Sikkim,True,26.8941073,89.3031281,5.251209710485094,control (non-VVP),False,0.06399207021502044,28
+672,Nibhare,North,Unknown,Sikkim,True,27.3091311,87.9755405,5.356886421662148,control (non-VVP),False,0.0390390662226024,22
+673,Fikkal,North,Unknown,Sikkim,True,26.8952118,88.0661527,5.522309970347057,control (non-VVP),False,0.20871732656132147,138
+674,Narayan Ashram,Pithoragarh,Unknown,Uttarakhand,True,29.9707,80.65476,0.0323530316101096,control (non-VVP),True,0.07111848771503153,4
+675,Napalcho,Pithoragarh,Unknown,Uttarakhand,True,30.1820716,80.8515056,0.0730629720601801,control (non-VVP),True,0.05842967412648209,7
+676,Bagrihat,Pithoragarh,Unknown,Uttarakhand,True,29.74274,80.36225,0.1180550634206112,control (non-VVP),True,0.17052475403850806,43
+677,Titri,Pithoragarh,Unknown,Uttarakhand,True,29.73587,80.36225,0.4402156242512728,control (non-VVP),True,0.13423331914734066,39
+678,Majarkana,Pithoragarh,Unknown,Uttarakhand,True,29.58069,80.36362,0.4476146132273144,control (non-VVP),True,0.12920976391836336,39
+679,Chhiyalekh,Pithoragarh,Unknown,Uttarakhand,True,30.1200614,80.8384468,0.520514503646884,control (non-VVP),True,0.04026295978493428,7
+680,Gullah,Pithoragarh,Unknown,Uttarakhand,True,30.02426,80.7193,0.5764591109992325,control (non-VVP),True,0.07899831536996114,5
+681,Tawaghat,Pithoragarh,Unknown,Uttarakhand,True,29.9614818,80.5995242,0.6439112012307722,control (non-VVP),True,0.08364545636798192,4
+682,Bachkot,Pithoragarh,Unknown,Uttarakhand,True,29.68918,80.36774,0.6834376358003158,control (non-VVP),True,0.055817949619728434,39
+683,Khela,Pithoragarh,Unknown,Uttarakhand,True,29.9624674,80.5911762,0.8549461818637469,control (non-VVP),True,0.15698043902662095,4
+684,Jauljibi,Pithoragarh,Unknown,Uttarakhand,True,29.7524071,80.376287,0.9286296961076403,control (non-VVP),True,0.10248081292002172,43
+685,Nabhidang Camp,Pithoragarh,Unknown,Uttarakhand,True,30.2390998,80.9760112,0.951191793935628,control (non-VVP),True,0.05798415175295008,7
+686,Ela Gad,Pithoragarh,Unknown,Uttarakhand,True,29.92127,80.57099,1.0376171956303184,control (non-VVP),True,0.0659440946440933,4
+687,Pipali,Pithoragarh,Unknown,Uttarakhand,True,29.67957,80.37598,1.0672403964005457,control (non-VVP),True,0.08132373196301194,39
+688,Bhungti,Pithoragarh,Unknown,Uttarakhand,True,30.02838,80.71656,1.0844439643766843,control (non-VVP),True,0.06326381289340467,4
+689,Kalika,Pithoragarh,Unknown,Uttarakhand,True,29.80866,80.49271,1.0908230484568096,control (non-VVP),True,0.23546593565119253,68
+690,Guariat,Pithoragarh,Unknown,Uttarakhand,True,29.56833,80.34165,1.0940235634343112,control (non-VVP),True,0.20519606612723326,39
+691,Kulagad,Pithoragarh,Unknown,Uttarakhand,True,29.90891,80.56824,1.2061540183517458,control (non-VVP),True,0.06008807320937992,4
+692,Budhi,Pithoragarh,Unknown,Uttarakhand,True,30.1021621,80.8278931,1.2169752384701875,control (non-VVP),True,0.0500655614076429,7
+693,Arkini,Pithoragarh,Unknown,Uttarakhand,True,29.53262,80.31143,1.3601773144358649,control (non-VVP),True,0.05900275987518013,39
+694,Mangti,Pithoragarh,Unknown,Uttarakhand,True,29.9975052,80.714547,1.386471653484554,control (non-VVP),True,0.038823978839585736,4
+695,Nigalpani,Pithoragarh,Unknown,Uttarakhand,True,29.82788,80.51468,1.4345252586515271,control (non-VVP),True,0.18027417997711861,86
+696,Sunkholi,Pithoragarh,Unknown,Uttarakhand,True,29.6727,80.38559,1.6108121518240937,control (non-VVP),True,0.07835374341648048,39
+697,Pangla,Pithoragarh,Unknown,Uttarakhand,True,29.9800668,80.6895435,1.6210846454452084,control (non-VVP),True,0.1578212175301339,4
+698,Jhulāghāt,Pithoragarh,Unknown,Uttarakhand,True,29.57245,80.38422,1.669445047328484,control (non-VVP),True,0.1356627373029223,39
+699,Balwakot,Pithoragarh,Unknown,Uttarakhand,True,29.80042,80.42954,1.6922467821054537,control (non-VVP),True,0.14359353683805443,43
+700,Matoli,Pithoragarh,Unknown,Uttarakhand,True,29.67407,80.34714,1.7446487149080665,control (non-VVP),True,0.05670190547769705,39
+701,Bagrigaon,Pithoragarh,Unknown,Uttarakhand,True,29.68506,80.38147,1.8045535437812656,control (non-VVP),True,0.07877459256215741,39
+702,Dwalisera,Pithoragarh,Unknown,Uttarakhand,True,29.70017,80.37735,1.95335447596369,control (non-VVP),True,0.11620330375440714,39
+703,Dobat,Pithoragarh,Unknown,Uttarakhand,True,29.87732,80.56275,2.0576548562319417,control (non-VVP),True,0.04160558373331421,4
+704,Ghasku,Pithoragarh,Unknown,Uttarakhand,True,29.9704962,80.6856052,2.1159743868697984,control (non-VVP),True,0.059426207978889936,4
+705,Sosa,Pithoragarh,Unknown,Uttarakhand,True,29.98306,80.63553,2.150443728067402,control (non-VVP),True,0.07246846826426434,4
+706,Tapovan,Pithoragarh,Unknown,Uttarakhand,True,29.8666326,80.559451,2.4136628364519885,control (non-VVP),True,0.06865416912554649,4
+707,Badari,Pithoragarh,Unknown,Uttarakhand,True,29.54361,80.2977,2.519961978082271,control (non-VVP),True,0.11554643480621762,39
+708,Pangu,Pithoragarh,Unknown,Uttarakhand,True,29.98444,80.61631,2.963014823972661,control (non-VVP),True,0.09964265254072413,4
+709,कालापानी,Pithoragarh,Unknown,Uttarakhand,True,30.2233426,80.9121926,3.087215901421682,control (non-VVP),True,0.047682231590520485,7
+710,Bharalu,Pithoragarh,Unknown,Uttarakhand,True,29.5697,80.30457,3.208758661003287,control (non-VVP),True,0.09143499017777897,39
+711,Askot,Pithoragarh,Unknown,Uttarakhand,True,29.7645899,80.3346048,3.3481721320454376,control (non-VVP),True,0.24556363291802003,43
+712,Chhirkala,Pithoragarh,Unknown,Uttarakhand,True,29.98032,80.56549,3.531308933184691,control (non-VVP),True,0.05290854341465899,4
+713,Chharandeo,Pithoragarh,Unknown,Uttarakhand,True,29.67545,80.32105,4.1042790874662,control (non-VVP),True,0.05303553553889519,39
+714,Balmara,Pithoragarh,Unknown,Uttarakhand,True,29.79767,80.35813,4.111956217174881,control (non-VVP),True,0.05564427188981678,43
+715,Imkhola,Pithoragarh,Unknown,Uttarakhand,True,29.8196229,80.3827692,4.920765939256588,control (non-VVP),True,0.03665754073860156,43
+716,Barabe,Pithoragarh,Unknown,Uttarakhand,True,29.51202,80.23728,5.100446408044568,control (non-VVP),True,0.12187917904250299,39
+717,Wadda,Pithoragarh,Unknown,Uttarakhand,True,29.56558,80.27848,5.11031452087313,control (non-VVP),True,0.45232544161550364,39
+718,Sangri,Pithoragarh,Unknown,Uttarakhand,True,29.67545,80.30731,5.37223428645033,control (non-VVP),True,0.060305411799397454,39
+719,Bagour,Pithoragarh,Unknown,Uttarakhand,True,29.63562,80.32517,5.447181654842486,control (non-VVP),True,0.048110034426458274,39
+720,Khanpaira,Pithoragarh,Unknown,Uttarakhand,True,29.82376,80.36499,5.991249511303318,control (non-VVP),True,0.0635291340655327,43
+721,Patharkhani,Pithoragarh,Unknown,Uttarakhand,True,29.53674,80.25101,6.078954259117757,control (non-VVP),True,0.08309428839235788,39
