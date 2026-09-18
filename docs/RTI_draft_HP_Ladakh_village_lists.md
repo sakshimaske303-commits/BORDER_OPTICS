@@ -57,7 +57,7 @@ Sir/Madam,
 
 I am writing to request the following information under the Right to Information Act, 2005, regarding the Vibrant Villages Programme (VVP-I), approved by the Union Cabinet in February 2023 for the development of border villages in five Himalayan border States/Union Territories.
 
-1. **Himachal Pradesh:** The Ministry's own replies to Lok Sabha Unstarred Question No. 2104 (2023) and Rajya Sabha Question No. 401 (2025) confirm that 75 villages in Himachal Pradesh have been identified as priority villages under VVP-I, but do not list these villages by name. I request the complete, village-wise list of all 75 priority villages sanctioned for Himachal Pradesh under VVP-I, including the name of each village, its district, and its block/tehsil.
+1. **Himachal Pradesh:** The Ministry's own replies to Lok Sabha Unstarred Question No. 2104 (2023) and Rajya Sabha Question No. 3251 (2023) confirm that 75 villages in Himachal Pradesh have been identified as priority villages under VVP-I, but do not list these villages by name. I request the complete, village-wise list of all 75 priority villages sanctioned for Himachal Pradesh under VVP-I, including the name of each village, its district, and its block/tehsil.
 
 2. **Ladakh:** The Ministry's reply to Lok Sabha Unstarred Question No. 4360 (2025) confirms that 35 villages in the Union Territory of Ladakh have been sanctioned under VVP-I, but does not list these villages by name. I request the complete, village-wise list of all 35 sanctioned villages for Ladakh under VVP-I, including the name of each village and its district (Leh/Kargil).
 
