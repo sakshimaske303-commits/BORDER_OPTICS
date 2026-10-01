@@ -78,17 +78,18 @@ with st.expander("**Ladakh (UT) — Excluded from Analysis**"):
     No publicly indexed government source with village-wise VVP-I data was found for
     Ladakh's 35 sanctioned villages, despite a deliberate search across state portals,
     parliamentary annexures, and secondary sources. Ladakh is fully excluded from this
-    analysis rather than approximated. This is documented as an open gap, not silently
-    omitted.
+    analysis rather than approximated. Getting the names would need an RTI application, which
+    was drafted but deliberately not filed, so this is a disclosed, permanent scope boundary,
+    not a pending task.
     """)
 
 with st.expander("**Himachal Pradesh — Illustrative Only, Not Core Sample**"):
     st.markdown("""
-    Of 75 priority villages under the VVP-I Action Plan (₹658.31 crore), only 51
-    inhabited villages could be identified by name (32 in Kinnaur, 19 in Lahaul and
-    Spiti), and only 7 of those could be reliably geocoded. Himachal Pradesh is treated
-    as an illustrative case study, not part of the core statistical sample used for
-    hypothesis testing.
+    Himachal Pradesh has 75 VVP-I priority villages, of which 51 are inhabited (32 in
+    Kinnaur, 19 in Lahaul and Spiti); its Action Plan (₹658.31 crore) covers those 51. No
+    public list names them, so only 7 could be identified by name from news coverage, and
+    all 7 were geocoded. Himachal Pradesh is treated as an illustrative case study, not part
+    of the core statistical sample used for hypothesis testing.
     """)
 
 with st.expander("**Uttarakhand — Residual Block Ambiguity**"):
@@ -129,8 +130,11 @@ with st.expander("**Composite Window Trade-Off — Snow vs. Monsoon Cloud**"):
     That gap turned out to be an archive-timing artifact rather than a permanent one: the
     Sentinel-2 archive had not yet backfilled scenes for those dates when the original
     extraction ran. A complete re-extraction recovered valid data for all 31 Sikkim
-    villages, and on that complete data, both compositing windows now agree that built-up
-    change is not significant (Development Log Entries 21–22; see Statistical Validation).
+    villages, and on that complete data neither compositing window shows a significant
+    built-up *increase* (Development Log Entries 21–22; see Statistical Validation). The
+    windows are not identical, though: run two-sided, the full-year window shows a
+    significant NDBI *decrease* (p = 1.4×10⁻¹⁵), while the summer window shows no
+    significant change in either direction.
     Where a result's direction or significance still changes between the two windows for
     other tests, that instability continues to be reported as a finding in itself.
     """)
@@ -224,7 +228,7 @@ with st.expander("**H3 Border-Proximity — Stress-Tested, and Surviving**"):
     synthetic fields rather than treating villages as independent. Both H3
     findings survive this stricter test too: spatially-corrected p = 0.0295 for
     summer NDBI (naive p = 0.0000026) and p = 0.0035 for full-year lights (naive
-    p = 0.0000547) — weaker than the naive p-values, as expected once spatial
+    p = 0.0000548) — weaker than the naive p-values, as expected once spatial
     clustering is accounted for, but still comfortably below 0.05.
 
     The two remaining checks from the original plan are done now too
@@ -278,7 +282,7 @@ with st.expander("**Parallel Pre-Trends Placebo Test — Now Run, Mostly Clean**
     main result.
 
     These are the district-verification-corrected, 721-village figures
-    (Development Log Entry 41): re-run against the corrected control list,
+    (Development Log Entry 42): re-run against the corrected control list,
     closing the vintage gap this section previously flagged. The immediately
     preceding 732-village version had full-year NDBI p=0.864, full-year
     lights p=0.755, summer lights p=0.968, and summer NDBI p=0.064 (raw
@@ -366,6 +370,49 @@ with st.expander("**Triangulation Against Independent Proxies — An Open Tensio
     positive, is still an open question. But it does rule out one specific
     candidate explanation: it isn't a continuation of a pre-existing trend
     that was already there before VVP-I existed.
+
+    Two caveats on the Dynamic World result itself. First, the summer Dynamic
+    World sample is much smaller: 169 of 251 treated villages (all 31 Sikkim
+    villages and 50 of 186 Arunachal Pradesh villages have no summer value)
+    and 536 of 721 controls. Second, a check in Development Log Entry 27 found
+    a small but significant link between how many usable images a village
+    gained between periods and its Dynamic World change, in opposite directions
+    for treated (positive) and control (negative) villages. It is too weak to
+    explain the whole DiD, but it is a partial imaging-density confound specific
+    to this proxy.
+    """)
+
+with st.expander("**Control-Group Construction — Selection Rule and Buffer Overlap**"):
+    st.markdown("""
+    Two details of how the control group was built, disclosed here because they bear on
+    the DiD. First, after the distance and exclusion filters, `select_control_villages.py`
+    keeps up to 3× the treated count per district by taking the candidates **closest to
+    the border** first (it sorts by distance to border), not a random draw. The control
+    group is therefore selected partly on border proximity.
+
+    Second, the contamination fix excludes control candidates within 50 m of a treated
+    village, but every extraction uses a 500 m buffer. So a control village less than
+    1 km from a treated village shares pixels with it: 82 of the 721 controls are in that
+    position (5 of them within 200 m). Shared pixels would push the DiD toward zero.
+    `src/analysis/buffer_overlap_sensitivity.py` re-runs the primary DiD without those 82
+    villages: all four results stay null (full-year NDBI p = 0.322, full-year lights
+    p = 0.511, summer NDBI p = 0.631, summer lights p = 0.783), so the overlap does not
+    explain the null.
+    """)
+
+with st.expander("**Extraction Timing and Cloud Masking — Two Open Items**"):
+    st.markdown("""
+    Treated and control summer data were pulled one day apart (16 and 17 September 2026,
+    after the Entry 37 control re-extraction), and the full-year treated data dates from the
+    original July 2026 pull while the full-year control data is from September 2026. Given
+    the Sentinel-2 archive backfill this study found in Entries 21–22, the full-year
+    treated/control comparison is not same-day; a same-day full-year re-pull has not been run.
+
+    Separately, all Sentinel-2 composites use the QA60 cloud mask. According to the Earth
+    Engine catalog, QA60 was not populated for Sentinel-2 scenes from early 2022 until early
+    2024 (this has not been re-checked for this project). If so, the **2023** multi-year
+    composites were built with little or no cloud masking, which could contribute to the
+    2023 dip in Figure 8. The 2019, 2021 and 2025 composites fall outside that gap.
     """)
 
 with st.expander("**Statistical Power — What This Design Could (and Couldn't) Detect**"):

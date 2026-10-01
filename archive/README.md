@@ -29,7 +29,7 @@ Note: `outputs/figures/imgg1.png` is **not** archived — despite the similar fi
 
 | File | Original path | Why it's here |
 |---|---|---|
-| `border optics maps.pdf` | repo root | An earlier, 6-page draft of what `BORDER_OPTICS_Maps_and_Plots.pdf` (16 pages, current) superseded. Confirmed no `.py` or `.md` file references it by name. The filename's space was also flagged as a hygiene issue independently of its staleness. |
+| `border optics maps.pdf` | repo root | An earlier, 6-page draft of what `BORDER_OPTICS_Maps_and_Plots.pdf` superseded. (That newer PDF is not currently in the repository; `build_maps_plots_pdf.py` regenerates it.) Confirmed no `.py` or `.md` file references it by name. The filename's space was also flagged as a hygiene issue independently of its staleness. |
 
 ## `superseded_scripts/`
 

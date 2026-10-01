@@ -88,7 +88,7 @@ def make_treated_vs_control_map():
     folium.LayerControl(collapsed=False).add_to(m)
     m.get_root().html.add_child(folium.Element(title_html(
         "BORDER OPTICS — Treated vs. Non-VVP Control Group",
-        f"{treated['village'].nunique()} treated villages (watermelon) vs. {control['village'].nunique()} "
+        f"{len(treated)} treated villages (watermelon) vs. {len(control)} "
         "district-restricted control villages (mint), same 14 districts",
     )))
     out_path = "outputs/interactive_maps/maps/village_treated_vs_control_map.html"
@@ -132,7 +132,8 @@ def make_recovery_map():
     folium.LayerControl(collapsed=False).add_to(m)
     m.get_root().html.add_child(folium.Element(title_html(
         "BORDER OPTICS — 2023-to-2025 Recovery",
-        "The sub-period driving the reported 2021-vs-2025 increase (summer window, core sample)",
+        "2023-to-2025 NDBI change, summer window, core sample. It follows a 2021-to-2023 decline, and the two "
+        "net out to a non-significant 2021-vs-2025 change (Research Paper §4.2, §4.7)",
     )))
     out_path = "outputs/interactive_maps/maps/village_recovery_2023_2025_map.html"
     m.save(out_path)

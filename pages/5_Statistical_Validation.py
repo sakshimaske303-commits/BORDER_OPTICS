@@ -29,7 +29,7 @@ st.markdown("---")
 
 _checks = [
     (PALETTE['accent'], "✓", "Dual Compositing-Window Test"),
-    (PALETTE['accent'], "✓", "Two Independent Metrics (NDBI + VIIRS)"),
+    (PALETTE['accent'], "✓", "Two Separate Metrics (NDBI + VIIRS)"),
     (PALETTE['accent'], "✓", "Wilcoxon Signed-Rank Tests"),
     (PALETTE['accent'], "✓", "District-Restricted Non-VVP Control Group (721 villages, DiD)"),
     (PALETTE['accent'], "✓", "Control-Group DiD Checked Further (Leave-One-District-Out + Randomization Inference)"),
@@ -252,7 +252,8 @@ for col, window_key, window_label, border in [
     with col:
         st.markdown(card_html, unsafe_allow_html=True)
 st.caption(
-    "Night-lights' own before/after change is a clean null in both windows (see H1 below). Against "
+    "Night-lights' own before/after change shows no significant *increase* in either window (the "
+    "one-sided tests above). Run two-sided, summer night-lights is a significant *decrease* (p=1.2e-5). Against "
     "the control group, the full-year gap had briefly looked significant under district fixed effects "
     "(but not the no-fixed-effects comparison) — until the control group itself was found to contain "
     "23 villages that were physically or nominally duplicate of treated villages (Development Log "
@@ -267,11 +268,12 @@ st.image(
     use_container_width=True,
 )
 st.caption(
-    "Baseline (2021) balance check: on the complete, decontaminated data, all four outcome/window "
-    "combinations are now statistically balanced between treated and control villages — including "
-    "night-lights, full-year, this study's single worst imbalance before the control-group "
-    "contamination fix (Development Log Entry 25). This is a level-balance check, not a confirmed "
-    "shared pre-trend, either way (see Methodology & Limitations)."
+    "Baseline (2021) balance check on the current 721-village control list: three of the four "
+    "outcome/window combinations are balanced (full-year NDBI p=0.181, summer NDBI p=0.461, summer "
+    "night-lights p=0.088). Full-year night-lights is significantly imbalanced (p=0.036). It had looked "
+    "balanced on the 732-village list (p=0.090, Entry 25), and the Entry 37 district-verification fix "
+    "reopened it. The full-year night-lights DiD itself stays null. This is a level-balance check, not a "
+    "shared pre-trend test; the 2019-2021 placebo test is on the Methodology & Limitations page."
 )
 
 st.markdown("---")
@@ -300,7 +302,9 @@ st.image(
 st.caption(
     "The 2021-vs-2025 summer NDBI comparison is a null on its own (see H1 above). This three-point "
     "breakdown shows why: a 2021-to-2023 decline followed by a 2023-to-2025 recovery nets out to "
-    "no significant overall trend either way — consistent with, not contradicting, that null result."
+    "no significant overall summer trend (p=0.442). The full-year window is different: its per-village "
+    "slopes show a significant *decline* in NDBI (panel regression p<0.000001), and full-year night-lights "
+    "slopes are borderline significant upward (one-sided Wilcoxon p=0.0500). See Research Paper §4.7."
 )
 
 st.markdown("---")
@@ -324,7 +328,7 @@ for col, r in zip(buf_cols, expanded["buffer_sensitivity"]["matched_subsample"])
 
 st.image(
     "outputs/figures/10_buffer_sensitivity.png",
-    caption="NDBI Wilcoxon p-value (log scale) at each buffer radius — as-extracted samples vs. the matched subsample present at all three radii.",
+    caption="NDBI Wilcoxon p-value (log scale) at each buffer radius, all three radii pulled the same day, n=251 at every radius.",
     use_container_width=True,
 )
 
@@ -363,10 +367,13 @@ verdict_html = (
     'control-group gap then took that result\u2019s place as this study\u2019s one remaining significant '
     'finding \u2014 until the control group itself was found to contain 23 villages that were '
     'physically or nominally duplicates of treated villages (Development Log Entry 23), and once '
-    'that contamination was actually removed and the control list regenerated (732 villages, '
-    'independently verified at zero overlap \u2014 Entry 25), that gap failed every specification that '
-    'had previously found it significant too (see the cards and figures above). No control-group '
-    'result, for either outcome or window, clears significance under any specification any more. '
+    'that contamination was actually removed and the control list regenerated (732 villages at '
+    'Entry 25, 721 after the Entry 37 district-verification fix, independently verified at zero '
+    'overlap), that gap failed every specification that had previously found it significant too (see '
+    'the cards and figures above). No NDBI or night-lights control-group result, for either outcome or '
+    'window, clears significance under any specification any more. The one exception in this study is '
+    'the Dynamic World triangulation proxy, whose control-group DiD is significant in both windows '
+    '(see Methodology & Limitations). '
     'Both reversals, not either individual result, are the core honesty check of the entire analysis.'
     '</p></div>'
 )

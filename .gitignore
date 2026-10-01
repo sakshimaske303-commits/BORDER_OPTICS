@@ -6,7 +6,6 @@ __pycache__/
 *.pyc
 .venv/
 venv/
-.streamlit/
+.streamlit/secrets.toml
 .ipynb_checkpoints/
 *.egg-info/
-ANALYSIS_FREEZE.md

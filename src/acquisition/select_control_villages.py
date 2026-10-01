@@ -355,6 +355,8 @@ def main():
             # don't claim yet -- might still get cut by the cap below
 
         cap = len(group) * MAX_CANDIDATES_PER_DISTRICT_MULTIPLIER
+        # NB: keeps the candidates CLOSEST to the border first (not a random draw) -- disclosed in
+        # BO_Research_Paper.md §3.7 as a selection rule on border proximity.
         kept = sorted(kept, key=lambda c: c["distance_to_border_km"])[:cap]
         # only claim what actually survives the cap
         for c in kept:

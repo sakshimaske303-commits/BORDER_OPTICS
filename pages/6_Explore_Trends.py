@@ -68,8 +68,7 @@ st.caption(
     "Sikkim's summer-matched composite once returned zero cloud-free imagery for all of its "
     "villages, due to an archive-timing gap rather than permanent monsoon-cloud data loss — "
     "resolved as of a complete re-extraction (Development Log Entries 21–22), so all three "
-    "core states now appear above in both windows (see Statistical Validation and "
-    "Methodology & Limitations)."
+    "core states now appear above (see Statistical Validation and Methodology & Limitations)."
 )
 
 st.markdown("##### Static exports (used in Research Paper)")
@@ -137,10 +136,10 @@ st.plotly_chart(fig_trend, use_container_width=True)
 
 st.caption(
     f"{my_state_choice} · {my_window_choice.lower()} window · n = {my_scope[f'{trend_prefix}_2021'].count()} villages with complete 2021/2023/2025 data. "
-    "The overall summer-matched NDBI trend across all three years is not itself statistically significant "
-    "(Wilcoxon on per-village slopes, p = 0.442) — consistent with the two-point 2021-vs-2025 comparison, "
-    "also not significant on the complete data. This shape is a 2023-to-2025 recovery following an earlier "
-    "2021-to-2023 decline that nets out to no overall trend either way (see Statistical Validation)."
+    "Core-sample test results (all states pooled): summer NDBI shows a 2021-to-2023 decline and a 2023-to-2025 "
+    "recovery that net out to no significant trend (p = 0.442). Full-year NDBI shows a significant overall "
+    "*decline* (panel regression p < 0.000001). Full-year night-lights slopes are borderline significant "
+    "upward (p = 0.0500); summer night-lights has no significant overall trend (see Research Paper §4.7)."
 )
 
 st.image(

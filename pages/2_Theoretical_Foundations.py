@@ -37,14 +37,17 @@ st.markdown("### High Relief Distorts What a Satellite Actually Sees")
 st.markdown("""
 BORDER OPTICS' 258 study villages sit across some of the steepest, highest-relief terrain any
 satellite-based verification study can be run on — the Himalayan border belt of Arunachal
-Pradesh, Sikkim, Uttarakhand, Himachal Pradesh, and Ladakh. That relief is not a neutral
-backdrop; it actively distorts the built-up-area signal this project measures. A satellite
-sensor images the ground along an oblique line of sight, not straight down, so a slope facing
-away from the sensor falls into **shadow**, while a slope facing toward it appears compressed —
-**foreshortening**, where a physically large slope area is mapped into a deceptively small number
-of pixels. Both effects change how much "built-up" surface a village's true footprint appears to
-occupy in a Sentinel-2 scene, independent of any real construction activity — a geometric
-confound layered on top of the genuine NDBI signal this project is trying to isolate.
+Pradesh, Sikkim, Uttarakhand, and Himachal Pradesh (VVP-I also covers Ladakh, but no Ladakh village
+could be named, so none is in this sample). That relief is not a neutral backdrop; it actively
+distorts the built-up-area signal this project measures. For an optical sensor like Sentinel-2,
+which looks almost straight down, the main effect is **illumination**: slopes facing away from the
+sun fall into **terrain shadow**, and the same slope is lit differently at different times of year
+as the sun angle changes. Steep slopes are also compressed into fewer pixels when seen from above.
+Both effects change how much "built-up" surface a village's true footprint appears to occupy in a
+Sentinel-2 scene, independent of any real construction activity — a geometric confound layered on
+top of the genuine NDBI signal this project is trying to isolate. (Radar sensors like Sentinel-1,
+used here only as a cross-check, look sideways instead and add their own **foreshortening** and
+radar-shadow effects.)
 """)
 
 st.markdown("---")
@@ -78,8 +81,9 @@ already discloses on its Methodology & Limitations page: full-year composites ri
 contamination at high altitude, while summer-matched composites are more exposed to monsoon
 cloud. Summer-matched Sikkim once returned zero cloud-free imagery for all of its villages under
 this exposure — but that turned out to be an archive-timing snapshot, not a permanent data gap,
-and is resolved as of a complete re-extraction (Development Log Entries 21-22): both compositing
-windows now agree that built-up change is not significant, including for Sikkim specifically. Both
+and is resolved as of a complete re-extraction (Development Log Entries 21-22): neither compositing
+window shows a significant built-up *increase*, including for Sikkim specifically (run two-sided,
+the full-year window actually shows a significant *decrease*). Both
 failure modes still trace back to the same underlying cause mapped in the diagram above — Himalayan
 relief drives both the imaging-geometry distortion and the altitude-driven seasonal cloud/snow
 exposure that this study's dual-window design exists specifically to check for.

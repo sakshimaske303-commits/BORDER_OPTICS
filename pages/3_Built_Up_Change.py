@@ -19,7 +19,7 @@ st.markdown("""
 NDBI (Normalized Difference Built-up Index) is a spectral proxy for built-up surface,
 computed from Sentinel-2 SWIR1/NIR reflectance — it is not a direct, cadastral measurement
 of construction. A positive change is consistent with new built-up area; a negative change
-with a reduction. (See the ground-truth case studies under Statistical Validation for where
+with a reduction. (See the ground-truth case studies under Methodology & Limitations for where
 this proxy and confirmed real construction disagree.)
 """)
 

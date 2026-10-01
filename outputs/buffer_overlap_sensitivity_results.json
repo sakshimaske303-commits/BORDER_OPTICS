@@ -1,0 +1,44 @@
+{
+  "n_control_total": 721,
+  "n_control_overlapping": 82,
+  "n_control_within_200m": 5,
+  "threshold_m": 1000,
+  "did_excluding_overlap": [
+    {
+      "window": "full_year",
+      "outcome": "ndbi",
+      "n_treated": 251,
+      "n_control": 639,
+      "did_coef": 0.006830447897707192,
+      "did_se": 0.006896827553298766,
+      "did_p": 0.32199069666024704
+    },
+    {
+      "window": "full_year",
+      "outcome": "lights",
+      "n_treated": 251,
+      "n_control": 639,
+      "did_coef": 0.031853658616107616,
+      "did_se": 0.0484173299652905,
+      "did_p": 0.5106037546488854
+    },
+    {
+      "window": "summer",
+      "outcome": "ndbi",
+      "n_treated": 251,
+      "n_control": 639,
+      "did_coef": -0.0022177303815732108,
+      "did_se": 0.0046229659753888345,
+      "did_p": 0.6314263286634707
+    },
+    {
+      "window": "summer",
+      "outcome": "lights",
+      "n_treated": 251,
+      "n_control": 639,
+      "did_coef": 0.011172542945760186,
+      "did_se": 0.040475641391675476,
+      "did_p": 0.7825240441940542
+    }
+  ]
+}

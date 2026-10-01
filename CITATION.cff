@@ -10,7 +10,7 @@ url: "https://github.com/sakshimaske303-commits/BORDER_OPTICS"
 identifiers:
   - type: doi
     value: "10.5281/zenodo.21759970"
-    description: "Zenodo archive of BORDER OPTICS v1.0.0"
+    description: "Zenodo archive of BORDER OPTICS (the DOI record describes an earlier version; see the repository for the current one)"
 doi: "10.5281/zenodo.21759970"
 abstract: >-
   An independent satellite-verification study of India's Vibrant Villages
@@ -22,7 +22,7 @@ abstract: >-
   membership independently verified against real administrative boundaries
   for all but one district), this study tests
   whether VVP-I's priority villages show measurable physical development
-  since programme sanction, under two independent compositing windows
+  since programme sanction, under two compositing windows
   (full-year and summer-matched) as an explicit robustness check rather than
   trusting a single satellite comparison. Two earlier versions of this study
   each found a significant result that turned out, on inspection, to be a
@@ -46,7 +46,9 @@ abstract: >-
   randomization-inference, and a further spatial-autocorrelation-calibrated
   permutation test, and survives all three (spatially-corrected p = 0.0035
   full-year night-lights, p = 0.0295 summer NDBI) — a real secondary finding,
-  running opposite to the direction predicted by securitization theory. Most
+  though its two versions point in opposite directions: summer NDBI change
+  rises away from the border (against securitization theory's prediction),
+  full-year night-lights change rises toward it (in line with it). Most
   significantly, triangulating the primary NDBI/night-lights design against
   two secondary satellite proxies of different kinds — Sentinel-1 SAR
   backscatter (a genuinely different sensor, radar not optical) and Dynamic
@@ -112,5 +114,5 @@ keywords:
   - India
   - geospatial analysis
 license: CC-BY-4.0
-version: 1.6.0
-date-released: "2026-09-18"
+version: 1.7.0
+date-released: "2026-09-30"

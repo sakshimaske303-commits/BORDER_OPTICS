@@ -112,29 +112,25 @@ def build_buffer_sensitivity():
     with open(f"{DATA}/border_optics_buffer_sensitivity_summary.json") as f:
         buf = json.load(f)
 
-    as_extracted = {r["buffer_m"]: r["ndbi_wilcoxon_p"] for r in buf["as_extracted"]}
-    matched = {r["buffer_m"]: r["wilcoxon_p"] for r in buf["matched_subsample"]}
+    # Since the Entry 31 same-day re-pull every radius has n=251, so the old "as extracted" vs
+    # "matched subsample" pair is two identical series -- one series, like static Figure 9.
+    rows = {r["buffer_m"]: r for r in buf["as_extracted"]}
     buffers = [250, 500, 1000]
     labels = [f"{b}m" for b in buffers]
 
     fig = go.Figure()
     fig.add_trace(go.Bar(
-        x=labels, y=[max(as_extracted[b], 1e-7) for b in buffers],
-        name="As extracted (same-day pull, n=251 at every radius)", marker_color="#B0B0B0",
+        x=labels, y=[max(rows[b]["ndbi_wilcoxon_p"], 1e-7) for b in buffers],
+        customdata=[[rows[b]["ndbi_mean_change"], rows[b]["ndbi_n_valid"]] for b in buffers],
+        name="Same-day pull, n=251 at every radius", marker_color=GREEN,
         marker_line=dict(color="black", width=1),
-        hovertemplate="%{x}<br>p = %{y:.5g}<extra>As extracted</extra>",
-    ))
-    fig.add_trace(go.Bar(
-        x=labels, y=[max(matched[b], 1e-7) for b in buffers],
-        name="Matched subsample (n=251, valid at all three radii)", marker_color=GREEN,
-        marker_line=dict(color="black", width=1),
-        hovertemplate="%{x}<br>p = %{y:.5g}<extra>Matched subsample</extra>",
+        hovertemplate="%{x}<br>p = %{y:.4f}<br>mean change = %{customdata[0]:+.5f}<br>n = %{customdata[1]}<extra></extra>",
     ))
     fig.add_hline(y=0.05, line_color=RED, annotation_text="p = 0.05", annotation_position="top right")
     fig.update_layout(
         title="Buffer-Radius Sensitivity: NDBI Significance, Summer Window",
         xaxis_title="Buffer radius", yaxis_title="NDBI Wilcoxon p-value (log scale)",
-        yaxis_type="log", barmode="group",
+        yaxis_type="log",
         height=480, hovermode="x unified", **{**DARK_LAYOUT, "margin": dict(t=70, b=50, l=70, r=30)},
     )
     fig.write_html(f"{OUT}/buffer_sensitivity.html", include_plotlyjs="cdn")

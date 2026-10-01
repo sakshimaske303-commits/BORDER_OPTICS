@@ -80,8 +80,8 @@ def test_control_group_no_duplicate_coordinates():
     n_unique = len(set(coords))
     assert n_unique == len(coords), (
         f"Found {len(coords) - n_unique} duplicate coordinate(s) in the control-village list "
-        f"— this is exactly the cross-district matching bug Development Log Entry 22 found and "
-        f"fixed (106 duplicate-coordinate rows in an earlier version). Re-run "
+        f"— this is exactly the cross-district matching bug Development Log Entries 14-15 found and "
+        f"fixed (18 duplicate rows, 753 -> 735 villages). Re-run "
         f"select_control_villages.py's dedup logic rather than hand-editing the CSV."
     )
 

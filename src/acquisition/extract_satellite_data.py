@@ -1,6 +1,10 @@
 """Buffers each village 500m, pulls NDBI (Sentinel-2) and VIIRS night-lights
-for full_year/summer windows. Null (not zero) when a period has no
-cloud-free images.
+for full_year/summer windows. Null (not zero) when a period has no images.
+
+Note on the *_image_count columns: they are collection.size() taken BEFORE the
+QA60 cloud mask is applied, so they count scenes that intersect the buffer, not
+cloud-free scenes. A village can have a non-zero count and still get a null
+NDBI if every pixel is masked.
 """
 
 import argparse

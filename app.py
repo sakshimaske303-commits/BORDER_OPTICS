@@ -94,7 +94,7 @@ with col2:
 with col3:
     st.metric("STATISTICAL SIGNIFICANCE", f"p = {p_val:.4f}" if p_val == p_val else "—")
 with col4:
-    st.metric("VILLAGES VERIFIED", f"{len(villages)}", "Multi-Source Geocoded")
+    st.metric("VILLAGES GEOCODED", f"{len(villages)}", "Multi-Source Geocoded")
 
 st.markdown("---")
 
@@ -113,9 +113,9 @@ st.markdown(
             spending against satellite-observed physical change, rather than trusting official progress
             reports alone. An earlier version of this project reported an unresolved instability between
             two measurement choices as its headline finding; once the underlying satellite extraction was
-            completed rather than left partial, that instability resolved to a consistent null across both
-            windows — and that reversal, including how it happened, is reported here rather than the
-            original result left standing.
+            completed rather than left partial, neither window shows a significant built-up increase
+            — and that reversal, including how it happened, is reported here rather than the original
+            result left standing.
         </p>
     </div>
     """,
@@ -161,9 +161,12 @@ with col_right:
             its place as this study's one remaining significant finding, until the control
             group itself was found to be contaminated with 23 villages that were physically or
             nominally duplicates of treated villages. With that fixed and the control list
-            regenerated, that result is null too: no control-group DiD result, for either
-            outcome or window, clears significance under any specification any more. See
-            Statistical Validation for the full breakdown.
+            regenerated, that result is null too: no NDBI or night-lights control-group DiD
+            result, for either outcome or window, clears significance under any specification
+            any more. One cross-check does not agree: Dynamic World's machine-learned built-up
+            probability shows a small but significant control-group effect in both windows.
+            That disagreement is reported as an open question, not resolved. See Statistical
+            Validation and Methodology &amp; Limitations for the full breakdown.
         </p>
     </div>
     """, unsafe_allow_html=True)
