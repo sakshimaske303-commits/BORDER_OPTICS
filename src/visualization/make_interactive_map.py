@@ -69,7 +69,7 @@ def title_html(title, subtitle):
 
 def add_base_tiles(m):
     folium.TileLayer(
-        tiles="CartoDB dark_matter",
+        tiles="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}", attr="Tiles &copy; Esri — Esri, HERE, Garmin, &copy; OpenStreetMap contributors", max_native_zoom=16,
         name="Dark Mode",
         control=True,
     ).add_to(m)

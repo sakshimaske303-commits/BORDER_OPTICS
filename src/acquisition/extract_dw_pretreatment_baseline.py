@@ -1,6 +1,6 @@
 """
 2019 Dynamic World baseline -- the DW analogue of extract_pretreatment_baseline.py.
-Anara AI's suggestion #2: since Dynamic World shows a small but significant
+An external review's suggestion #2: since Dynamic World shows a small but significant
 control-group effect (Section 6, triangulation) while NDBI doesn't, a genuine
 placebo test on DW itself (not just on NDBI/lights) is worth having before
 trusting that DW gap as real rather than a pre-existing trend.
