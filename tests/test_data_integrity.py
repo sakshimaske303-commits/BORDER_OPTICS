@@ -217,6 +217,53 @@ def test_district_cluster_count():
     )
 
 
+def test_treated_duplicate_coordinates():
+    """Added Entry 49. 7 locations each carry 2 treated villages (e.g. Kitpi / Kitpi II, Pekong x2),
+    so those pairs share identical satellite values. Documented ceiling 7 until geocode QA
+    (docs/NEXT_STEPS_EARTH_ENGINE.md, step 5) resolves them; lower it to 0 afterwards."""
+    KNOWN_TREATED_DUPLICATE_CEILING = 7
+    core = pd.read_csv(MASTER_PATH)
+    core = core[core["is_core_sample"] == True]
+    n_dup_locations = int(core.duplicated(subset=["latitude", "longitude"], keep="first").sum())
+    assert n_dup_locations <= KNOWN_TREATED_DUPLICATE_CEILING, (
+        f"{n_dup_locations} treated villages share coordinates with another treated village -- "
+        f"more than the {KNOWN_TREATED_DUPLICATE_CEILING} documented in Development Log Entry 49."
+    )
+
+
+def test_control_not_official_priority_village_with_qualifier():
+    """Added Entry 49. The exact-name check above misses official names written with a
+    qualifier ("Sawa" vs "Sawa H.Q.", "Bomdir" vs "Bomdir Basti"). 10 such controls are in the
+    committed 721-village list (sensitivity: sample_qa_sensitivity.py, no conclusion changes);
+    select_control_villages.py now excludes them, so lower this ceiling to 0 after regenerating."""
+    KNOWN_QUALIFIER_CONTAMINATION_CEILING = 10
+    sys.path.insert(0, os.path.join(ROOT, "src", "analysis"))
+    from sample_qa_sensitivity import suffix_matched_control_ids
+
+    cwd = os.getcwd()
+    os.chdir(ROOT)
+    try:
+        n = len(suffix_matched_control_ids())
+    finally:
+        os.chdir(cwd)
+    assert n <= KNOWN_QUALIFIER_CONTAMINATION_CEILING, (
+        f"{n} control villages match an official priority-village name once qualifiers are "
+        f"stripped -- more than the {KNOWN_QUALIFIER_CONTAMINATION_CEILING} documented in Entry 49."
+    )
+
+
+def test_lac_distance_reproduces_committed_distance():
+    """Added Entry 49. border_optics_lac_distance.csv recomputes the all-borders distance with
+    the same rule as compute_border_distance.py; it must agree with the committed column."""
+    path = os.path.join(DATA, "border_optics_lac_distance.csv")
+    if not os.path.exists(path):
+        print("  SKIPPED test_lac_distance_reproduces_committed_distance: run compute_lac_distance.py")
+        return
+    d = pd.read_csv(path)
+    worst = (d["distance_to_border_km_recomputed"] - d["distance_to_border_km"]).abs().max()
+    assert worst < 0.001, f"recomputed border distance differs from the committed one by {worst:.4f} km"
+
+
 if __name__ == "__main__":
     tests = [
         test_core_sample_size,
@@ -231,6 +278,9 @@ if __name__ == "__main__":
         test_did_panel_row_count,
         test_did_panel_no_duplicate_village_period_rows,
         test_district_cluster_count,
+        test_treated_duplicate_coordinates,
+        test_control_not_official_priority_village_with_qualifier,
+        test_lac_distance_reproduces_committed_distance,
     ]
     n_pass, n_fail = 0, 0
     for t in tests:

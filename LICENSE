@@ -31,3 +31,18 @@ This is a human-readable summary of (and not a substitute for) the full
 license text. The complete legal code is available at:
 
 https://creativecommons.org/licenses/by/4.0/legalcode
+
+THIRD-PARTY DATA (added in v2.0)
+
+The CC BY 4.0 licence above covers the author's own work. Data obtained from
+third parties keep their own terms:
+
+  - Data derived from OpenStreetMap (village coordinates from Nominatim, the
+    control-village lists in data/processed/*control* and outputs extracted
+    for those villages) are © OpenStreetMap contributors and available under
+    the Open Database License (ODbL 1.0): https://www.openstreetmap.org/copyright
+  - Satellite-derived values contain modified Copernicus Sentinel data (ESA)
+    and NOAA/EOG VIIRS data, accessed through Google Earth Engine.
+  - Dynamic World (CC BY 4.0) and Google Open Buildings (CC BY 4.0 / ODbL)
+    are used under their respective licences.
+  - Natural Earth boundary lines are in the public domain.

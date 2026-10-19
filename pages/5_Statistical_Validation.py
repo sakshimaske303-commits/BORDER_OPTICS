@@ -1,3 +1,4 @@
+import json
 import streamlit as st
 import pandas as pd
 from scipy import stats
@@ -38,10 +39,11 @@ _checks = [
     (PALETTE['accent'], "✓", "Cross-Checked Against Sanctioned Budget"),
     (PALETTE['accent'], "✓", "Every Data Gap Disclosed"),
     (PALETTE['accent'], "✓", "Original Summer NDBI Signal Re-Checked Once Extraction Was Completed — Did Not Survive"),
-    (PALETTE['accent'], "✓", "Border-Proximity Correlation (H3) — Stress-Tested (Leave-One-Out, Randomization, Spatial Correction) — Survives"),
+    (PALETTE['accent'], "✓", "Border Proximity (H3) Tested Within Districts — Pooled Correlations Disappear or Reverse"),
+    (PALETTE['accent'], "✓", "Detectability in Physical Units — NDBI Cannot See Village-Scale Construction"),
     (PALETTE['accent'], "✓", "Exact Wild Cluster Bootstrap (16,384 Sign-Flip Combinations) — DiD Null Confirmed"),
     (PALETTE['accent'], "✓", "Genuine Pre-Treatment (2019) Placebo Test — Mostly Clean, One Borderline Result Flagged"),
-    (PALETTE['warning'], "!", "Triangulation vs. SAR + Dynamic World — Open Tension, Not a Confirmation (see Methodology & Limitations)"),
+    (PALETTE['warning'], "!", "Dynamic World Shows a Small Positive DiD (Bootstrap p = 0.041 / 0.008) — Cause Not Yet Established"),
 ]
 _badges = "".join(
     f"""<span style="display:inline-flex; align-items:center; gap:6px; background:rgba(167,225,193,0.08);
@@ -162,20 +164,30 @@ h3_table = pd.DataFrame({
     "Summer (ρ)": [f"{sm_rho_n:.3f}" if sm_rho_n is not None else "—", f"{sm_rho_l:.3f}" if sm_rho_l is not None else "—"],
     "Summer (p)": [f"{sm_p_n:.4f}" if sm_p_n is not None else "—", f"{sm_p_l:.4f}" if sm_p_l is not None else "—"],
 })
+with open("outputs/h3_within_district_results.json") as _f:
+    _h3w = json.load(_f)
+_w = lambda win, out: _h3w[f"{win}|{out}|distance_to_border_km"]
+h3_table["Full-Year within-district ρ (perm. p)"] = [
+    f"{_w('full_year', o)['within_district_rank_corr']:+.3f} ({_w('full_year', o)['within_district_perm_p']:.4f})"
+    for o in ["ndbi_change", "lights_change"]]
+h3_table["Summer within-district ρ (perm. p)"] = [
+    f"{_w('summer', o)['within_district_rank_corr']:+.3f} ({_w('summer', o)['within_district_perm_p']:.4f})"
+    for o in ["ndbi_change", "lights_change"]]
 st.dataframe(h3_table, use_container_width=True, hide_index=True)
 st.caption(
-    "The two Holm-significant correlations here (summer NDBI ρ=+0.291, full-year lights ρ=-0.252) have "
-    "since been stress-tested: 14/14 leave-one-district-out reruns significant with the same sign, "
-    "randomization-inference p<0.001 for both, and — the more conservative test, since these villages are "
-    "not spatially independent — a spatial-autocorrelation-calibrated permutation test still gives "
-    "p=0.0295 (summer NDBI) and p=0.0035 (full-year lights). Both survive, though the summer NDBI result "
-    "is the more fragile of the two on every check run against it. Still exploratory given the "
-    "border-geometry caveats (see Methodology & Limitations) — a correlation, not a causal claim."
+    "Pooled across all villages, summer NDBI change rises with distance from the boundary and full-year "
+    "night-light change falls with it. Ranked within their own districts, neither holds: the summer NDBI "
+    "association disappears and the night-light association reverses (villages farther from the boundary "
+    "gained more light, in both windows). The pooled correlations therefore reflect which districts lie "
+    "closer to the boundary, not a proximity gradient, and earlier checks (leave-one-district-out, "
+    "randomization, spatial correction) could not reveal this because none separates within- from "
+    "between-district variation. Same result with distance to the China boundary only "
+    "(outputs/h3_within_district_results.json)."
 )
 
 st.image(
     "outputs/figures/03_h3_border_distance_vs_lights.png",
-    caption="Static export: distance-to-border vs. night-lights change, both composite windows",
+    caption="Distance to the nearest boundary vs. change, coloured by district, with pooled and within-district ρ",
     use_container_width=True,
 )
 
@@ -192,7 +204,7 @@ st.markdown(
     "fixed effects, standard errors clustered by district. Checked further by dropping each "
     "district one at a time and by randomization inference that doesn't lean on cluster "
     "asymptotics — see the cards below for each window's own leave-one-out and randomization "
-    "results, and the Research Paper's Section 4.6 for the full breakdown, including why the "
+    "results, and the Research Paper's §5.2 and §6 for the full breakdown, including why the "
     "summer-window checks (which used to hold 14/14 and p = 0.0005) no longer do, and why the "
     "full-year night-lights check, which briefly held after that (10/14, p = 0.0155), also no "
     "longer does once the control group's own contamination was found and fixed (Development "
@@ -264,7 +276,8 @@ st.caption(
 
 st.image(
     "outputs/figures/08_control_group_did_effect.png",
-    caption="District-fixed-effects DiD coefficient (treated-vs-control gap in change) with 95% CIs, NDBI and night-lights, both windows.",
+    caption="Treated-vs-control DiD, 95% intervals (t, 13 df) and wild-bootstrap p-values. Green band: the NDBI change "
+            "that doubling a typical village's buildings would produce.",
     use_container_width=True,
 )
 st.caption(
@@ -274,6 +287,40 @@ st.caption(
     "balanced on the 732-village list (p=0.090, Entry 25), and the Entry 37 district-verification fix "
     "reopened it. The full-year night-lights DiD itself stays null. This is a level-balance check, not a "
     "shared pre-trend test; the 2019-2021 placebo test is on the Methodology & Limitations page."
+)
+
+st.markdown("---")
+
+# ============================================================
+# DETECTABILITY + DYNAMIC WORLD (v2.0, Development Log Entry 49)
+# ============================================================
+st.markdown("### What Could the Satellite Measures Detect?")
+with open("outputs/measurement_sensitivity_results.json") as _f:
+    _ms = json.load(_f)
+with open("outputs/dynamic_world_robustness_results.json") as _f:
+    _dwr = json.load(_f)
+_rows = []
+for _key, _label in [("ndbi_full_year", "NDBI, full year"), ("ndbi_summer", "NDBI, summer"),
+                     ("dw_built_full_year", "Dynamic World, full year"), ("dw_built_summer", "Dynamic World, summer")]:
+    _o = _ms["outcomes"][_key]
+    _lo, _hi = _o["did_ci95_t_as_building_area_m2"]
+    _rows.append({
+        "Measure": _label,
+        "Change from doubling a typical village's buildings": f"{_o['tost_sesoi_index_units']:+.4f}",
+        "DiD estimate": f"{_o['did']['coef']:+.4f} (p = {_o['did']['p_t']:.3f})",
+        "DiD as building-equivalent area": f"{_o['did_coef_as_building_area_m2']:+,.0f} m²",
+        "95% CI, building-equivalent area": f"{_lo:+,.0f} to {_hi:+,.0f} m²",
+    })
+st.dataframe(pd.DataFrame(_rows), use_container_width=True, hide_index=True)
+st.caption(
+    f"Buildings cover a median {100 * _ms['median_treated_building_share_of_buffer']:.2f}% of a 500 m buffer, so a "
+    "buffer-average index barely moves when a village builds. For NDBI, doubling a typical village's buildings is "
+    "about one seventh of the smallest DiD effect the design can detect: the NDBI null cannot rule out "
+    "construction. Dynamic World responds three to four times more strongly to buildings, and its DiD corresponds "
+    "to several hundred to about two thousand square metres of built-up surface per village. Wild-bootstrap "
+    f"p = {_dwr['full_year_main']['wild_cluster_bootstrap_p']:.3f} (full year) and "
+    f"{_dwr['summer_main']['wild_cluster_bootstrap_p']:.3f} (summer); the summer result holds in all leave-one-"
+    "district-out reruns, the full-year one depends on Sikkim."
 )
 
 st.markdown("---")
@@ -304,7 +351,7 @@ st.caption(
     "breakdown shows why: a 2021-to-2023 decline followed by a 2023-to-2025 recovery nets out to "
     "no significant overall summer trend (p=0.442). The full-year window is different: its per-village "
     "slopes show a significant *decline* in NDBI (panel regression p<0.000001), and full-year night-lights "
-    "slopes are borderline significant upward (one-sided Wilcoxon p=0.0500). See Research Paper §4.7."
+    "slopes are borderline significant upward (one-sided Wilcoxon p=0.0500). Treat the 2023 point with care: Sentinel-2's QA60 cloud band is empty for most of 2022–2024 in the harmonized collection, so the 2023 composites may be effectively unmasked and the dip should not be interpreted. See Research Paper §5.1 and §6."
 )
 
 st.markdown("---")
@@ -354,33 +401,21 @@ verdict_html = (
     '<div class="recon-card" style="border-left: 4px solid ' + PALETTE["accent"] + ';">'
     '<p style="color: ' + PALETTE["accent"] + '; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Robustness Verdict</p>'
     '<p style="color: ' + PALETTE["text_primary"] + '; font-size: 0.9rem; margin: 0;">'
-    'Compare the full-year and summer-matched cards above. A result that keeps the same '
-    'sign and significance across both windows is treated as the more trustworthy finding. '
-    'A result that flips \u2014 in direction, significance, or both \u2014 is reported as evidence '
-    'of methodological instability rather than silently resolved by preferring one window. '
-    'This study has, in turn, found two of its own results clearing every check run against them, '
-    'only to fail once the underlying data problem behind each was actually fixed. First: the '
-    'summer-matched NDBI result cleared a control-group comparison, leave-one-district-out reruns, '
-    'randomization inference, a buffer-radius sweep, and Holm-Bonferroni correction \u2014 but that '
-    'result depended on an incomplete extraction missing an entire state\u2019s villages, and once '
-    'completed, it failed every one of those same checks. Second: the full-year night-lights '
-    'control-group gap then took that result\u2019s place as this study\u2019s one remaining significant '
-    'finding \u2014 until the control group itself was found to contain 23 villages that were '
-    'physically or nominally duplicates of treated villages (Development Log Entry 23), and once '
-    'that contamination was actually removed and the control list regenerated (732 villages at '
-    'Entry 25, 721 after the Entry 37 district-verification fix, independently verified at zero '
-    'overlap), that gap failed every specification that had previously found it significant too (see '
-    'the cards and figures above). No NDBI or night-lights control-group result, for either outcome or '
-    'window, clears significance under any specification any more. The one exception in this study is '
-    'the Dynamic World triangulation proxy, whose control-group DiD is significant in both windows '
-    '(see Methodology & Limitations). '
-    'Both reversals, not either individual result, are the core honesty check of the entire analysis.'
+    'NDBI, night lights and radar show no difference between priority and comparison villages under any '
+    'specification: cluster-robust (t, 13 df), wild cluster bootstrap, leave-one-district-out, randomization '
+    'inference, a 2019\u20132021 placebo, and sample-quality variants. That null is uninformative about construction, '
+    'because buffer-mean NDBI could not have detected even a doubling of a typical village\u2019s buildings. '
+    'Dynamic World\u2019s built-up probability, the most building-sensitive measure, shows a small positive '
+    'difference (bootstrap p = 0.041 full year, 0.008 summer); the summer result survives every check, the '
+    'full-year one depends on Sikkim. Earlier versions reported significant NDBI and night-light results that '
+    'disappeared once an incomplete extraction and a contaminated control list were fixed; the full record is '
+    'in the Development Log and Results Stability Table.'
     '</p></div>'
 )
 st.markdown(verdict_html, unsafe_allow_html=True)
 
 st.markdown("---")
 st.markdown(
-    "<p class='caption-text' style='text-align:center;'>BORDER OPTICS — Every result stress-tested, every limitation disclosed</p>",
+    "<p class='caption-text' style='text-align:center;'>BORDER OPTICS — every result reported with its limits</p>",
     unsafe_allow_html=True,
 )

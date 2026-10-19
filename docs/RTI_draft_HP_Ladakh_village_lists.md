@@ -1,7 +1,7 @@
 # Draft RTI Application — VVP-I Village-Wise Lists for Himachal Pradesh and Ladakh
 
 **Not filed, and not planned to be.** This was drafted in support of Section 7.4
-of `BO_Research_Paper.md`, but Sakshi has decided not to file it — the cost and
+of `BO_Research_Paper.md` (v1.7), but I have decided not to file it — the cost and
 multi-month reply timeline aren't justified for this project's scope. Kept here
 only as a transparency record of what was considered, not as an open task.
 Confirmed (September 2026) that no public source substitutes for it either:

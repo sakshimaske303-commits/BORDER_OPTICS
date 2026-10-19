@@ -14,7 +14,9 @@ after this fix, or resume logic thinks old (contaminated) rows are still good.
 """
 
 import time
+import re
 import unicodedata
+import zlib
 
 import geopandas as gpd
 import numpy as np
@@ -60,17 +62,60 @@ RETRYABLE_STATUS_CODES = {429, 502, 503, 504}
 MAX_DISTANCE_MULTIPLIER = 1.5   # candidate cap: up to 1.5x the treated sample's max distance
 MAX_CANDIDATES_PER_DISTRICT_MULTIPLIER = 3  # cap control count at 3x treated count per district
 
+# How the per-district cap picks candidates (Development Log Entry 49, review item B9).
+# "border_first" = original rule, keeps the candidates closest to the border (reproduces the
+# committed 721-village list); "random" = seeded random draw from the eligible pool, which
+# removes selection on border distance. Set from the command line (--selection, --seed, --out).
+SELECTION = "border_first"
+RANDOM_SEED = 42
+
+
+def apply_cap(kept, cap, district, selection=None, seed=None):
+    """Return at most `cap` candidates from `kept` using the chosen selection rule."""
+    selection = selection or SELECTION
+    seed = RANDOM_SEED if seed is None else seed
+    if selection == "border_first":
+        return sorted(kept, key=lambda c: c["distance_to_border_km"])[:cap]
+    if selection == "random":
+        # per-district seed so a resumed run draws exactly the same villages
+        rng = np.random.default_rng([seed, zlib.crc32(str(district).encode())])
+        ordered = sorted(kept, key=lambda c: (c["latitude"], c["longitude"]))  # stable input order
+        idx = rng.permutation(len(ordered))[:cap]
+        return [ordered[i] for i in sorted(idx)]
+    raise ValueError(f"unknown selection rule: {selection}")
+
 
 def normalize_name(name):
     name = unicodedata.normalize("NFKD", str(name)).encode("ascii", "ignore").decode()
     return " ".join(name.lower().split())
 
 
+_SUFFIX_RE = re.compile(r"\b(h\s*\.?\s*q\.?|hq|village|basti|camp|gaon|old|new|iii|ii|i)\b")
+
+
+def core_name(name):
+    """Looser key for the official-priority-name exclusion (Development Log Entry 49).
+
+    Official lists write many villages with qualifiers that OSM omits ("Sawa H.Q.",
+    "Bomdir Basti", "Ishneya(Isnia) I", "Jamkhar (Shemghar)"), so an exact
+    normalized-name match let 9 official priority villages into the 721-village
+    control list. This strips bracketed text, administrative/ordinal qualifiers and
+    non-letters. Keys shorter than 4 letters are ignored to avoid spurious matches.
+    """
+    s = normalize_name(name)
+    s = re.sub(r"\(.*?\)", " ", s)
+    s = _SUFFIX_RE.sub(" ", s)
+    s = re.sub(r"[^a-z]", "", s)
+    return s if len(s) >= 4 else None
+
+
 def load_official_priority_village_names():
     names_by_state = {}
     for state, path in OFFICIAL_PRIORITY_VILLAGE_PATHS.items():
         try:
-            names_by_state[state] = set(normalize_name(n) for n in pd.read_csv(path)["Habitation"])
+            habitations = pd.read_csv(path)["Habitation"]
+            names_by_state[state] = set(normalize_name(n) for n in habitations)
+            names_by_state[state] |= {f"core:{k}" for k in map(core_name, habitations) if k}
         except FileNotFoundError:
             print(f"  WARNING: {path} not found -- official priority-village name check "
                   f"for {state} will be skipped this run.")
@@ -299,7 +344,9 @@ def main():
             if not name:
                 continue
             name_norm = normalize_name(name)
-            if name_norm in treated_names or name_norm in official_names:
+            name_core = core_name(name)
+            if (name_norm in treated_names or name_norm in official_names
+                    or (name_core and f"core:{name_core}" in official_names)):
                 # matches a treated village name, or an official VVP-I village that never got geocoded
                 name_excluded += 1
                 continue
@@ -355,9 +402,10 @@ def main():
             # don't claim yet -- might still get cut by the cap below
 
         cap = len(group) * MAX_CANDIDATES_PER_DISTRICT_MULTIPLIER
-        # NB: keeps the candidates CLOSEST to the border first (not a random draw) -- disclosed in
-        # BO_Research_Paper.md §3.7 as a selection rule on border proximity.
-        kept = sorted(kept, key=lambda c: c["distance_to_border_km"])[:cap]
+        # NB: default rule keeps the candidates CLOSEST to the border first (not a random draw) --
+        # disclosed in BO_Research_Paper.md as a selection rule on border proximity. Use
+        # --selection random for a seeded random draw instead (Entry 49).
+        kept = apply_cap(kept, cap, district)
         # only claim what actually survives the cap
         for c in kept:
             claimed_coords.add(c.pop("_coord_key"))
@@ -397,4 +445,14 @@ def _save(rows):
 
 
 if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Build the district-restricted non-VVP control list.")
+    parser.add_argument("--selection", choices=["border_first", "random"], default="border_first",
+                        help="per-district cap rule (default reproduces the committed list)")
+    parser.add_argument("--seed", type=int, default=RANDOM_SEED)
+    parser.add_argument("--out", default=OUT_PATH,
+                        help="output CSV; use a NEW path for --selection random so the committed list is kept")
+    args = parser.parse_args()
+    SELECTION, RANDOM_SEED, OUT_PATH = args.selection, args.seed, args.out
     main()

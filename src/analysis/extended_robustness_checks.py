@@ -118,7 +118,9 @@ def leave_one_district_out():
         }
         print(f"  -> {outcome}: coef range [{min(coefs):+.5f}, {max(coefs):+.5f}], "
               f"significant (p<0.05) in {n_sig}/14 district-dropped reruns\n")
-    pd.DataFrame(all_rows).to_csv(OUT_LOO_CSV, index=False)
+    loo_df = pd.DataFrame(all_rows)
+    loo_df.insert(0, "window", "summer")  # Entry 49: the file holds summer-window reruns only; say so
+    loo_df.to_csv(OUT_LOO_CSV, index=False)
     print(f"Saved {OUT_LOO_CSV}\n")
     return summary
 

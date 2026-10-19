@@ -1,98 +1,66 @@
-"""
-this is Figure 10 in the paper but the file's named 07_robustness_summary.png -- don't renumber it.
+"""Summary of the treated-only (H1) and border-proximity (H3) tests, file
+07_robustness_summary.png (rebuilt in Development Log Entry 49).
+
+Changes from v1.7: H1 is plotted two-sided with the direction of change
+marked (the one-sided p = 1.000 had hidden a significant full-year
+*decline*); H3 is shown both pooled and within-district (stratified
+Spearman, permutation p, from outputs/h3_within_district_results.json), so
+the figure no longer suggests that the pooled H3 correlations are robust
+proximity effects. No hard-coded figure number in the title.
+
+run from the repository root:  python src/visualization/make_robustness_summary.py
 """
 
-import pandas as pd
-import numpy as np
+import json
+
 import matplotlib.pyplot as plt
+import pandas as pd
 from scipy import stats
 
-villages = pd.read_csv("data/processed/border_optics_master_villages_with_distance.csv")
-full_year = pd.read_csv("data/processed/border_optics_village_results_analyzed.csv")
-summer = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
+FY = pd.read_csv("data/processed/border_optics_village_results_analyzed.csv")
+SU = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
+FY, SU = FY[FY.is_core_sample == True], SU[SU.is_core_sample == True]
+with open("outputs/h3_within_district_results.json") as f:
+    H3 = json.load(f)
 
-merge_cols = ["village_id", "latitude", "longitude", "distance_to_border_km"]
-full_year = full_year.merge(villages[merge_cols], on="village_id", how="left")
-summer = summer.merge(villages[merge_cols], on="village_id", how="left")
+rows = []
+for wlabel, wkey, df in [("Full-year", "full_year", FY), ("Summer", "summer", SU)]:
+    for o, name in [("ndbi", "H1  NDBI change (Wilcoxon, two-sided)"), ("lights", "Night-light change (Wilcoxon, two-sided)")]:
+        v = df.dropna(subset=[f"{o}_before", f"{o}_after"])
+        p = stats.wilcoxon(v[f"{o}_after"], v[f"{o}_before"]).pvalue
+        direction = "↑" if (v[f"{o}_after"] - v[f"{o}_before"]).median() > 0 else "↓"
+        rows.append((name, wlabel, p, direction, "filled"))
+    for o, name in [("ndbi_change", "H3  distance vs NDBI change"), ("lights_change", "H3  distance vs night-light change")]:
+        r = H3[f"{wkey}|{o}|distance_to_border_km"]
+        rows.append((name + " — pooled", wlabel, r["pooled_p"], "+" if r["pooled_rho"] > 0 else "−", "filled"))
+        rows.append((name + " — within district", wlabel, r["within_district_perm_p"],
+                     "+" if r["within_district_rank_corr"] > 0 else "−", "hollow"))
+df = pd.DataFrame(rows, columns=["test", "window", "p", "sign", "style"])
+df["p_plot"] = df["p"].clip(lower=1e-16)
 
-full_year_core = full_year[full_year["is_core_sample"] == True]
-summer_core = summer[summer["is_core_sample"] == True]
-
-
-def wilcoxon_p(df, before_col, after_col):
-    paired = df.dropna(subset=[before_col, after_col])
-    _, p = stats.wilcoxon(paired[after_col], paired[before_col], alternative="greater")
-    return p, len(paired)
-
-
-def spearman_p(df, col_x, col_y):
-    valid = df.dropna(subset=[col_x, col_y])
-    _, p = stats.spearmanr(valid[col_x], valid[col_y])
-    return p, len(valid)
-
-
-tests = []
-
-p, n = wilcoxon_p(full_year_core, "ndbi_before", "ndbi_after")
-tests.append(("H1 — Built-Up Change\n(NDBI, Wilcoxon)", "Full-Year", p, n))
-p, n = wilcoxon_p(summer_core, "ndbi_before", "ndbi_after")
-tests.append(("H1 — Built-Up Change\n(NDBI, Wilcoxon)", "Summer-Matched", p, n))
-
-p, n = wilcoxon_p(full_year_core, "lights_before", "lights_after")
-tests.append(("Night-Lights Change\n(Wilcoxon)", "Full-Year", p, n))
-p, n = wilcoxon_p(summer_core, "lights_before", "lights_after")
-tests.append(("Night-Lights Change\n(Wilcoxon)", "Summer-Matched", p, n))
-
-p, n = spearman_p(full_year_core, "distance_to_border_km", "ndbi_change")
-tests.append(("H3 — Border Proximity\nvs. NDBI Change (Spearman)", "Full-Year", p, n))
-p, n = spearman_p(summer_core, "distance_to_border_km", "ndbi_change")
-tests.append(("H3 — Border Proximity\nvs. NDBI Change (Spearman)", "Summer-Matched", p, n))
-
-p, n = spearman_p(full_year_core, "distance_to_border_km", "lights_change")
-tests.append(("H3 — Border Proximity\nvs. Lights Change (Spearman)", "Full-Year", p, n))
-p, n = spearman_p(summer_core, "distance_to_border_km", "lights_change")
-tests.append(("H3 — Border Proximity\nvs. Lights Change (Spearman)", "Summer-Matched", p, n))
-
-df = pd.DataFrame(tests, columns=["test", "window", "p_value", "n"])
-df["p_plot"] = df["p_value"].clip(lower=1e-7)  # clip so log scale doesn't choke on p~0
-
-test_labels = df["test"].unique().tolist()
-y_pos = {label: i for i, label in enumerate(test_labels)}
-
-fig, ax = plt.subplots(figsize=(9, 5.5))
-
-colors = {"Full-Year": "#4C72B0", "Summer-Matched": "#DD8452"}
-offsets = {"Full-Year": 0.12, "Summer-Matched": -0.12}
-
-for window in ["Full-Year", "Summer-Matched"]:
-    sub = df[df["window"] == window]
-    ys = [y_pos[t] + offsets[window] for t in sub["test"]]
-    ax.scatter(sub["p_plot"], ys, s=90, color=colors[window], label=window, zorder=3, edgecolor="white", linewidth=0.8)
-
-# line connecting the two windows for each test
-for t in test_labels:
-    sub = df[df["test"] == t]
-    fy_p = sub[sub["window"] == "Full-Year"]["p_plot"].values[0]
-    sm_p = sub[sub["window"] == "Summer-Matched"]["p_plot"].values[0]
-    ax.plot([fy_p, sm_p], [y_pos[t] + offsets["Full-Year"], y_pos[t] + offsets["Summer-Matched"]],
-            color="#999999", linewidth=1, zorder=1, linestyle="--")
-
-ax.axvline(0.05, color="#C44E52", linewidth=1.2, linestyle="-", zorder=2)
-ax.text(0.05, len(test_labels) - 0.35, " p = 0.05", color="#C44E52", fontsize=9, va="bottom")
-
+tests = list(dict.fromkeys(df["test"]))
+fig, ax = plt.subplots(figsize=(10, 6))
+colors = {"Full-year": "#4C72B0", "Summer": "#DD8452"}
+for w, off in [("Full-year", -0.15), ("Summer", 0.15)]:
+    s = df[df.window == w]
+    for _, r in s.iterrows():
+        y = tests.index(r.test) + off
+        face = colors[w] if r["style"] == "filled" else "white"
+        ax.scatter(r.p_plot, y, s=80, facecolor=face, edgecolor=colors[w], linewidth=1.6, zorder=3,
+                   label=w if r.test == tests[0] else None)
+        ax.text(r.p_plot * 1.6, y, r.sign, va="center", fontsize=9, color=colors[w])
+ax.axvline(0.05, color="#C44E52", linewidth=1.2)
+ax.text(0.05, len(tests) - 0.55, " p = 0.05", color="#C44E52", fontsize=8)
 ax.set_xscale("log")
-ax.set_yticks(list(y_pos.values()))
-ax.set_yticklabels(list(y_pos.keys()))
-ax.set_xlabel("p-value (log scale)")
-ax.set_title("Figure 10 — Robustness Summary: Significance Across Both Compositing Windows", fontsize=12, fontweight="bold")
-ax.legend(loc="lower right", frameon=True)
-ax.set_ylim(-0.6, len(test_labels) - 0.4)
+ax.set_yticks(range(len(tests)))
+ax.set_yticklabels(tests, fontsize=9)
 ax.invert_yaxis()
-
+ax.set_xlabel("p-value (log scale). Arrow / sign = direction of the median change or correlation")
+ax.set_title("Treated-only and border-proximity tests, both windows\n"
+             "(filled = as reported before; hollow = within-district H3)", fontsize=11)
+ax.legend(loc="lower left", fontsize=8)
 fig.tight_layout()
 fig.savefig("outputs/figures/07_robustness_summary.png", bbox_inches="tight", dpi=150)
 plt.close(fig)
-
 print("Saved outputs/figures/07_robustness_summary.png")
-print()
-print(df[["test", "window", "n", "p_value"]].to_string(index=False))
+print(df[["test", "window", "p", "sign"]].to_string(index=False))

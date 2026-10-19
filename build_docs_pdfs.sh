@@ -19,7 +19,7 @@ for doc in "BO_Executive_Summary:BORDER OPTICS — Executive Summary" \
     name="${doc%%:*}"
     title="${doc#*:}"
     echo "Building ${name}.pdf..."
-    pandoc "${name}.md" -o "${name}.pdf" \
+    pandoc "${name}.md" -f markdown-implicit_figures -o "${name}.pdf" \
         --pdf-engine=wkhtmltopdf \
         -V margin-top=20mm -V margin-bottom=20mm -V margin-left=20mm -V margin-right=20mm \
         --metadata title="${title}" \

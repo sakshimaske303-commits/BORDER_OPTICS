@@ -1,92 +1,166 @@
-"""static png versions of the 5 folium maps since those can't go in a pdf. build_maps_plots_pdf.py needs these."""
+"""Static map renders (outputs/figures/static_map_renders/), rebuilt in
+Development Log Entry 49 to include basic cartographic elements the earlier
+versions lacked.
 
+Each map has two regional panels (west: Uttarakhand + Himachal Pradesh;
+east: Sikkim + Arunachal Pradesh), because the study villages sit in two
+clusters ~800 km apart, and adds:
+  - Natural Earth 1:10m India boundary lines, coloured by neighbouring
+    country (cartographic only -- the LAC alignment is disputed)
+  - an equal-distance aspect ratio (1 / cos(latitude)), a scale bar and a
+    north arrow
+  - Himachal Pradesh's 7 illustrative villages drawn as triangles, apart
+    from the 251-village core sample
+  - change maps on a diverging scale centred on zero, with arrows on the
+    colourbar marking values clipped at the 2nd/98th percentile
+  - the overview map also shows the 721 control villages
+Reads the boundary through src/analysis/border_geometry.py (no geopandas
+needed).
+
+run from the repository root:  python src/visualization/build_static_map_renders.py
+"""
+
+import math
 import os
-import pandas as pd
+import sys
+
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from matplotlib.colors import TwoSlopeNorm
+from matplotlib.lines import Line2D
 
-BG = "#141414"
-STATE_COLORS = {
-    "Arunachal Pradesh": "#D4AF37",
-    "Sikkim": "#4CAF50",
-    "Uttarakhand": "#2196F3",
-    "Himachal Pradesh": "#E63946",
-}
+sys.path.insert(0, "src/analysis")
+from border_geometry import load_india_segments  # noqa: E402
 
-plt.rcParams.update({
-    "figure.facecolor": BG, "axes.facecolor": BG, "axes.edgecolor": "#555555",
-    "axes.labelcolor": "#F2F2F0", "text.color": "#F2F2F0",
-    "xtick.color": "#9A9A98", "ytick.color": "#9A9A98",
-    "font.family": "sans-serif", "grid.color": "#2a2a2a", "grid.alpha": 0.4,
-})
+OUT_DIR = "outputs/figures/static_map_renders"
+REGIONS = {"West (Uttarakhand, Himachal Pradesh)": (77.3, 81.6, 29.4, 32.5),
+           "East (Sikkim, Arunachal Pradesh)": (87.8, 97.6, 26.8, 29.6)}
+BORDER_COLORS = {"China": "#C0392B", "Nepal": "#7F8C8D", "Bhutan": "#7F8C8D", "Myanmar": "#7F8C8D"}
+STATE_COLORS = {"Arunachal Pradesh": "#B8860B", "Sikkim": "#2E8B57", "Uttarakhand": "#1F5FA8",
+                "Himachal Pradesh": "#8E44AD"}
+plt.rcParams.update({"figure.dpi": 150, "font.size": 9})
+SEGMENTS = load_india_segments()
 
 
-def draw_map(df, color_col, cmap, title, subtitle, out_path, discrete_state=False):
-    valid = df.dropna(subset=[color_col, "latitude", "longitude"])
-    fig, ax = plt.subplots(figsize=(9, 10))
-    ax.grid(True, linewidth=0.4)
+def draw_borders(ax):
+    for seg in SEGMENTS:
+        color = BORDER_COLORS.get(seg["other_country"], "#BBBBBB")
+        lw = 1.6 if seg["other_country"] == "China" else 1.0
+        for part in seg["parts"]:
+            ax.plot(part[:, 0], part[:, 1], color=color, linewidth=lw, zorder=1)
 
-    if discrete_state:
-        for state in valid["state"].unique():
-            sub = valid[valid["state"] == state]
-            ax.scatter(sub["longitude"], sub["latitude"], s=22, color=STATE_COLORS.get(state, "#999"),
-                       label=state, edgecolor="white", linewidth=0.2, alpha=0.9)
-        ax.legend(loc="upper right", facecolor="#1a1a1a", edgecolor="#555", labelcolor="#F2F2F0", fontsize=9)
+
+def scale_bar(ax, lat, km=50):
+    x0, x1 = ax.get_xlim()
+    y0, y1 = ax.get_ylim()
+    deg = km / (111.32 * math.cos(math.radians(lat)))
+    xs, ys = x0 + 0.05 * (x1 - x0), y0 + 0.06 * (y1 - y0)
+    ax.plot([xs, xs + deg], [ys, ys], color="black", linewidth=3, solid_capstyle="butt", zorder=5)
+    ax.text(xs + deg / 2, ys + 0.03 * (y1 - y0), f"{km} km", ha="center", fontsize=8, zorder=5)
+
+
+def north_arrow(ax):
+    ax.annotate("N", xy=(0.95, 0.96), xytext=(0.95, 0.74), xycoords="axes fraction", ha="center",
+                fontsize=10, fontweight="bold", arrowprops=dict(arrowstyle="-|>", color="black", lw=1.5))
+
+
+def setup(ax, name, box):
+    x0, x1, y0, y1 = box
+    ax.set_xlim(x0, x1)
+    ax.set_ylim(y0, y1)
+    ax.set_aspect(1 / math.cos(math.radians((y0 + y1) / 2)))
+    ax.set_title(name, fontsize=9.5)
+    ax.set_xlabel("Longitude (°E)")
+    ax.set_ylabel("Latitude (°N)")
+    ax.grid(True, linewidth=0.3, alpha=0.5)
+    draw_borders(ax)
+    scale_bar(ax, (y0 + y1) / 2)
+    north_arrow(ax)
+
+
+def border_legend():
+    return [Line2D([0], [0], color="#C0392B", lw=1.6, label="India–China boundary (Natural Earth; LAC disputed)"),
+            Line2D([0], [0], color="#7F8C8D", lw=1.0, label="India–Nepal / Bhutan / Myanmar boundary")]
+
+
+def value_map(df, col, label, title, path, diverging=True, cmap="RdBu_r"):
+    v = df.dropna(subset=[col, "latitude", "longitude"])
+    lo, hi = v[col].quantile([0.02, 0.98])
+    if diverging:
+        bound = max(abs(lo), abs(hi))
+        norm, vmin, vmax = TwoSlopeNorm(0, -bound, bound), None, None
     else:
-        vmin, vmax = valid[color_col].quantile(0.02), valid[color_col].quantile(0.98)
-        sc = ax.scatter(valid["longitude"], valid["latitude"], c=valid[color_col], cmap=cmap,
-                        vmin=vmin, vmax=vmax, s=24, edgecolor="white", linewidth=0.2, alpha=0.95)
-        cbar = fig.colorbar(sc, ax=ax, shrink=0.7, pad=0.02)
-        cbar.set_label(color_col, color="#F2F2F0")
-        cbar.ax.yaxis.set_tick_params(color="#9A9A98")
-        plt.setp(cbar.ax.get_yticklabels(), color="#9A9A98")
-
-    ax.set_xlabel("Longitude")
-    ax.set_ylabel("Latitude")
-    ax.set_title(f"{title}\n{subtitle}", fontsize=12, fontweight="bold", color="#F2F2F0", pad=14)
-    fig.tight_layout()
-    fig.savefig(out_path, dpi=170, facecolor=BG, bbox_inches="tight")
+        norm, vmin, vmax = None, lo, hi
+    fig, axes = plt.subplots(1, 2, figsize=(14, 4.6), gridspec_kw={"width_ratios": [1, 2.1]})
+    sc = None
+    for ax, (name, box) in zip(axes, REGIONS.items()):
+        setup(ax, name, box)
+        core = v[v.is_core_sample == True]
+        hp = v[v.is_core_sample != True]
+        sc = ax.scatter(core.longitude, core.latitude, c=core[col], cmap=cmap, norm=norm, vmin=vmin, vmax=vmax,
+                        s=28, edgecolor="black", linewidth=0.3, zorder=3)
+        if len(hp):
+            ax.scatter(hp.longitude, hp.latitude, c=hp[col], cmap=cmap, norm=norm, vmin=vmin, vmax=vmax,
+                       s=40, marker="^", edgecolor="black", linewidth=0.4, zorder=3)
+    cb = fig.colorbar(sc, ax=axes, shrink=0.75, pad=0.01, extend="both")
+    cb.set_label(label)
+    handles = border_legend() + [Line2D([0], [0], marker="^", color="w", markerfacecolor="grey",
+                                        markeredgecolor="black", markersize=7,
+                                        label="Himachal Pradesh, illustrative (not in core sample)")]
+    fig.legend(handles=handles, loc="lower center", ncol=3, fontsize=8, frameon=False)
+    fig.suptitle(title, fontsize=11)
+    fig.savefig(path, bbox_inches="tight")
     plt.close(fig)
-    print("Saved", out_path)
+    print("Saved", path)
+
+
+def overview(villages, controls, path):
+    fig, axes = plt.subplots(1, 2, figsize=(14, 4.6), gridspec_kw={"width_ratios": [1, 2.1]})
+    for ax, (name, box) in zip(axes, REGIONS.items()):
+        setup(ax, name, box)
+        ax.scatter(controls.longitude, controls.latitude, s=7, color="#AAAAAA", zorder=2)
+        for st, g in villages.groupby("state"):
+            marker = "^" if st == "Himachal Pradesh" else "o"
+            ax.scatter(g.longitude, g.latitude, s=24, marker=marker, color=STATE_COLORS[st],
+                       edgecolor="black", linewidth=0.3, zorder=3)
+    handles = border_legend() + [
+        Line2D([0], [0], marker="o", color="w", markerfacecolor=c, markeredgecolor="black", markersize=7,
+               label=f"{st} — VVP-I priority village ({int((villages.state == st).sum())})")
+        for st, c in STATE_COLORS.items() if st != "Himachal Pradesh"] + [
+        Line2D([0], [0], marker="^", color="w", markerfacecolor=STATE_COLORS["Himachal Pradesh"],
+               markeredgecolor="black", markersize=7, label="Himachal Pradesh — illustrative only (7)"),
+        Line2D([0], [0], marker="o", color="w", markerfacecolor="#AAAAAA", markersize=5,
+               label=f"Control village, same 14 districts ({len(controls)})")]
+    fig.legend(handles=handles, loc="lower center", ncol=3, fontsize=8, frameon=False)
+    fig.suptitle("Study area: 251 core VVP-I priority villages, 7 illustrative villages and 721 control villages",
+                 fontsize=11)
+    fig.savefig(path, bbox_inches="tight")
+    plt.close(fig)
+    print("Saved", path)
 
 
 def main():
+    os.makedirs(OUT_DIR, exist_ok=True)
     villages = pd.read_csv("data/processed/border_optics_master_villages_with_distance.csv")
-    full_year = pd.read_csv("data/processed/border_optics_village_results_analyzed.csv")
-    summer = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv")
+    controls = pd.read_csv("data/processed/border_optics_control_villages.csv")
+    fy = pd.read_csv("data/processed/border_optics_village_results_analyzed.csv").drop(
+        columns=["latitude", "longitude"], errors="ignore").merge(
+        villages[["village_id", "latitude", "longitude", "distance_to_border_km"]], on="village_id")
+    su = pd.read_csv("data/processed/border_optics_village_results_summer_analyzed.csv").drop(
+        columns=["latitude", "longitude"], errors="ignore").merge(
+        villages[["village_id", "latitude", "longitude", "distance_to_border_km"]], on="village_id")
 
-    # summer already has its own lat/lon -- only grab distance_to_border_km here,
-    # else the merge renames lat/lon to _x/_y (see utils/data.py)
-    merge_cols = ["village_id", "latitude", "longitude", "distance_to_border_km"]
-    full_year = full_year.merge(villages[merge_cols], on="village_id", how="left")
-    summer = summer.merge(villages[["village_id", "distance_to_border_km"]], on="village_id", how="left")
-
-    out_dir = "outputs/figures/static_map_renders"
-    os.makedirs(out_dir, exist_ok=True)
-
-    draw_map(full_year, "ndbi_change", "RdYlGn_r",
-        "BORDER OPTICS — Village-Level NDBI Change",
-        "Full-year composite, 2021 vs 2025 (static render of interactive map)",
-        f"{out_dir}/map_ndbi_fullyear.png")
-
-    draw_map(summer, "ndbi_change", "RdYlGn_r",
-        "BORDER OPTICS — Village-Level NDBI Change",
-        "Summer-matched composite (Jun-Sep), 2021 vs 2025 (static render of interactive map)",
-        f"{out_dir}/map_ndbi_summer.png")
-
-    draw_map(summer, "lights_change", "YlOrRd",
-        "BORDER OPTICS — Village-Level Night-Lights Change",
-        "VIIRS radiance change, summer-matched composite (static render of interactive map)",
-        f"{out_dir}/map_lights_change.png")
-
-    draw_map(summer, "distance_to_border_km", "cividis",
-        "BORDER OPTICS — Village Proximity to Border/LAC",
-        "Straight-line distance to nearest Natural Earth boundary segment (static render of interactive map)",
-        f"{out_dir}/map_border_distance.png")
-
-    draw_map(summer, "state", None,
-        "BORDER OPTICS — Village Sample Overview",
-        "All geocoded villages across 4 states, colored by state (static render of interactive map)",
-        f"{out_dir}/map_state_overview.png", discrete_state=True)
+    overview(villages, controls, f"{OUT_DIR}/map_state_overview.png")
+    value_map(fy, "ndbi_change", "Change in 500 m buffer-mean NDBI (red = increase)",
+              "NDBI change 2021→2025, full-year composites", f"{OUT_DIR}/map_ndbi_fullyear.png")
+    value_map(su, "ndbi_change", "Change in 500 m buffer-mean NDBI (red = increase)",
+              "NDBI change 2021→2025, summer (Jun–Sep) composites", f"{OUT_DIR}/map_ndbi_summer.png")
+    value_map(su, "lights_change", "Change in VIIRS radiance, nW/cm²/sr (red = brighter)",
+              "Night-light change 2021→2025, summer composites", f"{OUT_DIR}/map_lights_change.png")
+    value_map(su, "distance_to_border_km", "Distance to nearest India boundary (km)",
+              "Distance from each village to the nearest India boundary line (comparative, not authoritative)",
+              f"{OUT_DIR}/map_border_distance.png", diverging=False, cmap="viridis_r")
 
 
 if __name__ == "__main__":

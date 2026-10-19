@@ -139,7 +139,9 @@ st.caption(
     "Core-sample test results (all states pooled): summer NDBI shows a 2021-to-2023 decline and a 2023-to-2025 "
     "recovery that net out to no significant trend (p = 0.442). Full-year NDBI shows a significant overall "
     "*decline* (panel regression p < 0.000001). Full-year night-lights slopes are borderline significant "
-    "upward (p = 0.0500); summer night-lights has no significant overall trend (see Research Paper §4.7)."
+    "upward (p = 0.0500); summer night-lights has no significant overall trend. Sentinel-2's QA60 cloud band is empty "
+    "for most of 2022–2024, so the 2023 composites may be effectively unmasked: do not read the 2023 dip as a real "
+    "change (see Research Paper §5.1 and §6)."
 )
 
 st.image(

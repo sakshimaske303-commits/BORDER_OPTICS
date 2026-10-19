@@ -163,10 +163,10 @@ with st.expander("**Control-Group Baseline Imbalance — Resolved, Then Reopened
     smoothed over: fixing a real, independently-verified data-quality problem (unverified
     district labels) surfaced a baseline imbalance that a previous, less-correct version of
     the control list happened not to show. The full-year night-lights DiD result itself
-    stays null on the corrected list (p = 0.45334, see H4 above) — but that null can no
+    stays null on the corrected list (p = 0.47 with t, 13 df; 0.45 with the earlier normal reference; see H4 above) — but that null can no
     longer be read as sitting on a well-matched baseline for this one outcome/window
     combination, the way it briefly could between Entries 25 and 37 (see Research Paper
-    §6.7 for the full account). A genuine parallel-pre-trends placebo test *has* since been
+    §6, Table 5). A genuine parallel-pre-trends placebo test *has* since been
     run (Development Log Entry 30) — see the "Parallel Pre-Trends Placebo Test" expander
     below — by pulling a second, earlier pre-treatment year (2019) for both groups, closing
     the gap this section used to describe as unclosable with the existing single-pre-period
@@ -185,69 +185,34 @@ with st.expander("**Multi-Year Trend Is Not Monotonic (and Nets Out to a Null, L
     earlier in the window, or some combination) — see Statistical Validation.
     """)
 
-with st.expander("**Buffer-Radius Comparison — An Archive-Timing Confound, Present in Both Directions**"):
+with st.expander("**Buffer-Radius Comparison — Same-Day Extraction**"):
     st.markdown("""
-    Sentinel-2's archive keeps backfilling scenes for past dates, so any two extractions
-    of the same fixed date range, run on different days, can disagree on scene counts and
-    composite values even with identical query parameters — a mechanism this project has
-    now seen affect both the 500m extraction (Development Log Entries 21–22, where a
-    stale extraction was missing an entire state's villages) and, separately, the 250m/1km
-    comparison here (where the two smaller/larger radii were run in August, before the
-    fresh, complete 500m re-extraction). The buffer-radius conclusion is unaffected either
-    way — all three radii are null on the summer NDBI test, whether compared as-extracted
-    or restricted to villages valid at every radius (now the full core sample at every
-    radius). A same-day re-pull of all three radii together has since been done (see
-    Research Paper §4.8): all three now stand at n=251, pulled the same day, closing the
-    archive-timing gap this section originally flagged.
+    The 250 m and 1 km extractions were first pulled on a different day from the 500 m
+    run. Because two extractions of the same date range made on different days (or with
+    different code) have disagreed in this project, all three radii were re-extracted back
+    to back on the same day. All three are null on the summer NDBI test (n = 251 at every
+    radius; p = 0.12, 0.44, 0.90). The earlier explanation for such disagreements, Sentinel-2
+    "archive backfill", has not been verified; a check is prepared
+    (`src/acquisition/check_s2_archive_ingestion.py`).
     """)
 
-with st.expander("**H3 Border-Proximity — Stress-Tested, and Surviving**"):
+with st.expander("**H3 Border Proximity — Pooled Correlations Do Not Hold Within Districts**"):
     st.markdown("""
-    Two H3 border-proximity correlations survive the paper-wise Holm-Bonferroni
-    correction: summer NDBI (ρ = +0.291) and full-year night-lights (ρ = -0.252).
-    Both have now been put through the same leave-one-district-out and
-    randomization-inference checks that this study's own now-null results (the
-    summer NDBI-change test, the full-year lights DiD) were checked with before
-    failing — `src/analysis/h3_border_proximity_robustness.py`. Both survive:
-    14 of 14 district-dropped reruns stay significant with the same sign, and
-    2,000-permutation randomization inference gives p<0.001 for each. The
-    full-year lights result had previously been described as robust only
-    because it stayed significant across several data re-extractions — a
-    weaker claim than actually being checked this way, which it now has been.
+    Pooled across all 251 villages, summer NDBI change rises with distance from the boundary
+    (ρ = +0.29) and full-year night-light change falls with it (ρ = −0.25). Earlier versions
+    treated both as robust because they survived leave-one-district-out, randomization
+    inference and a spatial-autocorrelation correction. None of those checks separates
+    variation **within** districts from differences **between** districts.
 
-    One more check has since been added, and it's a more conservative one than
-    either of the above: these 251 villages are not spatially independent
-    observations, so an ordinary p-value can overstate significance if nearby
-    villages' values are correlated with each other for reasons that have
-    nothing to do with border distance. `src/analysis/spatial_moran_and_h3_correction.py`
-    first confirms both outcomes ARE spatially autocorrelated (Moran's I = 0.346,
-    p = 0.001 for summer NDBI change; I = 0.076, p = 0.003 for full-year lights
-    change — reproducing this study's own already-published values as an internal
-    check), then calibrates a spatial autoregressive model to match that same
-    autocorrelation and re-derives significance from 2,000 spatially-structured
-    synthetic fields rather than treating villages as independent. Both H3
-    findings survive this stricter test too: spatially-corrected p = 0.0295 for
-    summer NDBI (naive p = 0.0000026) and p = 0.0035 for full-year lights (naive
-    p = 0.0000548) — weaker than the naive p-values, as expected once spatial
-    clustering is accounted for, but still comfortably below 0.05.
-
-    The two remaining checks from the original plan are done now too
-    (Development Log Entry 27). On linearity: summer NDBI's correlation with
-    distance is close to a straight line across all five distance quintiles
-    (quadratic term not significant, F=0.89, p=0.347); full-year lights'
-    quintile pattern isn't monotonic (rising, falling twice, then jumping back
-    up), though a formal quadratic test still doesn't flag it as curved
-    (F=0.69, p=0.406) — the simplest read is that this one looks more like a
-    handful of districts sitting at particular distances than a smooth
-    proximity effect. On the three-point 2021/2023/2025 cross-check: both
-    correlations reproduce closely over the full period (summer NDBI
-    rho=+0.293 vs. the two-point extraction's +0.291; full-year lights
-    rho=-0.252, exactly matching), but neither is stable across sub-periods —
-    summer NDBI's relationship flips sign between 2021-2023 and 2023-2025, and
-    full-year lights weakens substantially in the second half. Neither of
-    these newer findings overturns either H3 result, but "stress-tested and
-    surviving" needs the more precise description above rather than a blanket
-    "stable and linear" claim.
+    `src/analysis/h3_within_district.py` does: villages are ranked inside their own district
+    and distance is permuted only within districts. Within districts the summer NDBI
+    association disappears (ρ = +0.03, p = 0.78) and the night-light association reverses:
+    villages *farther* from the boundary gained more light (ρ = +0.24, p = 0.021 full year;
+    +0.42, p < 0.001 summer). Using distance to the China boundary only
+    (`compute_lac_distance.py`; 31 villages are nearest to Bhutan, Nepal or Myanmar) gives
+    the same pattern. The pooled correlations reflect which districts lie closer to the
+    boundary, not a proximity gradient, so there is no consistent evidence that change
+    concentrates near the border.
     """)
 
 with st.expander("**Parallel Pre-Trends Placebo Test — Now Run, Mostly Clean**"):
@@ -313,73 +278,36 @@ with st.expander("**14 District Clusters — An Exact Wild Cluster Bootstrap, No
     before being trusted for the bootstrap itself.)
     """)
 
-with st.expander("**Triangulation Against Independent Proxies — An Open Tension, Not a Confirmation**"):
+with st.expander("**Triangulation — Radar Null, Dynamic World Positive**"):
     st.markdown("""
-    The primary design uses NDBI and night-lights. As a further check, the
-    same control-group DiD was run on two independent proxies of different
-    kinds — Sentinel-1 SAR backscatter (VV and VH, a genuinely different
-    sensor, radar rather than optical, immune to the cloud-masking concerns
-    that affect optical imagery) and Dynamic World, a machine-learned
-    per-pixel built-up probability that is algorithm-independent of NDBI but
-    not sensor-independent, since it is itself derived from the same
-    Sentinel-2 imagery — via
-    `src/analysis/triangulation_analysis.py`. This was meant to be an ordinary
-    robustness check. For SAR, that's what it was: null in both windows, both
-    polarizations, agreeing with NDBI. For Dynamic World, it wasn't: its
-    control-group DiD is significant in **both** windows (full-year coefficient
-    +0.0026, p = 0.0159; summer +0.0059, p = 0.0006).
+    The same DiD was run on Sentinel-1 radar (VV and VH) and on Dynamic World's built-up
+    probability. Radar is null in both windows. Dynamic World shows a small positive
+    difference in both: full year +0.0026 (p = 0.031, t with 13 df; wild cluster bootstrap
+    p = 0.041) and summer +0.0059 (p = 0.004; bootstrap p = 0.008)
+    (`src/analysis/dynamic_world_robustness.py`). The summer result is significant in all
+    12 leave-one-district-out reruns. The full-year result loses significance without Sikkim
+    (p = 0.074) or when Dibang Valley or North district is dropped. A 2019–2021 placebo is
+    null in both windows (p = 0.93, 0.18), so it is not an earlier trend continuing.
 
-    That disagreement is hard to dismiss as one stray significant test among
-    many, for two reasons. First, `src/analysis/building_footprint_validation.py`
-    checked all three proxies against an independent, non-satellite ground
-    truth — actual building counts from Google's Open Buildings dataset — and
-    Dynamic World tracks real building counts far more closely (Spearman
-    ρ = 0.808) than NDBI (ρ = 0.399) or night-lights (ρ = 0.478) do. Second, at
-    three villages this project separately confirmed underwent real
-    construction (Walong — a border-terminal building and a hostel, Kaho — a
-    basketball court and solar streetlighting, Musai — solar streetlighting),
-    Dynamic World and night-lights both correctly
-    registered a before-to-after increase at all three, while NDBI moved in
-    the *wrong* direction at all three.
+    Converted with each measure's own response to buildings
+    (`src/analysis/measurement_sensitivity.py`), the Dynamic World difference corresponds to
+    roughly 800–2,100 m² of built-up surface per village. NDBI could not have registered a
+    change that size, which is why the measures disagree; at village level they point the
+    same way in only 31–63% of villages. Whether the Dynamic World difference is early
+    programme construction, related works (roads, the state's model-village schemes), or a
+    classifier artefact is not yet established. Footprint-zone outcomes and a 2026 follow-up
+    are prepared to test it.
 
-    A village-level cross-check (`src/analysis/dw_sar_ndbi_village_level_check.py`)
-    found the three proxies agreeing on the direction of change in only about a
-    third to two-thirds of individual villages, depending on the proxy pair
-    and window — close to chance. This is reported as this study's single most
-    important open question, not resolved in either direction: it could mean
-    the primary 500m-buffer NDBI measure is not sensitive enough to detect a
-    real, modest VVP-I effect that Dynamic World is picking up, or it could
-    mean Dynamic World's significant DiD is itself a different kind of false
-    positive. Night-lights detecting the three ground-truth cases correctly
-    while its own aggregate control-group DiD stays null shows these two things
-    ("detects the case-study villages" and "produces a significant aggregate
-    result") don't automatically travel together — a reason for caution before
-    reading too much into either proxy's result on its own.
-
-    One more check closes out what could be tested without a further live
-    re-extraction (Development Log Entry 43): a Dynamic World analogue of the
-    NDBI/lights pre-treatment placebo test above — a genuine second
-    pre-treatment year (2019), both groups, both windows, comparing the
-    2019-to-2021 change in DW "built" probability, a period VVP-I could not
-    possibly have affected since it wasn't sanctioned until February 2023.
-    Both windows come back clean (full-year p = 0.93406, summer p = 0.17869)
-    — no pre-existing divergence between treated and control villages in
-    either window. This doesn't resolve the disagreement above: whether
-    Dynamic World's significant control-group DiD reflects a real, small
-    effect the other two proxies are missing, or a different kind of false
-    positive, is still an open question. But it does rule out one specific
-    candidate explanation: it isn't a continuation of a pre-existing trend
-    that was already there before VVP-I existed.
-
-    Two caveats on the Dynamic World result itself. First, the summer Dynamic
-    World sample is much smaller: 169 of 251 treated villages (all 31 Sikkim
-    villages and 50 of 186 Arunachal Pradesh villages have no summer value)
-    and 536 of 721 controls. Second, a check in Development Log Entry 27 found
-    a small but significant link between how many usable images a village
-    gained between periods and its Dynamic World change, in opposite directions
-    for treated (positive) and control (negative) villages. It is too weak to
-    explain the whole DiD, but it is a partial imaging-density confound specific
-    to this proxy.
+    **Case villages, corrected in v2.0.** News reports of the 31 October 2023 visit to Anjaw
+    (Arunachal Times; ANI) list new facilities at Walong (terminal building, girls' hostel),
+    Kaho and Musai (basketball courts, solar streetlights, school buildings). Kaho's and
+    Musai's works are described as state Golden Jubilee model-village works, later merged
+    into VVP; Walong's are not described as VVP. The only works described as VVP-funded are at
+    Kibithoo, which is not in the sample because its geocoding failed. Measured as a
+    percentile of all 251 villages' change, night lights at Kaho and Walong were in the top
+    5% and Dynamic World at the 97th and 83rd percentiles, while Musai was near the median
+    on both, and NDBI fell further than at most villages at all three. Three villages in one
+    district are illustrative, not validation.
     """)
 
 with st.expander("**Control-Group Construction — Selection Rule and Buffer Overlap**"):
@@ -400,36 +328,46 @@ with st.expander("**Control-Group Construction — Selection Rule and Buffer Ove
     explain the null.
     """)
 
-with st.expander("**Extraction Timing and Cloud Masking — Two Open Items**"):
+with st.expander("**Extraction Timing, Pipeline and Cloud Masking — Open Items**"):
     st.markdown("""
-    Treated and control summer data were pulled one day apart (16 and 17 September 2026,
-    after the Entry 37 control re-extraction), and the full-year treated data dates from the
-    original July 2026 pull while the full-year control data is from September 2026. Given
-    the Sentinel-2 archive backfill this study found in Entries 21–22, the full-year
-    treated/control comparison is not same-day; a same-day full-year re-pull has not been run.
+    The full-year treated values come from an early Earth Engine Code Editor export that is
+    not preserved in the repository, made about seven weeks before the control extraction.
+    The repository's own Python pipeline gives village values that differ by more than 0.01
+    NDBI at about 75% of villages, but substituting them changes no conclusion (full-year
+    NDBI DiD +0.0029, p = 0.64; `src/analysis/sample_qa_sensitivity.py`). A same-day
+    full-year re-extraction is the first step in `docs/NEXT_STEPS_EARTH_ENGINE.md`.
 
-    Separately, all Sentinel-2 composites use the QA60 cloud mask. According to the Earth
-    Engine catalog, QA60 was not populated for Sentinel-2 scenes from early 2022 until early
-    2024 (this has not been re-checked for this project). If so, the **2023** multi-year
-    composites were built with little or no cloud masking, which could contribute to the
-    2023 dip in Figure 8. The 2019, 2021 and 2025 composites fall outside that gap.
+    Sentinel-2's QA60 cloud band is not populated for most of 2022 to early 2024 in the
+    harmonized collection, so the 2023 multi-year composites may be effectively unmasked and
+    the 2023 dip should not be interpreted. The prepared footprint-zone extraction uses Cloud
+    Score+ instead, which is consistent across all years.
     """)
 
-with st.expander("**Statistical Power — What This Design Could (and Couldn't) Detect**"):
+with st.expander("**Sample Quality — What Was Found and How Much It Matters**"):
     st.markdown("""
-    A null result says a test wasn't significant — on its own, it doesn't say
-    whether the design could have detected a real effect if one existed.
-    `src/analysis/power_analysis.py` computes the Minimum Detectable Effect
-    (MDE) for the primary H1 (treated-only) and H4 (control-group DiD) tests
-    at 80% power, α=0.05, using t-quantiles at this study's own degrees of
-    freedom rather than a large-sample z approximation. H1's MDE, as Cohen's
-    d, is 0.157 across every outcome/window — comfortably under Cohen's own
-    "small effect" threshold of 0.2 — meaning this design was sensitive
-    enough to catch a small-to-moderate real effect had one existed; H1's
-    null is substantive, not a power artifact. H4's cluster-based design is
-    less sensitive, as expected, but every observed H4 coefficient still
-    sits at only 15-35% of its own detection threshold — a clear gap, not a
-    near-miss.
+    A v2.0 audit found: 7 pairs of treated villages sharing identical coordinates; 35 of 251
+    treated buffers (and 61 control buffers) with no mapped building, suggesting the point may
+    not sit on the settlement (e.g. Lachung); Joshimath, a block-headquarters town, in the
+    treated list; and 10 control villages that are official priority villages written with a
+    qualifier ("Sawa" vs "Sawa H.Q."). Re-running every test without each of these, and
+    without all of them together, leaves every NDBI and night-light DiD null and the Dynamic
+    World DiD significant (`sample_qa_sensitivity.py`, `dynamic_world_robustness.py`). Joshimath
+    alone flips the sign of the mean summer night-light change, which is why medians are
+    reported. Geocodes still need checking against high-resolution imagery.
+    """)
+
+with st.expander("**What the Design Could Detect — In Physical Units**"):
+    st.markdown("""
+    Earlier versions argued that a Cohen's-d minimum detectable effect of 0.157 made the
+    null "substantive". That was misleading: Cohen's d says nothing about whether plausible
+    construction moves a buffer-average index at all. Buildings cover a median 0.33% of a
+    500 m buffer, and across all 972 villages buffer-mean NDBI rises by only about 0.5–0.8 per
+    unit of building cover. Doubling a typical village's buildings would therefore move NDBI
+    by about 0.002, which is 13–14% of the DiD's minimum detectable effect, and the NDBI
+    confidence intervals span changes of four to seven times a typical village's entire
+    building stock. An equivalence test against a doubling fails for both windows. The NDBI
+    null is uninformative about construction, not evidence that none happened
+    (`src/analysis/measurement_sensitivity.py`).
     """)
 
 st.markdown("---")

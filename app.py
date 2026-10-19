@@ -1,5 +1,9 @@
+import json
 import os
+
+import pandas as pd
 import streamlit as st
+from scipy.stats import t as t_dist
 from utils.theme import inject_theme, PALETTE
 from utils.data import load_data
 from utils.doc_viewer import render_doc_viewer
@@ -9,7 +13,6 @@ inject_theme()
 
 villages, full_year, summer = load_data()
 
-from scipy import stats
 
 st.markdown("<h1>🛰️ BORDER OPTICS</h1>", unsafe_allow_html=True)
 st.markdown(
@@ -73,28 +76,28 @@ st.markdown(
 
 st.markdown("---")
 
-summer_core = summer[summer["is_core_sample"] == True] if "is_core_sample" in summer.columns else summer
-valid_ndbi = summer_core.dropna(subset=["ndbi_change"])
-peak_row = valid_ndbi.loc[valid_ndbi["ndbi_change"].idxmax()] if len(valid_ndbi) else None
-paired = summer_core.dropna(subset=["ndbi_before", "ndbi_after"])
-if len(paired) >= 2:
-    # Matches the formal H1 test in analyze_results.py: one-sided, testing whether
-    # "after" is significantly higher than "before" (not two-sided). did_model.py is
-    # the separate H4 control-group DiD model, not this treated-only Wilcoxon test.
-    _, p_val = stats.wilcoxon(paired["ndbi_after"], paired["ndbi_before"], alternative="greater")
-else:
-    p_val = float("nan")
+core_n = int((villages["is_core_sample"] == True).sum())
+illus_n = int(len(villages) - core_n)
+core_states = villages.loc[villages["is_core_sample"] == True, "state"].nunique()
+n_control = len(pd.read_csv("data/processed/border_optics_control_villages.csv"))
+did_ps = []
+for _path in ["data/processed/border_optics_did_summary_fullyear.json", "data/processed/border_optics_did_summary_summer.json"]:
+    with open(_path) as _f:
+        # t with 13 df (14 district clusters), matching the paper's Table 2
+        did_ps += [2 * t_dist.sf(abs(r["did_coef"] / r["did_se"]), 13) for r in json.load(_f)["did"]]
+with open("outputs/dynamic_world_robustness_results.json") as _f:
+    _dw = json.load(_f)["summer_main"]
 
 col1, col2, col3, col4 = st.columns(4)
 with col1:
-    st.metric("STUDY REGION", f"{villages['state'].nunique()} States", "Himalayan Border Belt")
+    st.metric("CORE SAMPLE", f"{core_n} villages", f"{core_states} states (+{illus_n} illustrative)")
 with col2:
-    st.metric("PEAK NDBI CHANGE", f"{peak_row['ndbi_change']:.3f}" if peak_row is not None else "—",
-               peak_row["village"] if peak_row is not None else None)
+    st.metric("COMPARISON GROUP", f"{n_control} villages", "same 14 districts")
 with col3:
-    st.metric("STATISTICAL SIGNIFICANCE", f"p = {p_val:.4f}" if p_val == p_val else "—")
+    st.metric("NDBI & NIGHT-LIGHT DiD", "no difference", f"p = {min(did_ps):.2f}–{max(did_ps):.2f}", delta_color="off")
 with col4:
-    st.metric("VILLAGES GEOCODED", f"{len(villages)}", "Multi-Source Geocoded")
+    st.metric("DYNAMIC WORLD DiD (SUMMER)", f"+{_dw['coef']:.4f}", f"bootstrap p = {_dw['wild_cluster_bootstrap_p']:.3f}",
+              delta_color="off")
 
 st.markdown("---")
 
@@ -104,18 +107,16 @@ st.markdown(
                 border: 1px solid rgba(255, 124, 172, 0.3); border-left: 4px solid {PALETTE['accent_vintage']};
                 border-radius: 10px;">
         <p style="color:{PALETTE['accent_vintage']}; text-transform:uppercase; letter-spacing:1.5px;
-                  font-weight:800; font-size:0.85rem; margin-bottom:8px;">Why This Matters</p>
-        <p style="color:{PALETTE['text_primary']}; font-size:1rem; line-height:1.6; margin:0;">
-            Asked directly in Parliament whether the Vibrant Villages Programme's impact had ever been
-            assessed, the Ministry of Home Affairs answered without qualification: "No impact assessment
-            has been carried out" (Lok Sabha Unstarred Question No. 508, 3 February 2026). This project
-            is that missing independent assessment — testing ₹4,800 crore of sanctioned border-development
-            spending against satellite-observed physical change, rather than trusting official progress
-            reports alone. An earlier version of this project reported an unresolved instability between
-            two measurement choices as its headline finding; once the underlying satellite extraction was
-            completed rather than left partial, neither window shows a significant built-up increase
-            — and that reversal, including how it happened, is reported here rather than the original
-            result left standing.
+                  font-weight:800; font-size:0.85rem; margin-bottom:8px;">Research Question</p>
+        <p style="color:{PALETTE['text_primary']}; font-size:1.05rem; line-height:1.6; margin:0 0 10px 0; font-weight:700;">
+            Did India's Vibrant Villages Programme priority villages show more satellite-observed built-up
+            and night-light change between 2021 and 2025 than non-priority villages in the same districts?
+        </p>
+        <p style="color:{PALETTE['text_primary']}; font-size:0.95rem; line-height:1.6; margin:0;">
+            Asked in Parliament whether the programme's impact had been assessed, the Ministry of Home Affairs
+            replied that "no impact assessment has been carried out" (Lok Sabha Unstarred Question No. 508,
+            3 February 2026). This project tests the ₹4,800 crore programme against independent satellite
+            evidence, and asks how much change each satellite measure could actually detect.
         </p>
     </div>
     """,
@@ -128,45 +129,32 @@ with col_left:
     st.markdown("""
     ### What Is BORDER OPTICS?
 
-    Under the **Vibrant Villages Programme (VVP-I)**, the Government of India sanctioned
-    infrastructure and development spending across border villages in Arunachal Pradesh,
-    Sikkim, Uttarakhand, Himachal Pradesh, and Ladakh. Official progress reports describe
-    spending and sanctioned works, but do not independently verify physical, observable
-    change on the ground.
+    The **Vibrant Villages Programme (VVP-I)**, approved in February 2023, funds roads, power,
+    communications and livelihood works in 2,967 border villages, 662 of them priority villages.
+    Official reports describe sanctioned works but do not independently verify change on the ground.
 
-    This project fills that gap: applying **Sentinel-2 built-up-area indices (NDBI)** and
-    **VIIRS night-lights** data to 258 individually geocoded villages, benchmarked against
-    a district-restricted non-VVP control group of 721 villages in the same districts, testing whether
-    measurable change occurred between 2021 and 2025, whether it is attributable to VVP-I
-    specifically, whether it correlates with state-wise budget allocation, and whether
-    proximity to the border/LAC itself predicts the pace of development — with every data
-    gap and methodological trade-off disclosed transparently.
+    BORDER OPTICS compares **251 geocoded priority villages** in Arunachal Pradesh, Sikkim and
+    Uttarakhand with **721 non-priority villages in the same 14 districts**, using four satellite
+    measures (Sentinel-2 NDBI, VIIRS night lights, Sentinel-1 radar, Dynamic World built-up
+    probability) in a difference-in-differences design, and checks every measure against Google
+    Open Buildings footprints to estimate what it can and cannot detect.
     """)
 
 with col_right:
     st.markdown(f"""
     <div class="recon-card">
         <p style="color:{PALETTE['accent']}; text-transform:uppercase; font-size:0.78rem;
-                  letter-spacing:1.5px; font-weight:800; margin-bottom:12px;">Core Finding</p>
-        <p style="color:{PALETTE['text_primary']}; font-size:0.95rem; line-height:1.7; margin:0; font-weight:500;">
-            NDBI (a built-up-surface proxy) is tested across the sample under two
-            separate compositing windows — full-year and summer-matched — to guard against
-            seasonal artifacts. An earlier extraction found the two windows disagreeing, with
-            the summer-matched result surviving every robustness check run against it — a
-            control-group comparison, leave-one-district-out reruns, randomization inference,
-            a buffer-radius sweep, and multiple-testing correction. That result depended on an
-            incomplete extraction missing an entire state's villages; once completed, both
-            windows agree on a null, and every one of those same checks now agrees too. A
-            second result — night-lights, full-year, against the control group — then took
-            its place as this study's one remaining significant finding, until the control
-            group itself was found to be contaminated with 23 villages that were physically or
-            nominally duplicates of treated villages. With that fixed and the control list
-            regenerated, that result is null too: no NDBI or night-lights control-group DiD
-            result, for either outcome or window, clears significance under any specification
-            any more. One cross-check does not agree: Dynamic World's machine-learned built-up
-            probability shows a small but significant control-group effect in both windows.
-            That disagreement is reported as an open question, not resolved. See Statistical
-            Validation and Methodology &amp; Limitations for the full breakdown.
+                  letter-spacing:1.5px; font-weight:800; margin-bottom:12px;">Core Findings (v2.0)</p>
+        <p style="color:{PALETTE['text_primary']}; font-size:0.93rem; line-height:1.65; margin:0; font-weight:500;">
+            <b>1.</b> NDBI, night lights and radar show no difference between priority and comparison villages.<br>
+            <b>2.</b> That null cannot rule out construction: buildings cover a median 0.33% of a 500 m buffer,
+            so doubling a village's buildings would move the NDBI average by only ~0.002, far below what the
+            design can detect.<br>
+            <b>3.</b> Dynamic World, the measure most sensitive to buildings, shows a small positive difference
+            (≈800–2,100 m² of built-up surface per village), robust in the summer window.<br>
+            <b>4.</b> No consistent border-proximity pattern: pooled correlations disappear or reverse within
+            districts.<br>
+            See Statistical Validation and Methodology &amp; Limitations for details.
         </p>
     </div>
     """, unsafe_allow_html=True)

@@ -18,13 +18,15 @@ st.markdown("---")
 st.markdown("""
 ### The Research Framework
 
-Rather than relying on official VVP-I progress reports alone, this project measures
-physical, observable change from space — built-up area expansion and night-time light
-growth — at 258 individually geocoded villages, then tests whether that change is
-statistically meaningful, correlated with budget, predicted by proximity to the
-border/LAC itself, and attributable to VVP-I specifically rather than a regional trend
-shared by every village in these districts — benchmarked against a district-restricted non-VVP
-control group of 721 villages and a three-point 2021/2023/2025 trend.
+**Research question:** *Did VVP-I priority villages show more satellite-observed built-up and
+night-light change between 2021 and 2025 than non-priority villages in the same districts?*
+
+The **primary analysis is H4**, a district fixed-effects difference-in-differences comparing
+251 geocoded priority villages with 721 non-priority villages in the same 14 districts.
+The other questions are secondary: H1 and RQ3 describe change in priority villages themselves
+(which cannot separate programme effects from regional trends), RQ2 is descriptive (three
+states), and H3 asks whether change is patterned by border distance. A separate analysis asks
+how much change each satellite measure could detect at all (see Statistical Validation).
 """)
 
 st.markdown("---")
@@ -36,7 +38,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown(f"""
     <div class="recon-card" style="border-left: 4px solid {PALETTE['border_up']}; min-height: 210px; margin-bottom: 16px;">
-        <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ1 / H1 — Built-Up Change</p>
+        <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ1 / H1 — Built-Up Change (descriptive)</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
             Has physical built-up area increased in VVP-I sanctioned villages between 2021
             and 2025? <b>H1:</b> Villages will show a statistically significant increase in
@@ -85,12 +87,12 @@ with col4:
 
 st.markdown(f"""
 <div class="recon-card" style="border-left: 4px solid {PALETTE['accent']}; margin-top: 16px;">
-    <p style="color: {PALETTE['accent']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ5 / H4 — VVP-I-Attributable Effect</p>
+    <p style="color: {PALETTE['accent']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ5 / H4 — Programme Effect (PRIMARY)</p>
     <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
         Is any detected change attributable to VVP-I specifically, or does it merely reflect
         a regional trend shared by every village in these border districts regardless of
         programme status? <b>H4:</b> VVP-I priority villages will show a significantly
-        larger increase than a district-restricted set of 721 non-VVP villages in the same 14
+        larger increase than a district-restricted set of 721 non-priority villages in the same 14
         districts over the same period — tested with a district-fixed-effects
         Difference-in-Differences model (see Statistical Validation).
     </p>

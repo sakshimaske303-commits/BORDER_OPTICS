@@ -38,11 +38,18 @@ def build_did_effect():
     rows = []
     for window_label, data in [("Full-Year", did_fy), ("Summer-Matched", did_sm)]:
         for r in data["did"]:
+            # v2.0: the summary JSON stores normal-reference intervals and p-values. With 14
+            # district clusters the paper reports t with G - 1 = 13 df, so recover the SE from
+            # the stored interval and redo the interval and p-value with t(13).
+            from scipy import stats
+            se = (r["did_ci_hi"] - r["did_ci_lo"]) / (2 * stats.norm.ppf(0.975))
+            tcrit = stats.t.ppf(0.975, 13)
             rows.append({
                 "outcome": "NDBI" if r["outcome"] == "ndbi" else "Night-Lights",
                 "window": window_label,
-                "coef": r["did_coef"], "ci_lo": r["did_ci_lo"], "ci_hi": r["did_ci_hi"],
-                "p": r["did_p"],
+                "coef": r["did_coef"],
+                "ci_lo": r["did_coef"] - tcrit * se, "ci_hi": r["did_coef"] + tcrit * se,
+                "p": 2 * stats.t.sf(abs(r["did_coef"] / se), 13),
             })
     df = pd.DataFrame(rows)
     labels = [f"{r.outcome} ({r.window})" for r in df.itertuples()]
@@ -58,12 +65,12 @@ def build_did_effect():
                          array=sub["ci_hi"] - sub["coef"], arrayminus=sub["coef"] - sub["ci_lo"],
                          color="rgba(255,255,255,0.5)", thickness=1.5, width=6),
             customdata=sub["p"],
-            hovertemplate="%{y}<br>DiD coef: %{x:+.5f}<br>p = %{customdata:.5f}<extra></extra>",
+            hovertemplate="%{y}<br>DiD coef: %{x:+.5f}<br>p (t, 13 df) = %{customdata:.3f}<extra></extra>",
         ))
 
     fig.add_vline(x=0, line_dash="dash", line_color="rgba(255,255,255,0.5)")
     fig.update_layout(
-        title="Control-Group DiD: Treated-vs-Control Effect, Both Windows",
+        title="Control-Group DiD: Treated-vs-Control Effect, Both Windows<br><sup>95% intervals and p-values use t with 13 df (14 district clusters). All four are null.</sup>",
         xaxis_title="DiD coefficient (treated-vs-control gap in change, district FE, cluster-robust SE)",
         yaxis=dict(autorange="reversed"),
         height=480, hovermode="closest", **DARK_LAYOUT,
@@ -96,7 +103,8 @@ def build_multiyear_trend():
             ))
 
     fig.update_layout(
-        title="Three-Point Trend (2021 / 2023 / 2025), Both Compositing Windows — mean ± SE, core sample (n=251)",
+        title="Three-Point Trend (2021 / 2023 / 2025), Both Compositing Windows — mean ± SE, core sample (n=251)"
+              "<br><sup>Sentinel-2 QA60 cloud flags are empty for most of 2022–2024, so the 2023 composites may be effectively unmasked: do not read the 2023 dip.</sup>",
         xaxis=dict(title="Year", tickvals=YEARS),
         yaxis_title="Mean value",
         height=560, hovermode="closest", **{**DARK_LAYOUT, "margin": dict(t=70, b=50, l=70, r=30)},

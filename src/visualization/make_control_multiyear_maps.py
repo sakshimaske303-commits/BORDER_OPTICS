@@ -133,7 +133,9 @@ def make_recovery_map():
     m.get_root().html.add_child(folium.Element(title_html(
         "BORDER OPTICS — 2023-to-2025 Recovery",
         "2023-to-2025 NDBI change, summer window, core sample. It follows a 2021-to-2023 decline, and the two "
-        "net out to a non-significant 2021-vs-2025 change (Research Paper §4.2, §4.7)",
+        "net out to a non-significant 2021-vs-2025 change. Sentinel-2 QA60 cloud flags are empty for most of "
+        "2022–2024, so the 2023 composite may be effectively unmasked: read this map as a data-quality "
+        "diagnostic, not a programme pattern (Research Paper §5.1, §6)",
     )))
     out_path = "outputs/interactive_maps/maps/village_recovery_2023_2025_map.html"
     m.save(out_path)
