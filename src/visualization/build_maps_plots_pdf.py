@@ -1,6 +1,9 @@
 """
 puts all the figures + static map renders into one PDF, with a cover page.
 dashboard maps stay interactive, this is just the print copy.
+
+run from the repository root:  python src/visualization/build_maps_plots_pdf.py
+out:  docs/BORDER_OPTICS_Maps_and_Plots.pdf
 """
 
 import os
@@ -9,7 +12,7 @@ from reportlab.lib.pagesizes import letter, landscape
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
 
-OUT_PATH = "BORDER_OPTICS_Maps_and_Plots.pdf"
+OUT_PATH = "docs/BORDER_OPTICS_Maps_and_Plots.pdf"
 BG = (10, 10, 10)
 ACCENT = (215, 165, 60)
 TEXT = (240, 240, 235)

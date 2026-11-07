@@ -57,16 +57,17 @@ st.markdown("---")
 st.markdown("### Statistical Methods")
 
 st.markdown("""
-**Wilcoxon signed-rank test** (paired, non-parametric) for before/after change in NDBI
-and night-lights, since normality cannot be assumed at this sample size, and for
-per-village multi-year trend slopes tested against zero. **Spearman correlation**
-(rank-based, robust to non-linear monotonic relationships) for state-level budget vs.
-change (RQ2) and distance-to-border vs. change (H3) — both explicitly exploratory given
-small state and moderate village counts respectively. **Difference-in-Differences (OLS)**
-with district fixed effects and cluster-robust standard errors (14 district clusters,
-plus a parallel HC3 no-fixed-effects specification) for the treated-vs-control comparison
-(H4), and a **village-fixed-effects panel regression** as a second specification for the
-multi-year trend.
+**Primary: difference-in-differences (OLS)** of priority vs. comparison villages, 2021→2025,
+with district fixed effects and district-clustered standard errors. With only 14 clusters,
+p-values use t with 13 degrees of freedom and an exact wild cluster bootstrap (all 16,384
+sign flips); a no-fixed-effects HC3 specification is reported for comparison. Pre-specified
+outcomes: NDBI and night lights; radar and Dynamic World are triangulation outcomes.
+**Detectability (SQ1):** the cross-sectional response of each index to Open Buildings
+footprint cover converts estimates into building-equivalent area, with an equivalence test
+against a doubling of a typical village's buildings. **Descriptive:** two-sided Wilcoxon
+signed-rank tests for priority villages' own change, and **Spearman correlation** for border
+distance (SQ2, pooled and within districts, with a within-district permutation test) and for
+state budget (three states).
 """)
 
 st.markdown("---")
@@ -114,12 +115,12 @@ with st.expander("**Border/LAC Geometry — A Cartographic Proxy, Not a Legal Cl
     China boundary, but 19 (Arunachal Pradesh, mostly Tawang and West Kameng) are nearest
     to Bhutan, 8 (Sikkim's North district and Uttarakhand's Pithoragarh) are nearest to
     Nepal, and 4 (Arunachal's Anjaw district) are nearest to Myanmar. For those 31 villages,
-    the H3 "border proximity" variable is measuring distance to a different country's
+    the border-distance variable is measuring distance to a different country's
     frontier than the LAC specifically — a reasonable variable for a general
     border-securitization hypothesis (VVP-I villages are, after all, still border villages
     in that broader sense), but not literally "distance to the LAC" for that minority of
-    the sample. H3 is already treated as exploratory in this study for other reasons; this
-    is an additional reason to read it that way rather than as a clean LAC-proximity test.
+    the sample. Repeating the analysis with distance to the China boundary only gives the
+    same result (`compute_lac_distance.py`, `h3_within_district.py`).
     """)
 
 with st.expander("**Composite Window Trade-Off — Snow vs. Monsoon Cloud**"):
@@ -163,7 +164,7 @@ with st.expander("**Control-Group Baseline Imbalance — Resolved, Then Reopened
     smoothed over: fixing a real, independently-verified data-quality problem (unverified
     district labels) surfaced a baseline imbalance that a previous, less-correct version of
     the control list happened not to show. The full-year night-lights DiD result itself
-    stays null on the corrected list (p = 0.47 with t, 13 df; 0.45 with the earlier normal reference; see H4 above) — but that null can no
+    stays null on the corrected list (p = 0.47 with t, 13 df; 0.45 with the earlier normal reference; see Statistical Validation) — but that null can no
     longer be read as sitting on a well-matched baseline for this one outcome/window
     combination, the way it briefly could between Entries 25 and 37 (see Research Paper
     §6, Table 5). A genuine parallel-pre-trends placebo test *has* since been
@@ -173,16 +174,15 @@ with st.expander("**Control-Group Baseline Imbalance — Resolved, Then Reopened
     extraction.
     """)
 
-with st.expander("**Multi-Year Trend Is Not Monotonic (and Nets Out to a Null, Like the Two-Point Comparison)**"):
+with st.expander("**2023 Mid-Point — Shown, Not Interpreted**"):
     st.markdown("""
     Extending the core sample to a third time point (2023) shows the 2021-vs-2025 summer
     NDBI comparison — itself not significant on the complete data — is not a steady trend
-    either: mean NDBI declines from 2021 to 2023, then rises significantly from 2023 to
-    2025, netting out to no significant three-point linear trend overall. This is
-    consistent with, not a contradiction of, the two-point comparison's own null result.
-    This study's satellite-only evidence cannot distinguish between possible explanations
-    for the decline-then-recovery shape (a late-starting rollout, a weather-driven dip
-    earlier in the window, or some combination) — see Statistical Validation.
+    either: mean NDBI declines from 2021 to 2023 and recovers by 2025, netting out to no
+    significant three-point trend. Sentinel-2's QA60 cloud band is not populated for most of
+    2022–2024 in the harmonized collection, so the 2023 composites may be effectively unmasked.
+    The dip and recovery are therefore not interpreted, and the 2023 point plays no part in the
+    programme estimate.
     """)
 
 with st.expander("**Buffer-Radius Comparison — Same-Day Extraction**"):
@@ -196,7 +196,7 @@ with st.expander("**Buffer-Radius Comparison — Same-Day Extraction**"):
     (`src/acquisition/check_s2_archive_ingestion.py`).
     """)
 
-with st.expander("**H3 Border Proximity — Pooled Correlations Do Not Hold Within Districts**"):
+with st.expander("**SQ2 Border Distance — Pooled Correlations Do Not Hold Within Districts**"):
     st.markdown("""
     Pooled across all 251 villages, summer NDBI change rises with distance from the boundary
     (ρ = +0.29) and full-year night-light change falls with it (ρ = −0.25). Earlier versions
@@ -373,20 +373,20 @@ with st.expander("**What the Design Could Detect — In Physical Units**"):
 st.markdown("---")
 
 st.warning("""
-**Budget correlation (RQ2) is exploratory only** — with just three states with sufficient
+**Budget correlation is exploratory only** — with just three states with sufficient
 valid data (Arunachal Pradesh, Uttarakhand, and — as of the complete summer-window
 extraction — Sikkim), and a correlation whose direction itself flips between compositing
 windows at this sample size, this should not be read as a confirmatory or causal result.
 """)
 
 st.error("""
-**H3 border-proximity correlation should be read alongside the LAC geometry caveat above**
+**Border-distance correlations should be read alongside the LAC geometry caveat above**
 — any observed relationship reflects distance to a disputed, de facto line, not a settled
 legal boundary.
 """)
 
 st.markdown("---")
 st.markdown(
-    "<p class='caption-text' style='text-align:center;'>BORDER OPTICS — A Satellite-Based Verification Framework</p>",
+    "<p class='caption-text' style='text-align:center;'>BORDER OPTICS — Satellite evidence on India's Vibrant Villages Programme</p>",
     unsafe_allow_html=True,
 )

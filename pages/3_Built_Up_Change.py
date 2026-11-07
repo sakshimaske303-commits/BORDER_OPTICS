@@ -32,7 +32,7 @@ window = st.radio("Composite window", ["Summer-Matched (Jun–Sep)", "Full-Year"
 df = summer if window.startswith("Summer") else full_year
 core_df = df[df["is_core_sample"] == True] if "is_core_sample" in df.columns else df
 valid = core_df.dropna(subset=["ndbi_change"])
-st.caption(f"Core statistical sample (n={len(valid)}) — matches the formal H1 test in the Research Paper. "
+st.caption(f"Core statistical sample (n={len(valid)}) — priority villages' own change, descriptive (Research Paper §5.1); the programme estimate is the difference-in-differences on Statistical Validation. "
            "Illustrative Himachal villages are excluded here; see Methodology & Limitations.")
 
 c1, c2, c3, c4 = st.columns(4)

@@ -7,7 +7,7 @@ Version 2.0 (October 2026). Earlier versions and the full record of changes are 
 
 ## Abstract
 
-India's Vibrant Villages Programme (VVP-I), approved in February 2023 with an outlay of about ₹4,800 crore, targets 2,967 villages on the northern border, 662 of them designated priority villages. In February 2026 the Ministry of Home Affairs told Parliament that no impact assessment had been carried out. This study asks whether priority villages show more satellite-observed physical change between 2021 and 2025 than non-priority villages in the same districts. We geocoded 251 priority villages in Arunachal Pradesh, Sikkim and Uttarakhand and selected 721 comparison villages from OpenStreetMap in the same 14 districts. For each village we extracted Sentinel-2 NDBI, VIIRS night lights, Sentinel-1 backscatter and Dynamic World built-up probability within a 500 m buffer, under full-year and June–September composites, and estimated district fixed-effects difference-in-differences models with district-clustered inference (t with 13 degrees of freedom and an exact wild cluster bootstrap). NDBI, night lights and radar show no treated–control difference (all p ≥ 0.31). Dynamic World shows a small positive difference in both windows (p = 0.031 and 0.004; bootstrap p = 0.041 and 0.008), equivalent to roughly 800–2,100 m² of built-up surface per village; the summer estimate is robust to every check, while the full-year estimate depends on Sikkim. A detectability analysis shows why the indices disagree: buildings cover a median 0.33% of a 500 m buffer, so doubling a village's buildings would move buffer-mean NDBI by about 0.002, a seventh of the smallest effect the NDBI design can detect. The NDBI null is therefore uninformative rather than evidence of no change. A pooled association between change and border distance disappears or reverses within districts. Settlement-footprint outcomes and a 2026 follow-up are prepared as the next step.
+India's Vibrant Villages Programme (VVP-I), approved in February 2023 with an outlay of about ₹4,800 crore, targets 2,967 villages on the northern border, 662 of them designated priority villages. In February 2026 the Ministry of Home Affairs told Parliament that no impact assessment had been carried out. This study asks whether priority villages show more satellite-observed physical change between 2021 and 2025 than non-priority villages in the same districts. We geocoded 251 priority villages in Arunachal Pradesh, Sikkim and Uttarakhand and selected 721 comparison villages from OpenStreetMap in the same 14 districts. For each village we extracted Sentinel-2 NDBI, VIIRS night lights, Sentinel-1 backscatter and Dynamic World built-up probability within a 500 m buffer, under full-year and June–September composites, and estimated district fixed-effects difference-in-differences models with district-clustered inference (t with 13 degrees of freedom and an exact wild cluster bootstrap). NDBI, night lights and radar show no treated–control difference (all p ≥ 0.31). Dynamic World shows a small positive difference in both windows (p = 0.031 and 0.004; bootstrap p = 0.041 and 0.008), equivalent to roughly 800–2,100 m² of built-up surface per village; the summer estimate is robust to every check, including a Holm correction across the triangulation outcomes, while the full-year estimate depends on Sikkim. A detectability analysis shows why the indices disagree: buildings cover a median 0.33% of a 500 m buffer, so doubling a village's buildings would move buffer-mean NDBI by about 0.002, a seventh of the smallest effect the NDBI design can detect. The NDBI null is therefore uninformative rather than evidence of no change. A pooled association between change and border distance disappears or reverses within districts. Settlement-footprint outcomes and a 2026 follow-up are prepared as the next step.
 
 **Keywords:** Vibrant Villages Programme; policy evaluation; Earth observation; difference-in-differences; Sentinel-2; Sentinel-1; VIIRS; Dynamic World; Google Open Buildings; detectability; border regions; India.
 
@@ -64,7 +64,7 @@ Of 559 listed priority villages in the four states, 258 were geocoded and distri
 
 *The 14 districts are the clusters for all inference (Arunachal Pradesh: Anjaw, Dibang Valley, East Kameng, Kra Daadi, Kurung Kumey, Lower Dibang, Tawang, Upper Siang, Upper Subansiri, West Kameng; Sikkim: North; Uttarakhand: Chamoli, Pithoragarh, Uttarkashi).*
 
-![Figure 1](outputs/figures/static_map_renders/map_state_overview.png)
+![Figure 1](../outputs/figures/static_map_renders/map_state_overview.png)
 
 **Figure 1.** Study area. Core priority villages by state, illustrative Himachal Pradesh villages (triangles) and comparison villages (grey). Boundary lines are Natural Earth cartographic lines; the Line of Actual Control is disputed and is not represented authoritatively.
 
@@ -122,21 +122,21 @@ We compute the geodesic distance from each village to the nearest India boundary
 
 ### 4.5 Multiple testing
 
-The primary family is the four NDBI and night-light DiD estimates. Holm-adjusted, all four equal 1.000. Triangulation, border-distance and robustness results are reported as secondary, with exact p-values, and are not used to make the headline claim.
+The primary family is the four NDBI and night-light DiD estimates. Holm-adjusted, all four equal 1.000. The six triangulation DiDs (radar VV and VH, Dynamic World; both windows) form a second family, also Holm-adjusted (`triangulation_holm.py`). Border-distance and robustness results are reported as secondary, with exact p-values, and are not used to make the headline claim.
 
 ## 5. Results
 
 ### 5.1 What changed in priority villages
 
-Figure 2 shows the treated villages' own 2021→2025 change. In the full-year window, buffer-mean NDBI fell in 76% of villages (median −0.017; two-sided Wilcoxon p = 1.4 × 10⁻¹⁵). In the summer window it did not change (median +0.0017, p = 0.87). The full-year decline is largest where snow enters the composite, and the three most extreme values start from 2021 NDBI below −0.6, typical of snow or water rather than settlement. Night lights rose slightly in the full-year window (median +0.0017, p = 0.10) and fell in the summer window (median −0.060, p = 1.2 × 10⁻⁵). The summer *mean* is positive (+0.017) only because of one town, Joshimath (+5.97). By state, summer NDBI fell in Sikkim and rose slightly in Arunachal Pradesh and Uttarakhand (Figure 3).
+Figure 2 shows the treated villages' own 2021→2025 change. In the full-year window, buffer-mean NDBI fell in 76% of villages (median −0.017; two-sided Wilcoxon p = 1.4 × 10⁻¹⁵). In the summer window it did not change (median +0.0017, p = 0.87). The full-year window is the one affected by snow, and its two most extreme values, large increases at Mana and Jadung, start from 2021 NDBI below −0.6, typical of snow or water rather than settlement. Night lights rose slightly in the full-year window (median +0.0017, p = 0.10) and fell in the summer window (median −0.060, p = 1.2 × 10⁻⁵). The summer *mean* is positive (+0.017) only because of one town, Joshimath (+5.97). By state, summer NDBI fell in Sikkim and rose slightly in Arunachal Pradesh and Uttarakhand (Figure 3).
 
 These are changes in priority villages, not programme effects; Section 5.2 compares them with comparison villages.
 
-![Figure 2](outputs/figures/01_ndbi_change_distribution.png)
+![Figure 2](../outputs/figures/01_ndbi_change_distribution.png)
 
-**Figure 2.** NDBI change per priority village, both windows. Labelled values start from snow or water.
+**Figure 2.** NDBI change per priority village, both windows. The two labelled full-year values start from snow or water.
 
-![Figure 3](outputs/figures/static_map_renders/map_ndbi_summer.png)
+![Figure 3](../outputs/figures/static_map_renders/map_ndbi_summer.png)
 
 **Figure 3.** Summer NDBI change by village (red = increase). Sikkim's villages (left of the east panel) mostly decline.
 
@@ -161,15 +161,15 @@ Table 2 and Figures 4–5 give the DiD estimates.
 
 *Dynamic World: 249 treated / 716 comparison villages with valid full-year data; 169 / 536 in summer (no valid Sikkim summer values).*
 
-![Figure 4](outputs/figures/08_control_group_did_effect.png)
+![Figure 4](../outputs/figures/08_control_group_did_effect.png)
 
 **Figure 4.** NDBI and night-light DiD estimates with 95% intervals. The green band marks the change in buffer-mean NDBI that doubling a median village's buildings would produce (Section 5.3).
 
-![Figure 5](outputs/figures/11_triangulation_did.png)
+![Figure 5](../outputs/figures/11_triangulation_did.png)
 
 **Figure 5.** DiD estimates for all four measures, each on its own scale.
 
-NDBI, night lights and both radar polarisations show no priority–comparison difference in either window. Dynamic World's built probability rose more in priority villages in both windows. The summer estimate is significant in all 12 leave-one-district-out re-estimations. The full-year estimate is significant in 12 of 14: it loses significance when Dibang Valley or Sikkim's North district is dropped, and without Sikkim it is +0.0023 (p = 0.074). Restricted to the villages that also have summer values, the full-year estimate is +0.0023 (p = 0.12). A 2019→2021 placebo for Dynamic World is null in both windows (p = 0.93 and 0.18), so the difference does not continue an earlier trend.
+NDBI, night lights and both radar polarisations show no priority–comparison difference in either window. Dynamic World's built probability rose more in priority villages in both windows. The summer estimate is significant in all 12 leave-one-district-out re-estimations. The full-year estimate is significant in 12 of 14: it loses significance when Dibang Valley or Sikkim's North district is dropped, and without Sikkim it is +0.0023 (p = 0.074). Restricted to the villages that also have summer values, the full-year estimate is +0.0023 (p = 0.12). A 2019→2021 placebo for Dynamic World is null in both windows (p = 0.93 and 0.18), so the difference does not continue an earlier trend. Holm-adjusted across the six triangulation tests, the summer estimate remains significant (adjusted p = 0.027) and the full-year estimate does not (0.16).
 
 ### 5.3 What the measures could detect
 
@@ -180,7 +180,7 @@ Buildings cover a median 0.33% of a 500 m buffer (90th percentile 2.4%), and 35 
 | | NDBI full year | NDBI summer | Dynamic World full year | Dynamic World summer |
 |---|---|---|---|---|
 | Index change per unit building cover (SE) | 0.84 (0.25) | 0.53 (0.16) | 2.45 (0.26) | 2.24 (0.28) |
-| Change from doubling the median village's buildings | +0.0028 | +0.0018 | +0.0081 | +0.0074 |
+| Change from doubling the median village's buildings | +0.0028 | +0.0017 | +0.0081 | +0.0074 |
 | …as a share of the DiD's minimum detectable effect | 14% | 13% | — | — |
 | DiD estimate as building-equivalent area per village | +6,300 m² | −4,100 m² | +840 m² | +2,080 m² |
 | 95% CI, building-equivalent area | −6,600 to +19,100 m² | −18,200 to +10,000 m² | +90 to +1,600 m² | +770 to +3,380 m² |
@@ -196,7 +196,7 @@ News reports of an official visit to Anjaw district on 31 October 2023 list new 
 
 Figure 6 places each village's change within the distribution of all 251 villages. Night lights at Kaho and Walong were in the top 5% of all villages (95th and 98th percentiles), and Dynamic World at the 97th and 83rd. Musai was close to the median on both (55th and 64th). NDBI at all three fell further than at most villages (7th–26th percentiles). This is consistent with lights responding to new lighting at two of the three sites, but three villages in one district cannot validate any measure.
 
-![Figure 6](outputs/figures/12_footprint_validation.png)
+![Figure 6](../outputs/figures/12_footprint_validation.png)
 
 **Figure 6.** (A) Cross-sectional correlation between each measure's 2025 level and building count. (B) The three villages' 2021→2025 change as a percentile of all 251 villages.
 
@@ -213,7 +213,7 @@ Pooled across villages, summer NDBI change rises with distance from the boundary
 | Night lights | Full year | −0.25 (< 0.001) | +0.24 (0.021) | +0.22 (0.023) |
 | Night lights | Summer | −0.07 (0.27) | +0.42 (< 0.001) | +0.41 (0.001) |
 
-![Figure 7](outputs/figures/03_h3_border_distance_vs_lights.png)
+![Figure 7](../outputs/figures/03_h3_border_distance_vs_lights.png)
 
 **Figure 7.** Distance to the nearest boundary vs. change, coloured by district, with pooled and within-district correlations.
 
@@ -235,19 +235,19 @@ Across the three states, mean NDBI change does not follow sanctioned budget: the
 | Without 10 comparison villages that are qualifier-variant priority villages | No change (NDBI p = 0.34/0.53; lights 0.46/0.64; Dynamic World 0.030/0.005) |
 | Without the 7 duplicated treated locations, 35 building-free treated buffers (and 61 comparison), and Joshimath | All primary DiDs null; Joshimath alone reverses the sign of mean summer light change |
 | Full-year treated values from the project's Python pipeline instead of the Code Editor export | NDBI DiD +0.0029 (p = 0.64); lights unchanged (p = 0.47) |
-| Buffer radius 250 m / 1 km (summer, same-day extraction) | Treated-only NDBI change null at all radii (p = 0.12, 0.44, 0.90) |
-| SCL cloud mask instead of QA60 | Summer NDBI change null under both (p = 0.29 vs 0.44) |
+| Buffer radius 250 m / 1 km (summer, same-day extraction) | Treated-only NDBI change: no increase at any radius (one-sided Wilcoxon p = 0.12, 0.44, 0.90) |
+| SCL cloud mask instead of QA60 | Summer NDBI change: no increase under either mask (one-sided Wilcoxon p = 0.29 vs 0.44) |
 | Log night lights | Null (full year p = 0.61; summer 0.72) |
 
 *p-values use district-clustered standard errors with a normal reference (as in earlier versions) except where t(13) is stated in Table 2; the t(13) values are slightly larger and change no conclusion.*
 
-![Figure 8](outputs/figures/07_robustness_summary.png)
+![Figure 8](../outputs/figures/07_robustness_summary.png)
 
 **Figure 8.** Treated-only and border-distance tests, both windows, including within-district versions.
 
 The three-point trend (Figure 9) shows NDBI falling from 2021 to 2023 and recovering by 2025 in both windows. Sentinel-2's QA60 cloud band is not populated for most of 2022–2024 in the harmonized collection, so the 2023 composites may be effectively unmasked, and the dip should not be interpreted.
 
-![Figure 9](outputs/figures/09_multiyear_trend.png)
+![Figure 9](../outputs/figures/09_multiyear_trend.png)
 
 **Figure 9.** Mean NDBI and night lights in priority villages, 2021, 2023, 2025.
 
@@ -344,22 +344,22 @@ Zha, Y., Gao, J., & Ni, S. (2003). Use of normalized difference built-up index i
 
 ## Appendix
 
-![Figure A1](outputs/figures/02_state_change_vs_budget.png)
+![Figure A1](../outputs/figures/02_state_change_vs_budget.png)
 
 **Figure A1.** State budget vs. mean NDBI change, both windows (n = 3, descriptive).
 
-![Figure A2](outputs/figures/04_state_mean_ndbi_change.png)
+![Figure A2](../outputs/figures/04_state_mean_ndbi_change.png)
 
 **Figure A2.** NDBI change by state: medians with 95% bootstrap intervals and means.
 
-![Figure A3](outputs/figures/05_state_mean_lights_change.png)
+![Figure A3](../outputs/figures/05_state_mean_lights_change.png)
 
 **Figure A3.** Night-light change by state.
 
-![Figure A4](outputs/figures/10_buffer_sensitivity.png)
+![Figure A4](../outputs/figures/10_buffer_sensitivity.png)
 
 **Figure A4.** Treated-only NDBI change at three buffer radii (summer window).
 
-![Figure A5](outputs/figures/static_map_renders/map_border_distance.png)
+![Figure A5](../outputs/figures/static_map_renders/map_border_distance.png)
 
 **Figure A5.** Distance from each village to the nearest India boundary line.

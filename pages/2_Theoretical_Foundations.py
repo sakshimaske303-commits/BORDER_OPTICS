@@ -35,7 +35,7 @@ st.markdown("---")
 st.markdown("### High Relief Distorts What a Satellite Actually Sees")
 
 st.markdown("""
-BORDER OPTICS' 258 study villages sit across some of the steepest, highest-relief terrain any
+BORDER OPTICS' 258 geocoded villages (251 analysed) sit across some of the steepest, highest-relief terrain any
 satellite-based verification study can be run on — the Himalayan border belt of Arunachal
 Pradesh, Sikkim, Uttarakhand, and Himachal Pradesh (VVP-I also covers Ladakh, but no Ladakh village
 could be named, so none is in this sample). That relief is not a neutral backdrop; it actively

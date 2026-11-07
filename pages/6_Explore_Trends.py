@@ -90,9 +90,10 @@ st.markdown("---")
 # ============================================================
 st.markdown("### Multi-Year Trend — 2021 / 2023 / 2025")
 st.markdown(
-    "The core comparison above rests on two single years. This extends the same core sample "
-    "to a third, independent time point (2023), so a trend line — not a two-point difference — "
-    "carries the evidentiary weight. Pick a window and a state to see its own trend line."
+    "Priority villages only, shown descriptively. The 2023 composites may be effectively unmasked "
+    "(Sentinel-2's QA60 cloud band is empty for most of 2022–2024), so the 2023 point is not "
+    "interpreted; the programme estimate is the 2021–2025 difference-in-differences. Pick a window "
+    "and a state to see its line."
 )
 
 my_window_choice = st.radio("Compositing window", ["Summer-Matched", "Full-Year"], horizontal=True, key="trend_window")
@@ -186,7 +187,7 @@ st.markdown("---")
 # ============================================================
 # BUDGET CORRELATION (RQ2)
 # ============================================================
-st.markdown("### RQ2 — Change vs. Budget Allocation")
+st.markdown("### Change vs. Budget Allocation (descriptive, three states)")
 
 st.image(
     "outputs/figures/02_state_change_vs_budget.png",

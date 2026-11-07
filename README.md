@@ -1,6 +1,6 @@
 # BORDER OPTICS — Satellite Evidence on India's Vibrant Villages Programme
 
-[![EarthArXiv](https://img.shields.io/badge/EarthArXiv-Preprint-B7410E.svg)](https://eartharxiv.org/repository/view/14830/) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21759970.svg)](https://doi.org/10.5281/zenodo.21759970)
+[![EarthArXiv](https://img.shields.io/badge/EarthArXiv-Preprint-B7410E.svg)](https://eartharxiv.org/repository/view/14830/)
 
 **Did India's ₹4,800 crore Vibrant Villages Programme (VVP-I) change its border villages, and how much change could satellites actually detect?**
 
@@ -8,12 +8,15 @@
 
 | Document | Contents |
 |---|---|
-| [`BO_Executive_Summary.md`](./BO_Executive_Summary.md) | Two-page summary: question, method, findings, limitations (start here) |
-| [`BO_Research_Paper.md`](./BO_Research_Paper.md) | Full paper (v2.0) |
-| [`BO_Development_Log.md`](./BO_Development_Log.md) | Complete development record, including every error found and fixed |
-| [`BO_Results_Stability_Table.md`](./BO_Results_Stability_Table.md) | Every result that changed between versions, and why |
-| [`ANALYSIS_FREEZE.md`](./ANALYSIS_FREEZE.md) | Exact data and code state behind the reported numbers |
-| [`docs/NEXT_STEPS_EARTH_ENGINE.md`](./docs/NEXT_STEPS_EARTH_ENGINE.md) | Prepared analyses that need a live Earth Engine session |
+| [`BO_Executive_Summary.md`](./docs/BO_Executive_Summary.md) | Two-page summary: question, method, findings, limitations (start here) |
+| [`BO_Research_Paper.md`](./docs/BO_Research_Paper.md) | Full paper (v2.0) |
+| [`BO_Development_Log.md`](./docs/BO_Development_Log.md) | Complete development record, including every error found and fixed |
+| [`BO_Results_Stability_Table.md`](./docs/BO_Results_Stability_Table.md) | Every result that changed between versions, and why |
+| [`ANALYSIS_FREEZE.md`](./docs/ANALYSIS_FREEZE.md) | Exact data and code state behind the reported numbers |
+| [`BO_Declarations.pdf`](./docs/BO_Declarations.pdf) | Authorship, funding, interests, data licences, corrections and AI use |
+| [`DATA_DICTIONARY.md`](./docs/DATA_DICTIONARY.md) | Every data file and column |
+| [`BORDER_OPTICS_Maps_and_Plots.pdf`](./docs/BORDER_OPTICS_Maps_and_Plots.pdf) | All figures and maps in one printable file |
+| [`NEXT_STEPS_EARTH_ENGINE.md`](./docs/NEXT_STEPS_EARTH_ENGINE.md) | Prepared analyses that need a live Earth Engine session |
 
 ## Research question
 
@@ -37,7 +40,7 @@ It also asks what change each satellite measure could actually detect, and wheth
 ## Key findings (v2.0)
 
 1. **NDBI, night lights and radar show no priority–comparison difference** (all p ≥ 0.31).
-2. **That null cannot rule out construction.** Buildings cover a median 0.33% of a 500 m buffer, so doubling a typical village's buildings would move buffer-mean NDBI by about 0.002, roughly 13% of the smallest detectable effect.
+2. **That null cannot rule out construction.** Buildings cover a median 0.33% of a 500 m buffer, so doubling a typical village's buildings would move buffer-mean NDBI by about 0.002, 13–14% of the smallest detectable effect.
 3. **Dynamic World built-up probability, the most building-sensitive measure, shows a small positive difference** in both windows. It is equivalent to about 800–2,100 m² of built-up surface per village (bootstrap p = 0.041 full year, 0.008 summer). The summer result is robust to every check; the full-year result depends on Sikkim.
 4. **No consistent border-proximity pattern.** Pooled correlations with border distance come from differences between districts and disappear or reverse within districts.
 
@@ -47,26 +50,33 @@ See the paper for full numbers, robustness checks and limitations.
 
 ```text
 BORDER_OPTICS/
+├── README.md, LICENSE, CITATION.cff, requirements*.txt
 ├── app.py, pages/, utils/        Streamlit dashboard (home + 8 pages)
+├── static/                       PDFs served by the dashboard's document viewer
+├── docs/                         Paper, executive summary, development log, declarations (.md + .pdf),
+│                                 results stability table, analysis freeze, data dictionary,
+│                                 maps-and-plots PDF, next steps, RTI draft, review record
 ├── data/raw/                     Official village lists, Natural Earth boundaries
 ├── data/processed/               Geocoded villages, Earth Engine extractions, DiD panels, summaries
 ├── src/acquisition/              Geocoding, control selection, Earth Engine extraction
-│   ├── extract_settlement_masked.py      footprint-zone outcomes + 2026 window (v2.0; not yet run)
-│   └── check_s2_archive_ingestion.py     test of the Sikkim "archive backfill" explanation (v2.0)
+│   ├── extract_settlement_masked.py      footprint-zone outcomes + 2026 window (not yet run)
+│   └── check_s2_archive_ingestion.py     test of the Sikkim "archive backfill" explanation
 ├── src/analysis/                 Statistics
 │   ├── did_model.py                      primary DiD (statsmodels)
-│   ├── did_numpy.py                      same DiD in NumPy + t(13) + wild bootstrap (v2.0)
-│   ├── measurement_sensitivity.py        detectability, building-equivalent area, equivalence (v2.0)
-│   ├── dynamic_world_robustness.py       bootstrap, leave-one-out, composition checks (v2.0)
-│   ├── h3_within_district.py             border distance: pooled vs within-district (v2.0)
-│   ├── compute_lac_distance.py           distance to the China boundary only (v2.0)
-│   ├── sample_qa_sensitivity.py          duplicates, building-free buffers, pipeline swap (v2.0)
-│   └── settlement_masked_did.py          DiD on footprint-zone outcomes, once extracted (v2.0)
-├── src/visualization/            Figures and maps
+│   ├── did_numpy.py                      same DiD in NumPy + t(13) + wild bootstrap
+│   ├── measurement_sensitivity.py        detectability, building-equivalent area, equivalence
+│   ├── dynamic_world_robustness.py       bootstrap, leave-one-out, composition checks
+│   ├── triangulation_holm.py             Holm correction across the triangulation DiDs
+│   ├── h3_within_district.py             border distance: pooled vs within-district
+│   ├── compute_lac_distance.py           distance to the China boundary only
+│   ├── sample_qa_sensitivity.py          duplicates, building-free buffers, pipeline swap
+│   └── settlement_masked_did.py          DiD on footprint-zone outcomes, once extracted
+├── src/visualization/            Figures, maps, and the PDF builders
+│   ├── build_docs_pdfs.sh                rebuilds the paper, summary and log PDFs (docs/ + static/)
+│   └── build_maps_plots_pdf.py           rebuilds docs/BORDER_OPTICS_Maps_and_Plots.pdf
 ├── outputs/                      Figures, maps, JSON/CSV results
 ├── tests/test_data_integrity.py  Data invariants (15 checks)
-├── archive/                      Superseded files kept as an audit trail
-└── docs/                         Next steps, RTI draft
+└── archive/                      Superseded files kept as an audit trail
 ```
 
 ## Running locally
@@ -79,6 +89,9 @@ streamlit run app.py                      # dashboard (no Earth Engine needed)
 python tests/test_data_integrity.py       # data checks
 python src/analysis/measurement_sensitivity.py
 python src/analysis/h3_within_district.py
+python src/analysis/triangulation_holm.py
+bash src/visualization/build_docs_pdfs.sh        # rebuild document PDFs (needs pandoc + wkhtmltopdf)
+python src/visualization/build_maps_plots_pdf.py # rebuild the maps-and-plots PDF
 ```
 
 The extraction scripts in `src/acquisition/` need a Google Earth Engine account (`earthengine authenticate`, `EE_PROJECT` in `.env`). The scripts added in v2.0 under `src/analysis/` need only NumPy, pandas and SciPy.
@@ -95,6 +108,15 @@ The extraction scripts in `src/acquisition/` need a Google Earth Engine account 
 | Dynamic World V1 | Google / World Resources Institute (CC BY 4.0) |
 | Open Buildings v3 | Google Research (CC BY 4.0 / ODbL) |
 | Boundary lines | Natural Earth (public domain); cartographic only, the LAC is disputed |
+
+## Declarations
+
+The complete statement is in [`BO_Declarations.pdf`](./docs/BO_Declarations.pdf) (source: [`BO_Declarations.md`](./docs/BO_Declarations.md)). Briefly:
+
+- **Author and funding:** a single author carried out every stage; there was no external funding and there are no competing interests.
+- **Ethics:** public village lists and satellite data at village level only; no participants or personal data.
+- **Corrections:** each change to a headline result, and the version 2.0 changes made after an independent review, is listed, with the full record in `BO_Results_Stability_Table.md`.
+- **AI use:** see the AI-use section of [`BO_Declarations.pdf`](./docs/BO_Declarations.pdf).
 
 ## Licence
 

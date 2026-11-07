@@ -1,7 +1,7 @@
 # BORDER OPTICS
 ### Satellite evidence on India's Vibrant Villages Programme (VVP-I)
 
-Executive Summary · DOI: 10.5281/zenodo.21759970 · Sakshi D. Maske · Version 2.0 (October 2026)
+Executive Summary · Sakshi D. Maske · Version 2.0 (October 2026)
 
 ## The question
 
@@ -21,13 +21,13 @@ India's Vibrant Villages Programme (VVP-I), approved in February 2023 with an ou
 - **Design.** A difference-in-differences comparison of priority and comparison villages with district fixed effects. Inference suited to 14 district clusters: t with 13 degrees of freedom and an exact wild cluster bootstrap. Checks: a 2019–2021 placebo, leave-one-district-out, randomization inference and sample-quality sensitivity.
 - **Detectability.** For each measure, how much it moves per square metre of building, estimated from the footprint data, and therefore what change it could have detected.
 
-![Study area](outputs/figures/static_map_renders/map_state_overview.png)
+![Study area](../outputs/figures/static_map_renders/map_state_overview.png)
 
 ## Findings
 
 1. **Built-up index, night lights and radar: no difference** between priority and comparison villages in either window (all p ≥ 0.31; Table below).
 2. **That null cannot rule out construction.** Buildings cover a median 0.33% of a 500 m buffer. Doubling a typical village's buildings would move buffer-mean NDBI by about 0.002, only 13–14% of the smallest effect the design can detect. The NDBI result is uninformative, not evidence that nothing was built.
-3. **Dynamic World, the measure most sensitive to buildings, shows a small positive difference in both windows.** It is equivalent to roughly 800–2,100 m² of built-up surface per priority village and passes the small-cluster bootstrap (p = 0.041 full year, 0.008 summer). The summer result survives every check; the full-year result depends on Sikkim. A 2019–2021 placebo is clean, so it is not an earlier trend continuing.
+3. **Dynamic World, the measure most sensitive to buildings, shows a small positive difference in both windows.** It is equivalent to roughly 800–2,100 m² of built-up surface per priority village and passes the small-cluster bootstrap (p = 0.041 full year, 0.008 summer). The summer result survives every check, including a correction for testing several measures; the full-year result depends on Sikkim. A 2019–2021 placebo is clean, so it is not an earlier trend continuing.
 4. **No consistent border-proximity pattern.** Pooled correlations between change and border distance reflect differences between districts. Within districts they disappear (built-up index) or reverse (night lights grew more in villages *farther* from the border).
 5. **Budget and outcome are unrelated** across the three states (descriptive, n = 3).
 
@@ -38,7 +38,7 @@ India's Vibrant Villages Programme (VVP-I), approved in February 2023 with an ou
 | Sentinel-1 VV / VH | +0.006 / −0.004 (0.83 / 0.89) | +0.019 / +0.000 (0.52 / 1.00) |
 | Dynamic World built probability | **+0.0026 (0.031; bootstrap 0.041)** | **+0.0059 (0.004; bootstrap 0.008)** |
 
-![Main result](outputs/figures/08_control_group_did_effect.png)
+![Main result](../outputs/figures/08_control_group_did_effect.png)
 
 *NDBI and night-light differences with 95% intervals. The green band shows the change that doubling a typical village's buildings would produce; the intervals are several times wider.*
 
@@ -73,6 +73,6 @@ Version 2.0 followed an independent review. It moved the primary analysis to the
 
 ---
 
-GitHub: github.com/sakshimaske303-commits/BORDER_OPTICS | Live Dashboard: borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app | Zenodo DOI: 10.5281/zenodo.21759970
+GitHub: github.com/sakshimaske303-commits/BORDER_OPTICS | Live Dashboard: borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app
 
 Sakshi D. Maske — Independent Geospatial Researcher

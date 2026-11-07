@@ -17,7 +17,7 @@ villages, full_year, summer = load_data()
 st.markdown("<h1>🛰️ BORDER OPTICS</h1>", unsafe_allow_html=True)
 st.markdown(
     "<h3 style='text-align: center; font-weight: 700; margin-top: -10px;'>"
-    "A Satellite-Based Verification Framework for India's Vibrant Villages Programme (VVP-I)</h3>",
+    "Did India's Vibrant Villages Programme Change Its Border Villages? A Multi-Sensor Difference-in-Differences Assessment, 2021–2025</h3>",
     unsafe_allow_html=True,
 )
 
@@ -45,26 +45,6 @@ st.markdown(
                     </div>
                     <div style="color:{PALETTE['text_primary']}; font-family:'Inter',sans-serif; font-weight:900; font-size:1.35rem; margin-top:2px;">
                         Read the preprint
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="https://doi.org/10.5281/zenodo.21759970" target="_blank" class="doi-badge-link" style="text-decoration:none;">
-            <div class="doi-badge-card" style="
-                display:flex; align-items:center; gap:18px;
-                background: linear-gradient(145deg, {PALETTE['bg_card']}, {PALETTE['bg_main']});
-                border: 2px solid {PALETTE['accent_vintage']};
-                border-radius: 14px;
-                padding: 16px 32px;
-                box-shadow: 0 4px 20px rgba(255, 124, 172, 0.35);
-            ">
-                <div style="text-align:left;">
-                    <div style="color:{PALETTE['accent']}; font-family:'Inter',sans-serif; font-weight:800; font-size:1.05rem; letter-spacing:0.4px; display:flex; align-items:center; gap:8px;">
-                        <span>ARCHIVED &amp; CITABLE ON ZENODO</span>
-                        <span style="opacity:0.8; font-size:0.95rem;">↗</span>
-                    </div>
-                    <div style="color:{PALETTE['text_primary']}; font-family:'Inter',sans-serif; font-weight:900; font-size:1.35rem; margin-top:2px;">
-                        DOI: 10.5281/zenodo.21759970
                     </div>
                 </div>
             </div>
@@ -168,12 +148,12 @@ m1, m2, m3 = st.columns(3)
 with m1:
     st.markdown(f"""
     <div class="recon-card" style="min-height: 190px;">
-        <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Satellite Verification</p>
+        <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Satellite Measures</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
-            Sentinel-2 NDBI and VIIRS night-lights extracted at 258 treated village points
-            plus 721 district-restricted control villages, across paired 2021/2025 composites (plus
-            2023) under both full-year and season-matched windows, at 250m/500m/1km
-            buffers.
+            Sentinel-2 NDBI, VIIRS night lights, Sentinel-1 radar and Dynamic World built-up
+            probability in a 500 m buffer around 251 priority and 721 comparison villages,
+            2021 and 2025 (plus a 2019 placebo year), full-year and June–September composites.
+            Google Open Buildings footprints size what each measure can detect.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -181,12 +161,12 @@ with m1:
 with m2:
     st.markdown(f"""
     <div class="recon-card" style="min-height: 190px;">
-        <p style="color: {PALETTE['lights']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Statistical Testing</p>
+        <p style="color: {PALETTE['lights']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Primary Analysis</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
-            Wilcoxon signed-rank tests for before/after and multi-year trend change,
-            Spearman correlations for budget (RQ2) and border-proximity (H3), and a
-            district-fixed-effects Difference-in-Differences model against the control
-            group (H4), with sample-size caveats disclosed wherever a test is exploratory.
+            District fixed-effects difference-in-differences of priority vs. comparison villages,
+            with t (13 df) and an exact wild cluster bootstrap for 14 district clusters, checked
+            by a 2019–2021 placebo, leave-one-district-out and randomization inference. Border
+            distance is analysed pooled and within districts.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -208,11 +188,11 @@ st.markdown("---")
 st.markdown("### Explore the Evidence")
 
 nav_items = [
-    ("Study Design", "Research questions, hypotheses, sample overview"),
+    ("Study Design", "Research question, design, sample overview"),
     ("Theoretical Foundations", "Why Himalayan terrain and altitude drive measurement uncertainty"),
     ("Built-Up Change", "NDBI findings across all villages"),
     ("Night-Lights", "VIIRS radiance change findings"),
-    ("Statistical Validation", "Wilcoxon tests, Spearman correlations, robustness"),
+    ("Statistical Validation", "Difference-in-differences, detectability, robustness"),
     ("Explore Trends", "Cross-state comparison, budget correlation"),
     ("Interactive Maps & Plots", "Live village-level geospatial exploration plus the three headline charts"),
     ("Methodology & Limitations", "Full transparency on data and methods"),
@@ -236,7 +216,7 @@ st.markdown("---")
 st.markdown("### Full Project Documentation")
 st.markdown(
     f"<p style='color:{PALETTE['text_secondary']}; font-weight:600;'>"
-    "The complete research paper, project journal, and development log open directly below, no download needed.</p>",
+    "The executive summary, research paper, development log and declarations open directly below, no download needed.</p>",
     unsafe_allow_html=True,
 )
 
@@ -244,6 +224,7 @@ _all_docs = [
     {"label": "Executive Summary", "filename": "BO_Executive_Summary.pdf"},
     {"label": "Research Paper", "filename": "BO_Research_Paper.pdf"},
     {"label": "Development Log", "filename": "BO_Development_Log.pdf"},
+    {"label": "Declarations", "filename": "BO_Declarations.pdf"},
 ]
 _docs = [d for d in _all_docs if os.path.exists(os.path.join("static", d["filename"]))]
 _missing = [d for d in _all_docs if d not in _docs]
@@ -285,7 +266,7 @@ st.markdown(
     <div style="text-align: center; padding: 25px;" class="recon-card">
         <p style="color: {PALETTE['text_secondary']}; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 700;">Developed by</p>
         <h2 style="color: {PALETTE['accent_vintage']}; margin: 5px 0; border: none; padding: 0;">SAKSHI D. MASKE</h2>
-        <p style="color: {PALETTE['accent']}; font-weight: 700;">Independent Geospatial Researcher</p>
+        <p style="color: {PALETTE['accent']}; font-weight: 700;">Satellite data and policy, self-directed research</p>
     </div>
     """,
     unsafe_allow_html=True,

@@ -1,0 +1,66 @@
+{
+  "family": "six triangulation DiDs (S1 VV, S1 VH, Dynamic World; both windows)",
+  "inference": "t with 13 df, district-clustered CR1 SE",
+  "tests": [
+    {
+      "outcome": "vv",
+      "window": "full_year",
+      "coef": 0.005509451256419329,
+      "se": 0.02508192483974466,
+      "n_obs": 1944,
+      "p_t13": 0.8295488358492363,
+      "holm_adjusted_p": 1.0,
+      "significant_after_holm": false
+    },
+    {
+      "outcome": "vv",
+      "window": "summer",
+      "coef": 0.018970115537582433,
+      "se": 0.028635892141807,
+      "n_obs": 1944,
+      "p_t13": 0.5192493741398287,
+      "holm_adjusted_p": 1.0,
+      "significant_after_holm": false
+    },
+    {
+      "outcome": "vh",
+      "window": "full_year",
+      "coef": -0.004023037295661544,
+      "se": 0.029531374126307887,
+      "n_obs": 1944,
+      "p_t13": 0.8937270500224781,
+      "holm_adjusted_p": 1.0,
+      "significant_after_holm": false
+    },
+    {
+      "outcome": "vh",
+      "window": "summer",
+      "coef": 0.00011546660553714283,
+      "se": 0.040406021150748705,
+      "n_obs": 1944,
+      "p_t13": 0.9977633084404967,
+      "holm_adjusted_p": 1.0,
+      "significant_after_holm": false
+    },
+    {
+      "outcome": "built",
+      "window": "full_year",
+      "coef": 0.0026236198227791645,
+      "se": 0.0010876354662731444,
+      "n_obs": 1930,
+      "p_t13": 0.031358878687449715,
+      "holm_adjusted_p": 0.15679439343724857,
+      "significant_after_holm": false
+    },
+    {
+      "outcome": "built",
+      "window": "summer",
+      "coef": 0.0059240468674203435,
+      "se": 0.001724828627349786,
+      "n_obs": 1410,
+      "p_t13": 0.004437641085445556,
+      "holm_adjusted_p": 0.026625846512673336,
+      "significant_after_holm": true
+    }
+  ]
+}

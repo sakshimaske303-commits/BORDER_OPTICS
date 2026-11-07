@@ -131,7 +131,7 @@ ax_b.set_ylim(0, 135)
 ax_b.set_xticks(range(3))
 ax_b.set_xticklabels(cases)
 ax_b.set_ylabel("Percentile of the village's change\namong all 251 core villages")
-ax_b.set_title("B. Villages with VVP-I works inaugurated Oct–Nov 2023 (Anjaw): full-year 2021→2025 change\n"
+ax_b.set_title("B. Villages with new facilities reported in Oct 2023 (Anjaw; state model-village works): full-year 2021→2025 change\n"
                "(numbers above bars = raw change)", fontsize=9)
 ax_b.legend(fontsize=8, loc="upper center", ncol=3, frameon=False)
 fig.tight_layout()

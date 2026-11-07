@@ -17,10 +17,10 @@ st.markdown(
 st.markdown("---")
 
 st.markdown("""
-VIIRS DNB monthly night-lights radiance is used as a secondary, independent proxy for
-economic activity and electrification — a rise here alongside NDBI growth strengthens
-confidence that observed built-up change reflects genuine development rather than a
-satellite-index artifact.
+VIIRS DNB monthly night-lights radiance is the second primary outcome, a proxy for
+electrification and activity that is independent of the optical built-up index. Its pixels
+(roughly 500–750 m) are about the size of the village buffer, so it registers new lighting
+better than new buildings.
 """)
 
 st.markdown("---")
@@ -35,7 +35,7 @@ window = st.radio(
 df = summer if window.startswith("Summer") else full_year
 core_df = df[df["is_core_sample"] == True] if "is_core_sample" in df.columns else df
 valid = core_df.dropna(subset=["lights_change"])
-st.caption(f"Core statistical sample (n={len(valid)}) — matches the formal H1 test in the Research Paper.")
+st.caption(f"Core statistical sample (n={len(valid)}) — priority villages' own change, descriptive (Research Paper §5.1); the programme estimate is the difference-in-differences on Statistical Validation.")
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("Mean Lights Change", f"{valid['lights_change'].mean():.4f}")

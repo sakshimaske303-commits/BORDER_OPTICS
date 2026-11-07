@@ -33,7 +33,7 @@ MAP_OPTIONS = {
     "Night-Lights Change": (MAP_DIR, "village_lights_change_map.html"),
     "Border / LAC Proximity": (MAP_DIR, "village_border_distance_map.html"),
     "State Overview": (MAP_DIR, "village_state_overview_map.html"),
-    "Treated vs. Non-VVP Control Group (H4)": (MAP_DIR, "village_treated_vs_control_map.html"),
+    "Priority vs. Comparison Villages": (MAP_DIR, "village_treated_vs_control_map.html"),
     "2023-to-2025 Recovery (Multi-Year Trend)": (MAP_DIR, "village_recovery_2023_2025_map.html"),
     "500m Coverage Gap (Buffer-Sensitivity Diagnostic)": (MAP_DIR, "village_coverage_gap_map.html"),
     "Control-Group DiD Effect": (PLOT_DIR, "control_group_did_effect.html"),

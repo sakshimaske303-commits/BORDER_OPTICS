@@ -1,6 +1,6 @@
 # BORDER OPTICS — Field Verification Shortlist
 
-Top 3 villages per state, ranked by the largest measured built-up-area increase (`ndbi_change`, 2021→2025) — these are the villages where the satellite shows the strongest "development" signal, so they're the most worth confirming on the ground.
+Top 3 villages per state, ranked by the largest measured built-up-area increase (`ndbi_change`, 2021→2025) — these are the villages where the satellite shows the strongest "development" signal, so they're the most worth confirming on the ground. Machine-readable version: `outputs/field_verification_shortlist.csv`.
 
 ## Arunachal Pradesh (summer-matched window)
 

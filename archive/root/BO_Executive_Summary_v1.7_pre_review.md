@@ -1,7 +1,7 @@
 # BORDER OPTICS
 ### A Satellite-Based Verification Framework for India's Vibrant Villages Programme (VVP-I)
 
-Executive Summary · DOI: 10.5281/zenodo.21759970 · Sakshi D. Maske
+Executive Summary · Sakshi D. Maske
 
 ## Project Overview
 
@@ -76,6 +76,6 @@ Parliament was told no independent impact study exists for a Rs. 4,800 crore gov
 
 ---
 
-GitHub: github.com/sakshimaske303-commits/BORDER_OPTICS | Live Dashboard: borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app | Zenodo DOI: 10.5281/zenodo.21759970
+GitHub: github.com/sakshimaske303-commits/BORDER_OPTICS | Live Dashboard: borderoptics-bkx3lpcvfghdpa2hmuqwsg.streamlit.app
 
 Sakshi D. Maske — Independent Geospatial Researcher

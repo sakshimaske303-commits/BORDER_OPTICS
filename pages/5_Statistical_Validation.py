@@ -31,7 +31,7 @@ st.markdown("---")
 _checks = [
     (PALETTE['accent'], "✓", "Dual Compositing-Window Test"),
     (PALETTE['accent'], "✓", "Two Separate Metrics (NDBI + VIIRS)"),
-    (PALETTE['accent'], "✓", "Wilcoxon Signed-Rank Tests"),
+    (PALETTE['accent'], "✓", "t With 13 df for 14 District Clusters"),
     (PALETTE['accent'], "✓", "District-Restricted Non-VVP Control Group (721 villages, DiD)"),
     (PALETTE['accent'], "✓", "Control-Group DiD Checked Further (Leave-One-District-Out + Randomization Inference)"),
     (PALETTE['accent'], "✓", "Three-Point Multi-Year Trend (2021/2023/2025)"),
@@ -39,7 +39,7 @@ _checks = [
     (PALETTE['accent'], "✓", "Cross-Checked Against Sanctioned Budget"),
     (PALETTE['accent'], "✓", "Every Data Gap Disclosed"),
     (PALETTE['accent'], "✓", "Original Summer NDBI Signal Re-Checked Once Extraction Was Completed — Did Not Survive"),
-    (PALETTE['accent'], "✓", "Border Proximity (H3) Tested Within Districts — Pooled Correlations Disappear or Reverse"),
+    (PALETTE['accent'], "✓", "Border Proximity (SQ2) Tested Within Districts — Pooled Correlations Disappear or Reverse"),
     (PALETTE['accent'], "✓", "Detectability in Physical Units — NDBI Cannot See Village-Scale Construction"),
     (PALETTE['accent'], "✓", "Exact Wild Cluster Bootstrap (16,384 Sign-Flip Combinations) — DiD Null Confirmed"),
     (PALETTE['accent'], "✓", "Genuine Pre-Treatment (2019) Placebo Test — Mostly Clean, One Borderline Result Flagged"),
@@ -64,9 +64,10 @@ st.markdown(
 st.markdown("---")
 
 st.markdown("""
-Every test below is run under both composite windows. Where a result's direction or
-significance flips between windows, that instability is reported explicitly rather than
-resolved by discarding one window.
+**How to read this page.** The programme estimate is the **difference-in-differences** (priority vs.
+comparison villages, section "Primary analysis" below). The first two sections describe change in
+priority villages on their own (two-sided Wilcoxon); they cannot separate a programme effect from a
+regional trend and are descriptive only. Every test is run under both compositing windows.
 """)
 
 st.markdown("---")
@@ -75,9 +76,9 @@ st.markdown("---")
 def run_wilcoxon(df, before_col, after_col):
     paired = df.dropna(subset=[before_col, after_col])
     if len(paired) < 2:
-        return None, None, len(paired)
-    w_stat, p_val = stats.wilcoxon(paired[after_col], paired[before_col], alternative="greater")
-    return w_stat, p_val, len(paired)
+        return None, None, len(paired), None
+    w_stat, p_val = stats.wilcoxon(paired[after_col], paired[before_col], alternative="two-sided")
+    return w_stat, p_val, len(paired), float((paired[after_col] - paired[before_col]).median())
 
 
 def run_spearman(df, col_x, col_y):
@@ -88,14 +89,16 @@ def run_spearman(df, col_x, col_y):
     return rho, p_val, len(valid)
 
 
-def result_card(label, w_stat, p_val, n, border_color):
+def result_card(label, w_stat, p_val, n, median, border_color):
     if p_val is None:
         body = '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.9rem; margin: 0;">Insufficient paired observations.</p>'
     else:
-        sig_text = "Significant at \u03b1 = 0.05" if p_val < 0.05 else "Not significant at \u03b1 = 0.05"
+        direction = "increase" if median > 0 else "decrease"
+        sig_text = (f"Significant {direction} (two-sided, \u03b1 = 0.05)" if p_val < 0.05
+                    else "No significant change (two-sided, \u03b1 = 0.05)")
         body = (
             '<p style="color: ' + PALETTE["text_primary"] + '; font-size: 1.6rem; font-weight: 900; margin-bottom: 4px;">W = ' + f"{w_stat:.3f}" + '</p>'
-            + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.85rem; margin-bottom: 4px;">p = ' + f"{p_val:.4f}" + ' \u00b7 n = ' + str(n) + '</p>'
+            + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.85rem; margin-bottom: 4px;">' + ("p < 0.0001" if p_val < 0.0001 else f"p = {p_val:.4f}") + ' \u00b7 median change ' + f"{median:+.4f}" + ' \u00b7 n = ' + str(n) + '</p>'
             + '<p style="color: ' + border_color + '; font-size: 0.82rem; font-weight: 700; margin: 0;">' + sig_text + '</p>'
         )
     card_html = (
@@ -110,23 +113,23 @@ def result_card(label, w_stat, p_val, n, border_color):
 # ============================================================
 # H1 — NDBI CHANGE (WILCOXON)
 # ============================================================
-st.markdown("### H1 — Built-Up Area Change (Wilcoxon Signed-Rank)")
+st.markdown("### Priority Villages' Own NDBI Change (descriptive, two-sided Wilcoxon)")
 
-fy_w, fy_p, fy_n = run_wilcoxon(full_year, "ndbi_before", "ndbi_after")
-sm_w, sm_p, sm_n = run_wilcoxon(summer, "ndbi_before", "ndbi_after")
+fy_w, fy_p, fy_n, fy_m = run_wilcoxon(full_year, "ndbi_before", "ndbi_after")
+sm_w, sm_p, sm_n, sm_m = run_wilcoxon(summer, "ndbi_before", "ndbi_after")
 
 col1, col2 = st.columns(2)
 with col1:
-    result_card("Full-Year", fy_w, fy_p, fy_n, PALETTE["accent"])
+    result_card("Full-Year", fy_w, fy_p, fy_n, fy_m, PALETTE["accent"])
 with col2:
-    result_card("Summer-Matched", sm_w, sm_p, sm_n, PALETTE["border_up"])
+    result_card("Summer-Matched", sm_w, sm_p, sm_n, sm_m, PALETTE["border_up"])
 
 st.caption(
-    "Both figures above use the primary QA60 cloud mask. A cross-check against an alternative SCL-band "
-    "mask first looked like it flipped this summer result from null to significant -- turned out to be "
-    "a bug (the SCL mask was letting snow pixels through as clear), caught by external review, fixed, "
-    "and rerun: the two masks now agree, both null (QA60 p=0.436, SCL p=0.288, n=251 both). "
-    "See Methodology & Limitations for the full account."
+    "The full-year decline is largest where snow enters the composite; the summer window shows no change. "
+    "Both use the primary QA60 cloud mask. An SCL-band cross-check first looked significant because the SCL "
+    "mask let snow through as clear; once fixed, both masks agree that summer NDBI did not increase "
+    "(one-sided test for an increase: QA60 p=0.436, SCL p=0.288, n=251). These describe priority villages "
+    "only and are not programme estimates; see the difference-in-differences below."
 )
 
 st.markdown("---")
@@ -134,23 +137,26 @@ st.markdown("---")
 # ============================================================
 # NIGHT-LIGHTS CHANGE (WILCOXON)
 # ============================================================
-st.markdown("### Night-Lights Change (Wilcoxon Signed-Rank)")
+st.markdown("### Priority Villages' Own Night-Light Change (descriptive, two-sided Wilcoxon)")
 
-fy_wl, fy_pl, fy_nl = run_wilcoxon(full_year, "lights_before", "lights_after")
-sm_wl, sm_pl, sm_nl = run_wilcoxon(summer, "lights_before", "lights_after")
+fy_wl, fy_pl, fy_nl, fy_ml = run_wilcoxon(full_year, "lights_before", "lights_after")
+sm_wl, sm_pl, sm_nl, sm_ml = run_wilcoxon(summer, "lights_before", "lights_after")
 
 col3, col4 = st.columns(2)
 with col3:
-    result_card("Full-Year", fy_wl, fy_pl, fy_nl, PALETTE["lights"])
+    result_card("Full-Year", fy_wl, fy_pl, fy_nl, fy_ml, PALETTE["lights"])
 with col4:
-    result_card("Summer-Matched", sm_wl, sm_pl, sm_nl, PALETTE["accent_vintage"])
+    result_card("Summer-Matched", sm_wl, sm_pl, sm_nl, sm_ml, PALETTE["accent_vintage"])
+st.caption(
+    "The summer median falls; the summer mean is positive only because of one town, Joshimath (+5.97)."
+)
 
 st.markdown("---")
 
 # ============================================================
 # H3 — BORDER PROXIMITY (SPEARMAN)
 # ============================================================
-st.markdown("### H3 — Border Proximity vs. Change (Spearman)")
+st.markdown("### SQ2 — Border Distance vs. Change (Spearman, pooled and within districts)")
 
 fy_rho_n, fy_p_n, fy_n_n = run_spearman(full_year, "distance_to_border_km", "ndbi_change")
 sm_rho_n, sm_p_n, sm_n_n = run_spearman(summer, "distance_to_border_km", "ndbi_change")
@@ -196,20 +202,22 @@ st.markdown("---")
 # ============================================================
 # H4 — CONTROL-GROUP DIFFERENCE-IN-DIFFERENCES
 # ============================================================
-st.markdown("### H4 — Control-Group Difference-in-Differences")
+st.markdown("### Primary Analysis — Priority vs. Comparison Villages (Difference-in-Differences)")
 st.markdown(
-    "A treated-only before/after comparison can't tell VVP-I's own effect apart from a "
-    "regional trend every village in these districts shares. This benchmarks the treated "
-    "core sample against 721 district-restricted non-VVP villages in the same 14 districts — district "
-    "fixed effects, standard errors clustered by district. Checked further by dropping each "
-    "district one at a time and by randomization inference that doesn't lean on cluster "
-    "asymptotics — see the cards below for each window's own leave-one-out and randomization "
-    "results, and the Research Paper's §5.2 and §6 for the full breakdown, including why the "
-    "summer-window checks (which used to hold 14/14 and p = 0.0005) no longer do, and why the "
-    "full-year night-lights check, which briefly held after that (10/14, p = 0.0155), also no "
-    "longer does once the control group's own contamination was found and fixed (Development "
-    "Log Entries 23-25)."
+    "This is the programme estimate. The 251 priority villages are compared with 721 non-priority "
+    "villages in the same 14 districts: district fixed effects, standard errors clustered by district, "
+    "p-values from t with 13 degrees of freedom and an exact wild cluster bootstrap (all 16,384 sign "
+    "flips), as in Table 2 of the Research Paper. Each card also gives the leave-one-district-out and "
+    "randomization-inference results."
 )
+
+with open("outputs/wild_cluster_bootstrap_results.json") as _f:
+    _wcb = {(r["outcome"], r["window"]): r["wild_cluster_bootstrap_p"] for r in json.load(_f)}
+
+
+def _p_t13(r):
+    return float(2 * stats.t.sf(abs(r["did_coef"] / r["did_se"]), 13))
+
 
 _loo = expanded["robustness_extended"]["leave_one_district_out"]
 _rand = expanded["robustness_extended"]["randomization_inference"]
@@ -221,7 +229,8 @@ for col, window_key, window_label, border in [
     (did_col2, "did_summer", "Summer-Matched", PALETTE["border_up"]),
 ]:
     ndbi_r = next(r for r in expanded[window_key]["did"] if r["outcome"] == "ndbi")
-    sig_text = "Significant at α = 0.05" if ndbi_r["did_p"] < 0.05 else "Not significant at α = 0.05"
+    _pt = _p_t13(ndbi_r); _pb = _wcb[("ndbi", "full_year" if window_key == "did_fullyear" else "summer")]
+    sig_text = "Significant at α = 0.05" if _pt < 0.05 else "Not significant at α = 0.05"
     if window_key == "did_summer":
         loo_text = f"Leave-one-district-out: {_loo['ndbi']['n_significant_of_14']}/14 significant · Randomization p = {_rand['ndbi']['p_randomization']:.4f}"
     else:
@@ -230,7 +239,7 @@ for col, window_key, window_label, border in [
         '<div class="recon-card" style="border-left: 4px solid ' + border + '; min-height: 190px;">'
         + '<p style="color: ' + border + '; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">' + window_label + ' — NDBI DiD</p>'
         + '<p style="color: ' + PALETTE["text_primary"] + '; font-size: 1.6rem; font-weight: 900; margin-bottom: 4px;">did = ' + f"{ndbi_r['did_coef']:+.4f}" + '</p>'
-        + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.85rem; margin-bottom: 4px;">p = ' + f"{ndbi_r['did_p']:.4f}" + ' · n = ' + str(ndbi_r['n_treated']) + ' treated / ' + str(ndbi_r['n_control']) + ' control</p>'
+        + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.85rem; margin-bottom: 4px;">p = ' + f"{_pt:.2f}" + ' (t, 13 df) · wild bootstrap p = ' + f"{_pb:.2f}" + ' · n = ' + str(ndbi_r['n_treated']) + ' treated / ' + str(ndbi_r['n_control']) + ' control</p>'
         + '<p style="color: ' + border + '; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px;">' + sig_text + '</p>'
         + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.75rem; margin: 0;">' + loo_text + '</p>'
         + '</div>'
@@ -245,7 +254,8 @@ for col, window_key, window_label, border in [
     (did_col4, "did_summer", "Summer-Matched", PALETTE["border_up"]),
 ]:
     lights_r = next(r for r in expanded[window_key]["did"] if r["outcome"] == "lights")
-    sig_text = "Significant at α = 0.05" if lights_r["did_p"] < 0.05 else "Not significant at α = 0.05"
+    _pt = _p_t13(lights_r); _pb = _wcb[("lights", "full_year" if window_key == "did_fullyear" else "summer")]
+    sig_text = "Significant at α = 0.05" if _pt < 0.05 else "Not significant at α = 0.05"
     if window_key == "did_summer":
         loo_text = f"Leave-one-district-out: {_loo['lights']['n_significant_of_14']}/14 significant · Randomization p = {_rand['lights']['p_randomization']:.4f}"
     else:
@@ -256,7 +266,7 @@ for col, window_key, window_label, border in [
         '<div class="recon-card" style="border-left: 4px solid ' + border + '; min-height: 190px;">'
         + '<p style="color: ' + border + '; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">' + window_label + ' — Night-Lights DiD</p>'
         + '<p style="color: ' + PALETTE["text_primary"] + '; font-size: 1.6rem; font-weight: 900; margin-bottom: 4px;">did = ' + f"{lights_r['did_coef']:+.4f}" + '</p>'
-        + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.85rem; margin-bottom: 4px;">p = ' + f"{lights_r['did_p']:.4f}" + ' · n = ' + str(lights_r['n_treated']) + ' treated / ' + str(lights_r['n_control']) + ' control</p>'
+        + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.85rem; margin-bottom: 4px;">p = ' + f"{_pt:.2f}" + ' (t, 13 df) · wild bootstrap p = ' + f"{_pb:.2f}" + ' · n = ' + str(lights_r['n_treated']) + ' treated / ' + str(lights_r['n_control']) + ' control</p>'
         + '<p style="color: ' + border + '; font-size: 0.82rem; font-weight: 700; margin-bottom: 6px;">' + sig_text + '</p>'
         + '<p style="color: ' + PALETTE["text_secondary"] + '; font-size: 0.75rem; margin: 0;">' + loo_text + '</p>'
         + '</div>'
@@ -264,9 +274,8 @@ for col, window_key, window_label, border in [
     with col:
         st.markdown(card_html, unsafe_allow_html=True)
 st.caption(
-    "Night-lights' own before/after change shows no significant *increase* in either window (the "
-    "one-sided tests above). Run two-sided, summer night-lights is a significant *decrease* (p=1.2e-5). Against "
-    "the control group, the full-year gap had briefly looked significant under district fixed effects "
+    "Leave-one-district-out and randomization p-values use the normal reference, as in the paper's Table 5. Against "
+    "the control group, the full-year night-light gap had briefly looked significant under district fixed effects "
     "(but not the no-fixed-effects comparison) — until the control group itself was found to contain "
     "23 villages that were physically or nominally duplicate of treated villages (Development Log "
     "Entry 23). With that fixed and the control list regenerated (Entry 25), the figure above reflects "
@@ -330,9 +339,10 @@ st.markdown("---")
 # ============================================================
 st.markdown("### Multi-Year Trend — 2021 / 2023 / 2025")
 st.markdown(
-    "The core comparison rests on two single years, vulnerable to either being a weather "
-    "anomaly. A third time point (2023) lets a trend — not a two-point difference — carry "
-    "the evidentiary weight."
+    "Shown for priority villages only and descriptively. Sentinel-2's QA60 cloud band is empty for "
+    "most of 2022–2024, so the 2023 composites may be effectively unmasked: the 2021→2023 dip and "
+    "2023→2025 recovery are not interpreted, and the programme estimate remains the 2021–2025 "
+    "difference-in-differences above."
 )
 
 my_summer_ndbi = next(r for r in expanded["multiyear_summer"] if r["outcome"] == "ndbi")
@@ -347,7 +357,7 @@ st.image(
     use_container_width=True,
 )
 st.caption(
-    "The 2021-vs-2025 summer NDBI comparison is a null on its own (see H1 above). This three-point "
+    "The 2021-vs-2025 summer NDBI change in priority villages is a null on its own (see above). This three-point "
     "breakdown shows why: a 2021-to-2023 decline followed by a 2023-to-2025 recovery nets out to "
     "no significant overall summer trend (p=0.442). The full-year window is different: its per-village "
     "slopes show a significant *decline* in NDBI (panel regression p<0.000001), and full-year night-lights "
@@ -362,10 +372,9 @@ st.markdown("---")
 st.markdown("### Buffer-Radius Sensitivity — 250m / 500m / 1km")
 st.markdown(
     "The 500m extraction buffer used throughout was a fixed choice. This re-runs the "
-    "summer-window NDBI test at 250m and 1km, on villages valid at all three radii (now the "
-    "full core sample at every radius), to isolate buffer radius from an unrelated archive-"
-    "coverage difference between extraction dates (see Methodology & Limitations). All three "
-    "radii now agree — none significant."
+    "summer-window NDBI change in priority villages at 250m and 1km (one-sided Wilcoxon test for an "
+    "increase; all three radii extracted the same day, n = 251 at every radius). All three radii "
+    "agree — none significant."
 )
 
 buf_cols = st.columns(3)
@@ -384,11 +393,11 @@ st.markdown("---")
 # ============================================================
 # ROBUSTNESS SUMMARY CHART
 # ============================================================
-st.markdown("### Robustness Summary — All Four Core Tests, Both Windows")
+st.markdown("### Descriptive Tests at a Glance — Priority-Village Change and Border Distance, Both Windows")
 
 st.image(
     "outputs/figures/07_robustness_summary.png",
-    caption="Significance (p-value, log scale) for every test under both compositing windows — points on opposite sides of the p = 0.05 line indicate a result that reverses conclusion depending on window choice.",
+    caption="Two-sided p-values (log scale) for the descriptive tests under both windows, with the within-district border-distance tests (hollow). The programme estimate is the difference-in-differences above.",
     use_container_width=True,
 )
 

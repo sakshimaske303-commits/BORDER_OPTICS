@@ -1,8 +1,8 @@
 # BORDER OPTICS — Forensic Review, 19 October 2026
 
-Before calling version 2.0 finished, I went through the whole project read-only, as an outside examiner would: paper, executive summary, README, Development Log, every script, every figure and every dashboard page. I re-ran eleven analysis scripts unchanged (their outputs matched the committed files) and re-implemented the core statistics in NumPy to check them independently. The arithmetic was right. The problems were in what the measures can detect, how the design was described, and how some results were interpreted.
+Before version 2.0 was called finished, the whole project was reviewed read-only by an independent reviewer, as an outside examiner would: paper, executive summary, README, Development Log, every script, every figure and every dashboard page. Eleven analysis scripts were re-run unchanged (their outputs matched the committed files) and the core statistics were re-implemented in NumPy to check them independently. The arithmetic was right. The problems were in what the measures can detect, how the design was described, and how some results were interpreted.
 
-This file lists what I found and where each item stands after the v2.0 fix round (Development Log Entry 49).
+This file lists what the review found and where each item stands after the v2.0 fix round (Development Log Entry 49).
 
 Codes: **A** = critical, **B** = important.
 

@@ -10,7 +10,7 @@ villages, full_year, summer = load_data()
 
 st.markdown("<h1>🏛️ STUDY DESIGN</h1>", unsafe_allow_html=True)
 st.markdown(
-    "<h3 style='text-align: center; font-weight: 700;'>Research Questions, Hypotheses, and Sample Design</h3>",
+    "<h3 style='text-align: center; font-weight: 700;'>Research Question, Design and Sample</h3>",
     unsafe_allow_html=True,
 )
 st.markdown("---")
@@ -21,83 +21,60 @@ st.markdown("""
 **Research question:** *Did VVP-I priority villages show more satellite-observed built-up and
 night-light change between 2021 and 2025 than non-priority villages in the same districts?*
 
-The **primary analysis is H4**, a district fixed-effects difference-in-differences comparing
-251 geocoded priority villages with 721 non-priority villages in the same 14 districts.
-The other questions are secondary: H1 and RQ3 describe change in priority villages themselves
-(which cannot separate programme effects from regional trends), RQ2 is descriptive (three
-states), and H3 asks whether change is patterned by border distance. A separate analysis asks
-how much change each satellite measure could detect at all (see Statistical Validation).
+The **primary analysis** answers it directly: a district fixed-effects difference-in-differences
+comparing 251 geocoded priority villages with 721 non-priority villages in the same 14 districts,
+with NDBI and night lights as the two outcomes fixed in advance. Two subsidiary questions follow,
+exactly as in the Research Paper.
 """)
 
 st.markdown("---")
 
-st.markdown("### Research Questions & Hypotheses")
+st.markdown("### Research Question and Subsidiary Questions")
+
+st.markdown(f"""
+<div class="recon-card" style="border-left: 4px solid {PALETTE['accent']}; margin-bottom: 16px;">
+    <p style="color: {PALETTE['accent']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Research Question — Programme Effect (primary)</p>
+    <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
+        Did priority villages change more than non-priority villages in the same districts between
+        2021 and 2025? Answered with a two-period difference-in-differences with district fixed
+        effects, district-clustered errors, t with 13 degrees of freedom and an exact wild cluster
+        bootstrap (14 districts). Primary outcomes: Sentinel-2 NDBI and VIIRS night lights.
+        Sentinel-1 radar and Dynamic World built-up probability are triangulation outcomes.
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 
 with col1:
     st.markdown(f"""
     <div class="recon-card" style="border-left: 4px solid {PALETTE['border_up']}; min-height: 210px; margin-bottom: 16px;">
-        <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ1 / H1 — Built-Up Change (descriptive)</p>
+        <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">SQ1 — Measurement: What Could Each Measure Detect?</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
-            Has physical built-up area increased in VVP-I sanctioned villages between 2021
-            and 2025? <b>H1:</b> Villages will show a statistically significant increase in
-            NDBI following programme sanction, measured via paired Sentinel-2 composites.
+            How large a change could each satellite measure, averaged over a 500 m buffer, actually
+            detect? Google Open Buildings footprints are used to convert each index into square
+            metres of buildings and to compare a plausible amount of construction with the
+            design's minimum detectable effect.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
 with col2:
     st.markdown(f"""
-    <div class="recon-card" style="border-left: 4px solid {PALETTE['accent_vintage']}; min-height: 210px; margin-bottom: 16px;">
-        <p style="color: {PALETTE['accent_vintage']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ2 — Budget Correlation</p>
+    <div class="recon-card" style="border-left: 4px solid {PALETTE['border_down']}; min-height: 210px; margin-bottom: 16px;">
+        <p style="color: {PALETTE['border_down']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">SQ2 — Pattern: Does Change Track Border Distance? (descriptive)</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
-            Does the magnitude of observed change correlate with state-wise VVP-I budget
-            allocation? Treated as <b>exploratory only</b>, given just three states in the
-            core sample — a directional signal, not a confirmatory test.
+            Is change related to distance from the international boundary, as a securitization
+            reading of the programme would suggest? Tested pooled and within districts, so that
+            differences between districts are not mistaken for a gradient.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
-col3, col4 = st.columns(2)
-
-with col3:
-    st.markdown(f"""
-    <div class="recon-card" style="border-left: 4px solid {PALETTE['lights']}; min-height: 210px;">
-        <p style="color: {PALETTE['lights']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ3 — Economic Activity</p>
-        <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
-            Has night-time light radiance (VIIRS) increased in parallel with built-up area
-            growth, as a proxy for electrification and economic activity following programme
-            implementation?
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col4:
-    st.markdown(f"""
-    <div class="recon-card" style="border-left: 4px solid {PALETTE['border_down']}; min-height: 210px;">
-        <p style="color: {PALETTE['border_down']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ4 / H3 — Border Proximity</p>
-        <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
-            Does distance to the border/LAC predict the pace of change? <b>H3:</b> Villages
-            closer to the border will show greater built-up and night-lights change,
-            consistent with strategic prioritization of frontier villages.
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown(f"""
-<div class="recon-card" style="border-left: 4px solid {PALETTE['accent']}; margin-top: 16px;">
-    <p style="color: {PALETTE['accent']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">RQ5 / H4 — Programme Effect (PRIMARY)</p>
-    <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
-        Is any detected change attributable to VVP-I specifically, or does it merely reflect
-        a regional trend shared by every village in these border districts regardless of
-        programme status? <b>H4:</b> VVP-I priority villages will show a significantly
-        larger increase than a district-restricted set of 721 non-priority villages in the same 14
-        districts over the same period — tested with a district-fixed-effects
-        Difference-in-Differences model (see Statistical Validation).
-    </p>
-</div>
-""", unsafe_allow_html=True)
+st.caption(
+    "Also reported, descriptively only: each priority village's own 2021→2025 change (it cannot separate "
+    "programme effects from regional trends) and state budget vs. mean change (three states)."
+)
 
 st.markdown("---")
 
@@ -202,7 +179,7 @@ with col_m2:
 
 col_m3, col_m4 = st.columns([0.94, 0.06])
 with col_m3:
-    st.markdown("3. **Satellite Extraction** — Sentinel-2 NDBI and VIIRS night-lights via Google Earth Engine, cloud-masked composites. Treated and control villages both get the 2021/2025 pair at 500m plus a 2019 pre-treatment year; the 2023 time point and the 250m/1km buffer radii were extracted for the treated core sample only.")
+    st.markdown("3. **Satellite Extraction** — Sentinel-2 NDBI, VIIRS night lights, Sentinel-1 radar and Dynamic World built-up probability via Google Earth Engine, 500 m buffer means. Treated and comparison villages both get 2021 and 2025 plus a 2019 pre-treatment year; the 2023 time point and the 250 m / 1 km radii were extracted for the treated core sample only. Google Open Buildings footprints are counted in the same buffers.")
 with col_m4:
     proof_popover("02_gee_extraction_vscode.png", "extract_satellite_data.py open in VS Code, running the Earth Engine NDBI/VIIRS extraction pipeline.")
 
@@ -218,16 +195,16 @@ with col_m6b:
 
 col_m7, col_m8 = st.columns([0.94, 0.06])
 with col_m7:
-    st.markdown("6. **Statistical Testing** — Wilcoxon signed-rank (paired before/after) and Spearman correlation (RQ2, H3), with sample-size caveats disclosed throughout.")
+    st.markdown("6. **Descriptive Tests** — Wilcoxon signed-rank for each priority village's own change and Spearman correlation for border distance (SQ2, pooled and within districts) and budget; descriptive, not the programme estimate.")
 with col_m8:
     proof_popover("04_statistical_testing_vscode.png", "Statistical Validation page code open in VS Code — the Wilcoxon signed-rank and Spearman correlation tests.")
 
-st.markdown("7. **Control-Group DiD** — 721 non-VVP villages from the same 14 districts, via the OpenStreetMap Overpass API, compared against the treated sample with a district-fixed-effects Difference-in-Differences model (RQ5/H4).")
-st.markdown("8. **Multi-Year Trend** — A third time point (2023) fit as a per-village linear trend across 2021/2023/2025, so a trend line — not a two-point difference — carries the evidentiary weight.")
+st.markdown("7. **Primary Analysis: Difference-in-Differences** — 721 non-priority villages from the same 14 districts (OpenStreetMap Overpass), compared with the 251 priority villages using district fixed effects, t with 13 df and an exact wild cluster bootstrap; checked with a 2019–2021 placebo, leave-one-district-out and randomization inference.")
+st.markdown("8. **Detectability (SQ1)** — Open Buildings footprints convert every DiD estimate into square metres of building-equivalent surface and show what each measure could have detected. A 2023 mid-point is shown descriptively only, because the 2023 composites may be unmasked.")
 st.markdown("9. **Buffer-Radius Sensitivity** — The same summer-window test re-run at 250m and 1km, all three radii pulled the same day (n=251 at every radius), to check the 500m buffer choice isn't itself driving the result.")
 
 st.markdown("---")
 st.markdown(
-    "<p class='caption-text' style='text-align:center;'>BORDER OPTICS — Independent Geospatial Verification of VVP-I</p>",
+    "<p class='caption-text' style='text-align:center;'>BORDER OPTICS — Satellite evidence on India's Vibrant Villages Programme</p>",
     unsafe_allow_html=True,
 )
