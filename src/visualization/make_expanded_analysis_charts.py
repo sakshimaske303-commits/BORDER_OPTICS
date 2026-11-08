@@ -2,7 +2,7 @@
 radius), rebuilt in Development Log Entry 49.
 
 Changes from v1.7:
-  - 08: 95% intervals use t with 13 df (14 district clusters) instead of the
+  - 08: 95% intervals use t with G - 1 df (12 from v2.1: 13 district clusters) instead of the
     normal approximation, wild-cluster-bootstrap p-values are printed, and
     the NDBI rows show, as a shaded band, the change that doubling the median
     village's buildings would produce (outputs/measurement_sensitivity_results.json),
@@ -56,7 +56,7 @@ for ax, outcome, xlabel in [(axes[0], "ndbi", "DiD coefficient, 500 m buffer-mea
                              label="± effect of doubling a median village's buildings" if i == 0 else None)
         ax.plot([lo, hi], [i, i], color=color, linewidth=2)
         ax.scatter(r["coef"], i, color=color, s=60, zorder=3)
-        ax.text(r["coef"], i + 0.22, f"p = {r['p_t']:.2f} (t, 13 df); wild bootstrap p = {wcb[(window, outcome)]:.2f}",
+        ax.text(r["coef"], i + 0.22, f"p = {r['p_t']:.2f} (t, {r['n_clusters'] - 1} df); wild bootstrap p = {wcb[(window, outcome)]:.2f}",
                 fontsize=7.5, va="top", ha="center")
     ax.set_yticks([0, 1])
     ax.set_yticklabels(["Full-year", "Summer"])
@@ -67,8 +67,8 @@ for ax, outcome, xlabel in [(axes[0], "ndbi", "DiD coefficient, 500 m buffer-mea
         ax.legend(fontsize=7, loc="upper left")
 axes[0].invert_yaxis()
 axes[1].invert_yaxis()
-fig.suptitle("Treated − control difference in 2021→2025 change (district FE; 95% CI, t with 13 df; "
-             "251 treated / 721 control villages)", fontsize=10)
+fig.suptitle("Treated − control difference in 2021→2025 change (district-by-period FE; 95% CI, t with 12 df; "
+             "220 treated / 628 control villages)", fontsize=10)
 fig.tight_layout()
 fig.savefig("outputs/figures/08_control_group_did_effect.png", bbox_inches="tight")
 plt.close(fig)
@@ -92,7 +92,7 @@ for outcome, ax, ylabel in [("ndbi", axes[0], "Mean 500 m buffer-mean NDBI"),
     ax.set_xticks(YEARS)
     ax.set_xlabel("Year")
     ax.set_ylabel(ylabel)
-    ax.set_title(f"{'NDBI' if outcome == 'ndbi' else 'Night lights'} — mean ± SE, treated core sample (n = 251)", fontsize=10)
+    ax.set_title(f"{'NDBI' if outcome == 'ndbi' else 'Night lights'} — mean ± SE, treated core sample (n = {len(my_fy)})", fontsize=10)
 axes[0].legend(loc="lower right", fontsize=9)
 fig.tight_layout()
 fig.savefig("outputs/figures/09_multiyear_trend.png", bbox_inches="tight")

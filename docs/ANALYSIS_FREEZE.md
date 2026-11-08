@@ -6,6 +6,20 @@ This is my record of exactly what this version of my headline results is built o
 
 **How I use this file.** If I compute something after the date below using different data, a different script default, or a different test than what I've declared here, I'm treating that as an extension of this study, not a silent continuation of it — I log it as a new Development Log entry, and if it changes a headline number, I handle it the way I handled the Sikkim archive-timing discovery in Development Log Entries 21–22: documented as a revision with a before/after table, never folded in quietly. I update this file itself (rather than letting it go stale) whenever I do a genuine re-freeze — for example, once I regenerate the control list under the Entry 24 code fix and re-extract the control satellite data against it, or once I finish a pre-treatment-panel extraction (both were open items at various points — see "Known, deferred issues" below for where each one actually landed).
 
+## Version 2.1 addendum (7 November 2026)
+
+**The sample and the model changed in v2.1.** A second review found that 84 of the 93 North Sikkim comparison villages lay outside that district (bbox-only selection; many in Nepal, Bhutan or West Bengal), and that the district fixed effects did not make the two-period DiD a within-district comparison.
+
+| Item | v2.0 | v2.1 |
+|---|---|---|
+| Core treated villages | 251 (Arunachal Pradesh, Sikkim, Uttarakhand) | 220 (Arunachal Pradesh, Uttarakhand); Sikkim's 31 set `is_core_sample = False` in every treated file |
+| Comparison villages | 721, of which 93 not district-verified | 628, all district-verified; the 93 removed rows are in `archive/data_processed/v2.0_sikkim_controls/` |
+| Districts / clusters | 14 / t with 13 df | 13 / t with 12 df |
+| DiD specification | `treatment + post + did + C(district)` | `treatment + did + C(district) * post` (district-by-period effects) |
+| Dynamic World DiD | full year p = 0.031, summer 0.004 | full year 0.067 (not significant), summer 0.006 |
+
+No satellite value was re-extracted. The tables further down this file describe the v2.0 and earlier state and are kept as the record; where they give 251, 721 or 14, the v2.1 values are those above. `docs/BO_Results_Stability_Table.md` lists every estimate that changed.
+
 ## Version 2.0 addendum (Development Log Entry 49, 19 October 2026)
 
 **No extracted data changed in v2.0.** Every satellite, village and control file used for the v1.7 numbers is unchanged. The only data-file edits are: a new `window` column in `outputs/leave_one_district_out_results.csv`, and a new derived file `data/processed/border_optics_lac_distance.csv` (distance to the China boundary). All v1.7 numbers in the tables below still reproduce.

@@ -1,8 +1,8 @@
 """
-Wild cluster bootstrap for the H4 DiD results (14 clusters is too few for
+Wild cluster bootstrap for the H4 DiD results (13 clusters is too few for
 normal asymptotics). Did OLS + cluster-robust SE by hand since statsmodels
 wouldn't install here - checked it matches did_model.py's numbers first.
-Full enumeration of all 2**14=16384 sign flips (exact, not Monte Carlo,
+Full enumeration of all 2**13=8192 sign flips (2**14=16384 until v2.0) (exact, not Monte Carlo,
 since that's small enough to just do directly).
 """
 
@@ -51,6 +51,7 @@ def build_design(df, outcome):
         pd.Series(1.0, index=valid.index, name="const"),
         valid[["treatment", "post", "did_term"]],
         district_dummies,
+        district_dummies.mul(valid["post"], axis=0).add_suffix("_x_post"),  # v2.1: district-by-period
     ], axis=1).astype(float)
     cols = list(X_full.columns)
     X_restricted = X_full.drop(columns=["did_term"]).values

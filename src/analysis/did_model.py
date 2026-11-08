@@ -1,6 +1,7 @@
 """
-DiD: 251 treated villages vs 721 district-restricted non-VVP control villages
-(dedup + district-boundary verification logic is in select_control_villages.py). District FE, SEs clustered by district.
+DiD: 220 treated villages vs 628 district-restricted non-VVP control villages in 13 districts
+(dedup + district-boundary verification logic is in select_control_villages.py). District-by-period
+fixed effects, SEs clustered by district, t with 12 df.
 """
 
 import argparse
@@ -62,10 +63,11 @@ def build_panel(window):
 def run_did(long, outcome, window):
     valid = long.dropna(subset=[outcome]).copy()
 
-    formula_fe = f"{outcome} ~ treatment + post + did_term + C(district)"
+    # v2.1: district-by-period effects, so the DiD is a within-district comparison
+    formula_fe = f"{outcome} ~ treatment + did_term + C(district) * post"
     formula_nofe = f"{outcome} ~ treatment + post + did_term"
 
-    # primary: district FE, clustered SE by district (14 clusters - thin, usual caveat)
+    # primary: district-by-period FE, clustered SE by district (13 clusters - thin, usual caveat)
     model_fe = smf.ols(formula_fe, data=valid).fit(
         cov_type="cluster", cov_kwds={"groups": valid["district"]}
     )
@@ -82,7 +84,7 @@ def run_did(long, outcome, window):
     print(f"\n--- {outcome.upper()} DiD, window={window} ---")
     print(f"n = {len(valid)} village-period observations "
           f"({n_treated} treated villages / {n_control} control villages)")
-    print("[Primary: district fixed effects, cluster-robust SE by district, 14 clusters]")
+    print("[Primary: district-by-period fixed effects, cluster-robust SE by district, 13 clusters]")
     print(f"  did_term = {coef:+.5f}  SE={se:.5f}  95% CI [{ci[0]:+.5f}, {ci[1]:+.5f}]  p={p:.5f}")
     print("[Comparison: no fixed effects, HC3 heteroskedasticity-robust SE]")
     print(f"  did_term = {coef2:+.5f}  p={p2:.5f}")

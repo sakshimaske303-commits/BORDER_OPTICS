@@ -1,4 +1,6 @@
-# BORDER OPTICS — Satellite Evidence on India's Vibrant Villages Programme
+# BORDER OPTICS
+
+### Evaluating a Place-Based Border Programme from Space: Evidence and Indicator Limits from India's Vibrant Villages Programme
 
 [![EarthArXiv](https://img.shields.io/badge/EarthArXiv-Preprint-B7410E.svg)](https://eartharxiv.org/repository/view/14830/)
 
@@ -9,7 +11,7 @@
 | Document | Contents |
 |---|---|
 | [`BO_Executive_Summary.md`](./docs/BO_Executive_Summary.md) | Two-page summary: question, method, findings, limitations (start here) |
-| [`BO_Research_Paper.md`](./docs/BO_Research_Paper.md) | Full paper (v2.0) |
+| [`BO_Research_Paper.md`](./docs/BO_Research_Paper.md) | Full paper (v2.1) |
 | [`BO_Development_Log.md`](./docs/BO_Development_Log.md) | Complete development record, including every error found and fixed |
 | [`BO_Results_Stability_Table.md`](./docs/BO_Results_Stability_Table.md) | Every result that changed between versions, and why |
 | [`ANALYSIS_FREEZE.md`](./docs/ANALYSIS_FREEZE.md) | Exact data and code state behind the reported numbers |
@@ -28,20 +30,20 @@ It also asks what change each satellite measure could actually detect, and wheth
 
 ## Data and method
 
-- **Villages.** 251 priority villages geocoded in Arunachal Pradesh, Sikkim and Uttarakhand (7 Himachal Pradesh villages shown as illustrations), plus 721 comparison villages from OpenStreetMap in the same 14 districts.
+- **Villages.** 220 priority villages geocoded in Arunachal Pradesh and Uttarakhand, plus 628 comparison villages from OpenStreetMap in the same 13 districts. Sikkim's 31 geocoded villages are outside the core sample, because its comparison villages could not be verified inside its district (v2.1); 7 Himachal Pradesh villages are shown as illustrations.
 - **Measures.** All inside a 500 m buffer, for 2019, 2021, 2023 and 2025, in full-year and June–September composites (Google Earth Engine):
   - Sentinel-2 NDBI
   - VIIRS night lights
   - Sentinel-1 VV/VH
   - Dynamic World built-up probability
   - Google Open Buildings footprints
-- **Design.** District fixed-effects difference-in-differences with inference for 14 clusters (t with 13 df and an exact wild cluster bootstrap). Plus a 2019–2021 placebo, leave-one-district-out, randomization inference, a detectability analysis in physical units, and a within-district analysis of border distance.
+- **Design.** Difference-in-differences with district-by-period fixed effects (villages compared within their own district), with inference for 13 clusters (t with 12 df and an exact wild cluster bootstrap). Plus a 2019–2021 placebo, leave-one-district-out, randomization inference, a detectability analysis in physical units, and a within-district analysis of border distance.
 
-## Key findings (v2.0)
+## Key findings (v2.1)
 
-1. **NDBI, night lights and radar show no priority–comparison difference** (all p ≥ 0.31).
-2. **That null cannot rule out construction.** Buildings cover a median 0.33% of a 500 m buffer, so doubling a typical village's buildings would move buffer-mean NDBI by about 0.002, 13–14% of the smallest detectable effect.
-3. **Dynamic World built-up probability, the most building-sensitive measure, shows a small positive difference** in both windows. It is equivalent to about 800–2,100 m² of built-up surface per village (bootstrap p = 0.041 full year, 0.008 summer). The summer result is robust to every check; the full-year result depends on Sikkim.
+1. **NDBI, night lights and radar show no priority–comparison difference** (all p ≥ 0.33).
+2. **That null cannot rule out construction.** Buildings cover a median 0.32% of a 500 m buffer, so doubling a typical village's buildings would move buffer-mean NDBI by about 0.002, 12–17% of the smallest detectable effect.
+3. **Dynamic World built-up probability, the most building-sensitive measure, shows a small positive difference** in the summer window, roughly 1,900 m² of built-up surface per village (an approximate conversion; p = 0.006, bootstrap p = 0.017). It is robust to every check. The full-year estimate is smaller and not significant (p = 0.067).
 4. **No consistent border-proximity pattern.** Pooled correlations with border distance come from differences between districts and disappear or reverse within districts.
 
 See the paper for full numbers, robustness checks and limitations.
@@ -63,7 +65,7 @@ BORDER_OPTICS/
 │   └── check_s2_archive_ingestion.py     test of the Sikkim "archive backfill" explanation
 ├── src/analysis/                 Statistics
 │   ├── did_model.py                      primary DiD (statsmodels)
-│   ├── did_numpy.py                      same DiD in NumPy + t(13) + wild bootstrap
+│   ├── did_numpy.py                      same DiD in NumPy + t(G-1) + wild bootstrap
 │   ├── measurement_sensitivity.py        detectability, building-equivalent area, equivalence
 │   ├── dynamic_world_robustness.py       bootstrap, leave-one-out, composition checks
 │   ├── triangulation_holm.py             Holm correction across the triangulation DiDs
@@ -75,7 +77,7 @@ BORDER_OPTICS/
 │   ├── build_docs_pdfs.sh                rebuilds the paper, summary and log PDFs (docs/ + static/)
 │   └── build_maps_plots_pdf.py           rebuilds docs/BORDER_OPTICS_Maps_and_Plots.pdf
 ├── outputs/                      Figures, maps, JSON/CSV results
-├── tests/test_data_integrity.py  Data invariants (15 checks)
+├── tests/test_data_integrity.py  Data invariants (16 checks)
 └── archive/                      Superseded files kept as an audit trail
 ```
 
@@ -115,7 +117,7 @@ The complete statement is in [`BO_Declarations.pdf`](./docs/BO_Declarations.pdf)
 
 - **Author and funding:** a single author carried out every stage; there was no external funding and there are no competing interests.
 - **Ethics:** public village lists and satellite data at village level only; no participants or personal data.
-- **Corrections:** each change to a headline result, and the version 2.0 changes made after an independent review, is listed, with the full record in `BO_Results_Stability_Table.md`.
+- **Corrections:** each change to a headline result, the version 2.0 changes made after an independent review and the version 2.1 corrections (Sikkim comparison villages, within-district model) are listed, with the full record in `BO_Results_Stability_Table.md`.
 - **AI use:** see the AI-use section of [`BO_Declarations.pdf`](./docs/BO_Declarations.pdf).
 
 ## Licence

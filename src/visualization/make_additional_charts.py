@@ -9,7 +9,7 @@ Changes from v1.7, following the forensic review:
     negative while the mean is positive) and mark Joshimath, a block-
     headquarters town whose radiance jump alone flips the sign of the
     summer mean
-Core statistical sample only (251 villages).
+Core statistical sample only (220 villages from v2.1).
 
 run from the repository root:  python src/visualization/make_additional_charts.py
 """
@@ -40,7 +40,7 @@ def median_ci(x, n_boot=2000):
 
 
 def state_panel(outcome, label, fname, title):
-    states = ["Arunachal Pradesh", "Sikkim", "Uttarakhand"]
+    states = ["Arunachal Pradesh", "Uttarakhand"]  # Sikkim outside the core sample from v2.1
     fig, ax = plt.subplots(figsize=(9, 4.8))
     for j, (wname, df) in enumerate(windows.items()):
         color = BLUE if j == 0 else ORANGE

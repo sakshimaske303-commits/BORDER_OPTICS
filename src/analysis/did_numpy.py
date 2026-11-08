@@ -2,8 +2,12 @@
 Shared NumPy implementation of the H4 DiD used by the Entry 49 follow-up
 scripts (so they run without statsmodels).
 
-Same specification as did_model.py:
-    y ~ treatment + post + treatment:post + C(district)
+Same specification as did_model.py (v2.1):
+    y ~ treatment + treatment:post + C(district) * post
+i.e. district intercepts plus a separate 2021->2025 change for every district,
+so the DiD compares treated and control villages within the same district.
+(With two periods, district intercepts alone cancel out of the DiD; the
+district-by-period terms are what make the comparison within-district.)
 cluster-robust (CR1) SE by district, identical small-sample factor
 G/(G-1) * (N-1)/(N-K). Verified to reproduce did_model.py's committed
 coefficients, SEs and p-values (border_optics_did_summary_*.json) to at least
@@ -45,7 +49,8 @@ def _design(panel, include_did=True):
     if include_did:
         cols.append(panel["did"])
     dummies = pd.get_dummies(panel["district"], drop_first=True).astype(float).to_numpy()
-    return np.column_stack(cols + [dummies])
+    district_post = dummies * panel["post"].to_numpy(float)[:, None]
+    return np.column_stack(cols + [dummies, district_post])
 
 
 def _cluster_se(X, e, g, XtXi, idx):

@@ -440,6 +440,13 @@ def _save(rows):
         "village_id", "village", "district", "block", "state", "is_core_sample",
         "latitude", "longitude", "distance_to_border_km", "village_source", "district_verified",
     ]]
+    # v2.1: keep only controls whose district was checked against a real boundary polygon.
+    # The bbox-only fallback (used for North Sikkim) picked up villages in Nepal, Bhutan and
+    # West Bengal, so unverified rows never enter the comparison group.
+    dropped = int((control_df["district_verified"] != True).sum())
+    if dropped:
+        print(f"Dropping {dropped} control villages whose district could not be verified")
+    control_df = control_df[control_df["district_verified"] == True]
     control_df.to_csv(OUT_PATH, index=False)
     return control_df
 

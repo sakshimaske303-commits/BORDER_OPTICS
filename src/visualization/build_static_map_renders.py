@@ -10,10 +10,10 @@ clusters ~800 km apart, and adds:
   - an equal-distance aspect ratio (1 / cos(latitude)), a scale bar and a
     north arrow
   - Himachal Pradesh's 7 illustrative villages drawn as triangles, apart
-    from the 251-village core sample
+    from the 220-village core sample
   - change maps on a diverging scale centred on zero, with arrows on the
     colourbar marking values clipped at the 2nd/98th percentile
-  - the overview map also shows the 721 control villages
+  - the overview map also shows the 628 control villages
 Reads the boundary through src/analysis/border_geometry.py (no geopandas
 needed).
 
@@ -107,7 +107,7 @@ def value_map(df, col, label, title, path, diverging=True, cmap="RdBu_r"):
     cb.set_label(label)
     handles = border_legend() + [Line2D([0], [0], marker="^", color="w", markerfacecolor="grey",
                                         markeredgecolor="black", markersize=7,
-                                        label="Himachal Pradesh, illustrative (not in core sample)")]
+                                        label="Outside core sample (Sikkim; Himachal Pradesh, illustrative)")]
     fig.legend(handles=handles, loc="lower center", ncol=3, fontsize=8, frameon=False)
     fig.suptitle(title, fontsize=11)
     fig.savefig(path, bbox_inches="tight")
@@ -121,20 +121,26 @@ def overview(villages, controls, path):
         setup(ax, name, box)
         ax.scatter(controls.longitude, controls.latitude, s=7, color="#AAAAAA", zorder=2)
         for st, g in villages.groupby("state"):
-            marker = "^" if st == "Himachal Pradesh" else "o"
+            marker = "o" if g["is_core_sample"].all() else "^"
             ax.scatter(g.longitude, g.latitude, s=24, marker=marker, color=STATE_COLORS[st],
                        edgecolor="black", linewidth=0.3, zorder=3)
+    core_states = sorted(villages.loc[villages.is_core_sample == True, "state"].unique())
+    n_districts = villages.loc[villages.is_core_sample == True, "district"].nunique()
     handles = border_legend() + [
-        Line2D([0], [0], marker="o", color="w", markerfacecolor=c, markeredgecolor="black", markersize=7,
-               label=f"{st} — VVP-I priority village ({int((villages.state == st).sum())})")
-        for st, c in STATE_COLORS.items() if st != "Himachal Pradesh"] + [
+        Line2D([0], [0], marker="o", color="w", markerfacecolor=STATE_COLORS[st], markeredgecolor="black",
+               markersize=7, label=f"{st} — VVP-I priority village ({int((villages.state == st).sum())})")
+        for st in core_states] + [
+        Line2D([0], [0], marker="^", color="w", markerfacecolor=STATE_COLORS["Sikkim"], markeredgecolor="black",
+               markersize=7, label=f"Sikkim — outside core sample, no verified comparison villages "
+                                   f"({int((villages.state == 'Sikkim').sum())})"),
         Line2D([0], [0], marker="^", color="w", markerfacecolor=STATE_COLORS["Himachal Pradesh"],
                markeredgecolor="black", markersize=7, label="Himachal Pradesh — illustrative only (7)"),
         Line2D([0], [0], marker="o", color="w", markerfacecolor="#AAAAAA", markersize=5,
-               label=f"Control village, same 14 districts ({len(controls)})")]
+               label=f"Comparison village, same {n_districts} districts ({len(controls)})")]
     fig.legend(handles=handles, loc="lower center", ncol=3, fontsize=8, frameon=False)
-    fig.suptitle("Study area: 251 core VVP-I priority villages, 7 illustrative villages and 721 control villages",
-                 fontsize=11)
+    n_core = int((villages.is_core_sample == True).sum())
+    fig.suptitle(f"Study area: {n_core} core VVP-I priority villages, {len(villages) - n_core} outside the core sample "
+                 f"and {len(controls)} comparison villages", fontsize=11)
     fig.savefig(path, bbox_inches="tight")
     plt.close(fig)
     print("Saved", path)

@@ -21,8 +21,8 @@ st.markdown("""
 **Research question:** *Did VVP-I priority villages show more satellite-observed built-up and
 night-light change between 2021 and 2025 than non-priority villages in the same districts?*
 
-The **primary analysis** answers it directly: a district fixed-effects difference-in-differences
-comparing 251 geocoded priority villages with 721 non-priority villages in the same 14 districts,
+The **primary analysis** answers it directly: a within-district difference-in-differences
+comparing 220 geocoded priority villages with 628 non-priority villages in the same 13 districts,
 with NDBI and night lights as the two outcomes fixed in advance. Two subsidiary questions follow,
 exactly as in the Research Paper.
 """)
@@ -36,9 +36,9 @@ st.markdown(f"""
     <p style="color: {PALETTE['accent']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Research Question — Programme Effect (primary)</p>
     <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
         Did priority villages change more than non-priority villages in the same districts between
-        2021 and 2025? Answered with a two-period difference-in-differences with district fixed
-        effects, district-clustered errors, t with 13 degrees of freedom and an exact wild cluster
-        bootstrap (14 districts). Primary outcomes: Sentinel-2 NDBI and VIIRS night lights.
+        2021 and 2025? Answered with a two-period difference-in-differences with district-by-period
+        fixed effects (villages compared within their own district), district-clustered errors, t with
+        12 degrees of freedom and an exact wild cluster bootstrap (13 districts). Primary outcomes: Sentinel-2 NDBI and VIIRS night lights.
         Sentinel-1 radar and Dynamic World built-up probability are triangulation outcomes.
     </p>
 </div>
@@ -73,7 +73,7 @@ with col2:
 
 st.caption(
     "Also reported, descriptively only: each priority village's own 2021→2025 change (it cannot separate "
-    "programme effects from regional trends) and state budget vs. mean change (three states)."
+    "programme effects from regional trends)."
 )
 
 st.markdown("---")
@@ -103,10 +103,11 @@ with col_b:
             <b>{len(villages)}</b> villages geocoded across <b>{villages['state'].nunique()}</b> border states.
         </p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
-            Arunachal Pradesh, Sikkim, and Uttarakhand form the <b>core statistical sample</b>.
-            Himachal Pradesh (7 villages) is an <b>illustrative case study</b> only — see
-            Methodology & Limitations. A district-restricted <b>non-VVP control group</b> of 721 villages,
-            drawn from the identical 14 districts, benchmarks this sample's change against
+            Arunachal Pradesh and Uttarakhand form the <b>core statistical sample</b> (220 villages).
+            Himachal Pradesh (7 villages) is an <b>illustrative case study</b> only, and Sikkim (31 villages)
+            is outside the core sample from version 2.1, because none of its comparison villages could be
+            verified inside its district — see Methodology & Limitations. A district-restricted
+            <b>non-VVP control group</b> of 628 villages, drawn from the identical 13 districts, benchmarks this sample's change against
             the surrounding region's own trend over the same period.
         </p>
     </div>
@@ -195,16 +196,16 @@ with col_m6b:
 
 col_m7, col_m8 = st.columns([0.94, 0.06])
 with col_m7:
-    st.markdown("6. **Descriptive Tests** — Wilcoxon signed-rank for each priority village's own change and Spearman correlation for border distance (SQ2, pooled and within districts) and budget; descriptive, not the programme estimate.")
+    st.markdown("6. **Descriptive Tests** — Wilcoxon signed-rank for each priority village's own change and Spearman correlation for border distance (SQ2, pooled and within districts); descriptive, not the programme estimate.")
 with col_m8:
     proof_popover("04_statistical_testing_vscode.png", "Statistical Validation page code open in VS Code — the Wilcoxon signed-rank and Spearman correlation tests.")
 
-st.markdown("7. **Primary Analysis: Difference-in-Differences** — 721 non-priority villages from the same 14 districts (OpenStreetMap Overpass), compared with the 251 priority villages using district fixed effects, t with 13 df and an exact wild cluster bootstrap; checked with a 2019–2021 placebo, leave-one-district-out and randomization inference.")
+st.markdown("7. **Primary Analysis: Difference-in-Differences** — 628 non-priority villages from the same 13 districts (OpenStreetMap Overpass, each checked against a district boundary), compared with the 220 priority villages using district-by-period fixed effects, t with 12 df and an exact wild cluster bootstrap; checked with a 2019–2021 placebo, leave-one-district-out and randomization inference.")
 st.markdown("8. **Detectability (SQ1)** — Open Buildings footprints convert every DiD estimate into square metres of building-equivalent surface and show what each measure could have detected. A 2023 mid-point is shown descriptively only, because the 2023 composites may be unmasked.")
-st.markdown("9. **Buffer-Radius Sensitivity** — The same summer-window test re-run at 250m and 1km, all three radii pulled the same day (n=251 at every radius), to check the 500m buffer choice isn't itself driving the result.")
+st.markdown("9. **Buffer-Radius Sensitivity** — The same summer-window test re-run at 250m and 1km, all three radii pulled the same day (n=220 at every radius), to check the 500m buffer choice isn't itself driving the result.")
 
 st.markdown("---")
 st.markdown(
-    "<p class='caption-text' style='text-align:center;'>BORDER OPTICS — Satellite evidence on India's Vibrant Villages Programme</p>",
+    "<p class='caption-text' style='text-align:center;'>BORDER OPTICS — Evaluating a Place-Based Border Programme from Space: Evidence and Indicator Limits from India's Vibrant Villages Programme</p>",
     unsafe_allow_html=True,
 )

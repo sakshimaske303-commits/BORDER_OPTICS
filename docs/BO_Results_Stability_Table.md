@@ -35,3 +35,23 @@ None of the rows below changes a number above. They change what the numbers are 
 | 10 | Anjaw case villages | "Confirmed VVP construction"; lights and Dynamic World "correctly detected all three" | Documented facilities not attributed to VVP by the sources; lights high at 2 of 3 villages, Musai near median | Source reports re-read; only Kibithoo's works are described as VVP-funded, and Kibithoo is not geocoded |
 | 11 | Primary estimand | Treated-only change (H1) | DiD (H4) | A treated-only before/after change cannot separate programme effects from regional trends. Changed after results were known; disclosed as such |
 
+
+## Corrections in Version 2.1 (November 2026)
+
+A second review of the code and data found two problems. Unlike the Version 2.0 rows above, these corrections change numbers.
+
+- **Sikkim comparison villages.** No district polygon could be retrieved for North Sikkim, so `select_control_villages.py` fell back to a box of about 65 km and took the candidates closest to the border first. By their own coordinates, 84 of the 93 Sikkim comparison villages lie outside North Sikkim, many of them in Nepal, Bhutan or West Bengal. From v2.1 a comparison village is used only if its district was verified against a polygon. Sikkim is left with no valid comparison villages, so its 31 priority villages also leave the core sample. The removed rows are kept in `archive/data_processed/v2.0_sikkim_controls/`, and `tests/test_data_integrity.py` now checks the rule.
+- **Within-district comparison.** With two periods, district fixed effects cancel out of the DiD, so the v2.0 estimate was a comparison pooled across districts (its coefficient was identical with and without the district effects). The model now has district-by-period effects.
+
+The sample is now 220 priority and 628 comparison villages in 13 districts, and inference uses t with 12 degrees of freedom.
+
+| # | Estimate | v2.0 value | v2.1 value | What changed |
+|---|---|---|---|---|
+| 12 | Dynamic World DiD, full year | +0.0026, p = 0.031 (t, 13 df), bootstrap 0.041 | +0.0024, p = 0.067 (t, 12 df), bootstrap 0.072 | No longer significant. Without the 84 misplaced villages alone (v2.0 model) it was already +0.0017, p = 0.19 |
+| 13 | Dynamic World DiD, summer | +0.0059, p = 0.004, bootstrap 0.008; Holm-adjusted 0.027 | +0.0050, p = 0.006, bootstrap 0.017; Holm-adjusted 0.038 | Still significant |
+| 14 | NDBI, night-light and radar DiDs | All null (p ≥ 0.31) | All null (p ≥ 0.33) | No change in conclusion |
+| 15 | Treated-only summer NDBI change | Median +0.0017, two-sided p = 0.87 | Median +0.004, two-sided p = 0.037 | Sikkim's villages, which mostly declined, are no longer in the sample. The comparison villages rose by a similar amount (DiD +0.0003, p = 0.92) |
+| 16 | Building-equivalent area of the Dynamic World estimates | 800–2,100 m² per village (both windows) | About 1,900 m² (summer); the full-year estimate (about 800 m²) is not significant | Follows rows 12–13 |
+| 17 | Budget vs change across states | Descriptive, n = 3 | Dropped | Only two states remain |
+
+Version 2.0 also understated a measurement problem: the two full-year NDBI extractions of the treated villages (the Code Editor export used in the analysis and the project's Python pipeline) differ by more than 0.01 at most villages (164 of 220 in 2021, 190 in 2025). Using either changes no conclusion, but the full-year NDBI values cannot be exactly reproduced until a same-day re-extraction is run.

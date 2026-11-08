@@ -8,14 +8,14 @@ the district structure intact or ignore it, so none of them can tell a
 genuine proximity gradient apart from "districts that sit closer to the
 border happened to change differently". This script separates the two:
 
-  pooled          Spearman rho across all 251 core villages (as reported before)
+  pooled          Spearman rho across all 220 core villages (as reported before)
   within-district stratified Spearman: villages ranked inside their own
                   district, ranks centred per district, then correlated,
                   with a permutation p-value that shuffles distance only
                   *inside* districts (2,000 draws, seed 42)
   district FE     OLS of rank(change) on rank(distance) + district dummies,
                   cluster-robust SE by district, t(13) p-value
-  between         Spearman rho of the 14 district means (n = 14)
+  between         Spearman rho of the district means (one per district)
 
 Run for both distance definitions: distance_to_border_km (nearest India
 boundary of any kind, as before) and distance_to_china_km (China/LAC only;
@@ -113,13 +113,13 @@ def main():
                     "n": int(len(v)), "n_districts": int(v["district"].nunique()),
                     "pooled_rho": float(pooled.statistic), "pooled_p": float(pooled.pvalue),
                     "within_district_rank_corr": w, "within_district_perm_p": w_p,
-                    "district_fe_rank_slope": b, "district_fe_se": se, "district_fe_p_t13": fe_p,
-                    "between_district_rho_n14": float(between.statistic), "between_district_p": float(between.pvalue),
+                    "district_fe_rank_slope": b, "district_fe_se": se, "district_fe_p_t": fe_p,
+                    "between_district_rho": float(between.statistic), "between_district_p": float(between.pvalue),
                     "per_district_rho_n_ge_8": per_district,
                 }
                 print(f"{window:9s} {outcome:13s} {dist:22s} pooled rho={pooled.statistic:+.3f} (p={pooled.pvalue:.2g}) | "
                       f"within={w:+.3f} (perm p={w_p:.4f}) | FE slope={b:+.3f} (p={fe_p:.3f}) | "
-                      f"between(n=14) rho={between.statistic:+.3f} (p={between.pvalue:.3f})")
+                      f"between(n={len(means)}) rho={between.statistic:+.3f} (p={between.pvalue:.3f})")
     with open(OUT_PATH, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nSaved {OUT_PATH}")

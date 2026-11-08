@@ -9,7 +9,7 @@ Engine run, but all can be *bounded* with data already in the repository:
      duplicated locations; e.g. Kitpi / Kitpi II, Pekong x2), so their
      500 m buffers -- and every satellite value -- are identical.
      Variant: keep the first row of each identical-coordinate group.
-  2. 35 of 251 core treated buffers (and 61 of 721 control buffers) contain
+  2. 29 of 220 core treated buffers (and 60 of 628 control buffers) contain
      no Google Open Buildings footprint at all, a sign that the geocoded
      point may not sit on the settlement (e.g. Lachung).
      Variant: drop treated and control villages with zero buildings.
@@ -114,7 +114,7 @@ def run_tests(t, c, outcome, before=None, after=None):
         "mean_change": float(change.mean()), "median_change": float(change.median()),
         "h1_p_greater": float(stats.wilcoxon(v[after], v[before], alternative="greater").pvalue),
         "h1_p_two_sided": float(stats.wilcoxon(v[after], v[before]).pvalue),
-        "did_coef": d["coef"], "did_p_t13": d["p_t"], "did_p_z": d["p_z"],
+        "did_coef": d["coef"], "did_p_t": d["p_t"], "did_p_z": d["p_z"],
     }
 
 
@@ -129,7 +129,7 @@ def main():
                 print(f"{window:9s} {outcome:6s} {name:30s} n={r['n_treated']}/{r['n_control']}  "
                       f"median chg={r['median_change']:+.4f} mean chg={r['mean_change']:+.4f}  "
                       f"H1 p(>)={r['h1_p_greater']:.4f} p(2s)={r['h1_p_two_sided']:.2g}  "
-                      f"DiD={r['did_coef']:+.5f} p_t13={r['did_p_t13']:.3f}")
+                      f"DiD={r['did_coef']:+.5f} p_t={r['did_p_t']:.3f}")
 
     # 4. pipeline-consistent full-year treated values
     t, c = load("full_year")
@@ -144,7 +144,7 @@ def main():
         out[f"full_year|{outcome}|python_pipeline_treated_values"] = r
         print(f"full_year {outcome:6s} {'python_pipeline_treated_values':30s} n={r['n_treated']}/{r['n_control']}  "
               f"median chg={r['median_change']:+.4f}  H1 p(>)={r['h1_p_greater']:.4f} p(2s)={r['h1_p_two_sided']:.2g}  "
-              f"DiD={r['did_coef']:+.5f} p_t13={r['did_p_t13']:.3f}  "
+              f"DiD={r['did_coef']:+.5f} p_t={r['did_p_t']:.3f}  "
               f"(2021 values differ >0.01 at {r['n_villages_2021_value_differs_by_gt_0.01']} villages)")
 
     with open(OUT_PATH, "w") as f:

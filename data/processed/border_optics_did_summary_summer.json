@@ -3,50 +3,50 @@
     {
       "outcome": "ndbi",
       "window": "summer",
-      "n_obs": 1944,
-      "n_treated": 251,
-      "n_control": 721,
-      "did_coef": -0.00275166102516833,
-      "did_se": 0.004392052046714231,
-      "did_p": 0.5309810027676689,
-      "did_ci_lo": -0.011359924854953653,
-      "did_ci_hi": 0.0058566028046169935,
-      "did_coef_nofe_hc3": -0.002751661025169436,
-      "did_p_nofe_hc3": 0.6994252430234862
+      "n_obs": 1696,
+      "n_treated": 220,
+      "n_control": 628,
+      "did_coef": 0.0003039901041262024,
+      "did_se": 0.0030516544522737016,
+      "did_p": 0.9206501029347033,
+      "did_ci_lo": -0.005677142715591558,
+      "did_ci_hi": 0.006285122923843962,
+      "did_coef_nofe_hc3": 0.00045947270637977135,
+      "did_p_nofe_hc3": 0.9533743266790633
     },
     {
       "outcome": "lights",
       "window": "summer",
-      "n_obs": 1944,
-      "n_treated": 251,
-      "n_control": 721,
-      "did_coef": 0.017984993788798212,
-      "did_se": 0.03891058238292421,
-      "did_p": 0.6439282724880749,
-      "did_ci_lo": -0.058278346299211956,
-      "did_ci_hi": 0.09424833387680838,
-      "did_coef_nofe_hc3": 0.01798499378879974,
-      "did_p_nofe_hc3": 0.7065731574369232
+      "n_obs": 1696,
+      "n_treated": 220,
+      "n_control": 628,
+      "did_coef": 0.03483782284581236,
+      "did_se": 0.04388016573762289,
+      "did_p": 0.4272356150255203,
+      "did_ci_lo": -0.051165721635576956,
+      "did_ci_hi": 0.12084136732720169,
+      "did_coef_nofe_hc3": 0.03618892011779288,
+      "did_p_nofe_hc3": 0.49886306962346827
     }
   ],
   "baseline_balance": [
     {
       "outcome": "ndbi",
       "window": "summer",
-      "baseline_treated_mean": -0.22343082182579618,
-      "baseline_control_mean": -0.23007617269430855,
-      "baseline_n_treated": 251,
-      "baseline_n_control": 721,
-      "baseline_balance_p": 0.460991356045633
+      "baseline_treated_mean": -0.22646616317437393,
+      "baseline_control_mean": -0.2334385011751589,
+      "baseline_n_treated": 220,
+      "baseline_n_control": 628,
+      "baseline_balance_p": 0.8642555797118983
     },
     {
       "outcome": "lights",
       "window": "summer",
-      "baseline_treated_mean": 0.401687099109564,
-      "baseline_control_mean": 0.40716974022327923,
-      "baseline_n_treated": 251,
-      "baseline_n_control": 721,
-      "baseline_balance_p": 0.08767108671573938
+      "baseline_treated_mean": 0.3949868414076797,
+      "baseline_control_mean": 0.3971522713538564,
+      "baseline_n_treated": 220,
+      "baseline_n_control": 628,
+      "baseline_balance_p": 0.007828266245036845
     }
   ]
 }

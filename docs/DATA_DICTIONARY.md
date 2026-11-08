@@ -13,7 +13,7 @@ One row per successfully geocoded village (258 rows).
 | `district` | string | District name. |
 | `block` | string | Administrative block. May be blank/"unresolved" for the 19 Pithoragarh (Uttarakhand) villages documented in BO_Development_Log.md, Entry 2. |
 | `state` | string | One of Arunachal Pradesh, Sikkim, Uttarakhand, Himachal Pradesh. |
-| `is_core_sample` | bool | `True` for Arunachal Pradesh / Sikkim / Uttarakhand (the 251-village core statistical sample); `False` for Himachal Pradesh (7-village illustrative case study, excluded from formal hypothesis tests). |
+| `is_core_sample` | bool | `True` for Arunachal Pradesh / Uttarakhand (the 220-village core statistical sample from v2.1); `False` for Himachal Pradesh (7-village illustrative case study) and, from v2.1, for Sikkim (31 villages; no verified comparison villages). Until v2.0 Sikkim was in the core sample (251 villages). |
 | `latitude`, `longitude` | float | WGS84 (EPSG:4326) coordinates from the geocoding pipeline (Nominatim primary, Bhuvan fallback). |
 | `distance_to_border_km` | float | Distance to the nearest India-relevant Natural Earth Admin-0 boundary segment. The nearest point on the boundary is first located with a planar (lon/lat) nearest-point search (`shapely.ops.nearest_points`), then the distance to that point is measured geodesically (WGS84 ellipsoid, via `pyproj.Geod`) rather than by reprojecting into a single UTM zone -- the study area spans roughly 20 degrees of longitude, so a single-zone projection (the original method, before Development Log Entry 18) is only accurate near its own central meridian. Note this means the *distance measurement* is geodesic but the *nearest-point selection* is not a true ellipsoidal-minimum search; the two only diverge meaningfully for points very close to the antimeridian or poles, neither of which applies here. Added by `compute_border_distance.py`. Present only in the `_with_distance` version, along with `nearest_border_country` (which country's segment was actually nearest -- not always China; see Entry 18). |
 
@@ -44,13 +44,13 @@ See `src/acquisition/extract_satellite_data.py` for the exact implementation.
 
 ## `border_optics_control_villages.csv`
 
-One row per non-VVP control village (721 rows — deduped by geodesic coordinate proximity (50m) and by the full official priority-village name list; see `BO_Development_Log.md` Entries 14-15, 23-25), assembled via the OpenStreetMap Overpass API from the same 14 districts as the treated core sample, excluding any village on a VVP-I priority list. Produced by `select_control_villages.py`. District membership is checked against a real Nominatim boundary polygon where that lookup succeeds; where it doesn't, the candidate is kept on a rougher bounding-box match instead (see `district_verified` below). A retry/disambiguated-phrasing fix (Development Log Entry 37) was run against live Nominatim/Overpass access and resolved real boundary polygons for two of the three previously-unverified districts (Tawang, Arunachal Pradesh; Pithoragarh, Uttarakhand), dropping the control list from 732 to 721 rows in the process (11 Tawang candidates confirmed genuinely out-of-district once the real polygon was available). **As of the current committed file, that lookup still does not succeed for 93 of the 721 rows, all in Sikkim's North district** — no Nominatim boundary resolves for that district under either query phrasing tried, which appears to be a genuine data gap rather than a network/rate-limit failure — so that one district's fixed effects and cluster assignment still rest on an unverified district label.
+One row per non-VVP control village (628 rows from v2.1, all district-verified; 721 rows until v2.0 — deduped by geodesic coordinate proximity (50m) and by the full official priority-village name list; see `BO_Development_Log.md` Entries 14-15, 23-25), assembled via the OpenStreetMap Overpass API from the same 14 districts as the treated core sample, excluding any village on a VVP-I priority list. Produced by `select_control_villages.py`. District membership is checked against a real Nominatim boundary polygon where that lookup succeeds; where it doesn't, the candidate is kept on a rougher bounding-box match instead (see `district_verified` below). A retry/disambiguated-phrasing fix (Development Log Entry 37) was run against live Nominatim/Overpass access and resolved real boundary polygons for two of the three previously-unverified districts (Tawang, Arunachal Pradesh; Pithoragarh, Uttarakhand), dropping the control list from 732 to 721 rows in the process (11 Tawang candidates confirmed genuinely out-of-district once the real polygon was available). **As of the current committed file, that lookup still does not succeed for 93 of the 721 rows, all in Sikkim's North district** — no Nominatim boundary resolves for that district under either query phrasing tried, which appears to be a genuine data gap rather than a network/rate-limit failure — so that one district's fixed effects and cluster assignment still rest on an unverified district label.
 
 | Column | Type | Description |
 |---|---|---|
 | `village_id` | int | Control-group-specific integer ID (not comparable to the treated `village_id` values — the two ID spaces are separate). |
 | `village`, `district`, `block`, `state`, `is_core_sample`, `latitude`, `longitude`, `distance_to_border_km` | — | Same meaning as in the master village table. |
-| `district_verified` | bool | `True` if this candidate's district membership was confirmed against a real Nominatim administrative-boundary polygon; `False` if that lookup failed and the row was kept purely because it fell inside the ~65km search bounding box around the district's treated villages instead. Currently `False` for 93 of 721 rows (all Sikkim/North) — see the file-level note above. |
+| `district_verified` | bool | `True` if this candidate's district membership was confirmed against a real Nominatim administrative-boundary polygon; `False` if that lookup failed and the row was kept purely because it fell inside the ~65km search bounding box around the district's treated villages instead. Until v2.0, `False` for 93 of 721 rows (all Sikkim/North); 84 of those lay outside North Sikkim. From v2.1 only `True` rows are kept (`select_control_villages.py` drops the rest; the removed rows are in `archive/data_processed/v2.0_sikkim_controls/`). |
 | `village_source` | string | Always `control (non-VVP)` in this file — retained so control and treated rows can be safely concatenated for the DiD panel without losing group identity. |
 
 ## `border_optics_control_results.csv` (full-year) / `border_optics_control_results_summer.csv` (summer-matched)
@@ -77,7 +77,7 @@ The treated and control villages reshaped into a two-period panel with a treatme
 
 ## `border_optics_did_by_district_fullyear.csv` / `border_optics_did_by_district_summer.csv`
 
-Per-district breakdown of the treated-vs-control gap (treated change, control change, and the difference, for each of the 14 districts), produced by `did_model.py` alongside the pooled DiD estimate in §5.2 of `BO_Research_Paper.md`, to see whether the pooled gap is spread evenly across districts or concentrated in a few.
+Per-district breakdown of the treated-vs-control gap (treated change, control change, and the difference, for each of the 13 districts from v2.1), produced by `did_model.py` alongside the pooled DiD estimate in §5.2 of `BO_Research_Paper.md`, to see whether the pooled gap is spread evenly across districts or concentrated in a few.
 
 | Column | Type | Description |
 |---|---|---|
@@ -94,7 +94,7 @@ Top-level keys: `did` (the DiD regression coefficients, confidence intervals, an
 
 ## `border_optics_multiyear_fullyear.csv` / `border_optics_multiyear_summer.csv`
 
-258 rows — one per geocoded treated village across all four states (the 251-village core sample plus Himachal Pradesh's 7 illustrative villages), each with NDBI and VIIRS values extracted at all three time points (2021, 2023, 2025), used for the three-point trend extension (§6). Produced by `extract_multiyear_satellite_data.py`.
+258 rows — one per geocoded treated village across all four states (Arunachal Pradesh, Uttarakhand, Sikkim and Himachal Pradesh; the core sample is 220 from v2.1), each with NDBI and VIIRS values extracted at all three time points (2021, 2023, 2025), used for the three-point trend extension (§6). Produced by `extract_multiyear_satellite_data.py`.
 
 | Column | Type | Description |
 |---|---|---|
@@ -105,7 +105,7 @@ Top-level keys: `did` (the DiD regression coefficients, confidence intervals, an
 
 ## `border_optics_multiyear_slopes_fullyear.csv` / `border_optics_multiyear_slopes_summer.csv`
 
-251 rows — the core-sample subset of the multiyear files above (Himachal Pradesh's 7 non-core villages are dropped here), with a per-village linear trend fit across all three years added by `multiyear_trend.py`.
+220 rows from v2.1 (251 until v2.0) — the core-sample subset of the multiyear files above (Himachal Pradesh's 7 and, from v2.1, Sikkim's 31 non-core villages are dropped here), with a per-village linear trend fit across all three years added by `multiyear_trend.py`.
 
 | Column | Type | Description |
 |---|---|---|
@@ -122,7 +122,7 @@ The core-sample villages re-extracted at 250m and 1km buffer radii (summer-match
 
 ## `border_optics_buffer_sensitivity_summary.json`
 
-Top-level keys: `as_extracted` (Wilcoxon results at each radius using all villages with valid data at that radius), `coverage_note` (valid-village counts at each radius and at all three together — all 251 since the Entry 31 same-day re-pull), and `matched_subsample` (the same test restricted to villages with valid data at all three radii — as of Entry 22's complete 500m re-extraction, this is the full 251-village core sample at all three radii, not a smaller subset; the version reported as the robustness result in §6, now null at all three radii).
+Top-level keys: `as_extracted` (Wilcoxon results at each radius using all villages with valid data at that radius), `coverage_note` (valid-village counts at each radius and at all three together — all core villages since the Entry 31 same-day re-pull, 220 from v2.1), and `matched_subsample` (the same test restricted to villages with valid data at all three radii — as of Entry 22's complete 500m re-extraction, this is the full 251-village core sample at all three radii, not a smaller subset; the version reported as the robustness result in §6, now null at all three radii).
 
 ## `border_optics_treated_dynamicworld_fullyear.csv` / `_summer.csv` and `border_optics_control_dynamicworld_fullyear.csv` / `_summer.csv`
 
@@ -189,7 +189,7 @@ Top-level keys `building_count_vs_ndbi_after`, `building_count_vs_lights_after`,
 
 ## `outputs/h3_robustness_results.json`
 
-The H3 (border-proximity) stress test (paper v2.0 §5.5, Development Log Entry 32) applied to all four outcome/window combinations, not just the summer-NDBI result the main text originally flagged as open. Produced by `src/analysis/h3_border_proximity_robustness.py`. Top-level keys are `summer_ndbi_change`, `full_year_lights_change` (the two significant H3 results), and `full_year_ndbi_change`, `summer_lights_change` (the two already-null ones, checked anyway for completeness). Each key holds `full_sample` (the headline rho/p/n), `leave_one_district_out` (14 refits, each dropping one district, with `n_significant_of_14` and `n_same_sign_of_14` summary counts), and `randomization_inference` (2,000-permutation null distribution of rho, giving `p_randomization`). Both significant H3 results survive all 14 leave-one-out refits and randomization inference; the summer-NDBI result's leave-one-out rho range is 0.183-0.337.
+The H3 (border-proximity) stress test (paper v2.0 §5.5, Development Log Entry 32) applied to all four outcome/window combinations, not just the summer-NDBI result the main text originally flagged as open. Produced by `src/analysis/h3_border_proximity_robustness.py`. Top-level keys are `summer_ndbi_change`, `full_year_lights_change` (the two significant H3 results), and `full_year_ndbi_change`, `summer_lights_change` (the two already-null ones, checked anyway for completeness). Each key holds `full_sample` (the headline rho/p/n), `leave_one_district_out` (one refit per district, each dropping one district, with `n_significant`, `n_same_sign` and `n_reruns` summary counts; 14 refits until v2.0, 13 from v2.1), and `randomization_inference` (2,000-permutation null distribution of rho, giving `p_randomization`). Both significant H3 results survive all 14 leave-one-out refits and randomization inference; the summer-NDBI result's leave-one-out rho range is 0.183-0.337.
 
 ## `outputs/spatial_moran_h3_correction_results.json`
 
@@ -213,7 +213,7 @@ The Dynamic World analogue of `outputs/pretreatment_placebo_summary_*.json` — 
 
 ## `outputs/robustness_extended_results.json`
 
-Two additional robustness checks beyond the ones with their own dedicated files above. `leave_one_district_out` re-fits the *real* 2021→2025 DiD (not the H3 proximity test) dropping one district at a time, for both NDBI and lights — `n_significant_of_14: 0` for both, i.e. the real DiD result stays null under every leave-one-out refit, consistent with (not contradicted by) it already being null in the full sample. `randomization_inference` reruns the real DiD's treatment assignment as a 2,000-permutation randomization-inference null (`p_randomization`) as a non-parametric cross-check on the cluster-robust asymptotic p-value. A third key, `log_viirs`, checks whether a log1p transform of the VIIRS radiance outcome changes any significance verdict (it does not). Produced by `src/analysis/extended_robustness_checks.py`.
+Two additional robustness checks beyond the ones with their own dedicated files above. `leave_one_district_out` re-fits the *real* 2021→2025 DiD (not the H3 proximity test) dropping one district at a time, for both NDBI and lights — `n_significant: 0` for both, i.e. the real DiD result stays null under every leave-one-out refit, consistent with (not contradicted by) it already being null in the full sample. `randomization_inference` reruns the real DiD's treatment assignment as a 2,000-permutation randomization-inference null (`p_randomization`) as a non-parametric cross-check on the cluster-robust asymptotic p-value. A third key, `log_viirs`, checks whether a log1p transform of the VIIRS radiance outcome changes any significance verdict (it does not). Produced by `src/analysis/extended_robustness_checks.py`.
 
 ## `outputs/leave_one_district_out_results.csv` / `outputs/holm_correction_results.csv`
 
@@ -257,7 +257,7 @@ The result of comparing the corrected SCL file above against the primary QA60-ma
 ## Files added in v2.0 (Development Log Entry 49)
 
 ### `data/processed/border_optics_lac_distance.csv`
-One row per treated (258) and control (721) village, from `src/analysis/compute_lac_distance.py`.
+One row per treated (258) and control (628 from v2.1; 721 until v2.0) village, from `src/analysis/compute_lac_distance.py`.
 | Column | Meaning |
 |---|---|
 | `group` | `treated` or `control` |
@@ -268,13 +268,13 @@ One row per treated (258) and control (721) village, from `src/analysis/compute_
 | `distance_to_china_km` | geodesic distance to the nearest India–China boundary segment (Natural Earth; cartographic, not authoritative) |
 
 ### `outputs/h3_within_district_results.json`
-From `h3_within_district.py`. Keys `window|outcome|distance_measure`. Fields: `pooled_rho`/`pooled_p` (Spearman, all villages); `within_district_rank_corr` (stratified Spearman: ranks within district, centred per district) and `within_district_perm_p` (2,000 within-district permutations, seed 42); `district_fe_rank_slope`, `district_fe_se`, `district_fe_p_t13` (rank regression with district dummies, cluster-robust, t with 13 df); `between_district_rho_n14`; `per_district_rho_n_ge_8`.
+From `h3_within_district.py`. Keys `window|outcome|distance_measure`. Fields: `pooled_rho`/`pooled_p` (Spearman, all villages); `within_district_rank_corr` (stratified Spearman: ranks within district, centred per district) and `within_district_perm_p` (2,000 within-district permutations, seed 42); `district_fe_rank_slope`, `district_fe_se`, `district_fe_p_t` (rank regression with district dummies, cluster-robust, t with 13 df); `between_district_rho_n14`; `per_district_rho_n_ge_8`.
 
 ### `outputs/measurement_sensitivity_results.json`
 From `measurement_sensitivity.py`. Buffer area, median treated building area and share, number of building-free buffers, and per outcome (`ndbi_full_year`, `ndbi_summer`, `dw_built_full_year`, `dw_built_summer`): `contrast_slope_per_unit_building_share` (index change per unit building cover, cross-sectional, district FE, clustered SE); `implied_buffer_mean_change` for +50% / +100% of the median village's building area; the DiD (`did`, with t(13) 90%/95% CIs); the DiD and its 95% CI expressed as building-equivalent m²; TOST equivalence against ± a doubling; the doubling as a fraction of the H1/H4 MDEs (NDBI only).
 
 ### `outputs/dynamic_world_robustness_results.json`
-From `dynamic_world_robustness.py`. Dynamic World DiD per window with t(13) p, exact wild cluster bootstrap p, leave-one-district-out summary, and variants without Sikkim, restricted to summer-valid villages, and without the 10 qualifier-matched controls.
+From `dynamic_world_robustness.py`. Dynamic World DiD per window with t p (G − 1 df), exact wild cluster bootstrap p, leave-one-district-out summary, and variants restricted to summer-valid villages, and without the 10 qualifier-matched controls.
 
 ### `outputs/sample_qa_sensitivity_results.json`
 From `sample_qa_sensitivity.py`. Keys `window|outcome|variant`; variants: `baseline`, `dedup_identical_coordinates`, `drop_zero_building_buffers`, `drop_joshimath`, `drop_suffix_matched_controls`, `all_combined`, and (full year) `python_pipeline_treated_values`. Fields: sample sizes, mean/median change, H1 Wilcoxon p (one- and two-sided), DiD coefficient and p (t13 and z).
@@ -288,3 +288,11 @@ Per Sikkim village and summer window: scene count and how many scenes were inges
 ### Changes to existing files in v2.0
 - `outputs/leave_one_district_out_results.csv`: new first column `window` (all rows are summer-window reruns; the column was implicit before).
 - Figures `01`–`12` and `static_map_renders/*` regenerated with the v2.0 scripts (no hard-coded figure numbers; see each script's docstring).
+
+## Changes in v2.1 (7 November 2026)
+
+- **Sample.** `is_core_sample` is `False` for Sikkim in every treated file; Sikkim rows were removed from every `border_optics_control_*.csv` file (kept in `archive/data_processed/v2.0_sikkim_controls/`). Core sample: 220 treated, 628 control villages, 13 districts.
+- **Model.** Every DiD (`did_model.py`, `did_numpy.py`, `triangulation_analysis.py`, `buffer_overlap_sensitivity.py`, `wild_cluster_bootstrap.py`, `extended_robustness_checks.py`) includes district-by-period effects. In `border_optics_did_summary_*.json`, `did_coef` and `did_coef_nofe_hc3` therefore now differ.
+- **Renamed keys** (the old names had the cluster count built in): `p_t13` → `p_t` in `outputs/triangulation_holm_results.json`; `did_p_t` → `did_p_t` in `outputs/sample_qa_sensitivity_results.json`; `n_significant_t13` → `n_significant_t` in `outputs/dynamic_world_robustness_results.json`; `n_significant_of_14` → `n_significant` (plus `n_reruns`) in `outputs/robustness_extended_results.json` and `outputs/h3_robustness_results.json` (`n_same_sign_of_14` → `n_same_sign`); `district_fe_p_t13` → `district_fe_p_t` and `between_district_rho_n14` → `between_district_rho` in `outputs/h3_within_district_results.json`.
+- **Removed.** `full_year_without_sikkim` in `outputs/dynamic_world_robustness_results.json` (no longer needed). Figure `02_state_change_vs_budget.png` moved to `archive/figures/02_state_change_vs_budget_v2.0.png` (only two states remain).
+- **Figures** `01`, `03`–`12` and `static_map_renders/*` regenerated; Figure 11 now marks Holm-adjusted significance.

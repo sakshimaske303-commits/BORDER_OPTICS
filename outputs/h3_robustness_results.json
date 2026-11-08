@@ -2,537 +2,509 @@
   "summer_ndbi_change": {
     "description": "H3 NDBI-proximity, summer window (the flagged, unstressed finding)",
     "full_sample": {
-      "rho": 0.2914449023389552,
-      "p": 2.6444246260587754e-06,
-      "n": 251
+      "rho": 0.23150438149398495,
+      "p": 0.0005374830464261879,
+      "n": 220
     },
     "leave_one_district_out": {
       "rows": [
         {
           "dropped_district": "Anjaw",
-          "n": 226,
-          "rho": 0.3160246967228708,
-          "p": 1.2383332620066838e-06,
+          "n": 195,
+          "rho": 0.2348303450552812,
+          "p": 0.000951540968002676,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Chamoli",
-          "n": 243,
-          "rho": 0.31270027184492005,
-          "p": 6.535063467832309e-07,
+          "n": 212,
+          "rho": 0.2508477756947668,
+          "p": 0.00022427294382392106,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Dibang Valley",
-          "n": 233,
-          "rho": 0.29914992906193355,
-          "p": 3.3409564150179463e-06,
+          "n": 202,
+          "rho": 0.23875186176834143,
+          "p": 0.0006219339845903776,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "East Kameng",
-          "n": 235,
-          "rho": 0.3104280160319344,
-          "p": 1.21091478879584e-06,
+          "n": 204,
+          "rho": 0.2617288959031113,
+          "p": 0.00015595216672947062,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Kra daadi",
-          "n": 246,
-          "rho": 0.2786972594502134,
-          "p": 9.11532025609597e-06,
+          "n": 215,
+          "rho": 0.2191990475460243,
+          "p": 0.001217352106617694,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Kurung Kumey",
-          "n": 181,
-          "rho": 0.18297605375130913,
-          "p": 0.013682702908681123,
+          "n": 150,
+          "rho": 0.1610859245826444,
+          "p": 0.04892236217209707,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Lower Dibang",
-          "n": 250,
-          "rho": 0.2924606335043189,
-          "p": 2.5474648211470012e-06,
-          "significant": true,
-          "same_sign_as_full_sample": true
-        },
-        {
-          "dropped_district": "North",
-          "n": 220,
-          "rho": 0.23150438149398495,
-          "p": 0.0005374830464261879,
+          "n": 219,
+          "rho": 0.23262000773478703,
+          "p": 0.0005195065822464276,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Pithoragarh",
-          "n": 235,
-          "rho": 0.3372138665414046,
-          "p": 1.171972904323607e-07,
+          "n": 204,
+          "rho": 0.26830743874315055,
+          "p": 0.0001044421146164832,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Tawang",
-          "n": 225,
-          "rho": 0.22163511808659417,
-          "p": 0.0008147268807697579,
-          "significant": true,
+          "n": 194,
+          "rho": 0.10775767138372534,
+          "p": 0.13477113139826702,
+          "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Upper Siang",
-          "n": 236,
-          "rho": 0.3334924936001139,
-          "p": 1.5460762362734014e-07,
+          "n": 205,
+          "rho": 0.26816704670660685,
+          "p": 0.00010126698007877714,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Upper Subansiri",
-          "n": 243,
-          "rho": 0.2845086159421169,
-          "p": 6.617222255850576e-06,
+          "n": 212,
+          "rho": 0.21609515479089486,
+          "p": 0.0015493698160115293,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Uttarkashi",
-          "n": 241,
-          "rho": 0.29246126985909654,
-          "p": 3.874915382972397e-06,
+          "n": 210,
+          "rho": 0.23449164149591373,
+          "p": 0.0006131865823324403,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "West Kameng",
-          "n": 249,
-          "rho": 0.294334652290154,
-          "p": 2.28688062184893e-06,
+          "n": 218,
+          "rho": 0.23519252754737177,
+          "p": 0.0004620173032509376,
           "significant": true,
           "same_sign_as_full_sample": true
         }
       ],
-      "n_significant_of_14": 14,
-      "n_same_sign_of_14": 14,
-      "rho_min": 0.18297605375130913,
-      "rho_max": 0.3372138665414046
+      "n_significant": 12,
+      "n_same_sign": 13,
+      "n_reruns": 13,
+      "rho_min": 0.10775767138372534,
+      "rho_max": 0.26830743874315055
     },
     "randomization_inference": {
       "n_permutations": 2000,
-      "perm_rho_mean": 1.8819628813280255e-05,
-      "perm_rho_sd": 0.0636565926763573,
-      "p_randomization": 0.0004997501249375312
+      "perm_rho_mean": 0.002819883997897018,
+      "perm_rho_sd": 0.06718237235011669,
+      "p_randomization": 0.0009995002498750624
     }
   },
   "full_year_lights_change": {
     "description": "H3 lights-proximity, full-year window (Holm-significant, NOT previously flagged for this check)",
     "full_sample": {
-      "rho": -0.25178477043953446,
-      "p": 5.4766554230050705e-05,
-      "n": 251
+      "rho": -0.25282496620408956,
+      "p": 0.00015040380746584228,
+      "n": 220
     },
     "leave_one_district_out": {
       "rows": [
         {
           "dropped_district": "Anjaw",
-          "n": 226,
-          "rho": -0.2869678940523479,
-          "p": 1.1722652741965059e-05,
+          "n": 195,
+          "rho": -0.2895944481713066,
+          "p": 4.020392869085068e-05,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Chamoli",
-          "n": 243,
-          "rho": -0.25262676792238303,
-          "p": 6.818118556475733e-05,
+          "n": 212,
+          "rho": -0.25143342575688976,
+          "p": 0.00021655228242533383,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Dibang Valley",
-          "n": 233,
-          "rho": -0.2441943916473806,
-          "p": 0.00016683645449377984,
+          "n": 202,
+          "rho": -0.2542167324018304,
+          "p": 0.00026138571418268363,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "East Kameng",
-          "n": 235,
-          "rho": -0.23418432286159577,
-          "p": 0.00029310145541195634,
+          "n": 204,
+          "rho": -0.24058822406907046,
+          "p": 0.0005278201866475919,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Kra daadi",
-          "n": 246,
-          "rho": -0.24083997955752035,
-          "p": 0.00013646601401351907,
+          "n": 215,
+          "rho": -0.24342335238925517,
+          "p": 0.0003147775111109465,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Kurung Kumey",
-          "n": 181,
-          "rho": -0.22483974277893862,
-          "p": 0.0023422317508021767,
+          "n": 150,
+          "rho": -0.22138425160453,
+          "p": 0.006477472855535342,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Lower Dibang",
-          "n": 250,
-          "rho": -0.25295320718953596,
-          "p": 5.221525542034876e-05,
-          "significant": true,
-          "same_sign_as_full_sample": true
-        },
-        {
-          "dropped_district": "North",
-          "n": 220,
-          "rho": -0.25282496620408956,
-          "p": 0.00015040380746584228,
+          "n": 219,
+          "rho": -0.2531428999053431,
+          "p": 0.00015272582503490873,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Pithoragarh",
-          "n": 235,
-          "rho": -0.1948886072753987,
-          "p": 0.00269555743094972,
+          "n": 204,
+          "rho": -0.1797218607918705,
+          "p": 0.010107023591809955,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Tawang",
-          "n": 225,
-          "rho": -0.17499466654726753,
-          "p": 0.008522684343245835,
+          "n": 194,
+          "rho": -0.1607777394277074,
+          "p": 0.025123905485598775,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Upper Siang",
-          "n": 236,
-          "rho": -0.2725484145446312,
-          "p": 2.1821835109383037e-05,
+          "n": 205,
+          "rho": -0.27344349616315206,
+          "p": 7.276867513374967e-05,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Upper Subansiri",
-          "n": 243,
-          "rho": -0.2623529180547779,
-          "p": 3.452491018548373e-05,
+          "n": 212,
+          "rho": -0.26687661880085467,
+          "p": 8.340290248378315e-05,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Uttarkashi",
-          "n": 241,
-          "rho": -0.2918765830801763,
-          "p": 4.059263303940899e-06,
+          "n": 210,
+          "rho": -0.2891222177733376,
+          "p": 2.080972446343961e-05,
           "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "West Kameng",
-          "n": 249,
-          "rho": -0.2578277515718077,
-          "p": 3.824818165052385e-05,
+          "n": 218,
+          "rho": -0.2576543643168147,
+          "p": 0.00011932313620023606,
           "significant": true,
           "same_sign_as_full_sample": true
         }
       ],
-      "n_significant_of_14": 14,
-      "n_same_sign_of_14": 14,
-      "rho_min": -0.2918765830801763,
-      "rho_max": -0.17499466654726753
+      "n_significant": 13,
+      "n_same_sign": 13,
+      "n_reruns": 13,
+      "rho_min": -0.2895944481713066,
+      "rho_max": -0.1607777394277074
     },
     "randomization_inference": {
       "n_permutations": 2000,
-      "perm_rho_mean": 0.000840656947296009,
-      "perm_rho_sd": 0.0642303735292106,
+      "perm_rho_mean": -0.0003134251612877782,
+      "perm_rho_sd": 0.0685287216600971,
       "p_randomization": 0.0004997501249375312
     }
   },
   "full_year_ndbi_change": {
     "description": "H3 NDBI-proximity, full-year window (already null -- checked anyway, for completeness)",
     "full_sample": {
-      "rho": 0.048597738639412066,
-      "p": 0.44335334308227026,
-      "n": 251
+      "rho": 0.06321398967555364,
+      "p": 0.35071291309320907,
+      "n": 220
     },
     "leave_one_district_out": {
       "rows": [
         {
           "dropped_district": "Anjaw",
-          "n": 226,
-          "rho": 0.02979491823031076,
-          "p": 0.655936037091367,
+          "n": 195,
+          "rho": 0.035533224953126503,
+          "p": 0.6218994596179139,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Chamoli",
-          "n": 243,
-          "rho": 0.06707557004428717,
-          "p": 0.2976961906008582,
+          "n": 212,
+          "rho": 0.08609874563832393,
+          "p": 0.21183897730860263,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Dibang Valley",
-          "n": 233,
-          "rho": 0.052307277804472765,
-          "p": 0.42679613310599906,
+          "n": 202,
+          "rho": 0.0617531997664691,
+          "p": 0.3826277670048177,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "East Kameng",
-          "n": 235,
-          "rho": 0.07492927427710427,
-          "p": 0.252570428084816,
+          "n": 204,
+          "rho": 0.08433440313576264,
+          "p": 0.23042209020710686,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Kra daadi",
-          "n": 246,
-          "rho": 0.056510236555603395,
-          "p": 0.3774958774563046,
+          "n": 215,
+          "rho": 0.07028634596610744,
+          "p": 0.30495687980316094,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Kurung Kumey",
-          "n": 181,
-          "rho": 0.14465598453840356,
-          "p": 0.05202878591375458,
-          "significant": false,
+          "n": 150,
+          "rho": 0.16976194285917473,
+          "p": 0.03781474822902678,
+          "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Lower Dibang",
-          "n": 250,
-          "rho": 0.05015364127124807,
-          "p": 0.42980723004442667,
-          "significant": false,
-          "same_sign_as_full_sample": true
-        },
-        {
-          "dropped_district": "North",
-          "n": 220,
-          "rho": 0.06321398967555364,
-          "p": 0.35071291309320907,
+          "n": 219,
+          "rho": 0.06410447560828615,
+          "p": 0.3450663512976678,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Pithoragarh",
-          "n": 235,
-          "rho": 0.10214971984800267,
-          "p": 0.1183672950872681,
+          "n": 204,
+          "rho": 0.1343392444570405,
+          "p": 0.05540961780789974,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Tawang",
-          "n": 225,
-          "rho": -0.17978397541080754,
-          "p": 0.006855043833581063,
+          "n": 194,
+          "rho": -0.1956921913778085,
+          "p": 0.006246514518497415,
           "significant": true,
           "same_sign_as_full_sample": false
         },
         {
           "dropped_district": "Upper Siang",
-          "n": 236,
-          "rho": 0.06681627123100575,
-          "p": 0.30671287627157356,
+          "n": 205,
+          "rho": 0.09070673499492275,
+          "p": 0.19585564719454415,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Upper Subansiri",
-          "n": 243,
-          "rho": 0.035602413442283085,
-          "p": 0.5807427028762215,
+          "n": 212,
+          "rho": 0.05360832402906583,
+          "p": 0.4374581209424313,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Uttarkashi",
-          "n": 241,
-          "rho": 0.03653392190659329,
-          "p": 0.572482816557609,
+          "n": 210,
+          "rho": 0.05496229894172696,
+          "p": 0.4281714724282248,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "West Kameng",
-          "n": 249,
-          "rho": 0.05625005586878785,
-          "p": 0.3767800426159208,
+          "n": 218,
+          "rho": 0.06983879879212028,
+          "p": 0.3046638954424919,
           "significant": false,
           "same_sign_as_full_sample": true
         }
       ],
-      "n_significant_of_14": 1,
-      "n_same_sign_of_14": 13,
-      "rho_min": -0.17978397541080754,
-      "rho_max": 0.14465598453840356
+      "n_significant": 2,
+      "n_same_sign": 12,
+      "n_reruns": 13,
+      "rho_min": -0.1956921913778085,
+      "rho_max": 0.16976194285917473
     },
     "randomization_inference": {
       "n_permutations": 2000,
-      "perm_rho_mean": -0.0018665181429053312,
-      "perm_rho_sd": 0.06367377580917145,
-      "p_randomization": 0.45327336331834084
+      "perm_rho_mean": 0.0021445625352539666,
+      "perm_rho_sd": 0.06615773814090098,
+      "p_randomization": 0.33883058470764615
     }
   },
   "summer_lights_change": {
     "description": "H3 lights-proximity, summer window (already null -- checked anyway, for completeness)",
     "full_sample": {
-      "rho": -0.07050711195210915,
-      "p": 0.2657717767600847,
-      "n": 251
+      "rho": -0.11141239575955007,
+      "p": 0.09930459589850159,
+      "n": 220
     },
     "leave_one_district_out": {
       "rows": [
         {
           "dropped_district": "Anjaw",
-          "n": 226,
-          "rho": -0.048161520476469176,
-          "p": 0.4712604020630873,
+          "n": 195,
+          "rho": -0.09990103360406806,
+          "p": 0.1646650863009422,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Chamoli",
-          "n": 243,
-          "rho": -0.0590176534025358,
-          "p": 0.3596410907417458,
+          "n": 212,
+          "rho": -0.10043520726659484,
+          "p": 0.14500588294865105,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Dibang Valley",
-          "n": 233,
-          "rho": -0.0642616820124686,
-          "p": 0.32874422997461583,
+          "n": 202,
+          "rho": -0.11662713821273152,
+          "p": 0.09834266643199872,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "East Kameng",
-          "n": 235,
-          "rho": -0.06820877022080664,
-          "p": 0.2977556631574704,
+          "n": 204,
+          "rho": -0.10420855705302766,
+          "p": 0.1379970021741402,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Kra daadi",
-          "n": 246,
-          "rho": -0.07704461071424543,
-          "p": 0.2285767002051609,
+          "n": 215,
+          "rho": -0.11566918404470543,
+          "p": 0.0906766076549136,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Kurung Kumey",
-          "n": 181,
-          "rho": -0.14845662303757634,
-          "p": 0.04609654162878571,
-          "significant": true,
-          "same_sign_as_full_sample": true
-        },
-        {
-          "dropped_district": "Lower Dibang",
-          "n": 250,
-          "rho": -0.07028406546861547,
-          "p": 0.268255440641165,
+          "n": 150,
+          "rho": -0.14922751435632123,
+          "p": 0.06836607777098523,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
-          "dropped_district": "North",
-          "n": 220,
-          "rho": -0.11141239575955007,
-          "p": 0.09930459589850159,
+          "dropped_district": "Lower Dibang",
+          "n": 219,
+          "rho": -0.11135408472733734,
+          "p": 0.1002640461884919,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Pithoragarh",
-          "n": 235,
-          "rho": 0.02000940389739303,
-          "p": 0.7602646200813566,
+          "n": 204,
+          "rho": -0.007895240875169534,
+          "p": 0.9107636119385565,
           "significant": false,
-          "same_sign_as_full_sample": false
+          "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Tawang",
-          "n": 225,
-          "rho": -0.01916935095172501,
-          "p": 0.7749049283497744,
+          "n": 194,
+          "rho": -0.08329142218496788,
+          "p": 0.24824381656149794,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Upper Siang",
-          "n": 236,
-          "rho": -0.035188417758268725,
-          "p": 0.5906660198973311,
+          "n": 205,
+          "rho": -0.07561146499476952,
+          "p": 0.28125028726358464,
           "significant": false,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Upper Subansiri",
-          "n": 243,
-          "rho": -0.09946856265202668,
-          "p": 0.1220070773318347,
-          "significant": false,
+          "n": 212,
+          "rho": -0.15493573285826467,
+          "p": 0.024057963384491208,
+          "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "Uttarkashi",
-          "n": 241,
-          "rho": -0.09881849547746492,
-          "p": 0.12605473525347585,
-          "significant": false,
+          "n": 210,
+          "rho": -0.13689650123294578,
+          "p": 0.04755588921467261,
+          "significant": true,
           "same_sign_as_full_sample": true
         },
         {
           "dropped_district": "West Kameng",
-          "n": 249,
-          "rho": -0.07797805901531799,
-          "p": 0.22014242443172463,
+          "n": 218,
+          "rho": -0.1180358402513057,
+          "p": 0.08206246114676619,
           "significant": false,
           "same_sign_as_full_sample": true
         }
       ],
-      "n_significant_of_14": 1,
-      "n_same_sign_of_14": 13,
-      "rho_min": -0.14845662303757634,
-      "rho_max": 0.02000940389739303
+      "n_significant": 2,
+      "n_same_sign": 13,
+      "n_reruns": 13,
+      "rho_min": -0.15493573285826467,
+      "rho_max": -0.007895240875169534
     },
     "randomization_inference": {
       "n_permutations": 2000,
-      "perm_rho_mean": 0.0005394757261734329,
-      "perm_rho_sd": 0.06238606419727335,
-      "p_randomization": 0.25687156421789104
+      "perm_rho_mean": 0.000564775729831069,
+      "perm_rho_sd": 0.0673671179888327,
+      "p_randomization": 0.10594702648675662
     }
   }
 }

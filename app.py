@@ -17,7 +17,7 @@ villages, full_year, summer = load_data()
 st.markdown("<h1>🛰️ BORDER OPTICS</h1>", unsafe_allow_html=True)
 st.markdown(
     "<h3 style='text-align: center; font-weight: 700; margin-top: -10px;'>"
-    "Did India's Vibrant Villages Programme Change Its Border Villages? A Multi-Sensor Difference-in-Differences Assessment, 2021–2025</h3>",
+    "Evaluating a Place-Based Border Programme from Space: Evidence and Indicator Limits from India's Vibrant Villages Programme</h3>",
     unsafe_allow_html=True,
 )
 
@@ -63,16 +63,16 @@ n_control = len(pd.read_csv("data/processed/border_optics_control_villages.csv")
 did_ps = []
 for _path in ["data/processed/border_optics_did_summary_fullyear.json", "data/processed/border_optics_did_summary_summer.json"]:
     with open(_path) as _f:
-        # t with 13 df (14 district clusters), matching the paper's Table 2
-        did_ps += [2 * t_dist.sf(abs(r["did_coef"] / r["did_se"]), 13) for r in json.load(_f)["did"]]
+        # t with 12 df (13 district clusters from v2.1), matching the paper's Table 2
+        did_ps += [2 * t_dist.sf(abs(r["did_coef"] / r["did_se"]), 12) for r in json.load(_f)["did"]]
 with open("outputs/dynamic_world_robustness_results.json") as _f:
     _dw = json.load(_f)["summer_main"]
 
 col1, col2, col3, col4 = st.columns(4)
 with col1:
-    st.metric("CORE SAMPLE", f"{core_n} villages", f"{core_states} states (+{illus_n} illustrative)")
+    st.metric("CORE SAMPLE", f"{core_n} villages", f"{core_states} states (+{illus_n} outside core)")
 with col2:
-    st.metric("COMPARISON GROUP", f"{n_control} villages", "same 14 districts")
+    st.metric("COMPARISON GROUP", f"{n_control} villages", "same 13 districts")
 with col3:
     st.metric("NDBI & NIGHT-LIGHT DiD", "no difference", f"p = {min(did_ps):.2f}–{max(did_ps):.2f}", delta_color="off")
 with col4:
@@ -113,25 +113,26 @@ with col_left:
     communications and livelihood works in 2,967 border villages, 662 of them priority villages.
     Official reports describe sanctioned works but do not independently verify change on the ground.
 
-    BORDER OPTICS compares **251 geocoded priority villages** in Arunachal Pradesh, Sikkim and
-    Uttarakhand with **721 non-priority villages in the same 14 districts**, using four satellite
+    BORDER OPTICS compares **220 geocoded priority villages** in Arunachal Pradesh and
+    Uttarakhand with **628 non-priority villages in the same 13 districts**, using four satellite
     measures (Sentinel-2 NDBI, VIIRS night lights, Sentinel-1 radar, Dynamic World built-up
     probability) in a difference-in-differences design, and checks every measure against Google
-    Open Buildings footprints to estimate what it can and cannot detect.
+    Open Buildings footprints to estimate what it can and cannot detect. Sikkim is left out from
+    version 2.1, because none of its comparison villages could be verified inside its district.
     """)
 
 with col_right:
     st.markdown(f"""
     <div class="recon-card">
         <p style="color:{PALETTE['accent']}; text-transform:uppercase; font-size:0.78rem;
-                  letter-spacing:1.5px; font-weight:800; margin-bottom:12px;">Core Findings (v2.0)</p>
+                  letter-spacing:1.5px; font-weight:800; margin-bottom:12px;">Core Findings (v2.1)</p>
         <p style="color:{PALETTE['text_primary']}; font-size:0.93rem; line-height:1.65; margin:0; font-weight:500;">
             <b>1.</b> NDBI, night lights and radar show no difference between priority and comparison villages.<br>
-            <b>2.</b> That null cannot rule out construction: buildings cover a median 0.33% of a 500 m buffer,
+            <b>2.</b> That null cannot rule out construction: buildings cover a median 0.32% of a 500 m buffer,
             so doubling a village's buildings would move the NDBI average by only ~0.002, far below what the
             design can detect.<br>
             <b>3.</b> Dynamic World, the measure most sensitive to buildings, shows a small positive difference
-            (≈800–2,100 m² of built-up surface per village), robust in the summer window.<br>
+            in the summer window (≈1,900 m² of built-up surface per village); the full-year estimate is not significant.<br>
             <b>4.</b> No consistent border-proximity pattern: pooled correlations disappear or reverse within
             districts.<br>
             See Statistical Validation and Methodology &amp; Limitations for details.
@@ -151,7 +152,7 @@ with m1:
         <p style="color: {PALETTE['border_up']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Satellite Measures</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
             Sentinel-2 NDBI, VIIRS night lights, Sentinel-1 radar and Dynamic World built-up
-            probability in a 500 m buffer around 251 priority and 721 comparison villages,
+            probability in a 500 m buffer around 220 priority and 628 comparison villages,
             2021 and 2025 (plus a 2019 placebo year), full-year and June–September composites.
             Google Open Buildings footprints size what each measure can detect.
         </p>
@@ -163,8 +164,8 @@ with m2:
     <div class="recon-card" style="min-height: 190px;">
         <p style="color: {PALETTE['lights']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Primary Analysis</p>
         <p style="color: {PALETTE['text_primary']}; font-size: 0.88rem; margin: 0;">
-            District fixed-effects difference-in-differences of priority vs. comparison villages,
-            with t (13 df) and an exact wild cluster bootstrap for 14 district clusters, checked
+            Within-district difference-in-differences of priority vs. comparison villages,
+            with t (12 df) and an exact wild cluster bootstrap for 13 district clusters, checked
             by a 2019–2021 placebo, leave-one-district-out and randomization inference. Border
             distance is analysed pooled and within districts.
         </p>
@@ -193,7 +194,7 @@ nav_items = [
     ("Built-Up Change", "NDBI findings across all villages"),
     ("Night-Lights", "VIIRS radiance change findings"),
     ("Statistical Validation", "Difference-in-differences, detectability, robustness"),
-    ("Explore Trends", "Cross-state comparison, budget correlation"),
+    ("Explore Trends", "Cross-state comparison and multi-year trend"),
     ("Interactive Maps & Plots", "Live village-level geospatial exploration plus the three headline charts"),
     ("Methodology & Limitations", "Full transparency on data and methods"),
 ]

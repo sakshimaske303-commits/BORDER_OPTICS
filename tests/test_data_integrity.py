@@ -25,13 +25,13 @@ CONTROL_RESULTS_FULLYEAR_PATH = os.path.join(DATA, "border_optics_control_result
 DID_PANEL_SUMMER_PATH = os.path.join(DATA, "border_optics_did_panel_summer.csv")
 DID_PANEL_FULLYEAR_PATH = os.path.join(DATA, "border_optics_did_panel_fullyear.csv")
 
-EXPECTED_CORE_TREATED = 251
+EXPECTED_CORE_TREATED = 220  # 251 until v2.1, when Sikkim (31) left the core sample
 EXPECTED_TOTAL_TREATED = 258
-EXPECTED_CONTROL = 721  # was 735 before the dedup fix (Entry 25), 732 before the district-verification fix (Entry 37)
-EXPECTED_DISTRICTS = 14
+EXPECTED_CONTROL = 628  # 721 until v2.1 (93 unverified Sikkim controls removed); 735 before Entry 25, 732 before Entry 37
+EXPECTED_DISTRICTS = 13  # 14 until v2.1 (North Sikkim removed)
 EXPECTED_STATE_COUNTS = {
     "Arunachal Pradesh": 186,
-    "Sikkim": 31,
+    "Sikkim": 0,  # outside the core sample from v2.1: no verified comparison villages
     "Uttarakhand": 34,
     "Himachal Pradesh": 0,  # illustrative only, not core sample
 }
@@ -217,6 +217,26 @@ def test_district_cluster_count():
     )
 
 
+def test_controls_inside_their_district():
+    """Every control must have its district checked against a boundary polygon, and that
+    district must be one of the core treated districts. Added in v2.1 after an independent
+    review found that the 93 bbox-only North Sikkim controls were mostly in Nepal, Bhutan
+    and West Bengal."""
+    controls = pd.read_csv(CONTROL_PATH)
+    treated = pd.read_csv(MASTER_PATH)
+    core_districts = set(treated.loc[treated["is_core_sample"] == True, "district"])
+    unverified = controls[controls["district_verified"] != True]
+    assert unverified.empty, (
+        f"{len(unverified)} control village(s) have district_verified != True "
+        f"(e.g. {unverified['village'].head(5).tolist()}); bbox-only matches can lie outside the district."
+    )
+    outside = controls[~controls["district"].isin(core_districts)]
+    assert outside.empty, (
+        f"{len(outside)} control village(s) are in districts with no core treated village: "
+        f"{sorted(outside['district'].unique())}"
+    )
+
+
 def test_treated_duplicate_coordinates():
     """Added Entry 49. 7 locations each carry 2 treated villages (e.g. Kitpi / Kitpi II, Pekong x2),
     so those pairs share identical satellite values. Documented ceiling 7 until geocode QA
@@ -278,6 +298,7 @@ if __name__ == "__main__":
         test_did_panel_row_count,
         test_did_panel_no_duplicate_village_period_rows,
         test_district_cluster_count,
+        test_controls_inside_their_district,
         test_treated_duplicate_coordinates,
         test_control_not_official_priority_village_with_qualifier,
         test_lac_distance_reproduces_committed_distance,

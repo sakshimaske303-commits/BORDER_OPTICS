@@ -23,8 +23,10 @@ for state, path in FILES.items():
     df = pd.read_csv(path)
     matched = df[df["geocode_status"].isin(MATCHED_STATUSES)].copy()
     matched["state"] = state
-    # Himachal is just the small illustrative case study, not core sample
-    matched["is_core_sample"] = state != "Himachal Pradesh"
+    # Himachal is just the small illustrative case study, not core sample.
+    # Sikkim is outside the core sample from v2.1: none of its comparison villages
+    # could be checked against a North Sikkim boundary, and 84 of the 93 lay outside it.
+    matched["is_core_sample"] = state not in ("Himachal Pradesh", "Sikkim")
     rows.append(matched[["Habitation", "District", "Block", "state", "latitude", "longitude", "is_core_sample"]])
 
 master = pd.concat(rows, ignore_index=True)

@@ -185,37 +185,37 @@ village_id,village,district,block,state,is_core_sample,latitude,longitude,built_
 184,Hapuk (I),Kra daadi,Pipsorang,Arunachal Pradesh,True,28.0967863,93.5839299,0.03665133158735549,1
 185,Kokso,Kra daadi,Pipsorang,Arunachal Pradesh,True,28.0838152,93.6115937,0.03212453405426939,1
 186,Richik,Kra daadi,Pipsorang,Arunachal Pradesh,True,28.064816,93.6543383,0.03545954950217611,1
-187,Chungthang,North,Chungthang,Sikkim,True,27.604236,88.6465196,,0
-188,Tung,North,Chungthang,Sikkim,True,27.5475,88.6493,,0
-189,Chawang,North,Kabi Tingda,Sikkim,True,27.4415,88.5992,,0
-190,Labi,North,Kabi Tingda,Sikkim,True,27.4373,88.6584,,0
-191,Paney-Phensong,North,Kabi Tingda,Sikkim,True,27.4340487,88.6127695,,0
-192,Phamtam,North,Kabi Tingda,Sikkim,True,27.4557,88.61,,0
-193,Phodong,North,Kabi Tingda,Sikkim,True,27.4130306,88.5838702,,0
-194,Ramthang,North,Kabi Tingda,Sikkim,True,27.4039854,88.550947,,0
-195,Rongong,North,Kabi Tingda,Sikkim,True,27.4092,88.5635,,0
-196,Tangyek,North,Kabi Tingda,Sikkim,True,27.4207,88.527,,0
-197,Tingchim,North,Kabi Tingda,Sikkim,True,27.4607586,88.5277316,,0
-198,Tingda,North,Kabi Tingda,Sikkim,True,27.3957,88.6272,,0
-199,Tumlong,North,Kabi Tingda,Sikkim,True,27.4198712,88.5898311,,0
-200,Lachen,North,Lachen,Sikkim,True,27.7305455,88.5469054,,0
-201,Lachung,North,Lachung,Sikkim,True,27.7794,88.7152648,,0
-202,Barfok,North,Passingdang,Sikkim,True,27.4977,88.491,,0
-203,Gor,North,Passingdang,Sikkim,True,27.4302826,88.4984203,,0
-204,Hee-Gyathang,North,Passingdang,Sikkim,True,27.4816,88.4991,,0
-205,Lingdem,North,Passingdang,Sikkim,True,27.5494817,88.4569319,,0
-206,Lingdong,North,Passingdang,Sikkim,True,27.5073091,88.5194632,,0
-207,Lingthem,North,Passingdang,Sikkim,True,27.5224732,88.5014686,,0
-208,Lingzah-Tolung,North,Passingdang,Sikkim,True,27.571,88.4466,,0
-209,Lum,North,Passingdang,Sikkim,True,27.394,88.48,,0
-210,Namok,North,Passingdang,Sikkim,True,27.4504654,88.5375829,,0
-211,Sakyong-Pentong,North,Passingdang,Sikkim,True,27.5797,88.4049,,0
-212,Salim Pakel,North,Passingdang,Sikkim,True,27.5379,88.5518,,0
-213,Sangtok,North,Passingdang,Sikkim,True,27.4091,88.504,,0
-214,Sheyam,North,Passingdang,Sikkim,True,27.4367,88.528,,0
-215,Shipgyer,North,Passingdang,Sikkim,True,27.5544461,88.6336147,,0
-216,Tingbong,North,Passingdang,Sikkim,True,27.5524,88.4984,,0
-217,Zimchung,North,Passingdang,Sikkim,True,27.4903,88.5321,,0
+187,Chungthang,North,Chungthang,Sikkim,False,27.604236,88.6465196,,0
+188,Tung,North,Chungthang,Sikkim,False,27.5475,88.6493,,0
+189,Chawang,North,Kabi Tingda,Sikkim,False,27.4415,88.5992,,0
+190,Labi,North,Kabi Tingda,Sikkim,False,27.4373,88.6584,,0
+191,Paney-Phensong,North,Kabi Tingda,Sikkim,False,27.4340487,88.6127695,,0
+192,Phamtam,North,Kabi Tingda,Sikkim,False,27.4557,88.61,,0
+193,Phodong,North,Kabi Tingda,Sikkim,False,27.4130306,88.5838702,,0
+194,Ramthang,North,Kabi Tingda,Sikkim,False,27.4039854,88.550947,,0
+195,Rongong,North,Kabi Tingda,Sikkim,False,27.4092,88.5635,,0
+196,Tangyek,North,Kabi Tingda,Sikkim,False,27.4207,88.527,,0
+197,Tingchim,North,Kabi Tingda,Sikkim,False,27.4607586,88.5277316,,0
+198,Tingda,North,Kabi Tingda,Sikkim,False,27.3957,88.6272,,0
+199,Tumlong,North,Kabi Tingda,Sikkim,False,27.4198712,88.5898311,,0
+200,Lachen,North,Lachen,Sikkim,False,27.7305455,88.5469054,,0
+201,Lachung,North,Lachung,Sikkim,False,27.7794,88.7152648,,0
+202,Barfok,North,Passingdang,Sikkim,False,27.4977,88.491,,0
+203,Gor,North,Passingdang,Sikkim,False,27.4302826,88.4984203,,0
+204,Hee-Gyathang,North,Passingdang,Sikkim,False,27.4816,88.4991,,0
+205,Lingdem,North,Passingdang,Sikkim,False,27.5494817,88.4569319,,0
+206,Lingdong,North,Passingdang,Sikkim,False,27.5073091,88.5194632,,0
+207,Lingthem,North,Passingdang,Sikkim,False,27.5224732,88.5014686,,0
+208,Lingzah-Tolung,North,Passingdang,Sikkim,False,27.571,88.4466,,0
+209,Lum,North,Passingdang,Sikkim,False,27.394,88.48,,0
+210,Namok,North,Passingdang,Sikkim,False,27.4504654,88.5375829,,0
+211,Sakyong-Pentong,North,Passingdang,Sikkim,False,27.5797,88.4049,,0
+212,Salim Pakel,North,Passingdang,Sikkim,False,27.5379,88.5518,,0
+213,Sangtok,North,Passingdang,Sikkim,False,27.4091,88.504,,0
+214,Sheyam,North,Passingdang,Sikkim,False,27.4367,88.528,,0
+215,Shipgyer,North,Passingdang,Sikkim,False,27.5544461,88.6336147,,0
+216,Tingbong,North,Passingdang,Sikkim,False,27.5524,88.4984,,0
+217,Zimchung,North,Passingdang,Sikkim,False,27.4903,88.5321,,0
 218,Bampa,Chamoli,Joshimath,Uttarakhand,True,30.7436664,79.8297153,0.05162045382107234,2
 219,Gamsali,Chamoli,Joshimath,Uttarakhand,True,30.7559986,79.8261873,0.037834357440027666,2
 220,Gurguti,Chamoli,Joshimath,Uttarakhand,True,30.7738,79.8758,,2

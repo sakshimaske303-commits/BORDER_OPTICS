@@ -57,7 +57,7 @@ def matched_subsample_test(common_ids, outcome="ndbi"):
 
 def main():
     all_results = []
-    print("=== Buffer-radius sensitivity, summer window, core sample (n=251, as extracted) ===\n")
+    print("=== Buffer-radius sensitivity, summer window, core sample (n=220, as extracted) ===\n")
     for buffer_m, path in BUFFERS.items():
         r = test_buffer(buffer_m, path)
         all_results.append(r)

@@ -10,10 +10,24 @@ Before starting: `pip install -r requirements-lock.txt`, `earthengine authentica
 
 ---
 
+## 0. Sikkim comparison villages (added in v2.1)
+
+Why: the 93 North Sikkim comparison villages were chosen inside a bounding box because no
+district polygon could be retrieved, and 84 of them lie outside North Sikkim (many in Nepal,
+Bhutan or West Bengal). Sikkim is outside the core sample until this is fixed.
+
+What: get a North Sikkim boundary (or Census / Local Government Directory village points for the
+district), rebuild the Sikkim candidates with point-in-polygon checks, and run the extraction
+scripts for the new villages in both windows. Then set Sikkim back to `is_core_sample = True` in
+`merge_geocoded.py`, regenerate the processed files, and rerun the analysis. The data integrity
+test `test_controls_inside_their_district` must pass.
+
+---
+
 ## 1. Same-day full-year re-extraction (review item A4) — ~2–3 h, cheap, do first
 
 Why: the full-year treated values come from an early Code Editor export that is not in the
-repo, and a Python re-extraction differs at 187/251 villages. Controls were extracted with the
+repo, and a Python re-extraction differs at 187/251 villages (164/220 in the v2.1 core sample). Controls were extracted with the
 Python script seven weeks later.
 
 ```bash
@@ -73,7 +87,7 @@ Then point `extract_control_satellite_data.py` at that file (copy it over
 ## 5. Manual data tasks (no code can do these)
 
 - **VVP-I block membership (A3).** Get the list of VVP-I's 46 blocks / 2,967 villages
-  (MHA/state notifications, RS Q. 2321 annexure). Check which of the 14 districts' blocks are
+  (MHA/state notifications, RS Q. 2321 annexure). Check which of the 13 districts' blocks are
   VVP blocks. If controls fall inside VVP blocks, either (a) restrict controls to non-VVP blocks,
   or (b) keep them and say clearly that the comparison is "priority vs. non-priority villages",
   not "VVP vs. non-VVP".

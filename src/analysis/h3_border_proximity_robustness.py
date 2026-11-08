@@ -45,7 +45,7 @@ def leave_one_district_out(window, metric, full_rho):
     n_same_sign = sum(r["same_sign_as_full_sample"] for r in rows)
     rhos = [r["rho"] for r in rows]
     return {
-        "rows": rows, "n_significant_of_14": n_sig, "n_same_sign_of_14": n_same_sign,
+        "rows": rows, "n_significant": n_sig, "n_same_sign": n_same_sign, "n_reruns": len(rows),
         "rho_min": min(rhos), "rho_max": max(rhos),
     }
 
@@ -87,8 +87,8 @@ def main():
 
         loo = leave_one_district_out(window, metric, rho)
         print(f"  Leave-one-district-out: rho range [{loo['rho_min']:+.5f}, {loo['rho_max']:+.5f}], "
-              f"significant (p<0.05) in {loo['n_significant_of_14']}/14 reruns, "
-              f"same sign as full sample in {loo['n_same_sign_of_14']}/14")
+              f"significant (p<0.05) in {loo['n_significant']}/{loo['n_reruns']} reruns, "
+              f"same sign as full sample in {loo['n_same_sign']}/{loo['n_reruns']}")
 
         rand = randomization_inference(window, metric, rho)
         print(f"  Randomization inference ({rand['n_permutations']} shuffles): "

@@ -185,37 +185,37 @@ village_id,village,district,block,state,is_core_sample,latitude,longitude,distan
 184,Hapuk (I),Kra daadi,Pipsorang,Arunachal Pradesh,True,28.0967863,93.5839299,45.746760436394744,China
 185,Kokso,Kra daadi,Pipsorang,Arunachal Pradesh,True,28.0838152,93.6115937,48.79108749597172,China
 186,Richik,Kra daadi,Pipsorang,Arunachal Pradesh,True,28.064816,93.6543383,53.436001694534184,China
-187,Chungthang,North,Chungthang,Sikkim,True,27.604236,88.6465196,11.201308626040928,China
-188,Tung,North,Chungthang,Sikkim,True,27.5475,88.6493,9.061615061691295,China
-189,Chawang,North,Kabi Tingda,Sikkim,True,27.4415,88.5992,15.542879608993822,China
-190,Labi,North,Kabi Tingda,Sikkim,True,27.4373,88.6584,9.854908413424733,China
-191,Paney-Phensong,North,Kabi Tingda,Sikkim,True,27.4340487,88.6127695,14.36770960117595,China
-192,Phamtam,North,Kabi Tingda,Sikkim,True,27.4557,88.61,14.30032499707199,China
-193,Phodong,North,Kabi Tingda,Sikkim,True,27.4130306,88.5838702,17.57311249069895,China
-194,Ramthang,North,Kabi Tingda,Sikkim,True,27.4039854,88.550947,20.952566571462313,China
-195,Rongong,North,Kabi Tingda,Sikkim,True,27.4092,88.5635,19.631615700626188,China
-196,Tangyek,North,Kabi Tingda,Sikkim,True,27.4207,88.527,22.982938637763464,China
-197,Tingchim,North,Kabi Tingda,Sikkim,True,27.4607586,88.5277316,22.551360222922458,China
-198,Tingda,North,Kabi Tingda,Sikkim,True,27.3957,88.6272,13.817394833203867,China
-199,Tumlong,North,Kabi Tingda,Sikkim,True,27.4198712,88.5898311,16.865981090527548,China
-200,Lachen,North,Lachen,Sikkim,True,27.7305455,88.5469054,26.220018637244667,China
-201,Lachung,North,Lachung,Sikkim,True,27.7794,88.7152648,11.76292890516004,China
-202,Barfok,North,Passingdang,Sikkim,True,27.4977,88.491,25.04784097031724,China
-203,Gor,North,Passingdang,Sikkim,True,27.4302826,88.4984203,25.579352718638233,China
-204,Hee-Gyathang,North,Passingdang,Sikkim,True,27.4816,88.4991,24.598818732959067,China
-205,Lingdem,North,Passingdang,Sikkim,True,27.5494817,88.4569319,28.0625892437003,China
-206,Lingdong,North,Passingdang,Sikkim,True,27.5073091,88.5194632,22.115621788406564,China
-207,Lingthem,North,Passingdang,Sikkim,True,27.5224732,88.5014686,23.749106613267926,China
-208,Lingzah-Tolung,North,Passingdang,Sikkim,True,27.571,88.4466,29.21185704990743,China
-209,Lum,North,Passingdang,Sikkim,True,27.394,88.48,28.061148012862233,China
-210,Namok,North,Passingdang,Sikkim,True,27.4504654,88.5375829,21.482042039876806,China
-211,Sakyong-Pentong,North,Passingdang,Sikkim,True,27.5797,88.4049,29.814433853353986,Nepal
-212,Salim Pakel,North,Passingdang,Sikkim,True,27.5379,88.5518,18.710402505342966,China
-213,Sangtok,North,Passingdang,Sikkim,True,27.4091,88.504,25.440821002873623,China
-214,Sheyam,North,Passingdang,Sikkim,True,27.4367,88.528,22.5833767308434,China
-215,Shipgyer,North,Passingdang,Sikkim,True,27.5544461,88.6336147,10.65243415479719,China
-216,Tingbong,North,Passingdang,Sikkim,True,27.5524,88.4984,23.974839077444045,China
-217,Zimchung,North,Passingdang,Sikkim,True,27.4903,88.5321,21.20496600672582,China
+187,Chungthang,North,Chungthang,Sikkim,False,27.604236,88.6465196,11.201308626040928,China
+188,Tung,North,Chungthang,Sikkim,False,27.5475,88.6493,9.061615061691295,China
+189,Chawang,North,Kabi Tingda,Sikkim,False,27.4415,88.5992,15.542879608993822,China
+190,Labi,North,Kabi Tingda,Sikkim,False,27.4373,88.6584,9.854908413424733,China
+191,Paney-Phensong,North,Kabi Tingda,Sikkim,False,27.4340487,88.6127695,14.36770960117595,China
+192,Phamtam,North,Kabi Tingda,Sikkim,False,27.4557,88.61,14.30032499707199,China
+193,Phodong,North,Kabi Tingda,Sikkim,False,27.4130306,88.5838702,17.57311249069895,China
+194,Ramthang,North,Kabi Tingda,Sikkim,False,27.4039854,88.550947,20.952566571462313,China
+195,Rongong,North,Kabi Tingda,Sikkim,False,27.4092,88.5635,19.631615700626188,China
+196,Tangyek,North,Kabi Tingda,Sikkim,False,27.4207,88.527,22.982938637763464,China
+197,Tingchim,North,Kabi Tingda,Sikkim,False,27.4607586,88.5277316,22.551360222922458,China
+198,Tingda,North,Kabi Tingda,Sikkim,False,27.3957,88.6272,13.817394833203867,China
+199,Tumlong,North,Kabi Tingda,Sikkim,False,27.4198712,88.5898311,16.865981090527548,China
+200,Lachen,North,Lachen,Sikkim,False,27.7305455,88.5469054,26.220018637244667,China
+201,Lachung,North,Lachung,Sikkim,False,27.7794,88.7152648,11.76292890516004,China
+202,Barfok,North,Passingdang,Sikkim,False,27.4977,88.491,25.04784097031724,China
+203,Gor,North,Passingdang,Sikkim,False,27.4302826,88.4984203,25.579352718638233,China
+204,Hee-Gyathang,North,Passingdang,Sikkim,False,27.4816,88.4991,24.598818732959067,China
+205,Lingdem,North,Passingdang,Sikkim,False,27.5494817,88.4569319,28.0625892437003,China
+206,Lingdong,North,Passingdang,Sikkim,False,27.5073091,88.5194632,22.115621788406564,China
+207,Lingthem,North,Passingdang,Sikkim,False,27.5224732,88.5014686,23.749106613267926,China
+208,Lingzah-Tolung,North,Passingdang,Sikkim,False,27.571,88.4466,29.21185704990743,China
+209,Lum,North,Passingdang,Sikkim,False,27.394,88.48,28.061148012862233,China
+210,Namok,North,Passingdang,Sikkim,False,27.4504654,88.5375829,21.482042039876806,China
+211,Sakyong-Pentong,North,Passingdang,Sikkim,False,27.5797,88.4049,29.814433853353986,Nepal
+212,Salim Pakel,North,Passingdang,Sikkim,False,27.5379,88.5518,18.710402505342966,China
+213,Sangtok,North,Passingdang,Sikkim,False,27.4091,88.504,25.440821002873623,China
+214,Sheyam,North,Passingdang,Sikkim,False,27.4367,88.528,22.5833767308434,China
+215,Shipgyer,North,Passingdang,Sikkim,False,27.5544461,88.6336147,10.65243415479719,China
+216,Tingbong,North,Passingdang,Sikkim,False,27.5524,88.4984,23.974839077444045,China
+217,Zimchung,North,Passingdang,Sikkim,False,27.4903,88.5321,21.20496600672582,China
 218,Bampa,Chamoli,Joshimath,Uttarakhand,True,30.7436664,79.8297153,17.59895767374898,China
 219,Gamsali,Chamoli,Joshimath,Uttarakhand,True,30.7559986,79.8261873,16.602438651764615,China
 220,Gurguti,Chamoli,Joshimath,Uttarakhand,True,30.7738,79.8758,12.359728268667741,China

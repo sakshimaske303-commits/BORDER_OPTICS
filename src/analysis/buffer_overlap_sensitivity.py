@@ -4,7 +4,7 @@ Buffer-overlap sensitivity for the H4 DiD (added 2026-09-30, Development Log Ent
 select_control_villages.py drops control candidates within 50m of a treated
 village, but every extraction uses a 500m buffer -- so a control village less
 than 1km from a treated village shares pixels with that treated village's
-buffer. 82 of the 721 controls are in that situation (5 of them within 200m).
+buffer. 82 of the 628 controls are in that situation (5 of them within 200m).
 Shared pixels push treated and control values toward each other, which would
 bias the DiD toward zero.
 
@@ -62,7 +62,7 @@ def main():
         panel = panel[~((panel["treatment"] == 0) & (panel["village_id"].isin(overlapping)))]
         for outcome in ["ndbi", "lights"]:
             v = panel.dropna(subset=[outcome])
-            m = smf.ols(f"{outcome} ~ treatment + post + did_term + C(district)", data=v).fit(
+            m = smf.ols(f"{outcome} ~ treatment + did_term + C(district) * post", data=v).fit(
                 cov_type="cluster", cov_kwds={"groups": v["district"]}
             )
             row = {

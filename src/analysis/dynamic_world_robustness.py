@@ -6,14 +6,13 @@ Until v1.7 this result had only the standard cluster-robust p-value and a
 2019 placebo. Here it gets the same small-cluster treatment the NDBI/lights
 DiDs already had, plus composition checks:
 
-  - t(13) p-value (instead of the normal approximation)
-  - exact wild cluster bootstrap (2**14 = 16,384 sign vectors)
-  - full-year re-estimated without Sikkim (the summer window has no valid
-    Sikkim treated villages, so this shows how much the full-year result
-    depends on that state)
+  - t p-value with G - 1 df (12 from v2.1; instead of the normal approximation)
+  - exact wild cluster bootstrap (2**13 = 8,192 sign vectors for 13 districts)
+  - (v2.0 also re-estimated the full year without Sikkim; from v2.1 Sikkim is
+    outside the core sample, so that check is no longer needed)
   - full-year re-estimated on the summer window's treated/control villages,
     so the two windows can be compared on the same villages
-  - leave-one-district-out (count significant at t(13) 0.05, coefficient range)
+  - leave-one-district-out (count significant at t 0.05, coefficient range)
   - without the 10 control villages that are official priority villages
     written with a qualifier (see sample_qa_sensitivity.py)
 
@@ -52,7 +51,7 @@ def summarize(label, t, c, bootstrap=False):
     if bootstrap:
         r["wild_cluster_bootstrap_p"] = wild_cluster_bootstrap_p(panel)
     extra = f"  WCB p={r['wild_cluster_bootstrap_p']:.4f}" if bootstrap else ""
-    print(f"{label:45s} coef={r['coef']:+.5f}  p_z={r['p_z']:.4f}  p_t13={r['p_t']:.4f}{extra}  "
+    print(f"{label:45s} coef={r['coef']:+.5f}  p_z={r['p_z']:.4f}  p_t={r['p_t']:.4f}{extra}  "
           f"(treated {r['n_treated']} in {r['n_treated_districts']} districts / control {r['n_control']})")
     return r
 
@@ -68,16 +67,15 @@ def main():
             rows.append({"dropped_district": d, "coef": r["coef"], "p_t": r["p_t"]})
         loo = pd.DataFrame(rows)
         out[f"{window}_leave_one_district_out"] = {
-            "n_significant_t13": int((loo.p_t < 0.05).sum()), "n_reruns": int(len(loo)),
+            "n_significant_t": int((loo.p_t < 0.05).sum()), "n_reruns": int(len(loo)),
             "coef_min": float(loo.coef.min()), "coef_max": float(loo.coef.max()),
             "nonsignificant_when_dropping": loo.loc[loo.p_t >= 0.05, "dropped_district"].tolist(),
         }
-        print(f"  leave-one-district-out: {out[f'{window}_leave_one_district_out']['n_significant_t13']}/{len(loo)} "
-              f"significant at t(13); coef {loo.coef.min():+.5f}..{loo.coef.max():+.5f}; "
+        print(f"  leave-one-district-out: {out[f'{window}_leave_one_district_out']['n_significant_t']}/{len(loo)} "
+              f"significant at t(G-1); coef {loo.coef.min():+.5f}..{loo.coef.max():+.5f}; "
               f"non-significant when dropping {out[f'{window}_leave_one_district_out']['nonsignificant_when_dropping']}")
 
     t, c = load("full_year")
-    out["full_year_without_sikkim"] = summarize("full_year: without Sikkim", t[t.state != "Sikkim"], c[c.state != "Sikkim"])
     ts, cs = load("summer")
     out["full_year_on_summer_villages"] = summarize(
         "full_year: restricted to summer-valid villages",

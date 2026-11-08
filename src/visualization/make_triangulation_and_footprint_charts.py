@@ -8,7 +8,7 @@ Changes from v1.7:
     World from dynamic_world_robustness.py)
   - 12B: the three case-study villages are no longer coloured "detected /
     wrong direction" from the sign of their change. Each proxy's change is
-    shown as a percentile of all 251 core villages' changes for that proxy
+    shown as a percentile of all 220 core villages' changes for that proxy
     (50 = a typical village), because most villages decline in full-year
     NDBI and a median-sized rise is not a detection
   - 12A: titled as a cross-sectional LEVEL correlation, which it is
@@ -45,6 +45,22 @@ with open("outputs/dynamic_world_robustness_results.json") as f:
     dwr = json.load(f)
 wcb[("full_year", "built")] = dwr["full_year_main"]["wild_cluster_bootstrap_p"]
 wcb[("summer", "built")] = dwr["summer_main"]["wild_cluster_bootstrap_p"]
+# v2.1: colour by Holm-adjusted p within each family (Section 4.5), not by the unadjusted p
+with open("outputs/triangulation_holm_results.json") as f:
+    holm_p = {(r["window"], r["outcome"]): r["holm_adjusted_p"] for r in json.load(f)["tests"]}
+_primary = {}
+for _w, (_tf, _cf) in {"full_year": ("border_optics_village_results_analyzed.csv", "border_optics_control_results.csv"),
+                       "summer": ("border_optics_village_results_summer_analyzed.csv",
+                                  "border_optics_control_results_summer.csv")}.items():
+    for _o in ["ndbi", "lights"]:
+        _t = pd.read_csv(P + _tf)
+        _primary[(_w, _o)] = did(long_panel(_t[_t["is_core_sample"] == True], pd.read_csv(P + _cf),
+                                            f"{_o}_before", f"{_o}_after"))["p_t"]
+_order = sorted(_primary, key=_primary.get)
+_running = 0.0
+for _rank, _k in enumerate(_order):  # Holm step-down across the four primary DiDs
+    _running = max(_running, min(1.0, (len(_order) - _rank) * _primary[_k]))
+    holm_p[_k] = _running
 
 SPECS = [  # proxy label, outcome key, before, after, treated file, control file, window
     ("NDBI (500 m mean)", "ndbi", "ndbi_before", "ndbi_after",
@@ -70,10 +86,10 @@ for ax, (label, key, b, a, files) in zip(axes, SPECS):
         c = pd.read_csv(P + cf).dropna(subset=[b, a])
         r = did(long_panel(t, c, b, a))
         lo, hi = r["ci95_t"]
-        color = RED if r["p_t"] < 0.05 else GRAY
+        color = RED if holm_p[(window, key)] < 0.05 else GRAY
         ax.plot([lo, hi], [i, i], color=color, linewidth=2)
         ax.scatter(r["coef"], i, color=color, s=55, zorder=3)
-        txt = f"p = {r['p_t']:.3f}"
+        txt = f"p = {r['p_t']:.3f} (Holm {holm_p[(window, key)]:.3f})"
         if (window, key) in wcb:
             txt += f"\nwild bootstrap p = {wcb[(window, key)]:.3f}"
         ax.text(r["coef"], i + 0.2, txt, ha="center", va="top", fontsize=7)
@@ -84,7 +100,8 @@ for ax, (label, key, b, a, files) in zip(axes, SPECS):
     ax.set_title(label, fontsize=9.5)
     ax.set_xlabel("DiD coefficient (own units)", fontsize=8)
 axes[0].invert_yaxis()
-fig.suptitle("Treated − control DiD across proxies (district FE; 95% CI with t, 13 df; red = p < 0.05)", fontsize=10.5)
+fig.suptitle("Treated − control DiD across proxies (district-by-period FE; 95% CI with t, 12 df; "
+             "red = Holm-adjusted p < 0.05)", fontsize=10.5)
 fig.tight_layout()
 fig.savefig("outputs/figures/11_triangulation_did.png", bbox_inches="tight")
 plt.close(fig)
@@ -114,7 +131,7 @@ ax_a.set_xticks(range(3))
 ax_a.set_xticklabels([r[0] for r in rows])
 ax_a.set_ylim(0, 1)
 ax_a.set_ylabel("Spearman ρ with building count")
-ax_a.set_title("A. 2025 LEVEL vs Open Buildings count (n = 249–251)\n(cross-section; says nothing about detecting change)",
+ax_a.set_title("A. 2025 LEVEL vs Open Buildings count (n = 218–220)\n(cross-section; says nothing about detecting change)",
                fontsize=9)
 
 width = 0.25
@@ -130,7 +147,7 @@ ax_b.text(2.45, 51, "typical village", fontsize=7, ha="right")
 ax_b.set_ylim(0, 135)
 ax_b.set_xticks(range(3))
 ax_b.set_xticklabels(cases)
-ax_b.set_ylabel("Percentile of the village's change\namong all 251 core villages")
+ax_b.set_ylabel("Percentile of the village's change\namong all 220 core villages")
 ax_b.set_title("B. Villages with new facilities reported in Oct 2023 (Anjaw; state model-village works): full-year 2021→2025 change\n"
                "(numbers above bars = raw change)", fontsize=9)
 ax_b.legend(fontsize=8, loc="upper center", ncol=3, frameon=False)

@@ -8,9 +8,9 @@
     },
     "Sikkim": {
       "n_official_villages": 46,
-      "n_geocoded": 31,
-      "n_ungeocoded": 15,
-      "geocoded_pct": 67.4
+      "n_geocoded": 0,
+      "n_ungeocoded": 46,
+      "geocoded_pct": 0.0
     },
     "Uttarakhand": {
       "n_official_villages": 51,
@@ -43,9 +43,9 @@
       "n_districts": 11
     },
     "Sikkim": {
-      "chi2": 6.006733230926778,
-      "dof": 1,
-      "p": 0.014251387792016075,
+      "chi2": 0.0,
+      "dof": 0,
+      "p": 1.0,
       "n_districts": 2
     },
     "Uttarakhand": {

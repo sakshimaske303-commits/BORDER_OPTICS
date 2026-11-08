@@ -71,7 +71,7 @@ def h4_test(treated_path, control_path, before_col, after_col):
     n_treated = long[long.treatment == 1]["village_id"].nunique()
     n_control = long[long.treatment == 0]["village_id"].nunique()
 
-    model = smf.ols("outcome ~ treatment + post + did_term + C(district)", data=long).fit(
+    model = smf.ols("outcome ~ treatment + did_term + C(district) * post", data=long).fit(
         cov_type="cluster", cov_kwds={"groups": long["district"]}
     )
     coef, se, p = model.params["did_term"], model.bse["did_term"], model.pvalues["did_term"]

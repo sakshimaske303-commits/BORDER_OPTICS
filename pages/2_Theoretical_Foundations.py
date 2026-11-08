@@ -35,7 +35,7 @@ st.markdown("---")
 st.markdown("### High Relief Distorts What a Satellite Actually Sees")
 
 st.markdown("""
-BORDER OPTICS' 258 geocoded villages (251 analysed) sit across some of the steepest, highest-relief terrain any
+BORDER OPTICS' 258 geocoded villages (220 analysed from version 2.1) sit across some of the steepest, highest-relief terrain any
 satellite-based verification study can be run on — the Himalayan border belt of Arunachal
 Pradesh, Sikkim, Uttarakhand, and Himachal Pradesh (VVP-I also covers Ladakh, but no Ladakh village
 could be named, so none is in this sample). That relief is not a neutral backdrop; it actively
@@ -81,9 +81,9 @@ already discloses on its Methodology & Limitations page: full-year composites ri
 contamination at high altitude, while summer-matched composites are more exposed to monsoon
 cloud. Summer-matched Sikkim once returned zero cloud-free imagery for all of its villages under
 this exposure — but that turned out to be an archive-timing snapshot, not a permanent data gap,
-and is resolved as of a complete re-extraction (Development Log Entries 21-22): neither compositing
-window shows a significant built-up *increase*, including for Sikkim specifically (run two-sided,
-the full-year window actually shows a significant *decrease*). Both
+and is resolved as of a complete re-extraction (Development Log Entries 21-22). (Sikkim has been
+outside the core sample since version 2.1 for a different reason: its comparison villages could not
+be verified inside its district.) Both
 failure modes still trace back to the same underlying cause mapped in the diagram above — Himalayan
 relief drives both the imaging-geometry distortion and the altitude-driven seasonal cloud/snow
 exposure that this study's dual-window design exists specifically to check for.

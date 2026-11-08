@@ -2,7 +2,7 @@
 Minimum Detectable Effect for H1 and H4, since both came back null and I
 want to report "no effect bigger than X is detectable" not just "p>0.05".
 H1 uses paired-design MDE (df=n-1), H4 uses the cluster-robust SE from
-did_model.py with df = 14 districts - 1 (Cameron & Miller 2015 for thin clusters).
+did_model.py with df = 13 districts - 1 (Cameron & Miller 2015 for thin clusters; 13 from v2.1).
 
 Usage:
     python3 src/analysis/power_analysis.py
@@ -16,7 +16,7 @@ from scipy import stats
 ALPHA = 0.05          # nominal alpha; sidedness is set per-test below to match the
                       # actual inferential test each MDE is calibrated against
 POWER = 0.80
-N_DISTRICTS = 14
+N_DISTRICTS = 13  # v2.1: Sikkim excluded (no verified comparison villages)
 
 TREATED_PATHS = {
     "full_year": "data/processed/border_optics_village_results_analyzed.csv",

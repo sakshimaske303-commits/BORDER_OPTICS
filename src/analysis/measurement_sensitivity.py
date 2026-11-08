@@ -134,7 +134,7 @@ def main():
         results["outcomes"][name] = entry
         print(f"\n{name}: contrast {slope:.3f} (SE {slope_se:.3f}) per unit building share")
         print(f"  doubling the median village's buildings -> buffer-mean change {sesoi:+.5f}")
-        print(f"  DiD {d['coef']:+.5f} (p_t13={d['p_t']:.4f}) = {to_m2(d['coef']):+,.0f} m^2 of building; "
+        print(f"  DiD {d['coef']:+.5f} (p_t={d['p_t']:.4f}) = {to_m2(d['coef']):+,.0f} m^2 of building; "
               f"95% CI upper bound = {to_m2(d['ci95_t'][1]):+,.0f} m^2 "
               f"({entry['did_ci95_upper_as_multiple_of_median_village_building_stock']:.1f}x the median village's buildings)")
         print(f"  TOST vs +/-{sesoi:.5f}: {'EQUIVALENT' if equivalent else 'not equivalent'} "

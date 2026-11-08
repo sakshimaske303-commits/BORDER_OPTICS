@@ -17,12 +17,12 @@ BG = (10, 10, 10)
 ACCENT = (215, 165, 60)
 TEXT = (240, 240, 235)
 
-# Figure numbers follow BO_Research_Paper.md v2.0 (Development Log Entry 49), NOT the PNG
+# Figure numbers follow BO_Research_Paper.md v2.1 (Development Log Entry 49), NOT the PNG
 # filename numbers (those are just generation order). Items not in the paper are "Supplementary".
 ITEMS = [
     ("outputs/figures/static_map_renders/map_state_overview.png",
      "Figure 1 — Study Area",
-     "251 core priority villages, 7 illustrative Himachal Pradesh villages and 721 comparison villages."),
+     "220 core priority villages, 31 Sikkim and 7 Himachal Pradesh villages outside the core sample, and 628 comparison villages."),
     ("outputs/figures/01_ndbi_change_distribution.png",
      "Figure 2 — NDBI Change per Priority Village",
      "Both compositing windows; labelled outliers start from snow/water values."),
@@ -31,10 +31,10 @@ ITEMS = [
      "Interactive version: dashboard → Interactive Maps."),
     ("outputs/figures/08_control_group_did_effect.png",
      "Figure 4 — Priority vs Comparison DiD (NDBI, Night Lights)",
-     "95% CI with t (13 df); green band = change from doubling a typical village's buildings."),
+     "95% CI with t (12 df); green band = change from doubling a typical village's buildings."),
     ("outputs/figures/11_triangulation_did.png",
      "Figure 5 — DiD Across Four Satellite Measures",
-     "NDBI, Sentinel-1 VV/VH, Dynamic World built probability."),
+     "NDBI, Sentinel-1 VV/VH, Dynamic World built probability; red = Holm-adjusted p < 0.05."),
     ("outputs/figures/12_footprint_validation.png",
      "Figure 6 — Footprint Correlation and Anjaw Case Villages",
      "Case villages shown as percentiles of all villages' change."),
@@ -47,20 +47,17 @@ ITEMS = [
     ("outputs/figures/09_multiyear_trend.png",
      "Figure 9 — Three-Point Trend (2021 / 2023 / 2025)",
      "2023 composites may be cloud-unmasked (QA60 gap)."),
-    ("outputs/figures/02_state_change_vs_budget.png",
-     "Figure A1 — State Budget vs Mean NDBI Change",
-     "Descriptive only, n = 3 states."),
     ("outputs/figures/04_state_mean_ndbi_change.png",
-     "Figure A2 — NDBI Change by State",
+     "Figure A1 — NDBI Change by State",
      "Medians with 95% bootstrap intervals, and means."),
     ("outputs/figures/05_state_mean_lights_change.png",
-     "Figure A3 — Night-Light Change by State",
+     "Figure A2 — Night-Light Change by State",
      "Medians with 95% bootstrap intervals, and means."),
     ("outputs/figures/10_buffer_sensitivity.png",
-     "Figure A4 — Buffer Radius Sensitivity",
+     "Figure A3 — Buffer Radius Sensitivity",
      "Mean NDBI change with 95% CI at 250 m, 500 m and 1 km (summer)."),
     ("outputs/figures/static_map_renders/map_border_distance.png",
-     "Figure A5 — Distance to the Nearest Boundary",
+     "Figure A4 — Distance to the Nearest Boundary",
      "Comparative only; Natural Earth cartographic lines."),
     ("outputs/figures/06_lights_change_distribution.png",
      "Supplementary — Night-Light Change Distribution",
@@ -88,7 +85,8 @@ def draw_cover(c):
     c.setFont("Helvetica", 15)
     c.drawCentredString(PAGE_W / 2, PAGE_H - 170, "Maps & Plots")
     c.setFont("Helvetica", 10)
-    c.drawCentredString(PAGE_W / 2, PAGE_H - 190, "Satellite-Based Verification Framework for India's Vibrant Villages Programme (VVP-I)")
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 190, "Evaluating a Place-Based Border Programme from Space:")
+    c.drawCentredString(PAGE_W / 2, PAGE_H - 204, "Evidence and Indicator Limits from India's Vibrant Villages Programme")
 
     y = PAGE_H - 250
     c.setFont("Helvetica-Bold", 11)

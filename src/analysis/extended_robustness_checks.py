@@ -66,6 +66,10 @@ def _build_design(df, fe=True):
         for c in cats[1:]:  # drop first as reference level
             cols.append((districts == c).astype(float).values)
             names.append(f"district_{c}")
+        post = df["post"].values.astype(float)
+        for c in cats[1:]:  # v2.1: district-by-period terms (within-district DiD)
+            cols.append((districts == c).astype(float).values * post)
+            names.append(f"district_{c}_x_post")
     return np.column_stack(cols), names
 
 
@@ -114,10 +118,10 @@ def leave_one_district_out():
         n_sig = sum(r["significant"] for r in rows)
         summary[outcome] = {
             "coef_min": min(coefs), "coef_max": max(coefs),
-            "n_significant_of_14": n_sig,
+            "n_significant": n_sig, "n_reruns": len(rows),
         }
         print(f"  -> {outcome}: coef range [{min(coefs):+.5f}, {max(coefs):+.5f}], "
-              f"significant (p<0.05) in {n_sig}/14 district-dropped reruns\n")
+              f"significant (p<0.05) in {n_sig}/{len(rows)} district-dropped reruns\n")
     loo_df = pd.DataFrame(all_rows)
     loo_df.insert(0, "window", "summer")  # Entry 49: the file holds summer-window reruns only; say so
     loo_df.to_csv(OUT_LOO_CSV, index=False)
@@ -220,7 +224,7 @@ def summer_missingness():
     print(f"  n core = {len(core)}, summer-valid = {n_valid}, summer-invalid = {n_invalid}")
 
     if n_invalid == 0:
-        # extraction's complete now (251/251) so nothing to compare against -
+        # extraction's complete now (220/220) so nothing to compare against -
         # keeping this check around anyway so the old result stays reproducible
         print("  No summer-invalid villages remain (fresh, complete extraction -- see Entry 22).")
         print("  This check is now moot: nothing left to compare against. Historical result")
@@ -305,7 +309,7 @@ def fullyear_lights_robustness():
 
     return {
         "leave_one_out": {
-            "coef_min": min(coefs), "coef_max": max(coefs), "n_significant_of_14": n_sig,
+            "coef_min": min(coefs), "coef_max": max(coefs), "n_significant": n_sig, "n_reruns": len(rows),
             "rows": rows,
         },
         "randomization": {

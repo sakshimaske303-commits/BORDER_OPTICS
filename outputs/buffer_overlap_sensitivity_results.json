@@ -1,5 +1,5 @@
 {
-  "n_control_total": 721,
+  "n_control_total": 628,
   "n_control_overlapping": 82,
   "n_control_within_200m": 5,
   "threshold_m": 1000,
@@ -7,38 +7,38 @@
     {
       "window": "full_year",
       "outcome": "ndbi",
-      "n_treated": 251,
-      "n_control": 639,
-      "did_coef": 0.006830447897707192,
-      "did_se": 0.006896827553298766,
-      "did_p": 0.32199069666024704
+      "n_treated": 220,
+      "n_control": 546,
+      "did_coef": 0.007710228437743196,
+      "did_se": 0.008093768128443346,
+      "did_p": 0.3407862068687445
     },
     {
       "window": "full_year",
       "outcome": "lights",
-      "n_treated": 251,
-      "n_control": 639,
-      "did_coef": 0.031853658616107616,
-      "did_se": 0.0484173299652905,
-      "did_p": 0.5106037546488854
+      "n_treated": 220,
+      "n_control": 546,
+      "did_coef": 0.05782488223041661,
+      "did_se": 0.05651315970459913,
+      "did_p": 0.30620813009849934
     },
     {
       "window": "summer",
       "outcome": "ndbi",
-      "n_treated": 251,
-      "n_control": 639,
-      "did_coef": -0.0022177303815732108,
-      "did_se": 0.0046229659753888345,
-      "did_p": 0.6314263286634707
+      "n_treated": 220,
+      "n_control": 546,
+      "did_coef": 0.00033882202992137453,
+      "did_se": 0.003286329276765265,
+      "did_p": 0.9178832472424286
     },
     {
       "window": "summer",
       "outcome": "lights",
-      "n_treated": 251,
-      "n_control": 639,
-      "did_coef": 0.011172542945760186,
-      "did_se": 0.040475641391675476,
-      "did_p": 0.7825240441940542
+      "n_treated": 220,
+      "n_control": 546,
+      "did_coef": 0.032136140685269064,
+      "did_se": 0.046944024953792615,
+      "did_p": 0.49361974693925714
     }
   ]
 }

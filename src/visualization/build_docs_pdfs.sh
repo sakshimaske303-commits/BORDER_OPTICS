@@ -15,16 +15,20 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 mkdir -p "$ROOT/static"
 cd "$ROOT/docs"   # image links in the .md files are relative to docs/ (../outputs/...)
 
-for doc in "BO_Executive_Summary:BORDER OPTICS — Executive Summary" \
-           "BO_Research_Paper:BORDER OPTICS — Research Paper" \
+# The paper and the executive summary carry their own title and subtitle in a YAML block
+# at the top of the .md file; the development log gets its title here.
+for doc in "BO_Executive_Summary:" \
+           "BO_Research_Paper:" \
            "BO_Development_Log:BORDER OPTICS — Development Log"; do
     name="${doc%%:*}"
     title="${doc#*:}"
+    title_opt=()
+    if [ -n "${title}" ]; then title_opt=(--metadata title="${title}"); fi
     echo "Building docs/${name}.pdf..."
     pandoc "${name}.md" -f markdown-implicit_figures -o "${name}.pdf" \
         --pdf-engine=wkhtmltopdf --pdf-engine-opt=--enable-local-file-access \
         -V margin-top=20mm -V margin-bottom=20mm -V margin-left=20mm -V margin-right=20mm \
-        --metadata title="${title}" \
+        "${title_opt[@]}" \
         --toc
     cp "${name}.pdf" "$ROOT/static/${name}.pdf"
 done

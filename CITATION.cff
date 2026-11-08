@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software or its findings, please cite it using the metadata below."
-title: "BORDER OPTICS: Satellite Verification of India's Vibrant Villages Programme"
+title: "BORDER OPTICS: Evaluating a Place-Based Border Programme from Space: Evidence and Indicator Limits from India's Vibrant Villages Programme"
 type: software
 authors:
   - family-names: "Maske"
@@ -9,16 +9,16 @@ repository-code: "https://github.com/sakshimaske303-commits/BORDER_OPTICS"
 url: "https://github.com/sakshimaske303-commits/BORDER_OPTICS"
 abstract: >-
   An independent satellite assessment of India's Vibrant Villages Programme
-  (VVP-I). It compares 251 geocoded priority villages in Arunachal Pradesh,
-  Sikkim and Uttarakhand with 721 non-priority villages in the same 14
-  districts, using Sentinel-2 NDBI, VIIRS night lights, Sentinel-1 backscatter
-  and Dynamic World built-up probability in a district fixed-effects
+  (VVP-I). It compares 220 geocoded priority villages in Arunachal Pradesh
+  and Uttarakhand with 628 non-priority villages in the same 13 districts,
+  using Sentinel-2 NDBI, VIIRS night lights, Sentinel-1 backscatter and
+  Dynamic World built-up probability in a within-district
   difference-in-differences design (2021-2025) with small-cluster inference.
   NDBI, night lights and radar show no difference between the groups, but a
   detectability analysis shows that buffer-mean NDBI could not have detected
   even a doubling of a typical village's buildings. Dynamic World shows a small
-  positive difference in both compositing windows, equivalent to roughly
-  800-2,100 square metres of built-up surface per village. A pooled association
+  positive difference in the summer window, roughly 1,900 square metres of
+  built-up surface per village; the full-year estimate is not significant. A pooled association
   between change and border distance disappears or reverses within districts.
   The repository includes all code, data, figures, a Streamlit dashboard and a
   full development log.
@@ -36,8 +36,8 @@ keywords:
   - Google Earth Engine
   - India
 license: CC-BY-4.0
-version: 2.0.0
-date-released: "2026-10-19"
+version: 2.1.0
+date-released: "2026-11-07"
 references:
   - type: data
     title: "Copernicus Sentinel-2 Level-2A (COPERNICUS/S2_SR_HARMONIZED) and Sentinel-1 GRD (COPERNICUS/S1_GRD)"

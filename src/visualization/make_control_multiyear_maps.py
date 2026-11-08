@@ -89,7 +89,7 @@ def make_treated_vs_control_map():
     m.get_root().html.add_child(folium.Element(title_html(
         "BORDER OPTICS — Treated vs. Non-VVP Control Group",
         f"{len(treated)} treated villages (watermelon) vs. {len(control)} "
-        "district-restricted control villages (mint), same 14 districts",
+        "district-verified control villages (mint), same 13 districts",
     )))
     out_path = "outputs/interactive_maps/maps/village_treated_vs_control_map.html"
     m.save(out_path)
@@ -188,7 +188,7 @@ def make_coverage_gap_map():
     m.get_root().html.add_child(folium.Element(title_html(
         "BORDER OPTICS — 500m Coverage Check (historical diagnostic, now resolved)",
         "Originally built to flag villages null at 500m but valid at 250m/1km (a Sentinel-2 archive-backfill "
-        "gap, not a buffer-radius effect). After the same-day re-extraction, all 251 core villages are valid "
+        "gap, not a buffer-radius effect). After the same-day re-extraction, all 220 core villages are valid "
         "at every radius — this map is kept as a record of that check, not a current coverage problem.",
     )))
     out_path = "outputs/interactive_maps/maps/village_coverage_gap_map.html"

@@ -1,150 +1,150 @@
 {
   "buffer_area_m2": 785398.1633974483,
-  "treated_core_n": 251,
-  "median_treated_building_area_m2": 2596.255172729492,
-  "median_treated_building_share_of_buffer": 0.00330565475414241,
-  "p90_treated_building_share_of_buffer": 0.02431239612992491,
-  "treated_core_buffers_with_zero_buildings": 35,
+  "treated_core_n": 220,
+  "median_treated_building_area_m2": 2508.0853023529053,
+  "median_treated_building_share_of_buffer": 0.0031933933885247663,
+  "p90_treated_building_share_of_buffer": 0.024525747200730134,
+  "treated_core_buffers_with_zero_buildings": 29,
   "sesoi_definition": "+100% of the median treated village's building area (a doubling)",
   "outcomes": {
     "ndbi_full_year": {
-      "contrast_slope_per_unit_building_share": 0.8381892608842981,
-      "contrast_slope_se": 0.24564942105631885,
-      "n_villages_for_contrast": 972,
+      "contrast_slope_per_unit_building_share": 0.8074611820727775,
+      "contrast_slope_se": 0.24741512272895988,
+      "n_villages_for_contrast": 848,
       "implied_buffer_mean_change": {
-        "+50pct_median_building_area": 0.0013853821575566464,
-        "+100pct_median_building_area": 0.002770764315113293
+        "+50pct_median_building_area": 0.0012892706001608,
+        "+100pct_median_building_area": 0.0025785412003216
       },
       "did": {
-        "coef": 0.006683410842277231,
-        "se": 0.0063296158566513204,
-        "n_obs": 1944,
-        "n_clusters": 14,
-        "p_z": 0.2910161087955381,
-        "p_t": 0.3102445762204621,
+        "coef": 0.006740445763267456,
+        "se": 0.007196332036840925,
+        "n_obs": 1696,
+        "n_clusters": 13,
+        "p_z": 0.348938526212186,
+        "p_t": 0.3674069467311995,
         "ci95_t": [
-          -0.006990892861882161,
-          0.020357714546436624
+          -0.008939014805146849,
+          0.022419906331681762
         ],
         "ci90_t": [
-          -0.004525917262034648,
-          0.01789273894658911
+          -0.006085487272314642,
+          0.01956637879884955
         ]
       },
-      "did_coef_as_building_area_m2": 6262.47417584095,
+      "did_coef_as_building_area_m2": 6556.270246156826,
       "did_ci95_t_as_building_area_m2": [
-        -6550.590266973722,
-        19075.53861865562
+        -8694.765725483692,
+        21807.306217797348
       ],
-      "did_ci95_upper_as_multiple_of_median_village_building_stock": 7.347328112822264,
-      "tost_sesoi_index_units": 0.002770764315113293,
+      "did_ci95_upper_as_multiple_of_median_village_building_stock": 8.694802444454062,
+      "tost_sesoi_index_units": 0.0025785412003216,
       "tost_equivalent_at_alpha_0.05": false,
-      "mde_H1_treated_only": 0.008017478289858316,
-      "doubling_as_fraction_of_mde_H1_treated_only": 0.34559049802706204,
-      "mde_H4_control_group_DiD": 0.01918202865125338,
-      "doubling_as_fraction_of_mde_H4_control_group_DiD": 0.14444584384103956
+      "mde_H1_treated_only": 0.009113851737536916,
+      "doubling_as_fraction_of_mde_H1_treated_only": 0.2829255154219208,
+      "mde_H4_control_group_DiD": 0.0219590467691151,
+      "doubling_as_fraction_of_mde_H4_control_group_DiD": 0.11742500607759804
     },
     "ndbi_summer": {
-      "contrast_slope_per_unit_building_share": 0.5292185101589767,
-      "contrast_slope_se": 0.16313240967183218,
-      "n_villages_for_contrast": 972,
+      "contrast_slope_per_unit_building_share": 0.5022969311221579,
+      "contrast_slope_se": 0.166323730475953,
+      "n_villages_for_contrast": 848,
       "implied_buffer_mean_change": {
-        "+50pct_median_building_area": 0.0008747068420435923,
-        "+100pct_median_building_area": 0.0017494136840871847
+        "+50pct_median_building_area": 0.0008020158494608894,
+        "+100pct_median_building_area": 0.0016040316989217789
       },
       "did": {
-        "coef": -0.002751661025169279,
-        "se": 0.004392052046714281,
-        "n_obs": 1944,
-        "n_clusters": 14,
-        "p_z": 0.5309810027675319,
-        "p_t": 0.5418266931178868,
+        "coef": 0.00030399010412674143,
+        "se": 0.0030516544522736335,
+        "n_obs": 1696,
+        "n_clusters": 13,
+        "p_z": 0.9206501029345613,
+        "p_t": 0.9222949270352985,
         "ci95_t": [
-          -0.012240112604444063,
-          0.006736790554105506
+          -0.00634499376819817,
+          0.006952973976451653
         ],
         "ci90_t": [
-          -0.010529692671608096,
-          0.005026370621269537
+          -0.005134935650302394,
+          0.005742915858555877
         ]
       },
-      "did_coef_as_building_area_m2": -4083.6619921156657,
+      "did_coef_as_building_area_m2": 475.32297069535014,
       "did_ci95_t_as_building_area_m2": [
-        -18165.2035497029,
-        9997.87956547157
+        -9921.116661370073,
+        10871.762602760777
       ],
-      "did_ci95_upper_as_multiple_of_median_village_building_stock": 3.850884793793443,
-      "tost_sesoi_index_units": 0.0017494136840871847,
+      "did_ci95_upper_as_multiple_of_median_village_building_stock": 4.334686141879493,
+      "tost_sesoi_index_units": 0.0016040316989217789,
       "tost_equivalent_at_alpha_0.05": false,
-      "mde_H1_treated_only": 0.005307804760023966,
-      "doubling_as_fraction_of_mde_H1_treated_only": 0.32959269663854135,
-      "mde_H4_control_group_DiD": 0.013310202404991122,
-      "doubling_as_fraction_of_mde_H4_control_group_DiD": 0.13143404065975595
+      "mde_H1_treated_only": 0.004972044177603809,
+      "doubling_as_fraction_of_mde_H1_treated_only": 0.3226101059493832,
+      "mde_H4_control_group_DiD": 0.009311885902095402,
+      "doubling_as_fraction_of_mde_H4_control_group_DiD": 0.17225637382013373
     },
     "dw_built_full_year": {
-      "contrast_slope_per_unit_building_share": 2.449171745737839,
-      "contrast_slope_se": 0.25829474256690205,
-      "n_villages_for_contrast": 966,
+      "contrast_slope_per_unit_building_share": 2.3111630714573295,
+      "contrast_slope_se": 0.19186446517328584,
+      "n_villages_for_contrast": 844,
       "implied_buffer_mean_change": {
-        "+50pct_median_building_area": 0.0040480581125047765,
-        "+100pct_median_building_area": 0.008096116225009553
+        "+50pct_median_building_area": 0.003690226436097214,
+        "+100pct_median_building_area": 0.007380452872194428
       },
       "did": {
-        "coef": 0.0026236198227791645,
-        "se": 0.0010876354662731444,
-        "n_obs": 1930,
-        "n_clusters": 14,
-        "p_z": 0.01585555901590056,
-        "p_t": 0.031358878687449715,
+        "coef": 0.00243030410870944,
+        "se": 0.0012056007018117455,
+        "n_obs": 1688,
+        "n_clusters": 13,
+        "p_z": 0.04381618963590125,
+        "p_t": 0.06677090599059711,
         "ci95_t": [
-          0.00027392625178536975,
-          0.004973313393772959
+          -0.00019647416785380538,
+          0.005057082385272686
         ],
         "ci90_t": [
-          0.0006974898528962993,
-          0.004549749792662029
+          0.00028157698078828085,
+          0.0045790312366305996
         ]
       },
-      "did_coef_as_building_area_m2": 841.3400137617222,
+      "did_coef_as_building_area_m2": 825.8856361330139,
       "did_ci95_t_as_building_area_m2": [
-        87.84242078285239,
-        1594.8376067405918
+        -66.7674438438126,
+        1718.5387161098404
       ],
-      "did_ci95_upper_as_multiple_of_median_village_building_stock": 0.6142838437039718,
-      "tost_sesoi_index_units": 0.008096116225009553,
+      "did_ci95_upper_as_multiple_of_median_village_building_stock": 0.6851994684940066,
+      "tost_sesoi_index_units": 0.007380452872194428,
       "tost_equivalent_at_alpha_0.05": true
     },
     "dw_built_summer": {
-      "contrast_slope_per_unit_building_share": 2.2401859418293952,
-      "contrast_slope_se": 0.278058408173859,
-      "n_villages_for_contrast": 931,
+      "contrast_slope_per_unit_building_share": 2.095502906116525,
+      "contrast_slope_se": 0.19909909087075559,
+      "n_villages_for_contrast": 826,
       "implied_buffer_mean_change": {
-        "+50pct_median_building_area": 0.0037026406543856664,
-        "+100pct_median_building_area": 0.007405281308771333
+        "+50pct_median_building_area": 0.0033458825630134728,
+        "+100pct_median_building_area": 0.0066917651260269455
       },
       "did": {
-        "coef": 0.0059240468674203435,
-        "se": 0.001724828627349786,
-        "n_obs": 1410,
-        "n_clusters": 14,
-        "p_z": 0.000593491960530568,
-        "p_t": 0.004437641085445556,
+        "coef": 0.0050028403839382195,
+        "se": 0.0015160450410028768,
+        "n_obs": 1310,
+        "n_clusters": 13,
+        "p_z": 0.0009670943096751794,
+        "p_t": 0.0063415888580679826,
         "ci95_t": [
-          0.002197781163124126,
-          0.00965031257171656
+          0.001699661998247772,
+          0.008306018769628666
         ],
         "ci90_t": [
-          0.002869490248892411,
-          0.008978603485948276
+          0.0023008121735549306,
+          0.007704868594321509
         ]
       },
-      "did_coef_as_building_area_m2": 2076.9416692941113,
+      "did_coef_as_building_area_m2": 1875.0733477136819,
       "did_ci95_t_as_building_area_m2": [
-        770.5312567302293,
-        3383.3520818579927
+        637.0362970739809,
+        3113.110398353383
       ],
-      "did_ci95_upper_as_multiple_of_median_village_building_stock": 1.3031662362760017,
-      "tost_sesoi_index_units": 0.007405281308771333,
+      "did_ci95_upper_as_multiple_of_median_village_building_stock": 1.2412298718201038,
+      "tost_sesoi_index_units": 0.0066917651260269455,
       "tost_equivalent_at_alpha_0.05": false
     }
   }

@@ -49,7 +49,7 @@ st.markdown("---")
 st.markdown("### Distribution of Change")
 st.image(
     "outputs/figures/01_ndbi_change_distribution.png",
-    caption="Distribution of NDBI change across the 251-village core statistical sample",
+    caption="Distribution of NDBI change across the 220-village core statistical sample",
     use_container_width=True,
 )
 

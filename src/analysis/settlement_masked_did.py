@@ -62,7 +62,7 @@ def run(base=P, out_path=OUT_PATH, bootstrap=False):
                 key = f"{window}|{outcome}|{label}_{y0}_{y1}"
                 results[key] = r
                 extra = f" WCB p={r['wild_cluster_bootstrap_p']:.4f}" if bootstrap else ""
-                print(f"{key:48s} coef={r['coef']:+.5f} p_t13={r['p_t']:.4f}{extra} "
+                print(f"{key:48s} coef={r['coef']:+.5f} p_t={r['p_t']:.4f}{extra} "
                       f"(n={r['n_treated_villages']}/{r['n_control_villages']})")
     with open(out_path, "w") as f:
         json.dump(results, f, indent=2)

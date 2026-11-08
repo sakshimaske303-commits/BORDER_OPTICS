@@ -18,9 +18,10 @@ st.markdown("---")
 
 st.markdown("""
 Aggregating village-level results up to the state level to compare the pace of change
-across the core statistical sample (Arunachal Pradesh, Sikkim, Uttarakhand), with
-Himachal Pradesh reported separately as an illustrative case study, and to explore
-whether change tracks allocated VVP-I budget.
+across the core statistical sample (Arunachal Pradesh, Uttarakhand), with
+Himachal Pradesh reported separately as an illustrative case study. Sikkim is outside
+the core sample from version 2.1, because none of its comparison villages could be
+verified inside its district; its villages can still be viewed in the drill-down below.
 """)
 
 st.markdown("---")
@@ -65,10 +66,10 @@ st.plotly_chart(fig, use_container_width=True)
 st.dataframe(state_stats, use_container_width=True, hide_index=True)
 
 st.caption(
-    "Sikkim's summer-matched composite once returned zero cloud-free imagery for all of its "
-    "villages, due to an archive-timing gap rather than permanent monsoon-cloud data loss — "
-    "resolved as of a complete re-extraction (Development Log Entries 21–22), so all three "
-    "core states now appear above (see Statistical Validation and Methodology & Limitations)."
+    "Core sample only. Sikkim left the core sample in version 2.1: its comparison villages had been "
+    "chosen inside a bounding box, and most of them lay outside North Sikkim (see Methodology & "
+    "Limitations). The budget-vs-change chart of earlier versions was dropped, because only two "
+    "core states remain."
 )
 
 st.markdown("##### Static exports (used in Research Paper)")
@@ -173,7 +174,7 @@ if len(hp) > 0:
             Only 7 of Himachal Pradesh's 51 inhabited priority villages could be confidently
             named and geocoded, out of 75 total priority villages under the state's VVP-I
             Action Plan. This is not a random or representative sample of the state, so its
-            numbers are shown here for transparency but excluded from the core three-state
+            numbers are shown here for transparency but excluded from the core two-state
             statistical comparison above and from the formal hypothesis tests in Statistical
             Validation.
         </p>
@@ -181,33 +182,6 @@ if len(hp) > 0:
     """, unsafe_allow_html=True)
 else:
     st.warning("No valid Himachal Pradesh data for this composite window.")
-
-st.markdown("---")
-
-# ============================================================
-# BUDGET CORRELATION (RQ2)
-# ============================================================
-st.markdown("### Change vs. Budget Allocation (descriptive, three states)")
-
-st.image(
-    "outputs/figures/02_state_change_vs_budget.png",
-    caption="State-level built-up change vs. VVP-I budget allocation",
-    use_container_width=True,
-)
-
-st.markdown(f"""
-<div class="recon-card" style="border-left: 4px solid {PALETTE['warning']};">
-    <p style="color: {PALETTE['warning']}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px;">Interpretation Caveat</p>
-    <p style="color: {PALETTE['text_primary']}; font-size: 0.9rem; margin: 0;">
-        This correlation is <b>exploratory only</b> — with just three core states with
-        valid data (as of a complete summer-window extraction; previously two, before
-        Sikkim's data was recovered), this has very limited statistical power, and its
-        direction itself flips between compositing windows at this sample size. It is a
-        directional signal worth revisiting with a larger multi-state sample, not evidence
-        of a causal budget-to-outcome link.
-    </p>
-</div>
-""", unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -222,6 +196,8 @@ state_df = all_valid[all_valid["state"] == selected_state]
 
 if selected_state == "Himachal Pradesh":
     st.caption("Illustrative case study only — not part of the core statistical sample.")
+elif selected_state == "Sikkim":
+    st.caption("Outside the core statistical sample from version 2.1 (no verified comparison villages).")
 
 d1, d2, d3 = st.columns(3)
 d1.metric("Villages", len(state_df))

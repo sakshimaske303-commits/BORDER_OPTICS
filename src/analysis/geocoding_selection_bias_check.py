@@ -2,7 +2,7 @@
 Checks whether geocoding success (which of the officially-listed VVP-I
 priority villages made it into the geocoded, core-sample dataset) correlates
 with village size (population/households) or with district -- i.e. whether
-the 251-village core sample is a biased subset of the 559 officially listed
+the core sample (220 villages from v2.1) is a biased subset of the 559 officially listed
 priority villages across the three core states, not just an incomplete one.
 
 Uses only files already in this repository (data/raw/*_vvp_villages.csv,

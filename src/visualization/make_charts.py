@@ -5,8 +5,8 @@ Changes from v1.7, following the forensic review:
     file names stay stable because the dashboard loads them)
   - 01: the extreme full-year values are labelled (their 2021 NDBI is
     below -0.6, i.e. snow/water, not built-up change) and medians are drawn
-  - 02: the dual-axis bar chart is replaced by a labelled scatter of budget
-    against mean NDBI change for both windows (n = 3, descriptive only)
+  - 02 (budget vs change, three states) was dropped in v2.1: with Sikkim outside
+    the core sample only two states remain, too few to say anything
   - 03: points coloured by district, with the pooled Spearman rho and the
     within-district (stratified) rho printed on every panel, so the reader
     can see that the pooled H3 correlations are between-district patterns
@@ -51,31 +51,10 @@ for ax, df, color, title in [(axes[0], full_year_core, BLUE, "Full-year composit
                     xytext=(r["ndbi_change"], 18), fontsize=7, ha="center",
                     arrowprops=dict(arrowstyle="-", color="grey", lw=0.6))
 axes[0].set_ylabel("Number of villages")
-fig.suptitle("NDBI change per village, core sample (n = 251). Labelled outliers start from snow/water values, "
+fig.suptitle(f"NDBI change per village, core sample (n = {len(full_year_core)}). Labelled outliers start from snow/water values, "
              "not settlement", y=1.02, fontsize=10)
 fig.tight_layout()
 fig.savefig("outputs/figures/01_ndbi_change_distribution.png", bbox_inches="tight")
-plt.close(fig)
-
-# --- 02: budget vs mean NDBI change, both windows (n = 3, descriptive) ---------------------
-budget = {"Arunachal Pradesh": 2749.74, "Uttarakhand": 270.58, "Sikkim": 188.90}
-fig, ax = plt.subplots(figsize=(7, 4.6))
-for df, color, label in [(full_year_core, BLUE, "Full-year window"), (summer_core, ORANGE, "Summer window")]:
-    s = df.dropna(subset=["ndbi_change"]).groupby("state")["ndbi_change"].agg(["mean", "size"])
-    s = s.loc[list(budget)]
-    xs = [budget[k] for k in s.index]
-    ax.scatter(xs, s["mean"], s=70, color=color, label=label, zorder=3)
-    for st, x, y, n in zip(s.index, xs, s["mean"], s["size"]):
-        ax.annotate(f"{st} (n={n})", (x, y), textcoords="offset points", xytext=(6, 4), fontsize=8, color=color)
-ax.set_xscale("log")
-ax.axhline(0, color="black", linewidth=0.8)
-ax.set_xlabel("Sanctioned VVP-I works, ₹ crore (log scale; parliamentary record)")
-ax.set_ylabel("Mean change in 500 m buffer-mean NDBI")
-ax.set_title("State budget vs mean NDBI change — 3 states, descriptive only\n"
-             "(Spearman ρ = +0.5 summer, −0.5 full-year: the sign flips with the window)", fontsize=10)
-ax.legend(fontsize=8, loc="lower right")
-fig.tight_layout()
-fig.savefig("outputs/figures/02_state_change_vs_budget.png", bbox_inches="tight")
 plt.close(fig)
 
 # --- 03: H3, coloured by district, pooled and within-district rho --------------------------
@@ -121,4 +100,4 @@ fig.tight_layout()
 fig.savefig("outputs/figures/03_h3_border_distance_vs_lights.png", bbox_inches="tight")
 plt.close(fig)
 
-print("Saved 01_ndbi_change_distribution.png, 02_state_change_vs_budget.png, 03_h3_border_distance_vs_lights.png")
+print("Saved 01_ndbi_change_distribution.png, 03_h3_border_distance_vs_lights.png")
