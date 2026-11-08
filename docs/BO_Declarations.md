@@ -4,7 +4,7 @@
 
 Sakshi D. Maske · Independent Geospatial Researcher · ORCID [0009-0002-5683-5966](https://orcid.org/0009-0002-5683-5966)
 
-Version 2.1.0  
+Version 2.1  
 Earlier preprint: [EarthArXiv](https://eartharxiv.org/repository/view/14830/) · Code and data: [github.com/sakshimaske303-commits/BORDER_OPTICS](https://github.com/sakshimaske303-commits/BORDER_OPTICS)
 
 ## Highlights

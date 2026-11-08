@@ -36,7 +36,7 @@ keywords:
   - Google Earth Engine
   - India
 license: CC-BY-4.0
-version: 2.1.0
+version: "2.1"
 date-released: "2026-11-07"
 references:
   - type: data
