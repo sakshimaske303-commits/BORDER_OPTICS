@@ -5,7 +5,7 @@ from scipy import stats
 from utils.theme import inject_theme, PALETTE
 from utils.data import load_data, load_expanded_results
 
-st.set_page_config(page_title="Statistical Validation — BORDER OPTICS", page_icon="📊", layout="wide")
+st.set_page_config(page_title="Statistical Validation — BORDER OPTICS", layout="wide")
 inject_theme()
 
 villages, full_year, summer = load_data()
@@ -21,7 +21,7 @@ expanded = load_expanded_results()
 full_year = full_year[full_year["is_core_sample"] == True] if "is_core_sample" in full_year.columns else full_year
 summer = summer[summer["is_core_sample"] == True] if "is_core_sample" in summer.columns else summer
 
-st.markdown("<h1>📊 STATISTICAL VALIDATION</h1>", unsafe_allow_html=True)
+st.markdown("<h1>STATISTICAL VALIDATION</h1>", unsafe_allow_html=True)
 st.markdown(
     "<h3 style='text-align: center; font-weight: 700;'>Hypothesis Testing, Robustness, and Honest Limitations</h3>",
     unsafe_allow_html=True,

@@ -4,12 +4,12 @@ import plotly.graph_objects as go
 from utils.theme import inject_theme, PALETTE
 from utils.data import load_data
 
-st.set_page_config(page_title="Explore Trends — BORDER OPTICS", page_icon="📈", layout="wide")
+st.set_page_config(page_title="Explore Trends — BORDER OPTICS", layout="wide")
 inject_theme()
 
 villages, full_year, summer = load_data()
 
-st.markdown("<h1>📈 EXPLORE TRENDS</h1>", unsafe_allow_html=True)
+st.markdown("<h1>EXPLORE TRENDS</h1>", unsafe_allow_html=True)
 st.markdown(
     "<h3 style='text-align: center; font-weight: 700;'>Cross-State Comparison</h3>",
     unsafe_allow_html=True,

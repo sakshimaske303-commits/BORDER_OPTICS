@@ -8,13 +8,13 @@ from utils.theme import inject_theme, PALETTE
 from utils.data import load_data
 from utils.doc_viewer import render_doc_viewer
 
-st.set_page_config(page_title="BORDER OPTICS", page_icon="🛰️", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="BORDER OPTICS", layout="wide", initial_sidebar_state="expanded")
 inject_theme()
 
 villages, full_year, summer = load_data()
 
 
-st.markdown("<h1>🛰️ BORDER OPTICS</h1>", unsafe_allow_html=True)
+st.markdown("<h1>BORDER OPTICS</h1>", unsafe_allow_html=True)
 st.markdown(
     "<h3 style='text-align: center; font-weight: 700; margin-top: -10px;'>"
     "Evaluating a Place-Based Border Programme from Space: Evidence and Indicator Limits from India's Vibrant Villages Programme</h3>",

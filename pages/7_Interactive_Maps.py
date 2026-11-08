@@ -4,12 +4,12 @@ import os
 from utils.theme import inject_theme, PALETTE
 from utils.data import load_data
 
-st.set_page_config(page_title="Interactive Maps — BORDER OPTICS", page_icon="🗺️", layout="wide")
+st.set_page_config(page_title="Interactive Maps — BORDER OPTICS", layout="wide")
 inject_theme()
 
 villages, full_year, summer = load_data()
 
-st.markdown("<h1>🗺️ INTERACTIVE MAPS &amp; PLOTS</h1>", unsafe_allow_html=True)
+st.markdown("<h1>INTERACTIVE MAPS &amp; PLOTS</h1>", unsafe_allow_html=True)
 st.markdown(
     "<h3 style='text-align: center; font-weight: 700;'>Village-Level Satellite Evidence and Headline Charts</h3>",
     unsafe_allow_html=True,

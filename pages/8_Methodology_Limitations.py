@@ -2,12 +2,12 @@ import streamlit as st
 from utils.theme import inject_theme, PALETTE
 from utils.data import load_data
 
-st.set_page_config(page_title="Methodology & Limitations — BORDER OPTICS", page_icon="📖", layout="wide")
+st.set_page_config(page_title="Methodology & Limitations — BORDER OPTICS", layout="wide")
 inject_theme()
 
 villages, full_year, summer = load_data()
 
-st.markdown("<h1>📖 METHODOLOGY & LIMITATIONS</h1>", unsafe_allow_html=True)
+st.markdown("<h1>METHODOLOGY & LIMITATIONS</h1>", unsafe_allow_html=True)
 st.markdown(
     "<h3 style='text-align: center; font-weight: 700;'>Full Transparency and Reproducibility</h3>",
     unsafe_allow_html=True,

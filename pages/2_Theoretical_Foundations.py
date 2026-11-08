@@ -2,10 +2,10 @@ import streamlit as st
 import os
 from utils.theme import inject_theme
 
-st.set_page_config(page_title="Mountain Geomorphology & Climatology — BORDER OPTICS", page_icon="🏔️", layout="wide")
+st.set_page_config(page_title="Mountain Geomorphology & Climatology — BORDER OPTICS", layout="wide")
 inject_theme()
 
-st.markdown("<h1>🏔️ READING A VILLAGE ON A SLOPE</h1>", unsafe_allow_html=True)
+st.markdown("<h1>READING A VILLAGE ON A SLOPE</h1>", unsafe_allow_html=True)
 st.markdown(
     "<h3 style='text-align: center; font-weight: 700;'>The Himalayan Geomorphology and Climatology Behind Border Optics' Data</h3>",
     unsafe_allow_html=True,
