@@ -2,7 +2,9 @@
 
 ### Evaluating a Place-Based Border Programme from Space: Evidence and Indicator Limits from India's Vibrant Villages Programme
 
-[![EarthArXiv](https://img.shields.io/badge/EarthArXiv-Preprint-B7410E.svg)](https://eartharxiv.org/repository/view/14830/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21759969.svg)](https://doi.org/10.5281/zenodo.21759969) [![EarthArXiv](https://img.shields.io/badge/EarthArXiv-earlier%20version-B7410E.svg)](https://eartharxiv.org/repository/view/14830/)
+
+Latest version on Zenodo: [10.5281/zenodo.21759969](https://doi.org/10.5281/zenodo.21759969). The EarthArXiv preprint is an earlier version.
 
 **Did India's ₹4,800 crore Vibrant Villages Programme (VVP-I) change its border villages, and how much change could satellites actually detect?**
 
